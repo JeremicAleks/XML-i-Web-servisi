@@ -8,18 +8,37 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <div>
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Nesto</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Nesto</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Nesto</a>
-      </li>
-      
-    </ul>
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top" style="text-transform: uppercase">
+    <div class="collapse navbar-collapse">
+      <!-- home logo picture -->
+      <a class="navbar-brand" style="color: white; margin-left: 30px;" routerLink="/">
+        <img src="\assets\pictures\mega_travel.png" width="30" height="30" class="d-inline-block align-top" alt="logo">
+      </a>
+      <!-- navbar links -->
+      <ul class="navbar-nav mr-auto">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="navbar-nav" style="vertical-align: bottom">
+            <a class="nav-item nav-link active" id="nav-link" style="color: white" href="#">
+              Something
+            </a>
+            <a class="nav-item nav-link" id="nav-link" style="color: white" href="#">
+              Something 2
+            </a>
+            <a class="nav-item nav-link" id="nav-link" style="color: white" href="#">
+              Something 3
+            </a>
+          </div>
+        </div>
+      </ul>
+      <!-- sign in navbar part -->
+      <ul class="navbar-nav mr-right" style="margin-right: 20px">
+        <li [hidden]="isLogin" class="nav-item">
+          <a class="nav-link" style="color: white" href="#">
+            Sign In
+          </a>
+        </li>
+      </ul>
+    </div>
   </nav>
 </div>
