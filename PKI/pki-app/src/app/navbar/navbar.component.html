@@ -2,7 +2,7 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -19,8 +19,8 @@
       <ul class="navbar-nav mr-auto">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div class="navbar-nav" style="vertical-align: bottom">
-            <a class="nav-item nav-link active" id="nav-link" style="color: white" href="#">
-              Something
+            <a class="nav-item nav-link" id="nav-link" style="color: white" routerLinkActive="active" routerLink="/addCertificate">
+              Certificate
             </a>
             <a class="nav-item nav-link" id="nav-link" style="color: white" href="#">
               Something 2
@@ -28,13 +28,24 @@
             <a class="nav-item nav-link" id="nav-link" style="color: white" href="#">
               Something 3
             </a>
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
           </div>
         </div>
       </ul>
       <!-- sign in navbar part -->
       <ul class="navbar-nav mr-right" style="margin-right: 20px">
         <li [hidden]="isLogin" class="nav-item">
-          <a class="nav-link" style="color: white" href="#">
+          <a class=" nav-item nav-link" style="color: white" href="#" >
             Sign In
           </a>
         </li>
@@ -42,3 +53,4 @@
     </div>
   </nav>
 </div>
+
