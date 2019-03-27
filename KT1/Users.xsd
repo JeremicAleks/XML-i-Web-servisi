@@ -5,9 +5,27 @@
     <xs:import namespace="Reservations" schemaLocation="Reservation.xsd"/>
     <xs:complexType name="User">
         <xs:sequence maxOccurs="1">
-            <xs:element name="name" type="xs:string"/>
-            <xs:element name="lastName" type="xs:string"/>
-            <xs:element name="username" type="xs:string"/>
+            <xs:element name="name">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="32"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="lastName">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="40"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="username">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="25"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
             <xs:element name="email" type="xs:time"/>
             <xs:element name="isVerified" type="xs:boolean"/>
             <xs:element name="password" type="xs:string"/>

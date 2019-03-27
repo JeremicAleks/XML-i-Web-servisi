@@ -8,7 +8,13 @@
     <xs:element name="Room">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="numberOfBeds" type="xs:int"/>
+                <xs:element form="qualified" name="numberOfBeds">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:positiveInteger">
+                            <xs:maxExclusive value="6"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
                 <xs:element ref="location:Location"/>
                 <xs:element name="type" type="rooms:TypeEnum"/>
                 <xs:element name="category" type="rooms:CategoryEnum"/>
@@ -17,7 +23,13 @@
                 </xs:sequence>
                 <xs:element name="description" type="xs:string"/>
                 <xs:sequence maxOccurs="10">
-                    <xs:element name="image" type="xs:anyURI"/>
+                    <xs:element minOccurs="1" name="image">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:base64Binary">
+                                <xs:maxLength value="1024"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                 </xs:sequence>
                 <xs:sequence maxOccurs="unbounded" minOccurs="0">
                     <xs:element name="ratesAndComments" type="rooms:RateAndComment"/>
