@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="Reservations" xmlns="Reservations" xmlns:reguser="User" xmlns:rooms="Rooms">
+
+    <xs:import namespace="User" schemaLocation="Users.xsd"/>
+    <xs:import namespace="Rooms" schemaLocation="Rooms.xsd"/>
+    <xs:element name="Reservation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="reguser:RegistredUser"/>
+                <xs:element name="checkIn" type="xs:date"/>
+                <xs:element name="checkOut" type="xs:date"/>
+                <xs:element ref="rooms:Room"/>
+                <xs:element name="price" type="xs:double"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="User" xmlns="User" xmlns:reservation="Reservations" xmlns:rooms="Rooms">
+    <xs:import namespace="Rooms" schemaLocation="Rooms.xsd"/>
+    <xs:import namespace="Reservations" schemaLocation="Reservation.xsd"/>
+    <xs:complexType name="User">
+        <xs:sequence maxOccurs="1">
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="username" type="xs:string"/>
+            <xs:element name="email" type="xs:time"/>
+            <xs:element name="isVerified" type="xs:boolean"/>
+            <xs:element name="password" type="xs:string"/>
+            <xs:element name="authority" type="AuthorityEnum"> </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element abstract="true" name="User" type="User"/>
+    <xs:complexType name="RegistredUser">
+        <xs:complexContent mixed="false">
+            <xs:extension base="User">
+                <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                    <xs:element ref="reservation:Reservation"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element abstract="false" name="AgentUser">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="User">
+                    <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                        <xs:element ref="rooms:Room"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="AuthorityEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SYSADMIN"/>
+            <xs:enumeration value="SECADMIN"/>
+            <xs:enumeration value="AGENT"/>
+            <xs:enumeration value="REGUSER"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="RegistredUser" type="RegistredUser"/>
+</xs:schema>
