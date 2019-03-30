@@ -40,6 +40,8 @@
                 <xs:sequence maxOccurs="unbounded" minOccurs="0">
                     <xs:element ref="reservation:Reservation"/>
                 </xs:sequence>
+                <xs:element name="floor" type="xs:positiveInteger"/>
+                <xs:element name="number" type="xs:nonPositiveInteger"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
