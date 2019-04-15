@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AgentApiApplication {
 
 	static {
+		
 		System.setProperty("jdk.tls.client.protocols", "TLSv1.2");
 		System.setProperty("https.protocols", "TLSv1.2");
 		System.setProperty("javax.net.ssl.trustStore", "c://agentTrustStore.p12");
