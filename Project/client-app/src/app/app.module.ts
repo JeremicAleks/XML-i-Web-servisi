@@ -12,7 +12,8 @@ import { MainNavibarComponent } from './views/main-navibar/main-navibar.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
