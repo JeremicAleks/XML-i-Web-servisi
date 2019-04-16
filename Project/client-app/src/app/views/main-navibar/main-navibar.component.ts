@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-main-navibar',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainNavibarComponent implements OnInit {
 
-  constructor() { }
+  isLogin : boolean
+  errorMessage: string;
 
-  ngOnInit() {
+  loginForm = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(5)])
+  })
+
+  constructor(private modalService : NgbModal) { 
+    this.isLogin = false;
+  }
+
+  ngOnInit() { }
+
+  onSubmit() {
+    alert("to be implemented")
+  }
+
+  openVerticallyCentered(content) {
+    this.modalService.open(content, { 
+      windowClass: 'dark-modal',
+      centered: true
+    });
   }
 
 }
