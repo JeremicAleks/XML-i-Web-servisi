@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/protect")
 public class TestController {
 	
-	@PreAuthorize("hasRole('ROLE_AGENT_APP')")
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> findCertificates() {
+	@PreAuthorize("@securityService.hasProtectedAccess('READ_PRODUCT')")
+	@GetMapping(value="/test",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getTest() {
 		
         return new ResponseEntity<>("Its cool!", HttpStatus.OK);
     }

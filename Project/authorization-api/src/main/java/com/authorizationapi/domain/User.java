@@ -29,15 +29,12 @@ public class User {
 	private Role role;
 
 	@Column(nullable = false)
-
 	private String lastName;
 	@Column(unique = true, nullable = false)
 	private String username;
 
 	@Column(nullable = false)
-
 	private String password;
-
 	@Column(unique = true, nullable = false)
 	private String email;
 	private String telephone;

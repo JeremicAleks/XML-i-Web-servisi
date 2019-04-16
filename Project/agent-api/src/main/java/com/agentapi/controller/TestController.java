@@ -12,25 +12,19 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 @RequestMapping("/api")
 public class TestController {
-	
-	static final String SERVICE_URI = "https://localhost:8043/api/protect";
-	
+
+	static final String SERVICE_URI = "https://localhost:8043/api/module/test";
+
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> findCertificates() {
-	RestTemplate restTemplate = new RestTemplate();
-	System.out.println("safasfa");
-	try {
-	ResponseEntity<String> resp =	restTemplate.exchange(SERVICE_URI, HttpMethod.GET, null,String.class);
-	 return new ResponseEntity<>(resp.getBody()+" 321421", HttpStatus.OK);
+	public ResponseEntity<String> findCertificates() {
+		RestTemplate restTemplate = new RestTemplate();
+		try {
+			ResponseEntity<String> resp = restTemplate.exchange(SERVICE_URI, HttpMethod.GET, null, String.class);
+			return new ResponseEntity<>(resp.getBody()+" ||Test centralnog servera!", HttpStatus.OK);
+		} catch (Exception e) {
+		}
+		return new ResponseEntity<>("Acces Denied", HttpStatus.FORBIDDEN);
+
 	}
-	catch (Exception e) {
-		e.printStackTrace();
-		
-	}
-	System.out.println("dsadada");
-	 return new ResponseEntity<>("Ne radi", HttpStatus.OK);
-     
-    }
-	
 
 }

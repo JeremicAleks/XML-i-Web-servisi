@@ -3,12 +3,19 @@ package com.authorizationapi.utils;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import com.authorizationapi.domain.BlackListToken;
+import com.authorizationapi.repo.BlackListTokenRepository;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -22,13 +29,21 @@ public class TokenUtils {
 
 	@Value("${token.expiration}")
 	private Long expiration;
-	
+
+	@Autowired
+	private BlackListTokenRepository blackRepo;
+
 	private Date generateCurrentDate() {
 
 		return new Date(System.currentTimeMillis());
 
 	}
 
+	@Scheduled(cron = "0 0/30 * * * *")
+	public void filterBlackList() {
+		List<BlackListToken> blackList = blackRepo.getExp(new Date());
+		blackRepo.deleteAll(blackList);
+	}
 
 	public Date getExpirationDateFromToken(String token) {
 
@@ -50,8 +65,6 @@ public class TokenUtils {
 
 	}
 
-
-
 	private Claims getClaimsFromToken(String token) {
 
 		Claims claims;
@@ -70,32 +83,28 @@ public class TokenUtils {
 
 	}
 
-
 	private Date generateExpirationDate() {
 
 		return new Date(System.currentTimeMillis() + this.expiration * 1000);
 
 	}
 
-
-
 	public String generateToken(UserDetails userDetails) {
 
 		Map<String, Object> claims = new HashMap<String, Object>();
-		
+
 		claims.put("sub", userDetails.getUsername());
-		String role="";
+		String role = "";
 		for (GrantedAuthority g : userDetails.getAuthorities()) {
-			role+=g;
+			role += g;
 		}
 		claims.put("role", role);
 		claims.put("created", this.generateCurrentDate());
+		claims.put("iat", new UUID(10, 10));
 
 		return this.generateToken(claims);
 
 	}
-
-
 
 	private String generateToken(Map<String, Object> claims) {
 
@@ -107,7 +116,6 @@ public class TokenUtils {
 
 		} catch (UnsupportedEncodingException ex) {
 
-
 			return Jwts.builder().setClaims(claims).setExpiration(this.generateExpirationDate())
 
 					.signWith(SignatureAlgorithm.HS256, this.secret).compact();
@@ -115,7 +123,7 @@ public class TokenUtils {
 		}
 
 	}
-	
+
 	private Boolean isTokenExpired(String token) {
 
 		final Date expiration = this.getExpirationDateFromToken(token);
@@ -124,15 +132,11 @@ public class TokenUtils {
 
 	}
 
-
-
 	public Boolean canTokenBeRefreshed(String token, Date lastPasswordReset) {
 
 		return (!(this.isTokenExpired(token)));
 
 	}
-
-
 
 	public String refreshToken(String token) {
 

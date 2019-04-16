@@ -2,13 +2,13 @@ package com.authorizationapi.domain;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Role {
@@ -16,43 +16,49 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private RoleEnum name;
+	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-	private List<Privileges> privileges;
-	
-	public Role() {
-		// TODO Auto-generated constructor stub
-	}
+	@Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = PrivilegeEnum.class)
+	private List<PrivilegeEnum> privileges;
 	
 	
 	
-	public Role(RoleEnum name, List<Privileges> privileges) {
+	public Role(String name, List<PrivilegeEnum> privileges) {
 		super();
 		this.name = name;
 		this.privileges = privileges;
 	}
 
-
+	public Role() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public RoleEnum getName() {
+
+	public String getName() {
 		return name;
 	}
-	public void setName(RoleEnum name) {
+
+	public void setName(String name) {
 		this.name = name;
 	}
-	public List<Privileges> getPrivilages() {
+
+	public List<PrivilegeEnum> getPrivileges() {
 		return privileges;
 	}
-	public void setPrivilages(List<Privileges> privilages) {
-		this.privileges = privilages;
+
+	public void setPrivileges(List<PrivilegeEnum> privileges) {
+		this.privileges = privileges;
 	}
+	
+	
 	
 	
 

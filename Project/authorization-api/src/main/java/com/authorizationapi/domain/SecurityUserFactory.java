@@ -13,7 +13,7 @@ public class SecurityUserFactory {
 
 		try {
 
-			authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(user.getRole().getName().toString());
+			authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(user.getRole().getName());
 
 		} catch (Exception e) {
 
