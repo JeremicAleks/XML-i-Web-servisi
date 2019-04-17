@@ -23,4 +23,35 @@ export class AuthentificationService {
     ));
   }
 
+  register(name: string, lastname: string, email: string, username: string, password: string, rePassword : string) {
+    return this.http.post<any>(environment.authentificationApiUrl + '/api/register', {
+      username, password, lastname, email, rePassword, name
+    }).pipe(map(message => {
+      return message;
+    }
+    ));
+  }
+
+  logout() {
+    localStorage.removeItem('sessionUser');
+  }
+
+  checkSessionUser() {
+    let sessionUser = JSON.parse(localStorage.getItem('sessionUser'));
+    if (sessionUser && sessionUser.token) {
+      return true;
+    }
+
+    return false;
+  }
+
+  getSessionUser() {
+    let sessionUser = JSON.parse(localStorage.getItem('sessionUser'));
+    if (sessionUser) {
+      return sessionUser;
+    }
+
+    return null;
+  }
+
 }
