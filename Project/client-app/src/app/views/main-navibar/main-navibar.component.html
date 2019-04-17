@@ -3,7 +3,8 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
     <a class="navbar-brand" style="color: white; margin-left: 30px;" routerLink="/">
-      <img src="assets\images\logo.png" width="30" height="30" class="d-inline-block align-top" alt="mi amor">
+      <img src="assets\images\logo.png" width="30" height="30" class="d-inline-block align-top" alt="Logo picture"
+        style="border-radius: 50%">
     </a>
 
     <ul class="navbar-nav mr-auto">
@@ -26,11 +27,25 @@
     </ul>
     <!-- login part-->
     <ul class="navbar-nav mr-right" style="margin-right: 20px">
-      <li [hidden]="isLogin" class="nav-item">
+      <!-- if there is nobody logged in -->
+      <li *ngIf="!isLogin" class="nav-item">
         <a class="nav-link" style="color: white" (click)="openVerticallyCentered(content)">
           <i class="material-icons">supervised_user_circle</i>
-          Sign In
+          sign in
         </a>
+      </li>
+      <!-- if user is logged in -->
+      <li *ngIf="isLogin" class="nav-item dropdown">
+        <a class="nav-link" style="color: white" dropdown-toggle data-toggle="dropdown" role="button"
+          aria-haspopup="true" aria-expanded="false" (click)="dropDownMenu()">
+          <i class="material-icons">person</i>
+          {{userLoginDTO.username}}
+        </a>
+        <div class="dropdown-menu bg-dark dropdown-menu-right">
+          <a class="dropdown-item" style="color: white;" routerLink="/">Adminpanel</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" style="color: white;" routerLink="/">Logout</a>
+        </div>
       </li>
     </ul>
   </div>
@@ -38,7 +53,7 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">Modal title</h4>
+    <h4 class="modal-title">Sign In</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -46,7 +61,7 @@
   <div class="modal-body">
     <form name="loginForm" [formGroup]="loginForm">
       <div class="imgcontainer">
-        <img src="assets\images\logo.png" alt="Logo picture">
+        <img src="assets\images\logo.png" alt="Logo picture" style="border-radius: 50%">
       </div>
       <div class="container" id="login-form">
         <div class="form-group">
@@ -79,7 +94,7 @@
               <div *ngIf="loginForm.get('password').errors.passwordError">{{errorMessage}}</div>
             </div>
           </div>
-          <span class="psw"><a routerLink="/register">Don't have account? Register now!</a></span>
+          <span class="psw"><a routerLink="/">Don't have account? Register now!</a></span>
         </div>
       </div>
     </form>

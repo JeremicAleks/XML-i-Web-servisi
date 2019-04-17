@@ -21,6 +21,7 @@ import com.authorizationapi.domain.BlackListToken;
 import com.authorizationapi.domain.PrivilegeEnum;
 import com.authorizationapi.domain.Role;
 import com.authorizationapi.domain.dto.LoginDTO;
+import com.authorizationapi.domain.dto.UserLoginDTO;
 import com.authorizationapi.repo.BlackListTokenRepository;
 import com.authorizationapi.repo.UserRepository;
 import com.authorizationapi.service.UserService;
@@ -49,10 +50,13 @@ public class TokenController {
 	@RequestMapping(method = RequestMethod.POST, value = "/token", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> loginUser(@Validated @RequestBody LoginDTO user) {
 
-		String token = userService.userLogin(user.getUsername(), user.getPassword());
-
-		return new ResponseEntity<String>(token, HttpStatus.OK);
-
+		UserLoginDTO userLoginDTO = userService.userLogin(user.getUsername(), user.getPassword());
+		
+		if (userLoginDTO != null) {
+			return new ResponseEntity<Object>(userLoginDTO, HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<Object>(null, HttpStatus.NOT_FOUND);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/user")

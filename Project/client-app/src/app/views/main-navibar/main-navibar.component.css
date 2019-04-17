@@ -3,21 +3,13 @@
 }
 
 form {
-    border: 3px solid #f1f1f1;
-    margin-top: 30px;
+    /*margin-top: 30px;*/
     text-align: center;
 }
 
 .imgcontainer {
     text-align: center;
-    height: 170px;
-    width: auto;/*maintain aspect ratio*/
-    max-width: 500px;
-}
-
-img.avatar {
-    width: 40%;
-    border-radius: 50%;
+    margin: 24px 0 12px 0;
 }
 
 .container {
