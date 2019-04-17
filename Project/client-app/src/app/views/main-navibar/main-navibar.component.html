@@ -18,9 +18,9 @@
             <i class="material-icons">code</i>
             Something2
           </a>
-          <a class="nav-item nav-link" id="nav-link" style="color: white" routerLink="">
+          <a class="nav-item nav-link" id="nav-link" style="color: white" routerLink="" (click)="logOut()">
             <i class="material-icons">code</i>
-            Something3
+            log out
           </a>
         </div>
       </div>
@@ -35,9 +35,9 @@
         </a>
       </li>
       <!-- if user is logged in -->
-      <li *ngIf="isLogin" class="nav-item dropdown">
+     <li *ngIf="isLogin" class="nav-item dropdown">
         <a class="nav-link" style="color: white" dropdown-toggle data-toggle="dropdown" role="button"
-          aria-haspopup="true" aria-expanded="false" (click)="dropDownMenu()">
+          aria-haspopup="true" aria-expanded="false" href="#">
           <i class="material-icons">person</i>
           {{userLoginDTO.username}}
         </a>
@@ -179,14 +179,14 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="material-icons">account_circle</i></span>
                 </div>
-                <input type="text" class="form-control" placeholder="USERNAME" id="registerUsername"
-                  formControlName="registerUsername"
-                  [ngClass]="{'is-invalid':registerForm.get('registerUsername').touched && 
-                  registerForm.get('registerUsername').invalid}" required>
-                <div *ngIf="registerForm.get('registerUsername').touched && registerForm.get('registerUsername').invalid"
+                <input type="text" class="form-control" placeholder="USERNAME" id="registrationUsername"
+                  formControlName="registrationUsername"
+                  [ngClass]="{'is-invalid':registerForm.get('registrationUsername').touched && 
+                  registerForm.get('registrationUsername').invalid}" required>
+                <div *ngIf="registerForm.get('registrationUsername').touched && registerForm.get('registrationUsername').invalid"
                   class="invalid-feedback">
-                  <div *ngIf="registerForm.get('registerUsername').errors.required">Username is required</div>
-                  <div *ngIf="registerForm.get('registerUsername').errors.registrationUsernameError">{{errorMessage}}</div>
+                  <div *ngIf="registerForm.get('registrationUsername').errors.required">Username is required</div>
+                  <div *ngIf="registerForm.get('registrationUsername').errors.registrationUsernameError">{{errorMessage}}</div>
                 </div>
               </div>
             </div>
@@ -197,16 +197,16 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="material-icons">visibility_off</i></span>
                 </div>
-                <input type="password" class="form-control" placeholder="PASSWORD" id="registerPassword"
-                  formControlName="registerPassword"
-                  [ngClass]="{'is-invalid':registerForm.get('registerPassword').touched && 
-                  registerForm.get('registerPassword').invalid}" required>
-                <div *ngIf="registerForm.get('registerPassword').touched && registerForm.get('registerPassword').invalid"
+                <input type="password" class="form-control" placeholder="PASSWORD" id="registrationPassword"
+                  formControlName="registrationPassword"
+                  [ngClass]="{'is-invalid':registerForm.get('registrationPassword').touched && 
+                  registerForm.get('registrationPassword').invalid}" required>
+                <div *ngIf="registerForm.get('registrationPassword').touched && registerForm.get('registrationPassword').invalid"
                   class="invalid-feedback">
-                  <div *ngIf="registerForm.get('registerPassword').errors.required">Password is required</div>
-                  <div *ngIf="registerForm.get('registerPassword').errors.minlength">Password must be at least 4 character long
+                  <div *ngIf="registerForm.get('registrationPassword').errors.required">Password is required</div>
+                  <div *ngIf="registerForm.get('registrationPassword').errors.minlength">Password must be at least 4 character long
                   </div>
-                  <div *ngIf="registerForm.get('registerPassword').errors.registrationPasswordError">{{errorMessage}}</div>
+                  <div *ngIf="registerForm.get('registrationPassword').errors.registrationPasswordError">{{errorMessage}}</div>
                 </div>
               </div>
             </div>

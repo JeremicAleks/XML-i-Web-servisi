@@ -27,6 +27,7 @@ import com.authorizationapi.domain.Role;
 import com.authorizationapi.domain.dto.LoginDTO;
 import com.authorizationapi.domain.dto.RegisterUserDTO;
 import com.authorizationapi.domain.dto.UserLoginDTO;
+import com.authorizationapi.exception.ResponseMessage;
 import com.authorizationapi.repo.BlackListTokenRepository;
 import com.authorizationapi.repo.RoleRepository;
 import com.authorizationapi.repo.UserRepository;
@@ -101,10 +102,13 @@ public class TokenController {
 	public ResponseEntity<?> revokeToken(@RequestHeader("Token-Authority") String token) {
 
 		Date date = tokenUtils.getExpirationDateFromToken(token);
-		if (blackList.findByToken(token) != null || date != null) {
+		System.out.println(date);
+		if (blackList.findByToken(token) == null || date != null) {
+			System.out.println("fsafa");
 			blackList.save(new BlackListToken(token, date));
+			
 		}
-		return new ResponseEntity<String>("Successfully logout!", HttpStatus.OK);
+		return new ResponseEntity<ResponseMessage>(new ResponseMessage("Successfully logout!"), HttpStatus.OK);
 
 	}
 }

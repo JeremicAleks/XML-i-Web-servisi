@@ -114,7 +114,7 @@ public class TokenUtils {
 
 			return Jwts.builder().setClaims(claims).setExpiration(this.generateExpirationDate())
 
-					.signWith(SignatureAlgorithm.HS512, this.secret.getBytes("UTF-8")).compact();
+					.signWith(SignatureAlgorithm.HS256, this.secret.getBytes("UTF-8")).compact();
 
 		} catch (UnsupportedEncodingException ex) {
 

@@ -11,11 +11,11 @@ public class RegisterUserDTO {
 	private String username;
 
 	@NotNull(message = "Password is required")
-	@Size(min = 5, message = "Password must be at least 5 character long")
+	@Size(min = 4, message = "Password must be at least 4 character long")
 	private String password;
 
 	@NotNull(message = "Re-password is required!")
-	@Size(min = 5, message = "Re-password must be at least 5 character long")
+	@Size(min = 4, message = "Re-password must be at least 4 character long")
 	private String rePassword;
 
 	@NotNull(message = "First name is required")

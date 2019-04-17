@@ -26,10 +26,10 @@ export class MainNavibarComponent implements OnInit {
   registerForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
-    registerUsername: new FormControl('', Validators.required),
+    registrationUsername: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
-    registerPassword: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    confirmPassword: new FormControl('', [Validators.required, matchOtherValidator('registerPassword')])
+    registrationPassword: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    confirmPassword: new FormControl('', [Validators.required, matchOtherValidator('registrationPassword')])
 
   })
 
@@ -39,8 +39,10 @@ export class MainNavibarComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("ngOnInit")
-    console.log("isLogin: " + this.isLogin)
+   this.isLogin = this.authService.checkSessionUser()
+   if(this.isLogin==true){
+     this.userLoginDTO = this.authService.getSessionUser()
+   }
   }
 
   // SIGN IN PART
@@ -59,6 +61,7 @@ export class MainNavibarComponent implements OnInit {
         if (data != null) {
           this.isLogin = true
           this.modalService.dismissAll()
+          alert("Successfull sign in!")
         }
       },
 
@@ -100,26 +103,26 @@ export class MainNavibarComponent implements OnInit {
     }
 
     this.clearRegistrationErrors();
-    this.authService.register(this.firstName.value, this.lastName.value, this.email.value, 
-        this.registrationUsername.value, this.registrationPassword.value, this.confirmPassword.value).subscribe(
+    this.authService.register(this.FirstName.value, this.LastName.value, this.Email.value, 
+        this.RegistrationUsername.value, this.RegistrationPassword.value, this.ConfirmPassword.value).subscribe(
       data => {
         this.modalService.dismissAll()
-        this.openSignInModal('signIn')
+        alert(data.message)
       },
       error => {
         this.errorMessage = error;
         if (error.includes('Password')) {
-          this.password.setErrors({ 'registrationPasswordError': error });
+          this.RegistrationPassword.setErrors({ 'registrationPasswordError': error });
         } else if (error.includes('Username')) {
-          this.username.setErrors({ 'registrationUsernameError': error });
+          this.RegistrationUsername.setErrors({ 'registrationUsernameError': error });
         } else if (error.includes('Re-password')) {
-          this.confirmPassword.setErrors({ 'confirmPasswordError': error });
+          this.ConfirmPassword.setErrors({ 'confirmPasswordError': error });
         } else if (error.includes('First name')) {
-          this.firstName.setErrors({ 'firstNameError': error });
+          this.FirstName.setErrors({ 'firstNameError': error });
         } else if (error.includes('Last name')) {
-          this.lastName.setErrors({ 'lastNameError': error });
+          this.LastName.setErrors({ 'lastNameError': error });
         } else if (error.includes('Email')) {
-          this.email.setErrors({ 'emailError': error });
+          this.Email.setErrors({ 'emailError': error });
         }
       }
     )
@@ -134,41 +137,49 @@ export class MainNavibarComponent implements OnInit {
 
   // Metoda za proveru poklapanja password-a
   checkPasswords() {
-    let registrationPassword = this.registrationPassword.value;
-    let confirmPassword = this.confirmPassword.value;
+    let registrationPassword = this.RegistrationPassword.value;
+    let confirmPassword = this.ConfirmPassword.value;
 
     return registrationPassword === confirmPassword ? null : { notSame: true }
   }
 
   private clearRegistrationErrors() {
-    this.registrationUsername.setErrors({ 'registrationUsernameError': null });
-    this.registrationUsername.updateValueAndValidity();
-    this.registrationPassword.setErrors({ 'registrationPasswordError': null });
-    this.registrationPassword.updateValueAndValidity();
-    this.confirmPassword.setErrors({ 'confirmPasswordError': null });
-    this.confirmPassword.updateValueAndValidity();
-    this.firstName.setErrors({ 'firstNameError': null });
-    this.firstName.updateValueAndValidity();
-    this.lastName.setErrors({ 'lastNameError': null });
-    this.lastName.updateValueAndValidity();
-    this.email.setErrors({ 'emailError': null });
-    this.email.updateValueAndValidity();
+    this.RegistrationUsername.setErrors({ 'registrationUsernameError': null });
+    this.RegistrationUsername.updateValueAndValidity();
+    this.RegistrationPassword.setErrors({ 'registrationPasswordError': null });
+    this.RegistrationPassword.updateValueAndValidity();
+    this.ConfirmPassword.setErrors({ 'confirmPasswordError': null });
+    this.ConfirmPassword.updateValueAndValidity();
+    this.FirstName.setErrors({ 'firstNameError': null });
+    this.FirstName.updateValueAndValidity();
+    this.LastName.setErrors({ 'lastNameError': null });
+    this.LastName.updateValueAndValidity();
+    this.Email.setErrors({ 'emailError': null });
+    this.Email.updateValueAndValidity();
 
   }
 
   // Geteri za polja firstName, lastName, username, email, password, repeatPassword
-  get firstName() { return this.registerForm.get('firstName') }
-  get lastName() { return this.registerForm.get('lastName') }
-  get email() { return this.registerForm.get('email') }
-  get registrationUsername() { return this.registerForm.get('registrationUsername') }
-  get registrationPassword() { return this.registerForm.get('registrationPassword') }
-  get confirmPassword() { return this.registerForm.get('confirmPassword') }
+  get FirstName() { return this.registerForm.get('firstName') }
+  get LastName() { return this.registerForm.get('lastName') }
+  get Email() { return this.registerForm.get('email') }
+  get RegistrationUsername() { return this.registerForm.get('registrationUsername') }
+  get RegistrationPassword() { return this.registerForm.get('registrationPassword') }
+  get ConfirmPassword() { return this.registerForm.get('confirmPassword') }
 
-
-  // TEST FUNCTIONS 
-  dropDownMenu() {
-    alert("ne zatvaraj, kujo")
-    console.log("isLogin: " + this.isLogin)
+  // LOG OUT
+  logOut() {
+    alert("log out clicked")
+    this.authService.logOut().subscribe(
+      data => {
+        localStorage.removeItem('sessionUser')
+        this.isLogin = false;
+      },
+      error => {
+        console.log("log out error")
+      }
+    )
+  
   }
 
 }

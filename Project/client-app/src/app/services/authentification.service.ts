@@ -32,8 +32,12 @@ export class AuthentificationService {
     ));
   }
 
-  logout() {
-    localStorage.removeItem('sessionUser');
+  logOut() {
+    return this.http.get<any>(environment.authentificationApiUrl + '/api/revoke')
+    .pipe(map(message => {
+      return message;
+    }
+    ));
   }
 
   checkSessionUser() {
