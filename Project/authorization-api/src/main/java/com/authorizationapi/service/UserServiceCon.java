@@ -4,11 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.authorizationapi.converter.RegUserDAOtoRegUser;
+import com.authorizationapi.domain.RegistredUser;
 import com.authorizationapi.domain.SecurityUser;
 import com.authorizationapi.domain.User;
+import com.authorizationapi.domain.dto.RegisterUserDTO;
 import com.authorizationapi.domain.dto.UserLoginDTO;
+import com.authorizationapi.exception.ResponseMessage;
 import com.authorizationapi.exception.UserCreditalsException;
 import com.authorizationapi.repo.UserRepository;
+import com.authorizationapi.utils.PasswordValidation;
 import com.authorizationapi.utils.TokenUtils;
 
 @Service
@@ -52,5 +57,22 @@ public class UserServiceCon implements UserService {
 		}
 		throw new UserCreditalsException("Wrong password");
 
+	}
+
+	@Override
+	public Object userRegister(RegisterUserDTO user) {
+
+		User userTemp = userRepository.findByUsername(user.getUsername());
+		if (userTemp != null)
+			throw new UserCreditalsException("Username '" + userTemp.getUsername() + "' already exist!");
+
+		if (!PasswordValidation.validPassword(user.getPassword(), user.getRePassword()))
+			throw new UserCreditalsException("Passwords don't match!");
+
+		user.setPassword(bcript.encode(user.getRePassword()));
+		RegistredUser regUser = RegUserDAOtoRegUser.create(user);
+		userRepository.save(regUser);
+
+		return new ResponseMessage("Successfull registration!");
 	}
 }

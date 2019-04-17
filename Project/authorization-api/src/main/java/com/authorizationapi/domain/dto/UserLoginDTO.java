@@ -15,7 +15,6 @@ public class UserLoginDTO {
 	private String telephone;
 	private String token;
 
-	@NotNull(message = "Role name is required!")
 	private String role;
 	
 	public UserLoginDTO() {

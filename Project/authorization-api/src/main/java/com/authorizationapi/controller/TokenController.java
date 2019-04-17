@@ -1,8 +1,8 @@
 package com.authorizationapi.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,9 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.authorizationapi.domain.BlackListToken;
-import com.authorizationapi.domain.PrivilegeEnum;
-import com.authorizationapi.domain.Role;
 import com.authorizationapi.domain.dto.LoginDTO;
+import com.authorizationapi.domain.dto.RegisterUserDTO;
 import com.authorizationapi.domain.dto.UserLoginDTO;
 import com.authorizationapi.repo.BlackListTokenRepository;
 import com.authorizationapi.repo.UserRepository;
@@ -59,23 +58,12 @@ public class TokenController {
 		return new ResponseEntity<Object>(null, HttpStatus.NOT_FOUND);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/user")
-	public ResponseEntity<?> addUser() {
+	@RequestMapping(method = RequestMethod.POST, value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterUserDTO user) {
 
-		List<PrivilegeEnum> p1 = new ArrayList<>();
-		p1.add(PrivilegeEnum.DELETE_PRODUCT);
-		p1.add(PrivilegeEnum.READ_PRODUCT);
-		p1.add(PrivilegeEnum.WRITE_PRODUCT);
-
-		userRepo.save(new com.authorizationapi.domain.User("Maki", new Role("SYSADMIN", p1), "dsjjjja", "maki",
-				bcript.encode("maki"), "dsla===", "421", "421"));
-		userRepo.save(new com.authorizationapi.domain.User("Kiriyaga", new Role("SECADMIN", p1.subList(0, 1)), "Nesto",
-				"kiriyaga", bcript.encode("maki"), "dsdsla", "421", "421"));
-
-		return new ResponseEntity<String>("Uspesno su dodati Useri", HttpStatus.OK);
+		return new ResponseEntity<>(userService.userRegister(user),HttpStatus.OK);
 
 	}
-
 	@RequestMapping(method = RequestMethod.GET, value = "/revoke")
 	public ResponseEntity<?> revokeToken(@RequestHeader("Token-Authority") String token) {
 
