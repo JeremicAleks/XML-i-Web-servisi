@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.authorizationapi.domain.BlackListToken;
+import com.authorizationapi.domain.SecurityUser;
+import com.authorizationapi.domain.User;
 import com.authorizationapi.repo.BlackListTokenRepository;
 
 import io.jsonwebtoken.Claims;
@@ -159,5 +161,39 @@ public class TokenUtils {
 		return refreshedToken;
 
 	}
+	
+	private Boolean notInBlackList(String token) {
+		
+		BlackListToken b = blackRepo.findByToken(token);
+		if(b==null) {
+			return true;
+		}
+		return false;
+		
+	}
+	
+	public String getUsernameFromToken(String token) {
+		String username;
+		try {
+			final Claims claims = this.getClaimsFromToken(token);
+			username = claims.getSubject();
+		} catch (Exception e) {
+			username = null;
+		}
+		return username;
+	}
+	
+
+	public Boolean validateToken(String token, UserDetails userDetails) {
+		SecurityUser user = (SecurityUser) userDetails;
+		final String username = this.getUsernameFromToken(token);
+		return (username.equals(user.getUsername()) && !(this.isTokenExpired(token) && notInBlackList(token)));
+	}
+	
+	public Boolean validateToken(String token, User user) {
+		final String username = this.getUsernameFromToken(token);
+		return (username.equals(user.getUsername()) && !(this.isTokenExpired(token) && notInBlackList(token)));
+	}
+	
 
 }
