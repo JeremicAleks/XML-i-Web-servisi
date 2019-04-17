@@ -13,12 +13,12 @@ import javax.persistence.ManyToOne;
 public class AclObjectIdentity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String path;
 	@Column(name = "IsFile")
 	private boolean isFile;
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private AclSid owner;
 	
 	public AclObjectIdentity() {
