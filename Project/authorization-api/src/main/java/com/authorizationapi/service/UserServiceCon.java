@@ -1,6 +1,8 @@
 package com.authorizationapi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,10 @@ public class UserServiceCon implements UserService {
 
 	@Autowired
 	private TokenUtils tokenUtils;
+	
+	@Value("${security.pepper}")
+	private String pepper;
+
 
 	@Autowired
 	private UserDetailsServiceCon userDetailService;
@@ -46,8 +52,9 @@ public class UserServiceCon implements UserService {
 	public UserLoginDTO userLogin(String username, String password) {
 
 		User user = loadUserByUsername(username);
-
-		if (bcript.matches(password, user.getPassword())) {
+		String fullPass= password +user.getSalt() + pepper;
+		
+		if (bcript.matches(fullPass, user.getPassword())) {
 
 			SecurityUser userDetails = (SecurityUser) this.userDetailService.loadUserByUsername(username);
 
@@ -68,9 +75,11 @@ public class UserServiceCon implements UserService {
 
 		if (!PasswordValidation.validPassword(user.getPassword(), user.getRePassword()))
 			throw new UserCreditalsException("Passwords don't match!");
-
-		user.setPassword(bcript.encode(user.getRePassword()));
+		String salt = KeyGenerators.secureRandom().toString();
+		String fullPass = user.getRePassword() + salt+pepper;
+		user.setPassword(bcript.encode(fullPass));
 		RegistredUser regUser = RegUserDAOtoRegUser.create(user);
+		regUser.setSalt(salt);
 		userRepository.save(regUser);
 
 		return new ResponseMessage("Successfull registration!");

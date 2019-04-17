@@ -12,8 +12,8 @@ public class RegistredUser extends User {
 	}
 
 	public RegistredUser(String name, String lastname, String username, String password, String email, Object object,
-			Object object2) {
-		super(name,null,lastname,username,password,email,null,null);
+			Object object2,String salt) {
+		super(name,null,lastname,username,password,email,null,null,salt);
 	}
 
 }

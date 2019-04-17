@@ -21,7 +21,16 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(nullable = false)
+	
+	private String salt;
 
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 	private String name;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
@@ -44,7 +53,7 @@ public class User {
 	}
 	
 	public User(String name, Role role, String lastName, String username, String password, String email,
-			String telephone, String adress) {
+			String telephone, String adress,String salt) {
 		super();
 		this.name = name;
 		this.role = role;
@@ -54,6 +63,7 @@ public class User {
 		this.email = email;
 		this.telephone = telephone;
 		this.adress = adress;
+		this.salt = salt;
 	}
 	public Long getId() {
 		return id;
