@@ -1,5 +1,6 @@
 package com.centralapi.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -51,6 +52,9 @@ public class Role {
 	}
 
 	public List<PrivilegeEnum> getPrivileges() {
+		if(this.privileges == null) {
+			this.privileges = new ArrayList<>();
+		}
 		return privileges;
 	}
 
