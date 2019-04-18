@@ -105,7 +105,7 @@ public class TokenController {
 		System.out.println(date);
 		if (blackList.findByToken(token) == null || date != null) {
 			System.out.println("fsafa");
-			blackList.save(new BlackListToken(token, date));
+			//blackList.save(new BlackListToken(token, date));
 			
 		}
 		return new ResponseEntity<ResponseMessage>(new ResponseMessage("Successfully logout!"), HttpStatus.OK);

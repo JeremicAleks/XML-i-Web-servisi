@@ -76,8 +76,8 @@ export class MainNavibarComponent implements OnInit {
     )
   }
 
-  openSignInModal(signIn) {
-    this.modalService.open(signIn, {
+  openSignInModal(content) {
+    this.modalService.open(content, {
       windowClass: 'dark-modal',
       centered: true
     });

@@ -6,17 +6,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 import { AdminRoleConfigurationComponent } from './views/admin-role-configuration/admin-role-configuration.component';
 import { AdminUserConfigurationComponent } from './views/admin-user-configuration/admin-user-configuration.component';
+import { SecAdminGuard } from './utils/sec-admin-guard';
 
 const routes: Routes = [
 
   {
     path: 'admin/config/user',
-    component: AdminUserConfigurationComponent
+    component: AdminUserConfigurationComponent,canActivate: [SecAdminGuard]
   },
 
   {
     path: 'admin/config/role',
-    component: AdminRoleConfigurationComponent
+    component: AdminRoleConfigurationComponent,canActivate: [SecAdminGuard]
   }
 
 ];

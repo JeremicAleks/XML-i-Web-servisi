@@ -17,14 +17,14 @@
       <td>{{user.username}}</td>
       <td>{{user.role}}</td>
       <td>
-        <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-          data-target="#updateUserModal">Update</button>
+        <button type="button" class="btn btn-outline-primary"
+          (click)="openUpdateUserModal(updateUserModal, user)">Update</button>
       </td>
     </tr>
   </tbody>
 </table>
 
-<!-- SIGN IN MODAL-->
+<!-- UPDATE USER MODAL-->
 <ng-template #updateUserModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Update user</h4>
@@ -33,11 +33,16 @@
     </button>
   </div>
   <div class="modal-body">
-    <form name="loginForm" [formGroup]="updateUserForm">
-      <div class="container" id="login-form">
+    <form name="updateUserForm" [formGroup]="updateUserForm">
+      <div class="container" id="updateUserForm">
         <div class="form-group">
-          <div class="input-group form-group">
-              kurec            
+          <div class="form-group row">
+            <label for="role" class="col-sm-4 col-form-label">Role type</label>
+            <div class="col-sm-8">
+              <select class="form-control" id="role" formControlName="role">
+                  <option *ngFor="let r of allRoles" value={{r.name}}>{{r.name}}</option>
+                </select>
+            </div>
           </div>
         </div>
       </div>
@@ -45,6 +50,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    <button type="button" class="btn btn-primary">Save changes</button>
+    <button type="button" class="btn btn-primary" (click)="saveUserChanges()">Save changes</button>
   </div>
 </ng-template>

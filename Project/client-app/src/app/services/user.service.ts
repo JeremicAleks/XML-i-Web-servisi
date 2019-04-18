@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment'
+import { PrivilegeEnum } from '../models/privilege-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,47 @@ export class UserService {
     return this.http.get<any>(environment.centralApiUrl + '/api/user/getUsers')
     .pipe(map(allUsers => {
       return allUsers
+    }
+    ));
+  }
+
+  getAllRoles() {
+    return this.http.get<any>(environment.centralApiUrl + '/api/role/getAllRoles')
+    .pipe(map(allRoles => {
+      return allRoles
+    }
+    ));
+  }
+
+  updateUser(username: String, role: String) {
+    return this.http.post<any>(environment.centralApiUrl + '/api/role/changeRoleForUser',
+    { username, role })
+    .pipe(map(retVal => {
+      return retVal
+    }
+    ));
+  }
+
+  deleteRole(role: String) {
+    return this.http.post<any>(environment.centralApiUrl + '/api/role/deleteRole', { role } )
+    .pipe(map(retVal => {
+      return retVal
+    }
+    ));
+  }
+
+  createRole(role: String) {
+    return this.http.post<any>(environment.centralApiUrl + '/api/role/addRole', { role } )
+    .pipe(map(retVal => {
+      return retVal
+    }
+    ));
+  }
+
+  updateRole(privileges: Array<PrivilegeEnum>, role: String) {
+    return this.http.post<any>(environment.centralApiUrl + '/api/role/updateRole', { privileges, role } )
+    .pipe(map(retVal => {
+      return retVal
     }
     ));
   }

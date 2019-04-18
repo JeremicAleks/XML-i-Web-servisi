@@ -12,17 +12,20 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">11</th>
-      <td>admin</td>
-      <td>write, read</td>
+    <tr *ngFor="let r of allRoles; index as i">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{r.name}}</td>
       <td>
-        <!---->
-        <button type="button" class="btn btn-outline-primary" style="margin-right: 10px" data-toggle="modal"
-          data-target="#updateRoleModal">Update</button>
-
-        <button type="button" class="btn btn-outline-danger">Delete</button>
-
+        <ul>
+          <li *ngFor="let p of r.privileges; index as j">{{p}}</li>
+        </ul>
+      </td>
+      <td>
+        <!-- UPDATE -->
+        <button type="button" class="btn btn-outline-primary" style="margin-right: 10px"
+          (click)="updateRole(updateRoleModal, r)">Update</button>
+        <!-- DELETE -->
+        <button type="button" class="btn btn-outline-danger" (click)="deleteRole(r)">Delete</button>
       </td>
     </tr>
   </tbody>
@@ -30,5 +33,96 @@
 
 <br>
 
-<button type="button" class="btn btn-outline-success" style="margin-left: 20px" data-toggle="modal"
-  data-target="#newRoleModal">New</button>
+<button type="button" class="btn btn-outline-success" style="margin-left: 20px"
+  (click)="newRole(newRoleModal)">New</button>
+
+<!-- NEW USER MODAL-->
+<ng-template #newRoleModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Create new role</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="newRoleForm" [formGroup]="newRoleForm">
+      <div class="container" id="newRoleForm">
+        <div class="form-group">
+          <div class="form-group row">
+            <label for="role" class="col-sm-4 col-form-label">Role</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="roleName" placeholder="ROLE NAME" formControlName="roleName"
+                [ngClass]="{'is-invalid':newRoleForm.get('roleName').touched && newRoleForm.get('roleName').invalid}"
+                required>
+              <div *ngIf="newRoleForm.get('roleName').touched && newRoleForm.get('roleName').invalid"
+                class="invalid-feedback">
+                <div>Role name is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" [disabled]="!newRoleForm.valid"
+      (click)="createNewRole()">Confirm</button>
+  </div>
+</ng-template>
+
+<!-- UPDATE USER MODAL-->
+<ng-template #updateRoleModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Update role privilages</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="form" [formGroup]="updateRoleForm" id="updateRoleForm">
+      <div class="form-group">
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <table>
+              <tr>
+                <td style="padding: 8px;">
+                  <input type="checkbox" id="write" (change)="changeCheckBox($event)" formControlName="write">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <label for="write" class="col-sm-5 col-form-label">Write product</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <table>
+              <tr>
+                <td style="padding: 8px;">
+                  <input type="checkbox" id="read" (change)="changeCheckBox($event)" formControlName="read">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <label for="read" class="col-sm-5 col-form-label">Read product</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <table>
+              <tr>
+                <td style="padding: 8px;">
+                  <input type="checkbox" id="delete" (change)="changeCheckBox($event)" formControlName="delete">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <label for="delete" class="col-sm-5 col-form-label">Delete product</label>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" (click)="saveRoleChanges()">Save changes</button>
+  </div>
+</ng-template>
