@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  authentificationApiUrl: "http://localhost:8089"
+  authentificationApiUrl: "http://localhost:8089",
+  centralApiUrl: "http://localhost:8040"
 };
 
 /*

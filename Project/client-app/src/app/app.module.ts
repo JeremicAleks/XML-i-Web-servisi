@@ -10,12 +10,14 @@ import { AdminRoleConfigurationComponent } from './views/admin-role-configuratio
 import { JwtInterceptor } from './utils/authInterceptors/jwt-interceptor';
 import { ErrorInterceptor } from './utils/authInterceptors/error-interceptor';
 import { DatePipe } from '@angular/common';
+import { AdminUserConfigurationComponent } from './views/admin-user-configuration/admin-user-configuration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavibarComponent,
-    AdminRoleConfigurationComponent
+    AdminRoleConfigurationComponent,
+    AdminUserConfigurationComponent
   ],
   imports: [
     BrowserModule,

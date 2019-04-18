@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PipeTransform } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-admin-role-configuration',
   templateUrl: './admin-role-configuration.component.html',
-  styleUrls: ['./admin-role-configuration.component.css']
+  styleUrls: ['./admin-role-configuration.component.css'],
+
 })
+
 export class AdminRoleConfigurationComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }
+
