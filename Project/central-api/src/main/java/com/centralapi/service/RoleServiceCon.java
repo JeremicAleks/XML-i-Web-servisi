@@ -93,4 +93,5 @@ public class RoleServiceCon implements RoleService {
 		
 		return new ResponseMessage("Successfully changed role for user!");
 	}
+	
 }

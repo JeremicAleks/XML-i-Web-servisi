@@ -39,10 +39,10 @@ export class MainNavibarComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.isLogin = this.authService.checkSessionUser()
-   if(this.isLogin==true){
-     this.userLoginDTO = this.authService.getSessionUser()
-   }
+    this.isLogin = this.authService.checkSessionUser()
+    if (this.isLogin == true) {
+      this.userLoginDTO = this.authService.getSessionUser()
+    }
   }
 
   // SIGN IN PART
@@ -97,35 +97,35 @@ export class MainNavibarComponent implements OnInit {
   // REGISTRATION PART
   onRegistration() {
     alert("registration - to be tested")
-    
+
     if (this.registerForm.invalid) {
       return;
     }
 
     this.clearRegistrationErrors();
-    this.authService.register(this.FirstName.value, this.LastName.value, this.Email.value, 
-        this.RegistrationUsername.value, this.RegistrationPassword.value, this.ConfirmPassword.value).subscribe(
-      data => {
-        this.modalService.dismissAll()
-        alert(data.message)
-      },
-      error => {
-        this.errorMessage = error;
-        if (error.includes('Password')) {
-          this.RegistrationPassword.setErrors({ 'registrationPasswordError': error });
-        } else if (error.includes('Username')) {
-          this.RegistrationUsername.setErrors({ 'registrationUsernameError': error });
-        } else if (error.includes('Re-password')) {
-          this.ConfirmPassword.setErrors({ 'confirmPasswordError': error });
-        } else if (error.includes('First name')) {
-          this.FirstName.setErrors({ 'firstNameError': error });
-        } else if (error.includes('Last name')) {
-          this.LastName.setErrors({ 'lastNameError': error });
-        } else if (error.includes('Email')) {
-          this.Email.setErrors({ 'emailError': error });
+    this.authService.register(this.FirstName.value, this.LastName.value, this.Email.value,
+      this.RegistrationUsername.value, this.RegistrationPassword.value, this.ConfirmPassword.value).subscribe(
+        data => {
+          this.modalService.dismissAll()
+          alert(data.message)
+        },
+        error => {
+          this.errorMessage = error;
+          if (error.includes('Password')) {
+            this.RegistrationPassword.setErrors({ 'registrationPasswordError': error });
+          } else if (error.includes('Username')) {
+            this.RegistrationUsername.setErrors({ 'registrationUsernameError': error });
+          } else if (error.includes('Re-password')) {
+            this.ConfirmPassword.setErrors({ 'confirmPasswordError': error });
+          } else if (error.includes('First name')) {
+            this.FirstName.setErrors({ 'firstNameError': error });
+          } else if (error.includes('Last name')) {
+            this.LastName.setErrors({ 'lastNameError': error });
+          } else if (error.includes('Email')) {
+            this.Email.setErrors({ 'emailError': error });
+          }
         }
-      }
-    )
+      )
   }
 
   openRegistrationModal(registration) {
@@ -179,7 +179,7 @@ export class MainNavibarComponent implements OnInit {
         console.log("log out error")
       }
     )
-  
+
   }
 
 }

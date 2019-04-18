@@ -18,17 +18,18 @@ import com.centralapi.repo.UserRepository;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-	
+
 	@Autowired
 	UserRepository userRepo;
-	
-	
+
 	@GetMapping(value = "/getUsers", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getUsers() {
+		System.out.println("pogodio sam centralni server");
 		List<User> users = userRepo.findAll();
 		List<UserLoginDTO> userdto = new ArrayList<>();
 		for (User user : users) {
-			userdto.add(new UserLoginDTO(user.getUsername(), user.getName(), user.getLastName(), user.getEmail(), user.getAdress(), user.getTelephone(),"", user.getRole().getName()));
+			userdto.add(new UserLoginDTO(user.getUsername(), user.getName(), user.getLastName(), user.getEmail(),
+					user.getAdress(), user.getTelephone(), "", user.getRole().getName()));
 		}
 		return new ResponseEntity<>(userdto, HttpStatus.OK);
 	}

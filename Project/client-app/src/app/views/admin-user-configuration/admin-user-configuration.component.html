@@ -4,7 +4,7 @@
 
 <table class="table table-striped">
   <thead>
-    <tr>
+    <tr *ngFor="let user of allUsers; index as i">
       <th scope="col">#</th>
       <th scope="col">Username</th>
       <th scope="col">Role</th>
@@ -13,9 +13,9 @@
   </thead>
   <tbody>
     <tr>
-      <th scope="row">ccc</th>
-      <td> cc</td>
-      <td> c</td>
+      <th scope="row">{{i + 1}}</th>
+      <td>{{user.username}}</td>
+      <td>{{user.role}}</td>
       <td>
         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#updateUserModal" 
         >Update</button>

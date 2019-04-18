@@ -17,7 +17,6 @@ import com.centralapi.domain.PrivilegeEnum;
 import com.centralapi.domain.dto.ChangeRoleForUserDTO;
 import com.centralapi.domain.dto.RoleDTO;
 import com.centralapi.domain.dto.UpdateRoleDTO;
-import com.centralapi.exception.GlobalException;
 import com.centralapi.exception.ResponseMessage;
 import com.centralapi.repo.RoleRepository;
 import com.centralapi.service.RoleService;

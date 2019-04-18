@@ -3,6 +3,7 @@ import { DecimalPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
+import { Role } from 'src/app/models/role';
 
 
 @Component({
@@ -13,6 +14,8 @@ import { map, startWith } from 'rxjs/operators';
 })
 
 export class AdminRoleConfigurationComponent implements OnInit {
+
+   allRoles : Array<Role>
 
   constructor() {}
 
