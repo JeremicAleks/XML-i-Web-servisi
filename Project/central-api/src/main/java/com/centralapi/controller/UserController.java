@@ -30,9 +30,6 @@ public class UserController {
 	@GetMapping(value = "/getUsers", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getUsers() throws UnknownHostException {
 		for(int i =0 ; i<500;i++) {  
-		logger.info("LEEF:1.0|Microsoft|MSExchange|4.0 SP1|15345|" + 
-				"src=7.5.6.6	dst=172.50.123.1	sev=5	cat=anomaly	srcPort=81	dstPort=21	" + 
-				"usrName=joe.black");
 		List<User> users = userRepo.findAll();
 		List<UserLoginDTO> userdto = new ArrayList<>();
 		for (User user : users) {
