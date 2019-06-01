@@ -1,0 +1,34 @@
+{date:2019-05-15 16:30:12.408, level:WARN , process:http-nio-8089-exec-1, class:com.authorizationapi.controller.TokenController, msg:Test warn}
+{date:2019-05-15 16:30:12.519, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.controller.TokenController, msg:Test debug}
+{date:2019-05-15 16:49:34.742, level:WARN , process:http-nio-8089-exec-1, class:com.authorizationapi.controller.TokenController, msg:Test warn}
+{date:2019-05-15 16:49:34.781, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.controller.TokenController, msg:Test debug}
+{date:2019-05-15 16:51:43.602, level:WARN , process:http-nio-8089-exec-1, class:com.authorizationapi.controller.TokenController, msg:Test warn}
+{date:2019-05-15 16:51:43.642, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.controller.TokenController, msg:Test debug}
+{date:2019-05-15 16:55:00.157, level:WARN , process:http-nio-8089-exec-1, class:com.authorizationapi.controller.TokenController, msg:Test warn}
+{date:2019-05-15 16:55:00.194, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.controller.TokenController, msg:Test debug}
+{date:2019-05-15 16:59:04.670, level:WARN , process:http-nio-8089-exec-2, class:com.authorizationapi.controller.TokenController, msg:Test warn}
+{date:2019-05-15 16:59:04.701, level:DEBUG, process:http-nio-8089-exec-2, class:com.authorizationapi.controller.TokenController, msg:Test debug}
+{date:2019-05-15 17:26:52.061, level:WARN , process:http-nio-8089-exec-5, class:com.authorizationapi.controller.TokenController, msg:Test warn}
+{date:2019-05-15 17:26:52.073, level:DEBUG, process:http-nio-8089-exec-5, class:com.authorizationapi.controller.TokenController, msg:Test debug}
+{date:2019-05-15 17:54:18.010, level:WARN , process:http-nio-8089-exec-9, class:com.authorizationapi.controller.TokenController, msg:Test warn}
+{date:2019-05-15 17:54:18.033, level:DEBUG, process:http-nio-8089-exec-9, class:com.authorizationapi.controller.TokenController, msg:Test debug}
+{date:2019-05-15 18:14:44.566, level:WARN , process:http-nio-8089-exec-1, class:com.authorizationapi.controller.TokenController, msg:Test warn}
+{date:2019-05-15 18:14:44.570, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.controller.TokenController, msg:Test debug}
+{date:2019-05-15 20:49:21.484, level:WARN , process:http-nio-8089-exec-7, class:com.authorizationapi.controller.TokenController, msg:Test warn}
+{date:2019-05-15 20:49:21.488, level:DEBUG, process:http-nio-8089-exec-7, class:com.authorizationapi.controller.TokenController, msg:Test debug}
+{date:2019-05-15 21:16:18.557, level:WARN , process:http-nio-8089-exec-3, class:com.authorizationapi.controller.TokenController, msg:Test warn}
+{date:2019-05-15 21:16:18.562, level:DEBUG, process:http-nio-8089-exec-3, class:com.authorizationapi.controller.TokenController, msg:Test debug}
+{date:2019-05-15 21:43:55.595, level:WARN , process:http-nio-8089-exec-1, class:com.authorizationapi.controller.TokenController, msg:Invalid login!}
+{date:2019-05-15 21:43:57.559, level:WARN , process:http-nio-8089-exec-2, class:com.authorizationapi.controller.TokenController, msg:Invalid login!}
+{date:2019-05-15 21:43:58.417, level:WARN , process:http-nio-8089-exec-3, class:com.authorizationapi.controller.TokenController, msg:Invalid login!}
+{date:2019-05-15 21:44:00.632, level:WARN , process:http-nio-8089-exec-9, class:com.authorizationapi.controller.TokenController, msg:Invalid login!}
+{date:2019-05-15 21:48:28.622, level:WARN , process:http-nio-8089-exec-2, class:com.authorizationapi.controller.TokenController, msg:Invalid login!}
+{date:2019-05-15 21:48:29.022, level:WARN , process:http-nio-8089-exec-3, class:com.authorizationapi.controller.TokenController, msg:Invalid login!}
+{date:2019-05-15 21:48:29.261, level:WARN , process:http-nio-8089-exec-6, class:com.authorizationapi.controller.TokenController, msg:Invalid login!}
+{date:2019-05-15 21:48:30.384, level:WARN , process:http-nio-8089-exec-1, class:com.authorizationapi.controller.TokenController, msg:Invalid login!}
+{date:2019-05-15 21:48:31.134, level:WARN , process:http-nio-8089-exec-10, class:com.authorizationapi.controller.TokenController, msg:Invalid login!}
+{date:2019-05-15 23:11:38.708, level:WARN , process:http-nio-8089-exec-9, class:com.authorizationapi.controller.TokenController, msg:Invalid login!}
+{date:2019-05-15 23:43:33.519, level:WARN , process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Warn logging Test!}
+{date:2019-05-15 23:43:33.645, level:INFO , process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Info logging Test!}
+{date:2019-05-15 23:43:33.646, level:ERROR, process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Error logging Test!}
+{date:2019-05-15 23:43:33.648, level:DEBUG, process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Debug logging Test!}

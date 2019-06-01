@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -21,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.authorizationapi.domain.BlackListToken;
 import com.authorizationapi.domain.PrivilegeEnum;
 import com.authorizationapi.domain.Role;
 import com.authorizationapi.domain.dto.LoginDTO;
@@ -38,6 +39,8 @@ import com.authorizationapi.utils.TokenUtils;
 @CrossOrigin
 @RequestMapping("/api")
 public class TokenController {
+	
+	public static Logger logger = Logger.getLogger(UserService.class);
 
 	@Autowired
 	UserService userService;
@@ -67,7 +70,9 @@ public class TokenController {
 		UserLoginDTO userLoginDTO = userService.userLogin(user.getUsername(), user.getPassword());
 		
 		if (userLoginDTO != null) {
+
 			return new ResponseEntity<Object>(userLoginDTO, HttpStatus.OK);
+			
 		}
 		
 		return new ResponseEntity<Object>(null, HttpStatus.NOT_FOUND);
@@ -102,13 +107,30 @@ public class TokenController {
 	public ResponseEntity<?> revokeToken(@RequestHeader("Token-Authority") String token) {
 
 		Date date = tokenUtils.getExpirationDateFromToken(token);
-		System.out.println(date);
+		logger.debug("Date from token: " + date);
 		if (blackList.findByToken(token) == null || date != null) {
-			System.out.println("fsafa");
+			logger.debug("Token is not present in blacklsit!");
 			//blackList.save(new BlackListToken(token, date));
 			
 		}
+		
+		MDC.put("user",tokenUtils.getUsernameFromToken(token));
+		MDC.put("logut","success");
+		logger.info("Successfully logout!");
 		return new ResponseEntity<ResponseMessage>(new ResponseMessage("Successfully logout!"), HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/test/log")
+	public ResponseEntity<?> test() {
+		
+		logger.warn("Warn logging Test!");
+		logger.info("Info logging Test!");
+		logger.error("Error logging Test!");
+		logger.trace("Trace logging Test!");
+		logger.debug("Debug logging Test!");
+		
+		return new ResponseEntity<String>("Test Logging!", HttpStatus.OK);
 
 	}
 }

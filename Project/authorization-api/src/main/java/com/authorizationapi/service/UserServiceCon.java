@@ -1,5 +1,7 @@
 package com.authorizationapi.service;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.keygen.KeyGenerators;
@@ -22,6 +24,8 @@ import com.authorizationapi.utils.TokenUtils;
 
 @Service
 public class UserServiceCon implements UserService {
+	
+	public static final Logger logger = Logger.getLogger(UserService.class);
 
 	@Autowired
 	private UserRepository userRepository;
@@ -45,8 +49,10 @@ public class UserServiceCon implements UserService {
 
 		User user = (User) userRepository.findByUsername(username);
 		if (user == null) {
+			logger.warn("Username '" + username + "' doesn't exist!");
 			throw new UserCreditalsException("Username '" + username + "' doesn't exist!");
 		} else {
+			logger.debug("Loaded user from database! Username: "+username);
 			return user;
 		}
 
@@ -63,10 +69,15 @@ public class UserServiceCon implements UserService {
 			SecurityUser userDetails = (SecurityUser) this.userDetailService.loadUserByUsername(username);
 
 			String token = this.tokenUtils.generateToken(userDetails);
-
+			MDC.put("login","success");
+			MDC.put("user",username);
+			logger.info("Successfully logged in!");
 			return new UserLoginDTO(user, token);
 		}
-		throw new UserCreditalsException("Wrong password");
+		MDC.put("login","failure");
+		MDC.put("user",username);
+		logger.warn("Invalid login!");
+		throw new UserCreditalsException("Wrong password!");
 
 	}
 
@@ -74,20 +85,35 @@ public class UserServiceCon implements UserService {
 	public Object userRegister(RegisterUserDTO user) {
 
 		User userTemp = userRepository.findByUsername(user.getUsername());
-		if (userTemp != null)
+		if (userTemp != null) {
+
+			MDC.put("user",user.getUsername());
+			logger.info("Username '" + userTemp.getUsername() + "' already exist!");
 			throw new UserCreditalsException("Username '" + userTemp.getUsername() + "' already exist!");
 
-		if (!PasswordValidation.validPassword(user.getPassword(), user.getRePassword()))
+		}
+		if (!PasswordValidation.validPassword(user.getPassword(), user.getRePassword())) {
+			
+			MDC.put("user",user.getUsername());
+			logger.info("Passwords don't match!");
+
 			throw new UserCreditalsException("Passwords don't match!");
+		
+		}
 		String salt = KeyGenerators.secureRandom().toString();
 		String fullPass = user.getRePassword() + salt + pepper;
 		user.setPassword(bcript.encode(fullPass));
+		logger.debug("Encode password for user using salt and pepper..");
 		RegistredUser regUser = RegUserDAOtoRegUser.create(user);
+		logger.debug("Creating registred user from DTO..");
 		regUser.setSalt(salt);
 		Role r = roleRepo.findByName("DefaultRole");
 		regUser.setRole(r);
+		logger.debug("Set role for user..");
 		userRepository.save(regUser);
 
+		MDC.put("user",user.getUsername());
+		logger.info("Successfull registration!");
 		return new ResponseMessage("Successfull registration!");
 	}
 }
