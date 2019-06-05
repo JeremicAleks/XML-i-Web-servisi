@@ -26,10 +26,11 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
-            <xs:element name="email" type="xs:time"/>
+            <xs:element name="email" type="xs:string"/>
             <xs:element name="isVerified" type="xs:boolean"/>
             <xs:element name="password" type="xs:string"/>
-            <xs:element name="authority" type="AuthorityEnum"> </xs:element>
+            <xs:element name="Role" type="Role"> </xs:element>
+            <xs:element name="sat" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element abstract="true" name="User" type="User"/>
@@ -63,13 +64,18 @@
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
-    <xs:simpleType name="AuthorityEnum">
+    <xs:simpleType name="PrivilegesEnum">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="SYSADMIN"/>
-            <xs:enumeration value="SECADMIN"/>
-            <xs:enumeration value="AGENT"/>
-            <xs:enumeration value="REGUSER"/>
+            <xs:enumeration value="WRITE_PRODUCT"/>
+            <xs:enumeration value="READ_PRODUCT"/>
+            <xs:enumeration value="DELETE_PRODUCT"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:element name="RegistredUser" type="RegistredUser"/>
+    <xs:complexType name="Role">
+        <xs:sequence>
+            <xs:element form="qualified" name="name" type="xs:string"/>
+            <xs:element name="privileges" type="PrivilegesEnum"/>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>
