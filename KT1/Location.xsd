@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="Location" xmlns:location="Location">
+    targetNamespace="http://www.xml-ftn.com/Location"
+    xmlns:location="http://www.xml-ftn.com/Location">
 
     <xs:element name="Location">
         <xs:complexType>

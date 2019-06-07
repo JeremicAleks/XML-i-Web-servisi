@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="Reservations" xmlns="Reservations" xmlns:reguser="User" xmlns:rooms="Rooms">
-    <xs:import namespace="Rooms" schemaLocation="Rooms.xsd"/>
+    targetNamespace="http://www.xml-ftn.xml.domain.centralapi.com/Reservation"
+    xmlns:rooms="http://www.xml-ftn.com.centralapi.domain.xml/Rooms"
+    xmlns="http://www.xml-ftn.xml.domain.centralapi.com/Reservation"
+    xmlns:ns1="http://www.xml-ftn.xml.domain.centralapi.com/Rooms">
+    <xs:import namespace="http://www.xml-ftn.xml.domain.centralapi.com/Rooms"
+        schemaLocation="Rooms.xsd"/>
     <xs:element name="Reservation">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="checkIn" type="xs:date"/>
                 <xs:element name="checkOut" type="xs:date"/>
                 <xs:element name="price" type="xs:double"/>
+                <xs:element name="id" type="xs:long"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

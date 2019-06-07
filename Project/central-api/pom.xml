@@ -156,6 +156,22 @@
                 <value>all</value>
             </property>
         </properties>
+                 <args>
+            <arg>-Xannotate</arg>
+            <arg>-Xhyperjaxb3-ejb</arg>
+           </args>                  
+           <plugins>
+            <plugin>
+              <groupId>org.jvnet.jaxb2_commons</groupId>
+              <artifactId>jaxb2-basics</artifactId>
+              <version>0.6.0</version>
+            </plugin>
+            <plugin>
+              <groupId>org.jvnet.jaxb2_commons</groupId>
+              <artifactId>jaxb2-basics-annotate</artifactId>
+              <version>0.6.0</version>
+            </plugin>
+          </plugins>
     </configuration>
 			</plugin>
 		</plugins>

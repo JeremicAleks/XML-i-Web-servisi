@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="User" xmlns="User" xmlns:reservation="Reservations" xmlns:rooms="Rooms">
-    <xs:import namespace="Rooms" schemaLocation="Rooms.xsd"/>
-    <xs:import namespace="Reservations" schemaLocation="Reservation.xsd"/>
+    targetNamespace="http://www.xml-ftn.xml.domain.centralapi.com/Users"
+    xmlns:reservation="http://www.xml-ftn.xml.domain.centralapi.com/Reservation"
+    xmlns:rooms="http://www.xml-ftn.xml.domain.centralapi.com/Rooms"
+    xmlns:users="http://www.xml-ftn.xml.domain.centralapi.com/Users">
+    <xs:import namespace="http://www.xml-ftn.xml.domain.centralapi.com/Reservation"
+        schemaLocation="Reservation.xsd"/>
+    <xs:import namespace="http://www.xml-ftn.xml.domain.centralapi.com/Rooms"
+        schemaLocation="Rooms.xsd"/>
     <xs:complexType name="User">
         <xs:sequence maxOccurs="1">
             <xs:element name="name">
@@ -29,14 +34,15 @@
             <xs:element name="email" type="xs:string"/>
             <xs:element name="isVerified" type="xs:boolean"/>
             <xs:element name="password" type="xs:string"/>
-            <xs:element name="Role" type="Role"> </xs:element>
-            <xs:element name="sat" type="xs:string"/>
+            <xs:element name="Role" type="users:Role"> </xs:element>
+            <xs:element name="salt" type="xs:string"/>
+            <xs:element minOccurs="1" name="id" type="xs:long"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:element abstract="true" name="User" type="User"/>
-    <xs:complexType name="RegistredUser">
+    <xs:element abstract="true" name="User" type="users:User"/>
+    <xs:complexType name="RegistredUser" block="">
         <xs:complexContent mixed="false">
-            <xs:extension base="User">
+            <xs:extension base="users:User">
                 <xs:sequence maxOccurs="unbounded" minOccurs="0">
                     <xs:element ref="reservation:Reservation"/>
                 </xs:sequence>
@@ -46,7 +52,7 @@
     <xs:element abstract="false" name="AgentUser">
         <xs:complexType>
             <xs:complexContent>
-                <xs:extension base="User">
+                <xs:extension base="users:User">
                     <xs:sequence maxOccurs="1" minOccurs="1">
                         <xs:sequence maxOccurs="unbounded" minOccurs="0">
                             <xs:element ref="rooms:Room"/>
@@ -71,11 +77,26 @@
             <xs:enumeration value="DELETE_PRODUCT"/>
         </xs:restriction>
     </xs:simpleType>
-    <xs:element name="RegistredUser" type="RegistredUser"/>
+    <xs:element name="RegistredUser" type="users:RegistredUser" block=""/>
     <xs:complexType name="Role">
         <xs:sequence>
             <xs:element form="qualified" name="name" type="xs:string"/>
-            <xs:element name="privileges" type="PrivilegesEnum"/>
+            <xs:element name="privileges" type="users:PrivilegesEnum" minOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
+    <xs:element name="getUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element form="qualified" name="username" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="userLogin">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element form="qualified" name="username" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

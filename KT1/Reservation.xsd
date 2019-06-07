@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="Reservations" xmlns="Reservations" xmlns:reguser="User" xmlns:rooms="Rooms">
-    <xs:import namespace="Rooms" schemaLocation="Rooms.xsd"/>
+    targetNamespace="http://www.xml-ftn.com/Reservation"
+    xmlns:reguser="http://www.xml-ftn.com/RegUsers" xmlns:rooms="http://www.xml-ftn.com/Rooms"
+    xmlns:reservation="http://www.xml-ftn.com/Reservation">
+    <xs:import namespace="http://www.xml-ftn.com/Rooms" schemaLocation="Rooms.xsd"/>
     <xs:element name="Reservation">
         <xs:complexType>
             <xs:sequence>
