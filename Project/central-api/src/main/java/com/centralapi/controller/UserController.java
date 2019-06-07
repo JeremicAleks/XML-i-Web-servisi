@@ -29,7 +29,6 @@ public class UserController {
 
 	@GetMapping(value = "/getUsers", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getUsers() throws UnknownHostException {
-		for(int i =0 ; i<500;i++) {  
 		List<User> users = userRepo.findAll();
 		List<UserLoginDTO> userdto = new ArrayList<>();
 		for (User user : users) {
@@ -37,8 +36,14 @@ public class UserController {
 					user.getAdress(), user.getTelephone(), "", user.getRole().getName()));
 		}
 		
-	}
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
+
+	@GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getUser(){
+
+		return new ResponseEntity<>(null, HttpStatus.OK);
+	}
+
 
 }
