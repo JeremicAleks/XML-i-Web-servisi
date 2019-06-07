@@ -118,19 +118,11 @@
             <xs:element name="price" type="xs:double"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:element name="addRoom">
+    <xs:element name="addRoomDTO">
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="rooms:Room"/>
                 <xs:element name="username" nillable="false" type="xs:string"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="deleteRoom">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="1" name="roomId" type="xs:long"/>
-                <xs:element name="username" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

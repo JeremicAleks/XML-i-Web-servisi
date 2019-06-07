@@ -6,47 +6,41 @@
 //
 
 
-package com.centralapi.domain.xml.xml_ftn.rooms;
+package com.centralapi.domain.xml.xml_ftn.reservation;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for CategoryEnum.
+ * <p>Java class for ReservationStateEnum.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <pre>
- * &lt;simpleType name="CategoryEnum">
+ * &lt;simpleType name="ReservationStateEnum">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="UNCATEGORIZAED"/>
- *     &lt;enumeration value="ONESTAR"/>
- *     &lt;enumeration value="TWOSTAR"/>
- *     &lt;enumeration value="THREESTAR"/>
- *     &lt;enumeration value="FOURSTAR"/>
- *     &lt;enumeration value="FIVESTAR"/>
+ *     &lt;enumeration value="ALLOWED"/>
+ *     &lt;enumeration value="NOTALLOWED"/>
+ *     &lt;enumeration value="PENDING"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
  * 
  */
-@XmlType(name = "CategoryEnum")
+@XmlType(name = "ReservationStateEnum")
 @XmlEnum
-public enum CategoryEnum {
+public enum ReservationStateEnum {
 
-    UNCATEGORIZAED,
-    ONESTAR,
-    TWOSTAR,
-    THREESTAR,
-    FOURSTAR,
-    FIVESTAR;
+    ALLOWED,
+    NOTALLOWED,
+    PENDING;
 
     public String value() {
         return name();
     }
 
-    public static CategoryEnum fromValue(String v) {
+    public static ReservationStateEnum fromValue(String v) {
         return valueOf(v);
     }
 

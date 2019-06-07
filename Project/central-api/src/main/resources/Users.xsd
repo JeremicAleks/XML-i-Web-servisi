@@ -32,11 +32,13 @@
                 </xs:simpleType>
             </xs:element>
             <xs:element name="email" type="xs:string"/>
-            <xs:element name="isVerified" type="xs:boolean"/>
             <xs:element name="password" type="xs:string"/>
             <xs:element name="Role" type="users:Role"> </xs:element>
             <xs:element name="salt" type="xs:string"/>
             <xs:element minOccurs="1" name="id" type="xs:long"/>
+            <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                <xs:element minOccurs="1" name="messages" type="xs:string"/>
+            </xs:sequence>
         </xs:sequence>
     </xs:complexType>
     <xs:element abstract="true" name="User" type="users:User"/>
@@ -84,14 +86,14 @@
             <xs:element name="privileges" type="users:PrivilegesEnum" minOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:element name="getUserRequest">
+    <xs:element name="getUserDTO">
         <xs:complexType>
             <xs:sequence>
                 <xs:element form="qualified" name="username" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="userLogin">
+    <xs:element name="userLoginDTO">
         <xs:complexType>
             <xs:sequence>
                 <xs:element form="qualified" name="username" type="xs:string"/>
