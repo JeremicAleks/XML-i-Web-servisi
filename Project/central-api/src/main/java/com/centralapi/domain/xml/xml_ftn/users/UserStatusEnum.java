@@ -6,41 +6,41 @@
 //
 
 
-package com.centralapi.domain.xml.xml_ftn.reservation;
+package com.centralapi.domain.xml.xml_ftn.users;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ReservationStateEnum.
+ * <p>Java class for UserStatusEnum.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <pre>
- * &lt;simpleType name="ReservationStateEnum">
+ * &lt;simpleType name="UserStatusEnum">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="ALLOWED"/>
- *     &lt;enumeration value="NOTALLOWED"/>
- *     &lt;enumeration value="PENDING"/>
+ *     &lt;enumeration value="BLOCK"/>
+ *     &lt;enumeration value="ACTIVE"/>
+ *     &lt;enumeration value="DELETED"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
  * 
  */
-@XmlType(name = "ReservationStateEnum")
+@XmlType(name = "UserStatusEnum")
 @XmlEnum
-public enum ReservationStateEnum {
+public enum UserStatusEnum {
 
-    ALLOWED,
-    NOTALLOWED,
-    PENDING;
+    BLOCK,
+    ACTIVE,
+    DELETED;
 
     public String value() {
         return name();
     }
 
-    public static ReservationStateEnum fromValue(String v) {
+    public static UserStatusEnum fromValue(String v) {
         return valueOf(v);
     }
 
