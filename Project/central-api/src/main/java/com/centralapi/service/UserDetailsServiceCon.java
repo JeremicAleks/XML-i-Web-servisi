@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.centralapi.domain.SecurityUserFactory;
 import com.centralapi.domain.User;
-import com.centralapi.repo.UserRepository;
+import com.centralapi.repo.UserDomRepository;
 
 @Service
 @Primary
@@ -18,7 +18,7 @@ public class UserDetailsServiceCon implements UserDetailsService {
 
 	@Autowired
 
-	private UserRepository userRepository;
+	private UserDomRepository userRepository;
 
 
 	@Override

@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.centralapi.repo.UserRepository;
+import com.centralapi.repo.UserDomRepository;
 
 @RestController
 @RequestMapping("/api/module")
 public class TestUserController {
 	
 	@Autowired
-	UserRepository userRepo;
+    UserDomRepository userRepo;
 	
 	@PreAuthorize("hasRole('ROLE_AGENT_APP')")
 	@GetMapping(value="/test",produces = MediaType.APPLICATION_JSON_VALUE)

@@ -11,7 +11,7 @@ import com.centralapi.domain.User;
 import com.centralapi.exception.GlobalException;
 import com.centralapi.exception.ResponseMessage;
 import com.centralapi.repo.RoleRepository;
-import com.centralapi.repo.UserRepository;
+import com.centralapi.repo.UserDomRepository;
 
 @Service
 public class RoleServiceCon implements RoleService {
@@ -20,7 +20,7 @@ public class RoleServiceCon implements RoleService {
 	RoleRepository roleRepo;
 
 	@Autowired
-	UserRepository userRepo;
+	UserDomRepository userRepo;
 
 	@Override
 	public ResponseMessage addRole(String role) {
