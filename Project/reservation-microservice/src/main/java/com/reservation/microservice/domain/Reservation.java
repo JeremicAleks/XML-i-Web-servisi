@@ -17,6 +17,9 @@ public class Reservation {
     private XMLGregorianCalendar checkOut;
     private ReservationStateEnum state;
 
+    public Reservation() {
+    }
+
     public Reservation(XMLGregorianCalendar checkIn, XMLGregorianCalendar checkOut, ReservationStateEnum state) {
         this.checkIn = checkIn;
         this.checkOut = checkOut;

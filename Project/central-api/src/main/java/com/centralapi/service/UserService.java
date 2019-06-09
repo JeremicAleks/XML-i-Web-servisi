@@ -1,3 +1,4 @@
+/*
 package com.centralapi.service;
 
 import com.centralapi.domain.xml.xml_ftn.users.User;
@@ -31,3 +32,4 @@ public class UserService {
         return userRepository.save(user);
     }
 }
+*/

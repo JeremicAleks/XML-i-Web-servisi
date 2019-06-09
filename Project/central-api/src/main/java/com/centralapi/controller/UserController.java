@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.centralapi.domain.xml.xml_ftn.users.User;
-import com.centralapi.service.UserService;
+//import com.centralapi.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,12 +25,12 @@ public class UserController {
 
 	  private static final Logger logger = Logger.getLogger(UserController.class);
 	  
-	@Autowired
-	UserService userService;
+	//@Autowired
+	//UserService userService;
 
 	@GetMapping(value = "/getUsers", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getUsers() throws UnknownHostException {
-		List<User> users = userService.findAll();
+		List<User> users = new ArrayList<>();//userService.findAll();
 		List<UserLoginDTO> userdto = new ArrayList<>();
 		for (User user : users) {
 			userdto.add(new UserLoginDTO(user.getUsername(), user.getName(), user.getLastName(), user.getEmail(),
@@ -40,7 +40,8 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getUser(@PathVariable Long id){		User user = userService.findById(id);
+	public ResponseEntity<?> getUser(@PathVariable Long id){
+		User user = new User(); //userService.findById(id);
 
 		if(user==null)
 			return new ResponseEntity<>("User not found!",HttpStatus.OK);
