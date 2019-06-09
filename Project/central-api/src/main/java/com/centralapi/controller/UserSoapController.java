@@ -32,10 +32,13 @@ public class UserSoapController {
     
     @PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "userLoginDTO")
     @ResponsePayload
-    public AgentUser login(@RequestPayload UserLoginDTO  request) {
+    public UserLoginDTO login(@RequestPayload UserLoginDTO  login) {
     	//vrsi se sinhronizacija sa back-endom
     	//AgentUser poseduje sve
-    	return null;
+    	
+    	System.out.println("lOGIN: " + login.getUsername());
+  
+    	return login;
         
     }
     

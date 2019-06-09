@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.xml-ftn.xml.domain.centralapi.com/Rooms"
+    xmlns:rooms="http://www.xml-ftn.xml.domain.centralapi.com/Rooms"
+    xmlns:location="http://www.xml-ftn.xml.domain.centralapi.com/Location"
+    xmlns:reservation="http://www.xml-ftn.xml.domain.centralapi.com/Reservation"
+    xmlns:users="http://www.xml-ftn.xml.domain.centralapi.com/Users">
+    <xs:import namespace="http://www.xml-ftn.xml.domain.centralapi.com/Location"
+        schemaLocation="Location.xsd"/>
+    <xs:import namespace="http://www.xml-ftn.xml.domain.centralapi.com/Reservation"
+        schemaLocation="Reservation.xsd"/>
+    <xs:import namespace="http://www.xml-ftn.xml.domain.centralapi.com/Users"
+        schemaLocation="Users.xsd"/>
+    <xs:element name="Room">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element form="qualified" name="numberOfBeds">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:positiveInteger">
+                            <xs:maxExclusive value="6"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element ref="location:Location"/>
+                <xs:element name="type" type="rooms:TypeEnum"/>
+                <xs:element name="category" type="rooms:CategoryEnum"/>
+                <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                    <xs:element name="additionalServices" type="rooms:RoomAdditionalService"/>
+                </xs:sequence>
+                <xs:element name="description" type="xs:string"/>
+                <xs:sequence maxOccurs="10">
+                    <xs:element minOccurs="1" name="image">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:base64Binary">
+                                <xs:maxLength value="1024"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </xs:sequence>
+                <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                    <xs:element name="ratesAndComments" type="rooms:RateAndComment"/>
+                </xs:sequence>
+                <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                    <xs:element name="priceList" type="rooms:PriceList"/>
+                </xs:sequence>
+                <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                    <xs:element ref="reservation:Reservation"/>
+                </xs:sequence>
+                <xs:element name="floor" type="xs:positiveInteger"/>
+                <xs:element name="number" type="xs:nonPositiveInteger"/>
+                <xs:element maxOccurs="1" name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="TypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="HOTEL"/>
+            <xs:enumeration value="BEDANDBREKFAST"/>
+            <xs:enumeration value="APARTMAN"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CategoryEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="UNCATEGORIZAED"/>
+            <xs:enumeration value="ONESTAR"/>
+            <xs:enumeration value="TWOSTAR"/>
+            <xs:enumeration value="THREESTAR"/>
+            <xs:enumeration value="FOURSTAR"/>
+            <xs:enumeration value="FIVESTAR"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType abstract="false" block="" final="" name="RoomAdditionalService">
+        <xs:sequence>
+            <xs:element name="price" type="xs:double"/>
+            <xs:element name="additionalServiceType" type="rooms:RoomAdditionalServiceEnum"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="RoomAdditionalServiceEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="WIFI"/>
+            <xs:enumeration value="PARKING"/>
+            <xs:enumeration value="BREAKFAST"/>
+            <xs:enumeration value="BEDANDBREKFAST"/>
+            <xs:enumeration value="BEDANDBOARD"/>
+            <xs:enumeration value="ALLINCLUSIVE"/>
+            <xs:enumeration value="PETFRIENDLY"/>
+            <xs:enumeration value="TV"/>
+            <xs:enumeration value="KITCHEN"/>
+            <xs:enumeration value="BATHROOM"/>
+            <xs:enumeration value="ROOMCANCEL"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="RoomCancel">
+        <xs:complexContent>
+            <xs:extension base="rooms:RoomAdditionalService">
+                <xs:sequence>
+                    <xs:element name="numberOfDays" type="xs:int"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="RateAndComment">
+        <xs:sequence>
+            <xs:element name="comment" type="xs:string"/>
+            <xs:element name="rating">
+                <xs:simpleType>
+                    <xs:restriction base="xs:positiveInteger">
+                        <xs:maxInclusive value="10"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element ref="users:RegistredUser"/>
+            <xs:element form="qualified" name="isAllowed" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PriceList">
+        <xs:sequence>
+            <xs:element name="month" type="xs:gYearMonth"/>
+            <xs:element name="price" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="addRoomDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="rooms:Room"/>
+                <xs:element name="username" nillable="false" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

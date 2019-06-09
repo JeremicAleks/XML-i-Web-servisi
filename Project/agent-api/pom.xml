@@ -35,6 +35,11 @@
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-core</artifactId>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web-services</artifactId>
+        </dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -80,6 +85,50 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>jaxb2-maven-plugin</artifactId>
+    <version>1.6</version>
+    <executions>
+        <execution>
+            <id>xjc</id>
+            <goals>
+                <goal>xjc</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
+        <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+        <clearOutputDir>false</clearOutputDir>
+                <properties>
+            <property>
+                <name>javax.xml.accessExternalSchema</name>
+                <value>all</value>
+            </property>
+            <property>
+                <name>javax.xml.accessExternalDTD</name>
+                <value>all</value>
+            </property>
+        </properties>
+                 <args>
+            <arg>-Xannotate</arg>
+            <arg>-Xhyperjaxb3-ejb</arg>
+           </args>                  
+           <plugins>
+            <plugin>
+              <groupId>org.jvnet.jaxb2_commons</groupId>
+              <artifactId>jaxb2-basics</artifactId>
+              <version>0.6.0</version>
+            </plugin>
+            <plugin>
+              <groupId>org.jvnet.jaxb2_commons</groupId>
+              <artifactId>jaxb2-basics-annotate</artifactId>
+              <version>0.6.0</version>
+            </plugin>
+          </plugins>
+    </configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.xml-ftn.xml.domain.centralapi.com/Reservation"
+    xmlns:rooms="http://www.xml-ftn.com.centralapi.domain.xml/Rooms"
+    xmlns="http://www.xml-ftn.xml.domain.centralapi.com/Reservation"
+    xmlns:ns1="http://www.xml-ftn.xml.domain.centralapi.com/Rooms">
+    <xs:import namespace="http://www.xml-ftn.xml.domain.centralapi.com/Rooms"
+        schemaLocation="Rooms.xsd"/>
+    <xs:element name="Reservation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="checkIn" type="xs:date"/>
+                <xs:element name="checkOut" type="xs:date"/>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="state" nillable="false" type="ReservationStateEnum"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ReservationDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Reservation"/>
+                <xs:element form="qualified" name="roomId" type="xs:long"/>
+                <xs:element minOccurs="1" name="userId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="ReservationStateEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ALLOWED"/>
+            <xs:enumeration value="NOTALLOWED"/>
+            <xs:enumeration value="PENDING"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

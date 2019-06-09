@@ -24,14 +24,14 @@ public class RoomSoapController {
     	return null;
         
     }
-    
+  /*  
     @PayloadRoot(namespace = ROOM_NAMESPACE_URI, localPart = "ReservationDTO")
     @ResponsePayload
     public ResponseMessage addUnavailableRoom(@RequestPayload ReservationDTO  request) {
     	
     	return null;
         
-    }
+    }*/
     
     @PayloadRoot(namespace = ROOM_NAMESPACE_URI, localPart = "ReservationDTO")
     @ResponsePayload
