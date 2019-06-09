@@ -39,6 +39,7 @@
             <xs:sequence maxOccurs="unbounded" minOccurs="0">
                 <xs:element minOccurs="1" name="messages" type="xs:string"/>
             </xs:sequence>
+            <xs:element minOccurs="1" name="userStatus" type="users:UserStatusEnum"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element abstract="true" name="User" type="users:User"/>
@@ -101,4 +102,11 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    <xs:simpleType name="UserStatusEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BLOCK"/>
+            <xs:enumeration value="ACTIVE"/>
+            <xs:enumeration value="DELETED"/>
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>

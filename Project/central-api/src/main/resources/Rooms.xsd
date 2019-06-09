@@ -110,6 +110,7 @@
                 </xs:simpleType>
             </xs:element>
             <xs:element ref="users:RegistredUser"/>
+            <xs:element form="qualified" name="isAllowed" type="xs:boolean"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="PriceList">
