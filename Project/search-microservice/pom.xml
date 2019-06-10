@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>reservation-microservice</artifactId>
+	<artifactId>search-microservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>reservation-microservice</name>
+	<name>search-microservice</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

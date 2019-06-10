@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.Date;
 
 @Entity
 public class Reservation {
@@ -13,14 +13,14 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private XMLGregorianCalendar checkIn;
-    private XMLGregorianCalendar checkOut;
+    private Date checkIn;
+    private Date checkOut;
     private ReservationStateEnum state;
 
     public Reservation() {
     }
 
-    public Reservation(XMLGregorianCalendar checkIn, XMLGregorianCalendar checkOut, ReservationStateEnum state) {
+    public Reservation(Date checkIn, Date checkOut, ReservationStateEnum state) {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.state = state;
@@ -34,19 +34,19 @@ public class Reservation {
         this.id = id;
     }
 
-    public XMLGregorianCalendar getCheckIn() {
+    public Date getCheckIn() {
         return checkIn;
     }
 
-    public void setCheckIn(XMLGregorianCalendar checkIn) {
+    public void setCheckIn(Date checkIn) {
         this.checkIn = checkIn;
     }
 
-    public XMLGregorianCalendar getCheckOut() {
+    public Date getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(XMLGregorianCalendar checkOut) {
+    public void setCheckOut(Date checkOut) {
         this.checkOut = checkOut;
     }
 
