@@ -2,169 +2,298 @@
   <ngb-tab>
     <ng-template ngbTabTitle><b>Add room</b></ng-template>
     <ng-template ngbTabContent>
-        <div class="col-md-8" style="margin-left: 20px" >
+      <div class="col-md-8" style="margin-left: 20px">
         <form [formGroup]="addReservation" id="addReservation">
           <h4>Location:</h4>
           <div class="form-group row">
-              <label for="locationname" class="col-sm-4 col-form-label">Name:</label>
+            <label for="locationname" class="col-sm-4 col-form-label">Name:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="locationname" placeholder="Location name"
+                formControlName="locationname"
+                [ngClass]="{'is-invalid':addReservation.get('locationname').touched && addReservation.get('locationname').invalid}"
+                required>
+              <div *ngIf="addReservation.get('locationname').touched && addReservation.get('locationname').invalid"
+                class="invalid-feedback">
+                <div>Location name is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="locationCords" class="col-sm-4 col-form-label">Cordinates:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="locationCords" placeholder="Location coordinates"
+                formControlName="locationCords"
+                [ngClass]="{'is-invalid':addReservation.get('locationCords').touched && addReservation.get('locationCords').invalid}"
+                required>
+              <div *ngIf="addReservation.get('locationCords').touched && addReservation.get('locationCords').invalid"
+                class="invalid-feedback">
+                <div>Location name is required</div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <h4>Room configuration:</h4>
+          <div class="form-group row">
+            <label for="selectType" class="col-sm-4 col-form-label">Select room type:</label>
+            <div class="col-sm-8">
+              <select class="form-control" id="selectType" placeholder="Room type" formControlName="selectType"
+                [ngClass]="{'is-invalid':addReservation.get('selectType').touched && addReservation.get('selectType').invalid}"
+                required>
+                <option>HOTEL</option>
+                <option>BED&BREKFAST</option>
+                <option>APARTMAN</option>
+              </select>
+              <div *ngIf="addReservation.get('selectType').touched && addReservation.get('selectType').invalid"
+                class="invalid-feedback">
+                <div>Location name is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="roomDescription" class="col-sm-4 col-form-label">Description:</label>
+            <div class="col-sm-8">
+              <textarea rows="3" class="form-control" id="roomDescription" placeholder="Room description"
+                formControlName="roomDescription"
+                [ngClass]="{'is-invalid':addReservation.get('roomDescription').touched && addReservation.get('roomDescription').invalid}"
+                required></textarea>
+              <div
+                *ngIf="addReservation.get('roomDescription').touched && addReservation.get('roomDescription').invalid"
+                class="invalid-feedback">
+                <div>Location name is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="numberOfPersons" class="col-sm-4 col-form-label">Number of persons:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="numberOfPersons" placeholder="Location coordinates"
+                formControlName="numberOfPersons"
+                [ngClass]="{'is-invalid':addReservation.get('numberOfPersons').touched && addReservation.get('numberOfPersons').invalid}"
+                required>
+              <div
+                *ngIf="addReservation.get('numberOfPersons').touched && addReservation.get('numberOfPersons').invalid"
+                class="invalid-feedback">
+                <div>Location name is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="roomAdditionalServices" class="col-sm-4 col-form-label">Additional room services:</label>
+            <div class="col-sm-8">
+              <select multiple class="form-control" id="roomAdditionalServices" placeholder="Room type"
+                formControlName="roomAdditionalServices"
+                [ngClass]="{'is-invalid':addReservation.get('roomAdditionalServices').touched && addReservation.get('roomAdditionalServices').invalid}"
+                required>
+               <option>WIFI</option> 
+               <option>PARKING</option>
+               <option>BREAKFAST</option> 
+               <option>BEDANDBREKFAST</option> 
+               <option>BEDANDBOARD</option> 
+               <option>ALLINCLUSIVE</option> 
+               <option>PETFRIENDLY</option> 
+               <option>TV</option> 
+               <option>KITCHEN</option>
+               <option>BATHROOM</option> 
+               <option>ROOMCANCEL</option>
+              </select>
+              <div
+                *ngIf="addReservation.get('roomAdditionalServices').touched && addReservation.get('roomAdditionalServices').invalid"
+                class="invalid-feedback">
+                <div>Location name is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="roomCancel" class="col-sm-4 col-form-label">Room cancel (days):</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="roomCancel" placeholder="Location coordinates"
+                formControlName="roomCancel"
+                [ngClass]="{'is-invalid':addReservation.get('roomCancel').touched && addReservation.get('roomCancel').invalid}"
+                required>
+              <div *ngIf="addReservation.get('roomCancel').touched && addReservation.get('roomCancel').invalid"
+                class="invalid-feedback">
+                <div>Location name is required</div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <h3>Price List configuration</h3>
+          <form [formGroup]="addPrice" id="addPrice">
+
+            <div class="form-group row">
+              <label for="date" class="col-sm-4 col-form-label">Select date:</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="locationname" placeholder="Location name"
-                  formControlName="locationname" [ngClass]="{'is-invalid':addReservation.get('locationname').touched && addReservation.get('locationname').invalid}"
-                  required>
-                <div *ngIf="addReservation.get('locationname').touched && addReservation.get('locationname').invalid"
-                  class="invalid-feedback">
+                <mat-form-field>
+                  <input matInput [matDatepicker]="dp" placeholder="Month and Year" formControlName="date"
+                    [ngClass]="{'is-invalid':addPrice.get('date').touched && addPrice.get('date').invalid}" required>
+                  <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                  <mat-datepicker #dp touchUi startView="multi-year" (yearSelected)="chosenYearHandler($event)"
+                  (monthSelected)="chosenMonthHandler($event, dp)" panelClass="example-month-picker">
+                  </mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="addPrice.get('date').touched && addPrice.get('date').invalid" class="invalid-feedback">
                   <div>Location name is required</div>
                 </div>
               </div>
             </div>
-            
             <div class="form-group row">
-                <label for="locationCords" class="col-sm-4 col-form-label">Cordinates:</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id="locationCords" placeholder="Location coordinates"
-                    formControlName="locationCords" [ngClass]="{'is-invalid':addReservation.get('locationCords').touched && addReservation.get('locationCords').invalid}"
-                    required>
-                  <div *ngIf="addReservation.get('locationCords').touched && addReservation.get('locationCords').invalid"
-                    class="invalid-feedback">
-                    <div>Location name is required</div>
-                  </div>
+              <label for="price" class="col-sm-4 col-form-label">Price for this month:</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="price" placeholder="Location coordinates"
+                  formControlName="price"
+                  [ngClass]="{'is-invalid':addPrice.get('price').touched && addPrice.get('price').invalid}" required>
+                <div *ngIf="addPrice.get('price').touched && addPrice.get('price').invalid" class="invalid-feedback">
+                  <div>Location name is required</div>
                 </div>
               </div>
-              <hr>
-              <h4>Room configuration:</h4>
-              <div class="form-group row">
-                  <label for="selectType" class="col-sm-4 col-form-label">Select room type:</label>
-                  <div class="col-sm-8">
-                    <select  class="form-control" id="selectType" placeholder="Room type"
-                      formControlName="selectType" [ngClass]="{'is-invalid':addReservation.get('selectType').touched && addReservation.get('selectType').invalid}"
-                      required>
-                      <option>hotel</option>
-                      <option>bed&breakfast,</option>
-                      <option>apartman</option>
-                      </select>
-                    <div *ngIf="addReservation.get('selectType').touched && addReservation.get('selectType').invalid"
-                      class="invalid-feedback">
-                      <div>Location name is required</div>
-                    </div>
-                  </div>
-                </div>
+            </div>
+            <button type="button" class="btn btn-primary" [disabled]="!addPrice.valid"  (click)=AddPrice() >Add Price</button>
+          </form>
+           <table>
+            <thead>
+              <tr>
+                <th width="80%">
+                  Date
+                </th>
+                <th width="10%">
+                  Price
+                </th>
+                <th>
+                  Remove
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of prices;index as i">
+                <td width="80%">
+                  {{p.date}}
+                </td>
+                <th>{{p.price}}</th>
+                <td class="text-center" width="10%">
+                  <button mat-raised-button color="accent" (click)="RemovePrice(i)">delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <hr>
+          <h3>Images:</h3>
+
+
+          <div class="form-group row">
+            <label for="imageUpload" class="col-sm-4 col-form-label">Images upload:</label>
+            <div class="col-sm-8">
+              <input formControlName="imageUpload" type="file" ng2FileSelect accept=".png" [uploader]="uploader"
+                multiple id="imageUpload" placeholder="Location coordinates"
+                [ngClass]="{'is-invalid':addReservation.get('imageUpload').touched && addReservation.get('imageUpload').invalid}"
+                required>
+              <div *ngIf="addReservation.get('imageUpload').touched && addReservation.get('imageUpload').invalid"
+                class="invalid-feedback">
+                <div>Location name is required</div>
+              </div>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th width="80%">
+                  File Name
+                </th>
+                <th width="10%">
+                  Size
+                </th>
+                <th width="10%">
+                  Remove
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of uploader.queue">
+                <th width="90%">
+                  {{item._file.name}}
+                </th>
+                <th>{{item._file.size}}B</th>
+                <th class="text-center" width="10%">
+                  <button mat-raised-button color="accent" (click)="item.remove()">delete</button>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+
+        </form>
+
+        <button type="button" class="btn btn-primary" [disabled]="prices.length == 0 || !addReservation.valid || uploader.queue.length == 0 "  (click)=AddRoom() >Add Room</button>
+      <br>
+      <br>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab>
+    <ng-template ngbTabTitle><b>Add reservation for room</b></ng-template>
+    <ng-template ngbTabContent>
+
+        <div class="col-md-8" style="margin-left: 20px">
+            <form [formGroup]="addRoomRes" id="addRoomRes">
                 <div class="form-group row">
-                    <label for="roomDescription" class="col-sm-4 col-form-label">Description:</label>
+                    <label for="selectRoom" class="col-sm-4 col-form-label">Select room:</label>
                     <div class="col-sm-8">
-                      <textarea  rows="3" class="form-control" id="roomDescription" placeholder="Room description"
-                        formControlName="roomDescription" [ngClass]="{'is-invalid':addReservation.get('roomDescription').touched && addReservation.get('roomDescription').invalid}"
-                        required></textarea>
-                      <div *ngIf="addReservation.get('roomDescription').touched && addReservation.get('roomDescription').invalid"
+                      <select class="form-control" id="selectRoom" placeholder="Room type" formControlName="selectRoom"
+                        [ngClass]="{'is-invalid':addRoomRes.get('selectRoom').touched && addRoomRes.get('selectRoom').invalid}"
+                        required>
+                        <option>ROOM1</option>
+                        <option>ROOM2</option>
+                      </select>
+                      <div *ngIf="addRoomRes.get('selectRoom').touched && addRoomRes.get('selectRoom').invalid"
                         class="invalid-feedback">
                         <div>Location name is required</div>
                       </div>
                     </div>
                   </div>
-
                   <div class="form-group row">
-                      <label for="numberOfPersons" class="col-sm-4 col-form-label">Number of persons:</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" id="numberOfPersons" placeholder="Location coordinates"
-                          formControlName="numberOfPersons" [ngClass]="{'is-invalid':addReservation.get('numberOfPersons').touched && addReservation.get('numberOfPersons').invalid}"
+                  <div class="col-3">
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="picker2" class="form-control" id="from" formControlName="from"
+                          placeholder="From" [ngClass]="{'is-invalid':addRoomRes.get('from').touched && addRoomRes.get('from').invalid}"
                           required>
-                        <div *ngIf="addReservation.get('numberOfPersons').touched && addReservation.get('numberOfPersons').invalid"
-                          class="invalid-feedback">
-                          <div>Location name is required</div>
+                        <div *ngIf="addRoomRes.get('from').touched && addRoomRes.get('from').invalid" class="invalid-feedback">
+                          <div>Travel time is required</div>
                         </div>
-                      </div>
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                      </mat-form-field>
                     </div>
-                    <div class="form-group row">
-                        <label for="roomAdditionalServices" class="col-sm-4 col-form-label">Additional room services:</label>
-                        <div class="col-sm-8">
-                          <select multiple class="form-control" id="roomAdditionalServices" placeholder="Room type"
-                            formControlName="roomAdditionalServices" [ngClass]="{'is-invalid':addReservation.get('roomAdditionalServices').touched && addReservation.get('roomAdditionalServices').invalid}"
-                            required>
-                            <option>hotel</option>
-                            <option>bed&breakfast,</option>
-                            <option>apartman</option>
-                            </select>
-                          <div *ngIf="addReservation.get('roomAdditionalServices').touched && addReservation.get('roomAdditionalServices').invalid"
-                            class="invalid-feedback">
-                            <div>Location name is required</div>
-                          </div>
+                    <div class="col-3">
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="picker1" class="form-control" id="to" formControlName="to"
+                          placeholder="Landing" [ngClass]="{'is-invalid':addRoomRes.get('to').touched && addRoomRes.get('to').invalid}"
+                          required>
+                        <div *ngIf="addRoomRes.get('to').touched && addRoomRes.get('to').invalid" class="invalid-feedback">
+                          <div>Travel time is required</div>
                         </div>
-                      </div>
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                  </div>
+              </form>
+              </div>
 
-                      <div class="form-group row">
-                          <label for="roomCancel" class="col-sm-4 col-form-label">Room cancel (days):</label>
-                          <div class="col-sm-8">
-                            <input type="text" class="form-control" id="roomCancel" placeholder="Location coordinates"
-                              formControlName="roomCancel" [ngClass]="{'is-invalid':addReservation.get('roomCancel').touched && addReservation.get('roomCancel').invalid}"
-                              required>
-                            <div *ngIf="addReservation.get('roomCancel').touched && addReservation.get('roomCancel').invalid"
-                              class="invalid-feedback">
-                              <div>Location name is required</div>
-                            </div>
-                          </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="roomCancel" class="col-sm-4 col-form-label">Prices:</label>
-                            <div class="col-sm-8">
-                              <button (click)="openPriceList(price)" >Add price</button>
-                              <div *ngIf="addReservation.get('roomCancel').touched && addReservation.get('roomCancel').invalid"
-                                class="invalid-feedback">
-                                <div>Location name is required</div>
-                              </div>
-                            </div>
-                          </div>
-
-                        <div class="form-group row">
-                            <label for="imageUpload" class="col-sm-4 col-form-label">Images upload:</label>
-                            <div class="col-sm-8">
-                              <input formControlName="imageUpload" type="file" ng2FileSelect accept=".png" [uploader]="uploader" multiple id="imageUpload" placeholder="Location coordinates"
-                              [ngClass]="{'is-invalid':addReservation.get('imageUpload').touched && addReservation.get('imageUpload').invalid}"
-                                required>
-                              <div *ngIf="addReservation.get('imageUpload').touched && addReservation.get('imageUpload').invalid"
-                                class="invalid-feedback">
-                                <div>Location name is required</div>
-                              </div>
-                            </div>
-                          </div>
-                          <table>
-                              <thead>
-                              <tr>
-                                <th width="80%">
-                                  File Name
-                                </th>
-                                <th width="10%">
-                                   Size
-                                  </th>
-                                <th width="10%">
-                                  Remove
-                                </th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              <tr *ngFor="let item of uploader.queue">
-                                <th width="90%">
-                                  {{item._file.name}}
-                                </th>
-                                <th>{{item._file.size}}B</th>
-                                <th class="text-center" width="10%">
-                                    <button mat-raised-button color="accent" (click)="item.remove()">delete</button>
-                                </th>
-                              </tr>
-                              </tbody>
-                            </table>
-                            <br>
-          </form>
-        </div>
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab>
-    <ng-template ngbTabTitle><b>Fancy</b> title</ng-template>
-    <ng-template ngbTabContent>kmnknlnlnl
     </ng-template>
   </ngb-tab>
   <ngb-tab title="Disabled" [disabled]="true">
     <ng-template ngbTabContent>
-      <p>Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla facilisi. Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu, congue et odio. Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et. Sed diam urna, egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus nisl enim, nec tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet ultricies in eget neque. Phasellus nec tortor vel tellus pulvinar feugiat.</p>
+      <p>Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla facilisi.
+        Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu, congue et odio.
+        Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et. Sed diam urna,
+        egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus nisl enim, nec
+        tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque penatibus et
+        magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet ultricies in eget
+        neque. Phasellus nec tortor vel tellus pulvinar feugiat.</p>
     </ng-template>
   </ngb-tab>
 </ngb-tabset>
@@ -172,50 +301,3 @@
 
 
 
-
-<!--MODALS-->
-<!-- SIGN IN MODAL-->
-<ng-template #price let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title">Price Configuration</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-        <div class="col-md-8" style="margin-left: 20px" >
-            <form [formGroup]="addPrice" id="addPrice">
-
-                <div class="form-group row">
-                    <label for="date" class="col-sm-4 col-form-label">Select date:</label>
-                    <div class="col-sm-8">
-                        <input type="text" ngbDatepicker #d="ngbDatepicker" class="form-control" id="date" placeholder="Location coordinates"
-                        formControlName="date" [ngClass]="{'is-invalid':addPrice.get('date').touched && addPrice.get('date').invalid}"
-                        required>
-                      <div *ngIf="addPrice.get('date').touched && addPrice.get('date').invalid"
-                        class="invalid-feedback">
-                        <div>Location name is required</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                      <label for="price" class="col-sm-4 col-form-label">Price for this mounth:</label>
-                      <div class="col-sm-8">
-                          <input type="text" class="form-control" id="price" placeholder="Location coordinates"
-                          formControlName="price" [ngClass]="{'is-invalid':addPrice.get('price').touched && addPrice.get('price').invalid}"
-                          required>
-                        <div *ngIf="addPrice.get('price').touched && addPrice.get('price').invalid"
-                          class="invalid-feedback">
-                          <div>Location name is required</div>
-                        </div>
-                      </div>
-                    </div>
-       
-        </form>
-        </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-      <button type="button" class="btn btn-primary">Add Price</button>
-    </div>
-  </ng-template>
