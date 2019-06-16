@@ -5,9 +5,12 @@ import {FileUploader} from "ng2-file-upload"
 import {MomentDateAdapter} from '@angular/material-moment-adapter'
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatDatepicker} from '@angular/material/datepicker';
+import {Location} from '../models/location';
 import * as _moment from 'moment';
 import { default as _rollupMoment, Moment } from 'moment';
 import { PriceList } from '../models/price-list';
+import { RoomServiceService } from '../services/room-service.service';
+import { Room } from '../models/room';
 const moment = _rollupMoment||_moment;
 
 export const MY_FORMATS = {
@@ -65,15 +68,41 @@ export class ReservationsComponent implements OnInit {
     price: new FormControl('', Validators.required)
   });
 
+  sendMessage = new FormGroup({
+    message: new FormControl('', Validators.required)
+  });
+
   public uploader:FileUploader = new FileUploader({
     isHTML5: true
   });
 
   prices:Array<PriceList>;
   images:Array<FormData>;
-  constructor() { 
+  user:any;
+  roomString:any;
+
+
+
+  constructor(private modalService: NgbModal,private roomService:RoomServiceService) { 
     this.prices = new Array<PriceList>();
     this.images = new Array<FormData>();
+  }
+
+  OpenSendMessage(sendMessageModal :any , i : any){
+
+    this.user = i;
+
+    this.modalService.open(sendMessageModal, {
+      windowClass: 'dark-modal',
+      centered: true
+    });
+   
+
+  }
+
+  SendMessage(){
+
+
   }
 
   ngOnInit() {
@@ -81,29 +110,48 @@ export class ReservationsComponent implements OnInit {
   }
 
   uploadSubmit(){
-    for (let i = 0; i < this.uploader.queue.length; i++) {
-      let fileItem = this.uploader.queue[i]._file;
-      if(fileItem.size > 10000000){
-        alert("Each File should be less than 10 MB of size.");
-        return;
-      }
-    }
+
     for (let j = 0; j < this.uploader.queue.length; j++) {
-      let data = new FormData();
+      let file = new FormData();
       let fileItem = this.uploader.queue[j]._file;
-      data.append('file', fileItem);
-      data.append('fileSeq', 'seq'+j);
-      this.images.push(data)
+      file.append('file', fileItem);
+      file.append('roomString', this.roomString);
+      this.roomService.addFiles(file).subscribe(
+        data=>{
+          alert("We finish uploading files");
+        }
+      )
     }
-    this.uploader.clearQueue();
 }
 
 AddRoom() {
 
- // alert("LName" + this.addReservation.get("locationname").value+ "locationCords" + this.addReservation.get("locationCords").value + "st" + this.addReservation.get("selectType").value +
- // "rd" +  this.addReservation.get("roomDescription").value + "np" + this.addReservation.get("numberOfPersons").value +
- // "roomAddition" + this.addReservation.get("roomAdditionalServices").value + "rc" + this.addReservation.get("roomCancel").value);
-  this.uploadSubmit();
+  
+
+  var room = new Room();
+  room.additionalServices = this.addReservation.get("roomAdditionalServices").value;
+  room.location = new Location(this.addReservation.get("locationCords").value,this.addReservation.get("locationCords").value,this.addReservation.get("locationname").value)
+  room.numberOfBeds=this.addReservation.get("numberOfPersons").value;
+  room.priceList = this.prices;
+  room.type = this.addReservation.get("selectType").value
+  room.description = this.addReservation.get("roomDescription").value;
+  room.daysForCancel = this.addReservation.get("roomCancel").value;
+  room.image = new Array<string>();
+  this.roomString = this.generateANumber();
+
+  for (let j = 0; j < this.uploader.queue.length; j++) {
+    room.image.push(this.roomString + "-" + this.uploader.queue[j]._file.name);
+  }
+
+
+
+  
+
+  this.roomService.addRoom(room).subscribe(
+    data => {
+      this.uploadSubmit();
+      alert("Successfuly added room!");
+        })
 
 }
 
@@ -127,6 +175,10 @@ RemovePrice(i:any){
     }
   }
   this.prices = priceTemp;
+}
+
+generateANumber(){
+ return  Math.floor(Math.random() * (50000000000000 - 0 + 1)) + 0
 }
 
 

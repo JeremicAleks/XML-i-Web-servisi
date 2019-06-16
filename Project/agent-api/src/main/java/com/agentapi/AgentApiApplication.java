@@ -5,12 +5,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
 @SpringBootApplication
 @EnableEurekaClient
+@ComponentScan("com.centralapi")
+@ComponentScan("com.agentapi")
+
 public class AgentApiApplication {
 
 	static {
@@ -42,7 +46,7 @@ public class AgentApiApplication {
 	Jaxb2Marshaller jaxb2Marshaller() {
 
 		Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-		jaxb2Marshaller.setPackagesToScan("com.centralapi.domain.xml");
+		jaxb2Marshaller.setPackagesToScan("com.agentapi.com.centralapi.domain.xml");
 
 		return jaxb2Marshaller;
 	}

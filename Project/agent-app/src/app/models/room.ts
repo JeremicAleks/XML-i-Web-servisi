@@ -9,9 +9,10 @@ export class Room {
     category:CategoryEnum ;
     additionalServices:Array<RoomAdditionalServiceEnum>;
     description : string;
-    image:Array<Array<any>>;
+    image:Array<string>;
     priceList:Array<PriceList>;
     reservation:Array<any>;
+    daysForCancel:number;
 
     constructor(){
         
