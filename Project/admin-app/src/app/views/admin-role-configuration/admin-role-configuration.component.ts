@@ -32,7 +32,7 @@ export class AdminRoleConfigurationComponent implements OnInit {
   constructor(private userService: UserService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.getAllRoles();
+    // this.getAllRoles();
   }
 
   getAllRoles() {
