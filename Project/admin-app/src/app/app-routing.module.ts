@@ -12,12 +12,12 @@ const routes: Routes = [
 
   {
     path: 'admin/config/user',
-    component: AdminUserConfigurationComponent, canActivate: [SecAdminGuard]
+    component: AdminUserConfigurationComponent // , canActivate: [SecAdminGuard]
   },
 
   {
     path: 'admin/config/role',
-    component: AdminRoleConfigurationComponent, canActivate: [SecAdminGuard]
+    component: AdminRoleConfigurationComponent // , canActivate: [SecAdminGuard]
   }
 
 ];
