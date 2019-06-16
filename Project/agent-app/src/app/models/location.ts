@@ -5,5 +5,9 @@ export class Location {
     lng:number;
     name:String;
 
-    constructor(){}
+    constructor(lat,lng,name){
+        this.lat=lat;
+        this.lng =lng;
+        this.name = name;
+    }
 }
