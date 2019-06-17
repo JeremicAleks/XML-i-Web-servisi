@@ -4,8 +4,8 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.centralapi.domain.xml.xml_ftn.users.User;
 //import com.centralapi.service.UserService;
+import com.centralapi.domain.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,7 +46,7 @@ public class UserController {
 		if(user==null)
 			return new ResponseEntity<>("User not found!",HttpStatus.OK);
 
-		return new ResponseEntity<>(new UserLoginDTO(user,""), HttpStatus.OK);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
 

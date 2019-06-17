@@ -1,10 +1,7 @@
-package com.reservation.microservice.domain;
+package com.room.microservice.domain;
 
-import javax.persistence.Entity;
-        import javax.persistence.GeneratedValue;
-        import javax.persistence.GenerationType;
-        import javax.persistence.Id;
-        import java.util.Date;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Reservation {
@@ -13,9 +10,19 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private Date checkIn;
+    @Column(nullable = false)
     private Date checkOut;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = ReservationStateEnum.class)
     private ReservationStateEnum state;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private Room reservedRoom;
+
 
     public Reservation() {
     }
@@ -58,3 +65,4 @@ public class Reservation {
         this.state = state;
     }
 }
+

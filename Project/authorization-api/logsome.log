@@ -32,3 +32,7 @@
 {date:2019-05-15 23:43:33.645, level:INFO , process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Info logging Test!}
 {date:2019-05-15 23:43:33.646, level:ERROR, process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Error logging Test!}
 {date:2019-05-15 23:43:33.648, level:DEBUG, process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Debug logging Test!}
+{date:2019-06-10 17:38:18.972, level:DEBUG, process:http-nio-8089-exec-1, class:freemarker.cache, msg:Couldn't find template in cache for "error.ftl"("sr_RS", UTF-8, parsed); will try to load it.}
+{date:2019-06-10 17:38:18.974, level:DEBUG, process:http-nio-8089-exec-1, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error_sr_RS.ftl"): Not found}
+{date:2019-06-10 17:38:18.975, level:DEBUG, process:http-nio-8089-exec-1, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error_sr.ftl"): Not found}
+{date:2019-06-10 17:38:18.976, level:DEBUG, process:http-nio-8089-exec-1, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error.ftl"): Not found}

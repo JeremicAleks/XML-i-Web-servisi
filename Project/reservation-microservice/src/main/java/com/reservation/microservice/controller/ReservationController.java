@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/reservation")
+@RequestMapping("/api/reservation")
 public class ReservationController {
 
     @Autowired
@@ -16,10 +16,10 @@ public class ReservationController {
 
     @GetMapping(value = "/all",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Reservation> getReservatons(){
-
-
-
-        return null;
+    	List<Reservation> reservations = reservationService.findAll();
+    	
+    	
+        return reservations;
     }
 
     @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
