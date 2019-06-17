@@ -2,7 +2,7 @@ package com.centralapi.service;
 
 import java.util.List;
 
-import com.centralapi.domain.PrivilegeEnum;
+import com.centralapi.domain.xml.xml_ftn.users.PrivilegesEnum;
 import com.centralapi.exception.ResponseMessage;
 
 public interface RoleService {
@@ -11,7 +11,7 @@ public interface RoleService {
 	
 	ResponseMessage deleteRole(String role);
 	
-	ResponseMessage updateRole(String role,List<PrivilegeEnum> privileges);
+	ResponseMessage updateRole(String role,List<PrivilegesEnum> privileges);
 	
 	ResponseMessage changeRoleForUser(String role,String username);
 

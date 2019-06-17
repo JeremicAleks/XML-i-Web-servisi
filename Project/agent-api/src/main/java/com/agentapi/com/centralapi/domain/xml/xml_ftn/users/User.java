@@ -8,6 +8,7 @@
 
 package com.agentapi.com.centralapi.domain.xml.xml_ftn.users;
 
+import javax.persistence.Column;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -91,6 +92,7 @@ public class User {
     @XmlElement(name = "Role", required = true)
     protected Role role;
     @XmlElement(required = true)
+    @Column(nullable = false)
     protected String salt;
     protected long id;
     @XmlElement(required = true)

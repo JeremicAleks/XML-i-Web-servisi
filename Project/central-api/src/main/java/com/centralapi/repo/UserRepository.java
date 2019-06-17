@@ -2,10 +2,11 @@ package com.centralapi.repo;
 
 import javax.transaction.Transactional;
 
-import com.centralapi.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+
+import com.centralapi.domain.xml.xml_ftn.users.User;
 
 
 public interface UserRepository extends JpaRepository<User, Long> {

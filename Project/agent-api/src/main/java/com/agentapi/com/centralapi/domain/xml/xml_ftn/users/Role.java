@@ -10,6 +10,14 @@ package com.agentapi.com.centralapi.domain.xml.xml_ftn.users;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -45,11 +53,17 @@ import javax.xml.bind.annotation.XmlType;
     "privileges",
     "id"
 })
+@Entity
 public class Role {
 
     @XmlElement(required = true)
     protected String name;
+	
+	@Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = PrivilegesEnum.class)
     protected List<PrivilegesEnum> privileges;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
     protected long id;
 
     /**

@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.centralapi.domain.PrivilegeEnum;
 import com.centralapi.domain.dto.ChangeRoleForUserDTO;
 import com.centralapi.domain.dto.RoleDTO;
 import com.centralapi.domain.dto.UpdateRoleDTO;
+import com.centralapi.domain.xml.xml_ftn.users.PrivilegesEnum;
 import com.centralapi.exception.ResponseMessage;
 import com.centralapi.repo.RoleRepository;
 import com.centralapi.service.RoleService;
@@ -73,7 +73,7 @@ public class SecurityAdminController {
 	@GetMapping(value = "/getAllPrivileges", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getPrivileges() {
 		
-		PrivilegeEnum[] privileges = PrivilegeEnum.class.getEnumConstants();
+		PrivilegesEnum[] privileges = PrivilegesEnum.class.getEnumConstants();
 
 		return new ResponseEntity<>(privileges, HttpStatus.OK);
 	}

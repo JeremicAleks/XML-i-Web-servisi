@@ -1,15 +1,15 @@
 package com.centralapi.controller;
 
-import com.centralapi.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import com.centralapi.domain.User;
 import com.centralapi.domain.xml.xml_ftn.users.GetUserRequest;
+import com.centralapi.domain.xml.xml_ftn.users.User;
 import com.centralapi.domain.xml.xml_ftn.users.UserLoginDTO;
+import com.centralapi.repo.UserRepository;
 
 @Endpoint
 public class UserSoapController {

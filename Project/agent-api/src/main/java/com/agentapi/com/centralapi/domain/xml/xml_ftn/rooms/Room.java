@@ -26,7 +26,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.location.Location;
@@ -121,8 +120,9 @@ public class Room {
     @XmlElement(name = "Reservation", namespace = "http://www.xml-ftn.xml.domain.centralapi.com/Reservation")
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     protected List<Reservation> reservation;
-
     protected int daysForCancel;
+    
+    
 
     /**
      * Gets the value of the numberOfBeds property.

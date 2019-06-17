@@ -8,6 +8,17 @@
 
 package com.centralapi.domain.xml.xml_ftn.users;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -76,6 +87,9 @@ import javax.xml.bind.annotation.XmlType;
     RegistredUser.class,
     AgentUser.class
 })
+@Entity
+@DiscriminatorColumn(name = "USER")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     @XmlElement(required = true)
@@ -83,15 +97,19 @@ public class User {
     @XmlElement(required = true)
     protected String lastName;
     @XmlElement(required = true)
+    @Column(unique = true, nullable = false)
     protected String username;
     @XmlElement(required = true)
     protected String email;
     @XmlElement(required = true)
     protected String password;
     @XmlElement(name = "Role", required = true)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     protected Role role;
     @XmlElement(required = true)
     protected String salt;
+    @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
     protected long id;
     @XmlElement(required = true)
     protected UserStatusEnum userStatus;

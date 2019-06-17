@@ -60,7 +60,17 @@ public class Role {
      *     {@link String }
      *     
      */
-    public String getName() {
+    public Role() {
+		// TODO Auto-generated constructor stub
+	}
+    
+    public Role(String name, List<PrivilegesEnum> privileges) {
+		super();
+		this.name = name;
+		this.privileges = privileges;
+	}
+
+	public String getName() {
         return name;
     }
 
