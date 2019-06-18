@@ -88,14 +88,14 @@
             <xsd:element form="qualified" name="id" type="xsd:long"/>
         </xsd:sequence>
     </xsd:complexType>
-    <xsd:element name="getUserDTO">
+    <xsd:element name="GetReservationForUserDTO">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element form="qualified" name="username" type="xsd:string"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="userLoginDTO">
+    <xsd:element name="LoginDTO">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element form="qualified" name="username" type="xsd:string"/>
@@ -110,13 +110,38 @@
             <xsd:enumeration value="DELETED"/>
         </xsd:restriction>
     </xsd:simpleType>
-    <xsd:element name="Message">
+    <xsd:element name="userLoginDTO">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element name="id" type="xsd:long"/>
-                <xsd:element name="message" type="xsd:string"/>
-                <xsd:element name="from" type="users:User"/>
-                <xsd:element name="to" type="users:User"/>
+                <xsd:element name="username" type="xsd:string"/>
+                <xsd:element name="name" type="xsd:string"/>
+                <xsd:element name="lastname" type="xsd:string"/>
+                <xsd:element name="role" type="xsd:string"/>
+                <xsd:element name="token" type="xsd:string"/>
+                <xsd:element name="email" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="LoginClientDTO">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="username" type="xsd:string"/>
+                <xsd:element name="password" type="xsd:string"/>
+                <xsd:element name="application" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetRoomsForUserDTO">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="username" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetMessagesForUserDTO">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="username" type="xsd:string"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

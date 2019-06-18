@@ -3,7 +3,6 @@ package com.authorizationapi.domain.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.authorizationapi.domain.PrivilegeEnum;
 import com.authorizationapi.domain.acl.AclPrivilegeEnum;
 
 public class FileUserObjectDTO {

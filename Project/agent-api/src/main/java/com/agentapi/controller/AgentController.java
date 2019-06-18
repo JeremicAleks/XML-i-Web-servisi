@@ -1,11 +1,16 @@
 package com.agentapi.controller;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,9 +21,18 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
+import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.GetReservations;
+import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.AddRoomDTO;
+import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.GetRooms;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.Image;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.Room;
+import com.agentapi.com.centralapi.domain.xml.xml_ftn.users.GetMessages;
+import com.agentapi.com.centralapi.domain.xml.xml_ftn.users.GetMessagesForUserDTO;
+import com.agentapi.com.centralapi.domain.xml.xml_ftn.users.GetReservationForUserDTO;
+import com.agentapi.com.centralapi.domain.xml.xml_ftn.users.LoginDTO;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.users.UserLoginDTO;
+import com.agentapi.repo.MessageRepository;
+import com.agentapi.repo.ReservationRepository;
 import com.agentapi.repo.RoomRepository;
 
 @RestController
@@ -26,8 +40,16 @@ import com.agentapi.repo.RoomRepository;
 public class AgentController {
 	
 	static final String SERVICE_URI = "https://localhost:8043/ws/";
+	static final String USER_SERVICE_URI = "https://localhost:8043/ws/";
+	
 	@Autowired
 	RestTemplate restTemplate;
+	
+	@Autowired
+	ReservationRepository resRepo;
+	
+	@Autowired
+	MessageRepository msgRepo;
 	
 	@Autowired
 	RoomRepository roomRepo;
@@ -38,19 +60,26 @@ public class AgentController {
     @PostMapping(value = "/addRoom")
     public ResponseEntity<?> addRoom(@RequestBody Room room){
     	
-    	System.out.println(room.getDescription()+room.getAdditionalServices()+room.getDescription()+room.getNumberOfBeds());
-    
+    	if(SecurityContextHolder.getContext().getAuthentication() == null) 
+    		new ResponseEntity<>("Please Login!", HttpStatus.UNAUTHORIZED);
+    	
+    	AddRoomDTO addRoom = new AddRoomDTO();
+    	addRoom.setRoom(room);
+    	addRoom.setUsername((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     	
     	roomRepo.save(room);
     	
     	Room response = (Room) soap.
-    			marshalSendAndReceive(SERVICE_URI, room);
+    			marshalSendAndReceive(SERVICE_URI, addRoom);
     	
         return new ResponseEntity<>(response.getAdditionalServices(), HttpStatus.OK);
     }
     
     @PostMapping(value = "/addFile")
     public ResponseEntity<?> addFile(@RequestParam(value="file") MultipartFile files,@RequestParam("roomString") Long roomS) throws IOException{
+    	
+    	if(SecurityContextHolder.getContext().getAuthentication() == null) 
+    		new ResponseEntity<>("Please Login!", HttpStatus.UNAUTHORIZED);
     	
     	System.out.println(files.getOriginalFilename());
     	Image im = new Image();
@@ -61,46 +90,90 @@ public class AgentController {
      	Image i = (Image) soap.
     			marshalSendAndReceive(SERVICE_URI, im);
      	
-		return new ResponseEntity<>("uspesnooooo",HttpStatus.OK);
+		return new ResponseEntity<>("Successfully uploaded file! ",HttpStatus.OK);
 		
     }
 
     @PostMapping(value = "/reserveRoom/{idRoom}")
     public ResponseEntity<?> reserveRoom(){
-
+    	if(SecurityContextHolder.getContext().getAuthentication() == null) 
+    		new ResponseEntity<>("Please Login!", HttpStatus.UNAUTHORIZED);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @GetMapping(value = "message/all",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getMessage(){
-
+    	if(SecurityContextHolder.getContext().getAuthentication() == null) 
+    		new ResponseEntity<>("Please Login!", HttpStatus.UNAUTHORIZED);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @PostMapping(value = "/message/{idUser}")
     public ResponseEntity<?> sendMessage(){
-
+    	if(SecurityContextHolder.getContext().getAuthentication() == null) 
+    		new ResponseEntity<>("Please Login!", HttpStatus.UNAUTHORIZED);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @PostMapping(value = "/reservation/{id}")
     public ResponseEntity<?> confirmReservation(){
-
+    	if(SecurityContextHolder.getContext().getAuthentication() == null) 
+    		
+    		new ResponseEntity<>("Please Login!", HttpStatus.UNAUTHORIZED);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
     
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> login(@RequestBody UserLoginDTO login){
+    public ResponseEntity<?> login(@RequestBody LoginDTO LoginDTO){
     	
-    	System.out.println("Login:  " + login.getUsername());
+    	Collection<? extends GrantedAuthority> gauth;
+    	System.out.println("Login:  " + LoginDTO.getUsername());
     	
-    	UserLoginDTO response = (UserLoginDTO) soap.
-    			marshalSendAndReceive(SERVICE_URI, login);
-
-    	//ResponseEntity<String> resp = restTemplate.postForEntity(SERVICE_URI, entity, String.class);
-        System.out.println("RADI LIII: " + response.getUsername() + " " + response.getPassword());
-    	return new ResponseEntity<>(null, HttpStatus.OK);
+    	try {
+    		UserLoginDTO response = (UserLoginDTO) soap.
+    				marshalSendAndReceive(USER_SERVICE_URI, LoginDTO);
+    		
+    		gauth = AuthorityUtils.commaSeparatedStringToAuthorityList(response.getRole());
+    		
+    		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+					response, response.getUsername(),gauth);
+    		
+    		SecurityContextHolder.getContext().setAuthentication(authentication);
+    		
+    	
+    		return new ResponseEntity<>(response, HttpStatus.OK);
+    	}catch (Exception e) {
+			
+    		return new ResponseEntity<>("Invalid login!", HttpStatus.NOT_FOUND);
+		}
     }
+    	
+    	public void syncWithMainServer() throws Exception{
+        	
+    		GetReservationForUserDTO getForUser = new GetReservationForUserDTO();
+    		getForUser.setUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
+    		GetReservationForUserDTO getForUserRoom = new GetReservationForUserDTO();
+    		getForUserRoom.setUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+    		GetMessagesForUserDTO getForUserMsg= new GetMessagesForUserDTO();
+    		getForUserMsg.setUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+        		
+        	GetReservations reservations = (GetReservations) soap.
+        			marshalSendAndReceive(SERVICE_URI, getForUser);
+        	
+        	GetRooms rooms = (GetRooms) soap.
+        			marshalSendAndReceive(SERVICE_URI,getForUserRoom);
+        	
+        	GetMessages msgs  = (GetMessages) soap.
+        			marshalSendAndReceive(SERVICE_URI,getForUserMsg);
+        	
+        	resRepo.saveAll(reservations.getReservation());
+        	roomRepo.saveAll(rooms.getRoom());
+        	msgRepo.saveAll(msgs.getMessage());
+        	
+ 
+    }
 
 }

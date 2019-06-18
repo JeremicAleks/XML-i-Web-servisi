@@ -31,4 +31,11 @@
             <xsd:enumeration value="PENDING"/>
         </xsd:restriction>
     </xsd:simpleType>
+    <xsd:element name="GetReservations">
+        <xsd:complexType>
+            <xsd:sequence maxOccurs="unbounded">
+                <xsd:element ref="reservations:Reservation"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 </xsd:schema>

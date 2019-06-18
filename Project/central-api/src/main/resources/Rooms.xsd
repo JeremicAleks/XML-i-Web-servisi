@@ -144,4 +144,11 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="GetRooms">
+        <xsd:complexType>
+            <xsd:sequence maxOccurs="unbounded">
+                <xsd:element ref="rooms:Room"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 </xsd:schema>

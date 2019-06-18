@@ -1,12 +1,16 @@
 package com.centralapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import com.centralapi.domain.xml.xml_ftn.reservation.GetMessages;
+import com.centralapi.domain.xml.xml_ftn.users.GetMessagesForUserDTO;
 import com.centralapi.domain.xml.xml_ftn.users.GetUserRequest;
+import com.centralapi.domain.xml.xml_ftn.users.LoginDTO;
 import com.centralapi.domain.xml.xml_ftn.users.User;
 import com.centralapi.domain.xml.xml_ftn.users.UserLoginDTO;
 import com.centralapi.repo.UserRepository;
@@ -21,6 +25,9 @@ public class UserSoapController {
 	@Autowired
 	private UserRepository userRepo;
 	
+	@Autowired
+	private RestTemplate rest;
+	
     @PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "getUserDTO")
     @ResponsePayload
     public User getUser(@RequestPayload GetUserRequest  request) {
@@ -29,16 +36,29 @@ public class UserSoapController {
         return response;
     }
     
-    @PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "userLoginDTO")
+    @PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "GetMessagesForUserDTO")
     @ResponsePayload
-    public UserLoginDTO login(@RequestPayload UserLoginDTO  login) {
-    	//vrsi se sinhronizacija sa back-endom
-    	//AgentUser poseduje sve
+    public GetMessages getMsgs(@RequestPayload GetMessagesForUserDTO  request) {
     	
-    	System.out.println("lOGIN: " + login.getUsername());
-  
-    	return login;
-        
+    	//treba vratiti poruke;
+    	System.out.println("dsadada");
+    	return new GetMessages();
+    }
+    
+    @PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "LoginDTO")
+    @ResponsePayload
+    public UserLoginDTO login(@RequestPayload LoginDTO  login) {
+
+    	
+    	try {
+    	UserLoginDTO user =rest.postForObject("http://autorization-api/api/token",login, UserLoginDTO.class);
+    	return user;
+    	}
+    	catch (Exception e) {
+    		 return null;
+		}
+    	
+       
     }
     
     

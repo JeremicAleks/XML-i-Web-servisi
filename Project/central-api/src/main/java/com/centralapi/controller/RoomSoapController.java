@@ -16,8 +16,11 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.centralapi.domain.xml.xml_ftn.reservation.ReservationDTO;
+import com.centralapi.domain.xml.xml_ftn.rooms.AddRoomDTO;
+import com.centralapi.domain.xml.xml_ftn.rooms.GetRooms;
 import com.centralapi.domain.xml.xml_ftn.rooms.Image;
 import com.centralapi.domain.xml.xml_ftn.rooms.Room;
+import com.centralapi.domain.xml.xml_ftn.users.GetRoomsForUserDTO;
 import com.centralapi.exception.ResponseMessage;
 
 
@@ -28,14 +31,14 @@ public class RoomSoapController {
 	private static final String RESERVATION_NAMESPACE_URI = "http://www.xml-ftn.xml.domain.centralapi.com/Reservations";
 	
 	@PreAuthorize("hasRole('ROLE_AGENT_APP')")
-    @PayloadRoot(namespace = ROOM_NAMESPACE_URI, localPart = "Room")
+    @PayloadRoot(namespace = ROOM_NAMESPACE_URI, localPart = "addRoomDTO")
     @ResponsePayload
-    public Room addRoom(@RequestPayload Room  request) {
+    public Room addRoom(@RequestPayload AddRoomDTO  request) {
     	
 		//sacuvati u bazu i vratiti room sa id-om
-    	System.out.println(request.getAdditionalServices());
+    	System.out.println(request.getRoom().getAdditionalServices());
     	
-    	return request;
+    	return request.getRoom();
         
     }
 	
@@ -53,6 +56,19 @@ public class RoomSoapController {
     	return request;
         
     }
+	
+	@PreAuthorize("hasRole('ROLE_AGENT_APP')")
+    @PayloadRoot(namespace = ROOM_NAMESPACE_URI, localPart = "GetRoomsForUserDTO")
+    @ResponsePayload
+    public GetRooms getRooms(@RequestPayload GetRoomsForUserDTO  request) throws IOException {
+		
+		System.out.println("dsafsa");
+		
+		//ovde treba vratiti sobe :D
+    	return new GetRooms();
+        
+    }
+	
   /*  
     @PayloadRoot(namespace = ROOM_NAMESPACE_URI, localPart = "ReservationDTO")
     @ResponsePayload
