@@ -110,17 +110,6 @@
             <xsd:enumeration value="DELETED"/>
         </xsd:restriction>
     </xsd:simpleType>
-    <xsd:element name="Message">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="id" type="xsd:long"/>
-                <xsd:element name="message" type="xsd:string"/>
-                <xsd:element name="from" type="xsd:long"/>
-                <xsd:element name="to" type="xsd:long"/>
-                <xsd:element ref="reservation:Reservation"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
     <xsd:element name="userLoginDTO">
         <xsd:complexType>
             <xsd:sequence>
@@ -153,13 +142,6 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="username" type="xsd:string"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="GetMessages">
-        <xsd:complexType>
-            <xsd:sequence maxOccurs="unbounded">
-                <xsd:element ref="users:Message"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

@@ -35,15 +35,7 @@ public class UserSoapController {
 
         return response;
     }
-    
-    @PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "GetMessagesForUserDTO")
-    @ResponsePayload
-    public GetMessages getMsgs(@RequestPayload GetMessagesForUserDTO  request) {
-    	
-    	//treba vratiti poruke;
-    	System.out.println("dsadada");
-    	return new GetMessages();
-    }
+
     
     @PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "LoginDTO")
     @ResponsePayload

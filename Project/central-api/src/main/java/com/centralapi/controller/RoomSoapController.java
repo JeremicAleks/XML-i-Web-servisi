@@ -28,7 +28,8 @@ import com.centralapi.exception.ResponseMessage;
 public class RoomSoapController {
 	
 	private static final String ROOM_NAMESPACE_URI = "http://www.xml-ftn.xml.domain.centralapi.com/Rooms";
-	private static final String RESERVATION_NAMESPACE_URI = "http://www.xml-ftn.xml.domain.centralapi.com/Reservations";
+	private static final String RESERVATION_NAMESPACE_URI = "http://www.xml-ftn.xml.domain.centralapi.com/Reservation";
+	private static final String USER_NAMESPACE_URI = "http://www.xml-ftn.xml.domain.centralapi.com/Users";
 	
 	@PreAuthorize("hasRole('ROLE_AGENT_APP')")
     @PayloadRoot(namespace = ROOM_NAMESPACE_URI, localPart = "addRoomDTO")
@@ -58,7 +59,7 @@ public class RoomSoapController {
     }
 	
 	@PreAuthorize("hasRole('ROLE_AGENT_APP')")
-    @PayloadRoot(namespace = ROOM_NAMESPACE_URI, localPart = "GetRoomsForUserDTO")
+    @PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "GetRoomsForUserDTO")
     @ResponsePayload
     public GetRooms getRooms(@RequestPayload GetRoomsForUserDTO  request) throws IOException {
 		

@@ -21,14 +21,15 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
+import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.GetMessages;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.GetReservations;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.AddRoomDTO;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.GetRooms;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.Image;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.Room;
-import com.agentapi.com.centralapi.domain.xml.xml_ftn.users.GetMessages;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.users.GetMessagesForUserDTO;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.users.GetReservationForUserDTO;
+import com.agentapi.com.centralapi.domain.xml.xml_ftn.users.GetRoomsForUserDTO;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.users.LoginDTO;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.users.UserLoginDTO;
 import com.agentapi.repo.MessageRepository;
@@ -140,24 +141,28 @@ public class AgentController {
     		
     		SecurityContextHolder.getContext().setAuthentication(authentication);
     		
-    	
+    		syncWithMainServer();
+    		
     		return new ResponseEntity<>(response, HttpStatus.OK);
     	}catch (Exception e) {
-			
+			e.printStackTrace();
     		return new ResponseEntity<>("Invalid login!", HttpStatus.NOT_FOUND);
 		}
     }
     	
-    	public void syncWithMainServer() throws Exception{
+    	public void syncWithMainServer(){
         	
+    		
+    		System.out.println("udje liii");
+    		
     		GetReservationForUserDTO getForUser = new GetReservationForUserDTO();
-    		getForUser.setUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    		getForUser.setUsername((String) SecurityContextHolder.getContext().getAuthentication().getCredentials());
 
-    		GetReservationForUserDTO getForUserRoom = new GetReservationForUserDTO();
-    		getForUserRoom.setUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    		GetRoomsForUserDTO getForUserRoom = new GetRoomsForUserDTO();
+    		getForUserRoom.setUsername((String) SecurityContextHolder.getContext().getAuthentication().getCredentials());
 
     		GetMessagesForUserDTO getForUserMsg= new GetMessagesForUserDTO();
-    		getForUserMsg.setUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    		getForUserMsg.setUsername((String) SecurityContextHolder.getContext().getAuthentication().getCredentials());
 
         		
         	GetReservations reservations = (GetReservations) soap.
@@ -171,7 +176,7 @@ public class AgentController {
         	
         	resRepo.saveAll(reservations.getReservation());
         	roomRepo.saveAll(rooms.getRoom());
-        	msgRepo.saveAll(msgs.getMessage());
+        	msgRepo.saveAll(msgs.getMessageTable());
         	
  
     }

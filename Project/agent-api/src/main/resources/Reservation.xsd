@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema elementFormDefault="qualified"
     targetNamespace="http://www.xml-ftn.xml.domain.centralapi.com/Reservation"
-    xmlns:rooms="http://www.xml-ftn.com.centralapi.domain.xml/Rooms"
     xmlns:reservations="http://www.xml-ftn.xml.domain.centralapi.com/Reservation"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:users="http://www.xml-ftn.xml.domain.centralapi.com/Users">
     <xsd:element name="Reservation">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="checkIn" type="xsd:date"/>
                 <xsd:element name="checkOut" type="xsd:date"/>
                 <xsd:element name="id" type="xsd:long"/>
-                <xsd:element name="state" nillable="false" type="reservations:ReservationStateEnum"
-                />
+                <xsd:element name="state" nillable="false" type="reservations:ReservationStateEnum"/>
+                <xsd:element ref="reservations:MessageTable"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -35,6 +35,23 @@
         <xsd:complexType>
             <xsd:sequence maxOccurs="unbounded">
                 <xsd:element ref="reservations:Reservation"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="MessageTable">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:long"/>
+                <xsd:element name="messageString" type="xsd:string"/>
+                <xsd:element name="fromUser" nillable="false" type="xsd:string"/>
+                <xsd:element name="toUser" nillable="true" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetMessages">
+        <xsd:complexType>
+            <xsd:sequence maxOccurs="unbounded">
+                <xsd:element ref="reservations:MessageTable"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
