@@ -45,15 +45,21 @@ public class User {
 	private String password;
 	@Column(unique = true, nullable = false)
 	private String email;
-	private String telephone;
-	private String adress;
+	private UserStatusEnum userStatus;
 	
+	public UserStatusEnum getUserStatusEnum() {
+		return userStatus;
+	}
+
+	public void setUserStatusEnum(UserStatusEnum userStatusEnum) {
+		this.userStatus = userStatusEnum;
+	}
+
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public User(String name, Role role, String lastName, String username, String password, String email,
-			String telephone, String adress,String salt) {
+	public User(String name, Role role, String lastName, String username, String password, String email,String salt,UserStatusEnum u) {
 		super();
 		this.name = name;
 		this.role = role;
@@ -61,9 +67,8 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.email = email;
-		this.telephone = telephone;
-		this.adress = adress;
 		this.salt = salt;
+		this.userStatus = u;
 	}
 	public Long getId() {
 		return id;
@@ -107,19 +112,5 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getTelephone() {
-		return telephone;
-	}
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-	public String getAdress() {
-		return adress;
-	}
-	public void setAdress(String adress) {
-		this.adress = adress;
-	}
 	
-	
-
 }

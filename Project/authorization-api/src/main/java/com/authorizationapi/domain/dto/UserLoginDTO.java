@@ -11,10 +11,7 @@ public class UserLoginDTO {
 	private String name;
 	private String lastName;
 	private String email;
-	private String adress;
-	private String telephone;
 	private String token;
-
 	private String role;
 	
 	public UserLoginDTO() {
@@ -22,15 +19,13 @@ public class UserLoginDTO {
 	}
 
 	public UserLoginDTO(@NotNull(message = "Username is required!") String username, String name, String lastName,
-			String email, String adress, String telephone, String token,
+			String email, String token,
 			@NotNull(message = "Authority is required!") String role) {
 		super();
 		this.username = username;
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
-		this.adress = adress;
-		this.telephone = telephone;
 		this.token = token;
 		this.role = role;
 	}
@@ -40,8 +35,6 @@ public class UserLoginDTO {
 		this.name = user.getName();
 		this.lastName = user.getLastName();
 		this.email = user.getEmail();
-		this.adress = user.getAdress();
-		this.telephone = user.getTelephone();
 		this.token = userToken;
 		this.role = user.getRole().getName();
 	}
@@ -76,22 +69,6 @@ public class UserLoginDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getAdress() {
-		return adress;
-	}
-
-	public void setAdress(String adress) {
-		this.adress = adress;
-	}
-
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
 	}
 
 	public String getToken() {

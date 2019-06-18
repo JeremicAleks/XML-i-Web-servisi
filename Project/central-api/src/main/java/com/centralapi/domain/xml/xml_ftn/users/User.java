@@ -104,7 +104,7 @@ public class User {
     @XmlElement(required = true)
     protected String password;
     @XmlElement(name = "Role", required = true)
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
     protected Role role;
     @XmlElement(required = true)
     protected String salt;

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.authorizationapi.domain.PrivilegeEnum;
 import com.authorizationapi.domain.Role;
+import com.authorizationapi.domain.UserStatusEnum;
 import com.authorizationapi.domain.dto.LoginDTO;
 import com.authorizationapi.domain.dto.RegisterUserDTO;
 import com.authorizationapi.domain.dto.UserLoginDTO;
@@ -96,8 +97,8 @@ public class TokenController {
 		roleRepo.save(new Role("DefaultRole",p1));
 		String salt = KeyGenerators.secureRandom().toString();
 		String fullPass = "maki" + salt + pepper;
-		userRepo.save(new com.authorizationapi.domain.User("Maki", new Role("SYSADMIN", p1), "dsjjjja", "maki",bcript.encode(fullPass), "dsla===", "421", "421",salt));
-		userRepo.save(new com.authorizationapi.domain.User("Kiriyaga", new Role("SECADMIN", p1.subList(0, 1)), "Nesto","kiriyaga", bcript.encode(fullPass), "dsdsla", "421", "421",salt));
+		userRepo.save(new com.authorizationapi.domain.User("Maki", new Role("SYSADMIN", p1), "dsjjjja", "maki",bcript.encode(fullPass), "dsla===",salt,UserStatusEnum.ACTIVE));
+		userRepo.save(new com.authorizationapi.domain.User("Kiriyaga", new Role("SECADMIN", p1.subList(0, 1)), "Nesto","kiriyaga", bcript.encode(fullPass), "dsdsla",salt,UserStatusEnum.ACTIVE));
 
 		return new ResponseEntity<String>("Uspesno su dodati Useri", HttpStatus.OK);
 

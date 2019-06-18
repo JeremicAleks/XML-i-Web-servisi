@@ -1,5 +1,9 @@
 package com.centralapi.controller;
 
+
+
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,7 @@ import com.centralapi.domain.dto.ChangeRoleForUserDTO;
 import com.centralapi.domain.dto.RoleDTO;
 import com.centralapi.domain.dto.UpdateRoleDTO;
 import com.centralapi.domain.xml.xml_ftn.users.PrivilegesEnum;
+import com.centralapi.domain.xml.xml_ftn.users.Role;
 import com.centralapi.exception.ResponseMessage;
 import com.centralapi.repo.RoleRepository;
 import com.centralapi.service.RoleService;
@@ -66,8 +71,12 @@ public class SecurityAdminController {
 
 	@GetMapping(value = "/getAllRoles", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getRoles() {
+		
+		List<Role> role = roleRepo.findAll();
+		System.out.println(role.get(0).getName());
+		System.out.println(role.size());
 
-		return new ResponseEntity<>(roleRepo.findAll(), HttpStatus.OK);
+		return new ResponseEntity<List<Role>>(role, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/getAllPrivileges", produces = MediaType.APPLICATION_JSON_VALUE)
