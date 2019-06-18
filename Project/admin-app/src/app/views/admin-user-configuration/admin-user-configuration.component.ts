@@ -17,6 +17,7 @@ export class AdminUserConfigurationComponent implements OnInit {
   allRoles: Array<Role>;
 
   userToUpdate: string;
+  userToPromote: string;
 
   newAgentForm = new FormGroup({
     agentName: new FormControl('', Validators.required),
@@ -32,20 +33,18 @@ export class AdminUserConfigurationComponent implements OnInit {
   constructor(private userService: UserService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    // this.getAllUsers();
+    this.getAllUsers();
     // this.getAllRoles();
   }
 
   createNewAgent() {
-    const agentName = this.newAgentForm.get('agentName').value;
-    const agentLastName = this.newAgentForm.get('agentLastName').value;
     const agentAddress = this.newAgentForm.get('agentAddress').value;
     const agentBusinessRegNumber = this.newAgentForm.get('agentBusinessRegNumber').value;
-    const newAgent = new AgentDTO(agentName, agentLastName, agentAddress, agentBusinessRegNumber);
+    const newAgent = new AgentDTO(this.userToPromote, agentAddress, agentBusinessRegNumber);
 
     this.userService.createNewAgent(newAgent).subscribe(
       data => {
-        alert(data.message)
+        alert(data.message);
         this.modalService.dismissAll();
       },
       error => {
@@ -54,11 +53,14 @@ export class AdminUserConfigurationComponent implements OnInit {
     );
   }
 
-  newAgent(content) {
+  newAgent(content, user) {
     this.modalService.open(content, {
       windowClass: 'dark-modal',
       centered: true
     });
+    this.userToPromote = user.username;
+    this.newAgentForm.controls.agentName.setValue(user.name);
+    this.newAgentForm.controls.agentLastName.setValue(user.lastName);
   }
 
   activateUser(user) {
@@ -134,7 +136,7 @@ export class AdminUserConfigurationComponent implements OnInit {
       error => {
         alert('getAllUsers error');
       }
-    )
+    );
   }
 
   getAllRoles() {
@@ -145,10 +147,10 @@ export class AdminUserConfigurationComponent implements OnInit {
       error => {
         alert('getAllRoles erro');
       }
-    )
+    );
   }
 
-  // Geteri 
+  // Geteri
   get UserRole() { return this.updateUserForm.get('role'); }
 
 }
