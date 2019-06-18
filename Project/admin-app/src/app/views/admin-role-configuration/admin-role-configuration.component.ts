@@ -68,7 +68,7 @@ export class AdminRoleConfigurationComponent implements OnInit {
     const roleName = this.newRoleForm.get('roleName').value;
     this.userService.createRole(roleName).subscribe(
       data => {
-        alert(data.message)
+        alert(data.message);
         this.modalService.dismissAll();
       },
       error => {
@@ -120,7 +120,7 @@ export class AdminRoleConfigurationComponent implements OnInit {
       error => {
         alert(error.message);
       }
-    )
+    );
   }
 
 }
