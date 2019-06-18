@@ -36,3 +36,21 @@
 {date:2019-06-10 17:38:18.974, level:DEBUG, process:http-nio-8089-exec-1, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error_sr_RS.ftl"): Not found}
 {date:2019-06-10 17:38:18.975, level:DEBUG, process:http-nio-8089-exec-1, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error_sr.ftl"): Not found}
 {date:2019-06-10 17:38:18.976, level:DEBUG, process:http-nio-8089-exec-1, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error.ftl"): Not found}
+{date:2019-06-18 13:32:15.508, level:WARN , process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Username 'kiriyaga' doesn't exist!}
+{date:2019-06-18 13:39:50.195, level:DEBUG, process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-18 13:39:51.213, level:INFO , process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-18 13:48:06.938, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-18 13:48:07.694, level:INFO , process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-18 14:35:09.534, level:DEBUG, process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-18 14:35:09.536, level:DEBUG, process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-18 14:35:13.325, level:INFO , process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-18 14:35:13.325, level:INFO , process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-18 14:38:20.195, level:WARN , process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Username 'dkdsadsa' doesn't exist!}
+{date:2019-06-18 14:39:13.152, level:DEBUG, process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-18 14:39:13.588, level:INFO , process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-18 14:50:35.890, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-18 14:50:36.363, level:INFO , process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-18 14:51:02.502, level:WARN , process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Username 'kmk' doesn't exist!}
+{date:2019-06-18 14:54:14.687, level:WARN , process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Username 'kmk' doesn't exist!}
+{date:2019-06-18 15:21:45.847, level:DEBUG, process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-18 15:21:46.360, level:INFO , process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
