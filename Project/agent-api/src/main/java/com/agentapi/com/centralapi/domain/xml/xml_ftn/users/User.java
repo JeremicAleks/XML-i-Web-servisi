@@ -8,7 +8,17 @@
 
 package com.agentapi.com.centralapi.domain.xml.xml_ftn.users;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -77,23 +87,32 @@ import javax.xml.bind.annotation.XmlType;
     RegistredUser.class,
     AgentUser.class
 })
+@Entity
+@DiscriminatorColumn(name = "USER")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
+
+	// @Query(value = "SELECT * FROM USER LEFT JOIN REGISTRED_USER ON USER.ID = REGISTRED_USER.ID WHERE USER.USERNAME =?1 ", nativeQuery = true)
+	//RegistredUser findByUsername(String username);
 
     @XmlElement(required = true)
     protected String name;
     @XmlElement(required = true)
     protected String lastName;
     @XmlElement(required = true)
+    @Column(unique = true, nullable = false)
     protected String username;
     @XmlElement(required = true)
     protected String email;
     @XmlElement(required = true)
     protected String password;
     @XmlElement(name = "Role", required = true)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
     protected Role role;
     @XmlElement(required = true)
-    @Column(nullable = false)
     protected String salt;
+    @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
     protected long id;
     @XmlElement(required = true)
     protected UserStatusEnum userStatus;

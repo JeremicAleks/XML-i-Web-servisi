@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.authorizationapi.domain.PrivilegeEnum;
+import com.authorizationapi.domain.PrivilegesEnum;
 import com.authorizationapi.domain.Role;
 import com.authorizationapi.domain.UserStatusEnum;
 import com.authorizationapi.domain.dto.LoginDTO;
@@ -65,7 +65,7 @@ public class TokenController {
 	@Autowired
 	BCryptPasswordEncoder bcript;
 
-	@RequestMapping(method = RequestMethod.POST, value = "/token", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method = RequestMethod.POST, value = "/token")
 	public ResponseEntity<?> loginUser(@Validated @RequestBody LoginDTO user) {
 
 		UserLoginDTO userLoginDTO = userService.userLogin(user.getUsername(), user.getPassword());
@@ -89,10 +89,10 @@ public class TokenController {
 	@RequestMapping(method = RequestMethod.GET, value = "/user")
 	public ResponseEntity<?> addUser() {
 
-		List<PrivilegeEnum> p1 = new ArrayList<>();
-		p1.add(PrivilegeEnum.DELETE_PRODUCT);
-		p1.add(PrivilegeEnum.READ_PRODUCT);
-		p1.add(PrivilegeEnum.WRITE_PRODUCT);
+		List<PrivilegesEnum> p1 = new ArrayList<>();
+		p1.add(PrivilegesEnum.DELETE_PRODUCT);
+		p1.add(PrivilegesEnum.READ_PRODUCT);
+		p1.add(PrivilegesEnum.WRITE_PRODUCT);
 
 		roleRepo.save(new Role("DefaultRole",p1));
 		String salt = KeyGenerators.secureRandom().toString();

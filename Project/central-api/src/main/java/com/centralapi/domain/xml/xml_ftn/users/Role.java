@@ -75,7 +75,6 @@ public class Role {
      *     
      */
     public Role() {
-		// TODO Auto-generated constructor stub
 	}
     
     public Role(String name, List<PrivilegesEnum> privileges) {

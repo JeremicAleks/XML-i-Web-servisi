@@ -8,6 +8,13 @@
 
 package com.centralapi.domain.xml.xml_ftn.rooms;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -51,6 +58,7 @@ import javax.xml.bind.annotation.XmlType;
     "room",
     "id"
 })
+@Entity
 public class RateAndComment {
 
     @XmlElement(required = true)
@@ -58,7 +66,10 @@ public class RateAndComment {
     protected int rating;
     protected boolean isAllowed;
     @XmlElement(name = "Room", required = true)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     protected Room room;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
 
     /**

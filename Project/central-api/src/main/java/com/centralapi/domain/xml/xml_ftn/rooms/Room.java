@@ -10,11 +10,24 @@ package com.centralapi.domain.xml.xml_ftn.rooms;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
 import com.centralapi.domain.xml.xml_ftn.location.Location;
 import com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
 
@@ -77,24 +90,36 @@ import com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
     "daysForCancel"
 })
 @XmlRootElement(name = "Room")
+@Entity
 public class Room {
 
+    @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    protected long id;
+    
     protected int numberOfBeds;
     @XmlElement(name = "Location", namespace = "http://www.xml-ftn.xml.domain.centralapi.com/Location", required = true)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     protected Location location;
     @XmlElement(required = true)
+    @Enumerated
     protected TypeEnum type;
     @XmlElement(required = true)
+    @Enumerated
     protected CategoryEnum category;
+	@Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = RoomAdditionalServiceEnum.class)
     protected List<RoomAdditionalServiceEnum> additionalServices;
     @XmlElement(required = true)
     protected String description;
     @XmlElement(required = true)
+    @ElementCollection
     protected List<String> image;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     protected List<PriceList> priceList;
     @XmlElement(name = "Reservation", namespace = "http://www.xml-ftn.xml.domain.centralapi.com/Reservation")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     protected List<Reservation> reservation;
-    protected long id;
     protected int daysForCancel;
 
     /**
