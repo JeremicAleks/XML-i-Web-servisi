@@ -11,20 +11,24 @@ import { JwtInterceptor } from './utils/authInterceptors/jwt-interceptor';
 import { ErrorInterceptor } from './utils/authInterceptors/error-interceptor';
 import { DatePipe } from '@angular/common';
 import { AdminUserConfigurationComponent } from './views/admin-user-configuration/admin-user-configuration.component';
+import { MainHomepageComponent } from './views/main-homepage/main-homepage.component';
+import {NgbDatepickerModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavibarComponent,
     AdminRoleConfigurationComponent,
-    AdminUserConfigurationComponent
+    AdminUserConfigurationComponent,
+    MainHomepageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbDatepickerModule
   ],
   providers: [ DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -1,0 +1,87 @@
+
+/*
+-----------------------
+Modified Default Class
+-----------------------
+*/
+
+.tab-content{
+  background-color: #fff6;
+  padding: 20px;
+}
+.form-control{
+  background-color: #fff4;
+}
+/*NAV LINK */
+.nav-link{
+  color: black;
+}
+.active {
+  font-weight: bolder;
+  color: #ffffff!important;
+}
+input:focus{
+  border-color:#ffffff !important;
+  box-shadow: 0 0 0 .1rem #ffffff!important;
+ /* background-color: #ffd29c!important;*/
+}
+
+
+/*
+--------------------
+Custom New Class
+--------------------
+*/
+
+.img-container {
+  min-height: 400px;
+  /*background-image: url(http://www.projgirlspire.com/wp-content/uploads/2016/10/why-you-should-read-and-re-read-these-high-school-books-as-an-adult.jpeg);
+*/
+  background: #323335;
+  background-repeat: no-repeat;
+  background-size: 100% 400px;
+  margin-top: 2%;
+}
+
+.headerSearch{
+  padding-left: 4%;
+  padding-top: 5%;
+  color: #ffffff;
+  font-family: "Graphik Webfont","Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif!important;
+}
+
+
+.btn-search{
+  background:#323335;
+  color:#ffffff;
+  font-weight: bolder;
+}
+.btn-search:hover{
+  background:#dcdce2;
+  color:  #323335;
+}
+.searchInput{
+  height: 3em;
+  padding-left: 2rem!important;
+}
+
+.dateInput{
+  height: 3em;
+  padding-left: 2rem!important;
+}
+/*Input Icon */
+.userIcon{
+  position: absolute;
+  left: 24px;
+  top: 16px;
+}
+
+
+/* | BOOTSTRAP CLASS | col-md-* | Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+
+  .paddingRightClear{
+    padding-right: 0px!important;
+  }
+}
+
