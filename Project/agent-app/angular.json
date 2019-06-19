@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/agent-app",
+            "outputPath": "dist/angular-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -27,7 +27,6 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ],
             "es5BrowserSupport": true
           },

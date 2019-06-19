@@ -4,8 +4,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.centralapi.domain.xml.xml_ftn.users.User;
-import com.centralapi.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.centralapi.domain.dto.UserLoginDTO;
+import com.centralapi.domain.xml.xml_ftn.users.User;
+import com.centralapi.domain.xml.xml_ftn.users.UserLoginDTO;
+import com.centralapi.service.UserService;
 
 
 @RestController
@@ -33,19 +33,20 @@ public class UserController {
 		List<User> users = userService.findAll();
 		List<UserLoginDTO> userdto = new ArrayList<>();
 		for (User user : users) {
-			userdto.add(new UserLoginDTO(user.getUsername(), user.getName(), user.getLastName(), user.getEmail(),
-					 "", user.getRole().getName()));
+			userdto.add(new UserLoginDTO(user.getUsername(), user.getName(), user.getLastName(),
+					  user.getRole().getName(),"",user.getEmail()));
 		}
 		return new ResponseEntity<>(userdto, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getUser(@PathVariable Long id){		User user = userService.findById(id);
+	public ResponseEntity<?> getUser(@PathVariable Long id){
+		User user = userService.findById(id);
 
 		if(user==null)
 			return new ResponseEntity<>("User not found!",HttpStatus.OK);
 
-		return new ResponseEntity<>(new UserLoginDTO(user,""), HttpStatus.OK);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
 

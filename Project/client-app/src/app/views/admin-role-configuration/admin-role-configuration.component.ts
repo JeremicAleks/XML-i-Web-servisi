@@ -15,24 +15,24 @@ import { PrivilegeEnum } from 'src/app/models/privilege-enum';
 
 export class AdminRoleConfigurationComponent implements OnInit {
 
-  allRoles: Array<Role>
-  roleToUpdate: String
+  allRoles: Array<Role>;
+  roleToUpdate: string;
 
   newRoleForm = new FormGroup({
     roleName: new FormControl('', Validators.required)
-  })
+  });
 
   updateRoleForm = new FormGroup({
     // checkbox
     write: new FormControl(false),
     read: new FormControl(false),
     delete: new FormControl(false)
-  })
+  });
 
   constructor(private userService: UserService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.getAllRoles()
+    this.getAllRoles();
   }
 
   getAllRoles() {
@@ -41,20 +41,20 @@ export class AdminRoleConfigurationComponent implements OnInit {
         this.allRoles = data;
       },
       error => {
-        alert("getAllRoles error")
+        alert('getAllRoles error');
       }
-    )
+    );
   }
 
   deleteRole(role) {
     this.userService.deleteRole(role.name).subscribe(
       data => {
-        alert(data.message)
+        alert(data.message);
       },
       error => {
-        alert(error.message)
+        alert(error.message);
       }
-    )
+    );
   }
 
   newRole(content) {
@@ -65,27 +65,27 @@ export class AdminRoleConfigurationComponent implements OnInit {
   }
 
   createNewRole() {
-    let roleName = this.newRoleForm.get('roleName').value
+    const roleName = this.newRoleForm.get('roleName').value;
     this.userService.createRole(roleName).subscribe(
       data => {
         alert(data.message)
-        this.modalService.dismissAll()
+        this.modalService.dismissAll();
       },
       error => {
-        alert(error.message)
+        alert(error.message);
       }
-    )
+    );
   }
 
   updateRole(content, role) {
 
-    for (let p of role.privileges) {
-      if (p == PrivilegeEnum.write) {
-        this.updateRoleForm.get('write').setValue(true)
-      } else if (p == PrivilegeEnum.read) {
-        this.updateRoleForm.get('read').setValue(true)
-      } else if (p == PrivilegeEnum.delete) {
-        this.updateRoleForm.get('delete').setValue(true)
+    for (const p of role.privileges) {
+      if (p === PrivilegeEnum.write) {
+        this.updateRoleForm.get('write').setValue(true);
+      } else if (p === PrivilegeEnum.read) {
+        this.updateRoleForm.get('read').setValue(true);
+      } else if (p === PrivilegeEnum.delete) {
+        this.updateRoleForm.get('delete').setValue(true);
       }
     }
 
@@ -94,31 +94,31 @@ export class AdminRoleConfigurationComponent implements OnInit {
       centered: true
     });
 
-    this.roleToUpdate = role.name
+    this.roleToUpdate = role.name;
   }
 
   saveRoleChanges() {
-    let currentPrivileges = new Array<PrivilegeEnum>()
+    const currentPrivileges = new Array<PrivilegeEnum>();
 
     if (this.updateRoleForm.get('write').value) {
-      currentPrivileges.push(PrivilegeEnum.write)
+      currentPrivileges.push(PrivilegeEnum.write);
     }
 
     if (this.updateRoleForm.get('read').value) {
-      currentPrivileges.push(PrivilegeEnum.read)
+      currentPrivileges.push(PrivilegeEnum.read);
     }
 
     if (this.updateRoleForm.get('delete').value) {
-      currentPrivileges.push(PrivilegeEnum.delete)
+      currentPrivileges.push(PrivilegeEnum.delete);
     }
 
     this.userService.updateRole(currentPrivileges, this.roleToUpdate).subscribe(
       data => {
-        alert(data.message)
-        this.modalService.dismissAll()
+        alert(data.message);
+        this.modalService.dismissAll();
       },
       error => {
-        alert(error.message)
+        alert(error.message);
       }
     )
   }

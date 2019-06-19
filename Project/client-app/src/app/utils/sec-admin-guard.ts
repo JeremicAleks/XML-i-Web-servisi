@@ -5,13 +5,13 @@ import { UserLoginDTO } from '../models/user-login-dto';
 
 @Injectable({ providedIn: 'root' })
 export class SecAdminGuard implements CanActivate {
-  private sessionUser:UserLoginDTO
+  private sessionUser: UserLoginDTO;
 
     constructor(private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         this.sessionUser = JSON.parse(localStorage.getItem('sessionUser'));
-        if (this.sessionUser !=null && this.sessionUser.role=="SECADMIN") {
+        if (this.sessionUser != null && this.sessionUser.role === 'SECADMIN') {
             return true;
         }
 

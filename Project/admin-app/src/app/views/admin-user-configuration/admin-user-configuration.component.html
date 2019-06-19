@@ -1,0 +1,131 @@
+<h4>
+  admin-user-configuration works!
+</h4>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Username</th>
+      <th scope="col">Role</th>
+      <th scope="col">Operations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of allUsers; index as i">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{user.username}}</td>
+      <td>{{user.role}}</td>
+      <td>
+        <button type="button" class="btn btn-outline-primary"
+          (click)="openUpdateUserModal(updateUserModal, user)">Update</button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-outline-secondary" (click)="newAgent(newAgentModal, user)">Promote</button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-outline-warning" (click)="blockUser(user)">Block</button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-outline-success" (click)="activateUser(user)">Activate</button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-outline-danger" (click)="deleteUser(user)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- NEW USER MODAL-->
+<ng-template #newAgentModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Add new agent</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="newAgentForm" [formGroup]="newAgentForm">
+      <div class="container" id="newAgentForm">
+        <div class="form-group">
+          <div class="form-group row">
+            <label for="role" class="col-sm-4 col-form-label">First name</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="agentName" placeholder="FIRST NAME"
+                formControlName="agentName" disabled>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="role" class="col-sm-4 col-form-label">Last name</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="agentLastName" placeholder="LAST NAME"
+                formControlName="agentLastName" disabled>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="role" class="col-sm-4 col-form-label">Address</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="agentAddress" placeholder="ADDRESS"
+                formControlName="agentAddress"
+                [ngClass]="{'is-invalid':newAgentForm.get('agentAddress').touched && newAgentForm.get('agentAddress').invalid}"
+                required>
+              <div *ngIf="newAgentForm.get('agentAddress').touched && newAgentForm.get('agentAddress').invalid"
+                class="invalid-feedback">
+                <div>Agent address is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="role" class="col-sm-4 col-form-label">Business number</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="agentBusinessRegNumber"
+                placeholder="BUSINESS REGISTRATION NUMBER" formControlName="agentBusinessRegNumber"
+                [ngClass]="{'is-invalid':newAgentForm.get('agentBusinessRegNumber').touched && newAgentForm.get('agentBusinessRegNumber').invalid}"
+                required>
+              <div
+                *ngIf="newAgentForm.get('agentBusinessRegNumber').touched && newAgentForm.get('agentBusinessRegNumber').invalid"
+                class="invalid-feedback">
+                <div>Agent business registration number is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" [disabled]="!newAgentForm.valid"
+      (click)="createNewAgent()">Confirm</button>
+  </div>
+</ng-template>
+
+<!-- UPDATE USER MODAL-->
+<ng-template #updateUserModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Update user</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="updateUserForm" [formGroup]="updateUserForm">
+      <div class="container" id="updateUserForm">
+        <div class="form-group">
+          <div class="form-group row">
+            <label for="role" class="col-sm-4 col-form-label">Role type</label>
+            <div class="col-sm-8">
+              <select class="form-control" id="role" formControlName="role">
+                <option *ngFor="let r of allRoles" value={{r.name}}>{{r.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" (click)="saveUserChanges()">Save changes</button>
+  </div>
+</ng-template>

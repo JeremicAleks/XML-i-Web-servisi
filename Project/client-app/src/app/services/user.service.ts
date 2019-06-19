@@ -15,7 +15,7 @@ export class UserService {
   getAllUsers() {
     return this.http.get<any>(environment.centralApiUrl + '/api/user/getUsers')
     .pipe(map(allUsers => {
-      return allUsers
+      return allUsers;
     }
     ));
   }
@@ -23,40 +23,40 @@ export class UserService {
   getAllRoles() {
     return this.http.get<any>(environment.centralApiUrl + '/api/role/getAllRoles')
     .pipe(map(allRoles => {
-      return allRoles
+      return allRoles;
     }
     ));
   }
 
-  updateUser(username: String, role: String) {
+  updateUser(username: string, role: string) {
     return this.http.post<any>(environment.centralApiUrl + '/api/role/changeRoleForUser',
     { username, role })
     .pipe(map(retVal => {
-      return retVal
+      return retVal;
     }
     ));
   }
 
-  deleteRole(role: String) {
+  deleteRole(role: string) {
     return this.http.post<any>(environment.centralApiUrl + '/api/role/deleteRole', { role } )
     .pipe(map(retVal => {
-      return retVal
+      return retVal;
     }
     ));
   }
 
-  createRole(role: String) {
+  createRole(role: string) {
     return this.http.post<any>(environment.centralApiUrl + '/api/role/addRole', { role } )
     .pipe(map(retVal => {
-      return retVal
+      return retVal;
     }
     ));
   }
 
-  updateRole(privileges: Array<PrivilegeEnum>, role: String) {
+  updateRole(privileges: Array<PrivilegeEnum>, role: string) {
     return this.http.post<any>(environment.centralApiUrl + '/api/role/updateRole', { privileges, role } )
     .pipe(map(retVal => {
-      return retVal
+      return retVal;
     }
     ));
   }

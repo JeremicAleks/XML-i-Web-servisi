@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import com.centralapi.domain.PrivilegeEnum;
+import com.centralapi.domain.xml.xml_ftn.users.PrivilegesEnum;
 
 public class UpdateRoleDTO {
 
@@ -12,7 +12,7 @@ public class UpdateRoleDTO {
 	private String role;
 
 	@NotNull(message = "Privileges is required!")
-	private List<PrivilegeEnum> privileges;
+	private List<PrivilegesEnum> privileges;
 	
 	public UpdateRoleDTO() {
 		// TODO Auto-generated constructor stub
@@ -26,11 +26,11 @@ public class UpdateRoleDTO {
 		this.role = role;
 	}
 
-	public List<PrivilegeEnum> getPrivileges() {
+	public List<PrivilegesEnum> getPrivileges() {
 		return privileges;
 	}
 
-	public void setPrivileges(List<PrivilegeEnum> privileges) {
+	public void setPrivileges(List<PrivilegesEnum> privileges) {
 		this.privileges = privileges;
 	}
 	

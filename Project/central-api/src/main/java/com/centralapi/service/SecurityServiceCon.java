@@ -9,7 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.centralapi.domain.Role;
+import com.centralapi.domain.xml.xml_ftn.users.Role;
 import com.centralapi.repo.RoleRepository;
 
 @Service

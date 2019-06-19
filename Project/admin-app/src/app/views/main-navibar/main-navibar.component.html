@@ -1,0 +1,243 @@
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top" style="text-transform: uppercase">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <a class="navbar-brand" style="color: white; margin-left: 30px;" routerLink="/">
+      <img src="assets\images\logo.png" width="30" height="30" class="d-inline-block align-top" alt="Logo picture"
+        style="border-radius: 50%">
+    </a>
+
+    <ul class="navbar-nav mr-auto">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav" style="vertical-align: bottom">
+          <a class="nav-item nav-link active" id="nav-link" style="color: white" routerLink="admin/config/user">
+            <i class="material-icons">code</i>
+            user config
+          </a>
+          <a class="nav-item nav-link" id="nav-link" style="color: white" routerLink="admin/config/role">
+            <i class="material-icons">settings</i>
+            role config
+          </a>
+          <a class="nav-item nav-link" id="nav-link" style="color: white" routerLink="" (click)="logOut()">
+            <i class="material-icons">power_settings_new</i>
+            log out
+          </a>
+        </div>
+      </div>
+    </ul>
+    <!-- login part-->
+    <ul class="navbar-nav mr-right" style="margin-right: 20px">
+      <!-- if there is nobody logged in -->
+      <li *ngIf="!isLogin" class="nav-item">
+        <a class="nav-link" style="color: white" (click)="openSignInModal(signIn)">
+          <i class="material-icons">supervised_user_circle</i>
+          sign in
+        </a>
+      </li>
+      <!-- if user is logged in -->
+     <li *ngIf="isLogin" class="nav-item dropdown">
+        <a class="nav-link" style="color: white" dropdown-toggle data-toggle="dropdown" role="button"
+          aria-haspopup="true" aria-expanded="false" href="#">
+          <i class="material-icons">person</i>
+          {{userLoginDTO.username}}
+        </a>
+        <div class="dropdown-menu bg-dark dropdown-menu-right">
+          <a class="dropdown-item" style="color: white;" routerLink="/">Adminpanel</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" style="color: white;" routerLink="/">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- SIGN IN MODAL-->
+<ng-template #signIn let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Sign In</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="loginForm" [formGroup]="loginForm">
+      <div class="imgcontainer">
+        <img src="assets\images\logo.png" alt="Logo picture" style="border-radius: 50%">
+      </div>
+      <div class="container" id="login-form">
+        <div class="form-group">
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="material-icons">account_circle</i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="USERNAME" id="username-value"
+              formControlName="username"
+              [ngClass]="{'is-invalid':loginForm.get('username').touched && loginForm.get('username').invalid}"
+              required>
+            <div *ngIf="loginForm.get('username').touched && loginForm.get('username').invalid"
+              class="invalid-feedback">
+              <div *ngIf="loginForm.get('username').errors.required">Username is required</div>
+              <div *ngIf="loginForm.get('username').errors.usernameError">{{errorMessage}}</div>
+            </div>
+          </div>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="material-icons">visibility_off</i></span>
+            </div>
+            <input type="password" class="form-control" placeholder="PASSWORD" id="password-value"
+              formControlName="password"
+              [ngClass]="{'is-invalid' : loginForm.get('password').touched && loginForm.get('password').invalid}"
+              required />
+            <div *ngIf="loginForm.get('password').touched && loginForm.get('password').invalid"
+              class="invalid-feedback">
+              <div *ngIf="loginForm.get('password').errors.required">Password is required</div>
+              <div *ngIf="loginForm.get('password').errors.minlength">Password must be at least 4 character long</div>
+              <div *ngIf="loginForm.get('password').errors.passwordError">{{errorMessage}}</div>
+            </div>
+          </div>
+          <span class="psw"><a (click)="openRegistrationModal(registration)">Don't have account? Register
+              now!</a></span>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" [disabled]="!loginForm.valid" (click)="onSignIn()">Sign In</button>
+  </div>
+</ng-template>
+
+<!-- REGISTER MODAL-->
+<ng-template #registration let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Registration</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="registerForm" [formGroup]="registerForm">
+      <div class="imgcontainer">
+        <img src="assets\images\logo.png" alt="Logo picture" style="border-radius: 50%">
+      </div>
+      <div class="container" id="registration-form">
+        <div class="form-group">
+          <!------------------FORM FIELDS---------------------->
+          <div class="form-row">
+            <div class="col-md-6">
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="material-icons">account_circle</i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="FIRST NAME" id="first-name-value"
+                  formControlName="firstName"
+                  [ngClass]="{'is-invalid':registerForm.get('firstName').touched && registerForm.get('firstName').invalid}"
+                  required>
+                <div *ngIf="registerForm.get('firstName').touched && registerForm.get('firstName').invalid"
+                  class="invalid-feedback">
+                  <div *ngIf="registerForm.get('firstName').errors.required">First name is required</div>
+                  <div *ngIf="registerForm.get('firstName').errors.firstNameError">{{errorMessage}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="material-icons">account_circle</i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="LAST NAME" id="last-name-value"
+                  formControlName="lastName"
+                  [ngClass]="{'is-invalid':registerForm.get('lastName').touched && registerForm.get('lastName').invalid}"
+                  required>
+                <div *ngIf="registerForm.get('lastName').touched && registerForm.get('lastName').invalid"
+                  class="invalid-feedback">
+                  <div *ngIf="registerForm.get('lastName').errors.required">Last name is required</div>
+                  <div *ngIf="registerForm.get('lastName').errors.lastNameError">{{errorMessage}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6">
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="material-icons">email</i></span>
+                </div>
+                <input type="email" class="form-control" placeholder="EMAIL" id="email-value" formControlName="email"
+                  [ngClass]="{'is-invalid':registerForm.get('email').touched && registerForm.get('email').invalid}"
+                  required>
+                <div *ngIf="registerForm.get('email').invalid" class="invalid-feedback">
+                  <div *ngIf="registerForm.get('email').touched && registerForm.get('email').errors.required">Email is
+                    required</div>
+                  <div *ngIf="registerForm.get('email').errors.email">Email must be a valid email address</div>
+                  <div *ngIf="registerForm.get('email').errors.emailError">{{errorMessage}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="material-icons">account_circle</i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="USERNAME" id="registrationUsername"
+                  formControlName="registrationUsername"
+                  [ngClass]="{'is-invalid':registerForm.get('registrationUsername').touched && 
+                  registerForm.get('registrationUsername').invalid}" required>
+                <div *ngIf="registerForm.get('registrationUsername').touched && registerForm.get('registrationUsername').invalid"
+                  class="invalid-feedback">
+                  <div *ngIf="registerForm.get('registrationUsername').errors.required">Username is required</div>
+                  <div *ngIf="registerForm.get('registrationUsername').errors.registrationUsernameError">{{errorMessage}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6">
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="material-icons">visibility_off</i></span>
+                </div>
+                <input type="password" class="form-control" placeholder="PASSWORD" id="registrationPassword"
+                  formControlName="registrationPassword"
+                  [ngClass]="{'is-invalid':registerForm.get('registrationPassword').touched && 
+                  registerForm.get('registrationPassword').invalid}" required>
+                <div *ngIf="registerForm.get('registrationPassword').touched && registerForm.get('registrationPassword').invalid"
+                  class="invalid-feedback">
+                  <div *ngIf="registerForm.get('registrationPassword').errors.required">Password is required</div>
+                  <div *ngIf="registerForm.get('registrationPassword').errors.minlength">Password must be at least 4 character long
+                  </div>
+                  <div *ngIf="registerForm.get('registrationPassword').errors.registrationPasswordError">{{errorMessage}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="material-icons">visibility_off</i></span>
+                </div>
+                <input type="password" class="form-control" placeholder="CONFIRM PASSWORD" id="confirm-password-value"
+                  formControlName="confirmPassword"
+                  [ngClass]="{'is-invalid':registerForm.get('confirmPassword').touched && 
+                  registerForm.get('confirmPassword').invalid}">
+                <div *ngIf="registerForm.get('confirmPassword').touched && registerForm.get('confirmPassword').invalid"
+                  class="invalid-feedback">
+                  <div *ngIf="registerForm.get('confirmPassword').errors.required">Confirm password is required</div>
+                  <div *ngIf="registerForm.get('confirmPassword').errors.matchOther &&
+                     !registerForm.get('confirmPassword').errors.required">
+                    Passwords don't match
+                  </div>
+                  <div *ngIf="registerForm.get('confirmPassword').errors.confirmPasswordError">{{errorMessage}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!------------------FORM FIELDS---------------------->
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" [disabled]="!registerForm.valid" (click)="onRegistration()">Register</button>
+  </div>
+</ng-template>

@@ -3,7 +3,7 @@ package com.centralapi.repo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.centralapi.domain.Role;
+import com.centralapi.domain.xml.xml_ftn.users.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
 	

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,6 +21,6 @@ public class ReservationService {
 
     public Reservation save(Reservation flightReservation){ return  reservationRepository.save(flightReservation);}
 
-    public List<Reservation> findBetween(XMLGregorianCalendar checkIn,XMLGregorianCalendar checkOut){return reservationRepository.findByCheckInBetween(checkIn,checkOut);}
+    public List<Reservation> findBetween(Date checkIn, Date checkOut){return reservationRepository.findByCheckInBetween(checkIn,checkOut);}
 
 }

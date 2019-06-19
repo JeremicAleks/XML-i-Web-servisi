@@ -1,7 +1,7 @@
-import { UserLoginDto } from './user-login-dto';
+import { UserLoginDTO } from './user-login-dto';
 
 describe('UserLoginDto', () => {
   it('should create an instance', () => {
-    expect(new UserLoginDto()).toBeTruthy();
+    expect(new UserLoginDTO()).toBeTruthy();
   });
 });

@@ -12,10 +12,10 @@ import { Role } from 'src/app/models/role';
 })
 export class AdminUserConfigurationComponent implements OnInit {
 
-  allUsers: Array<UserLoginDTO>
-  allRoles: Array<Role>
+  allUsers: Array<UserLoginDTO>;
+  allRoles: Array<Role>;
 
-  userToUpdate: String
+  userToUpdate: string;
 
   updateUserForm = new FormGroup({
     role: new FormControl('')
@@ -24,33 +24,33 @@ export class AdminUserConfigurationComponent implements OnInit {
   constructor(private userService: UserService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.getAllUsers()
-    this.getAllRoles()
+    this.getAllUsers();
+    this.getAllRoles();
   }
 
   saveUserChanges() {
 
     this.userService.updateUser(this.userToUpdate, this.UserRole.value).subscribe(
       data => {
-        alert(data.message)
-        this.modalService.dismissAll()
+        alert(data.message);
+        this.modalService.dismissAll();
         this.getAllUsers();
       },
       error => {
-        alert(error.message)
+        alert(error.message);
       }
     )
 
   }
 
   openUpdateUserModal(updateUserModal, user) {
-    this.userToUpdate = user.username
+    this.userToUpdate = user.username;
     this.modalService.open(updateUserModal, {
       windowClass: 'dark-modal',
       centered: true
     });
 
-    this.updateUserForm.get('role').setValue(user.role)
+    this.updateUserForm.get('role').setValue(user.role);
   }
 
   getAllUsers() {
@@ -59,7 +59,7 @@ export class AdminUserConfigurationComponent implements OnInit {
         this.allUsers = data;
       },
       error => {
-        alert("getAllUsers error")
+        alert('getAllUsers error');
       }
     )
   }
@@ -70,12 +70,12 @@ export class AdminUserConfigurationComponent implements OnInit {
         this.allRoles = data;
       },
       error => {
-        alert("getAllRoles error")
+        alert('getAllRoles erro');
       }
     )
   }
 
   // Geteri 
-  get UserRole() { return this.updateUserForm.get('role') }
+  get UserRole() { return this.updateUserForm.get('role'); }
 
 }

@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.centralapi.domain.SecurityUserFactory;
-import com.centralapi.domain.User;
-import com.centralapi.repo.UserDomRepository;
+import com.centralapi.domain.xml.xml_ftn.users.User;
+import com.centralapi.repo.UserRepository;
 
 @Service
 @Primary
@@ -18,7 +18,7 @@ public class UserDetailsServiceCon implements UserDetailsService {
 
 	@Autowired
 
-	private UserDomRepository userRepository;
+	private UserRepository userRepository;
 
 
 	@Override

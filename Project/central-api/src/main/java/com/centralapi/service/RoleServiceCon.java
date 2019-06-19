@@ -5,13 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.centralapi.domain.PrivilegeEnum;
-import com.centralapi.domain.Role;
-import com.centralapi.domain.User;
+import com.centralapi.domain.xml.xml_ftn.users.PrivilegesEnum;
+import com.centralapi.domain.xml.xml_ftn.users.Role;
+import com.centralapi.domain.xml.xml_ftn.users.User;
 import com.centralapi.exception.GlobalException;
 import com.centralapi.exception.ResponseMessage;
 import com.centralapi.repo.RoleRepository;
-import com.centralapi.repo.UserDomRepository;
+import com.centralapi.repo.UserRepository;
 
 @Service
 public class RoleServiceCon implements RoleService {
@@ -20,7 +20,7 @@ public class RoleServiceCon implements RoleService {
 	RoleRepository roleRepo;
 
 	@Autowired
-	UserDomRepository userRepo;
+    UserRepository userRepo;
 
 	@Override
 	public ResponseMessage addRole(String role) {
@@ -56,7 +56,7 @@ public class RoleServiceCon implements RoleService {
 	}
 
 	@Override
-	public ResponseMessage updateRole(String role, List<PrivilegeEnum> privileges) {
+	public ResponseMessage updateRole(String role, List<PrivilegesEnum> privileges) {
 
 		Role ro = roleRepo.findByName(role);
 		if ( ro == null) {
