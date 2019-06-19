@@ -99,7 +99,7 @@ public class Room {
     
     protected int numberOfBeds;
     @XmlElement(name = "Location", namespace = "http://www.xml-ftn.xml.domain.centralapi.com/Location", required = true)
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
     protected Location location;
     @XmlElement(required = true)
     @Enumerated

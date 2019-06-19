@@ -21,6 +21,14 @@ export class RoomServiceService {
     ))
   }
 
+  getRooms() {
+    //Content-Type multipart/form-data
+    return this.http.get<any>(environment.agentApiUrl + '/api/room/all').pipe(map(rooms => {
+      return rooms;
+    }
+    ))
+  }
+
   
   addFiles(room:FormData) {
     // 

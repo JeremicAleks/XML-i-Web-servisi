@@ -3,6 +3,8 @@ package com.agentapi.controller;
 import java.io.IOException;
 import java.util.Collection;
 
+import javax.ws.rs.QueryParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +25,8 @@ import org.springframework.ws.client.core.WebServiceTemplate;
 
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.GetMessages;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.GetReservations;
+import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
+import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.ReservationDTO;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.AddRoomDTO;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.GetRooms;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.Image;
@@ -95,11 +99,28 @@ public class AgentController {
 		
     }
 
-    @PostMapping(value = "/reserveRoom/{idRoom}")
-    public ResponseEntity<?> reserveRoom(){
+    @PostMapping(value = "/reserveRoom/")
+    public ResponseEntity<?> reserveRoom(@RequestBody Reservation reservation, @QueryParam(value = "idRoom") Long idRoom){
     	if(SecurityContextHolder.getContext().getAuthentication() == null) 
     		new ResponseEntity<>("Please Login!", HttpStatus.UNAUTHORIZED);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    	
+    	System.out.println("fsafas");
+    	System.out.println(idRoom);
+    	Room room = roomRepo.getOne(idRoom);
+    	room.getReservation().add(reservation);
+    	
+    	roomRepo.saveAndFlush(room);
+    	//treba i korisniku upisati na glavnom frontu
+    	
+        return new ResponseEntity<>("Suceessfully reserved room!", HttpStatus.OK);
+    }
+    
+    @GetMapping(value = "/room/all",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllRooms(){
+    	if(SecurityContextHolder.getContext().getAuthentication() == null) 
+    		new ResponseEntity<>("Please Login!", HttpStatus.UNAUTHORIZED);
+    	
+        return new ResponseEntity<>(roomRepo.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = "message/all",produces = MediaType.APPLICATION_JSON_VALUE)
@@ -115,6 +136,7 @@ public class AgentController {
     		new ResponseEntity<>("Please Login!", HttpStatus.UNAUTHORIZED);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
+    
 
     @PostMapping(value = "/reservation/{id}")
     public ResponseEntity<?> confirmReservation(){

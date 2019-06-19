@@ -244,8 +244,7 @@
                       <select class="form-control" id="selectRoom" placeholder="Room type" formControlName="selectRoom"
                         [ngClass]="{'is-invalid':addRoomRes.get('selectRoom').touched && addRoomRes.get('selectRoom').invalid}"
                         required>
-                        <option>ROOM1</option>
-                        <option>ROOM2</option>
+                        <option *ngFor="let room of rooms;index as i" [ngValue] = "room">location: {{room.location.name}},beds: {{room.numberOfBeds}}, type: {{room.type}}</option>
                       </select>
                       <div *ngIf="addRoomRes.get('selectRoom').touched && addRoomRes.get('selectRoom').invalid"
                         class="invalid-feedback">

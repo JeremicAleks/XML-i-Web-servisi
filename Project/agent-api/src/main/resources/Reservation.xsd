@@ -11,7 +11,9 @@
                 <xsd:element name="checkOut" type="xsd:date"/>
                 <xsd:element name="id" type="xsd:long"/>
                 <xsd:element name="state" nillable="false" type="reservations:ReservationStateEnum"/>
-                <xsd:element ref="reservations:MessageTable"/>
+                <xsd:sequence maxOccurs="unbounded">
+                    <xsd:element ref="reservations:MessageTable"/>
+                </xsd:sequence>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

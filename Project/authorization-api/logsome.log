@@ -69,3 +69,16 @@
 {date:2019-06-19 00:51:41.930, level:INFO , process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
 {date:2019-06-19 00:55:24.409, level:DEBUG, process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
 {date:2019-06-19 00:55:24.806, level:INFO , process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-19 01:04:38.337, level:DEBUG, process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-19 01:04:38.867, level:INFO , process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-19 01:37:31.516, level:DEBUG, process:http-nio-8089-exec-3, class:freemarker.cache, msg:Couldn't find template in cache for "error.ftl"("en_US", UTF-8, parsed); will try to load it.}
+{date:2019-06-19 01:37:31.537, level:DEBUG, process:http-nio-8089-exec-3, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error_en_US.ftl"): Not found}
+{date:2019-06-19 01:37:31.583, level:DEBUG, process:http-nio-8089-exec-3, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error_en.ftl"): Not found}
+{date:2019-06-19 01:37:31.585, level:DEBUG, process:http-nio-8089-exec-3, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error.ftl"): Not found}
+{date:2019-06-19 01:41:32.611, level:WARN , process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Username 'kiriyaga' doesn't exist!}
+{date:2019-06-19 01:42:14.903, level:DEBUG, process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-19 01:42:15.724, level:INFO , process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-19 03:13:46.168, level:DEBUG, process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-19 03:13:46.739, level:INFO , process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-19 03:16:54.399, level:DEBUG, process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-19 03:16:54.868, level:INFO , process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}

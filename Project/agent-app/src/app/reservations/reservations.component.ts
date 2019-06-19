@@ -11,6 +11,8 @@ import { default as _rollupMoment, Moment } from 'moment';
 import { PriceList } from '../models/price-list';
 import { RoomServiceService } from '../services/room-service.service';
 import { Room } from '../models/room';
+import { ReservationService } from '../services/reservation.service';
+import { Reservation, ReservationStateEnum } from '../models/reservation';
 const moment = _rollupMoment||_moment;
 
 export const MY_FORMATS = {
@@ -58,7 +60,7 @@ export class ReservationsComponent implements OnInit {
   });
 
   addRoomRes  = new FormGroup({
-    selectRoom: new FormControl('', Validators.required),
+    selectRoom: new FormControl(new Room, Validators.required),
     from: new FormControl('', Validators.required),
     to: new FormControl('', Validators.required),
   });
@@ -80,10 +82,11 @@ export class ReservationsComponent implements OnInit {
   images:Array<FormData>;
   user:any;
   roomString:any;
+  rooms:Array<Room>;
 
 
 
-  constructor(private modalService: NgbModal,private roomService:RoomServiceService) { 
+  constructor(private modalService: NgbModal,private roomService:RoomServiceService,private reservationService:ReservationService) { 
     this.prices = new Array<PriceList>();
     this.images = new Array<FormData>();
   }
@@ -106,6 +109,14 @@ export class ReservationsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.roomService.getRooms().subscribe(
+     data => {
+         this.rooms = data; 
+        },
+      error=>{
+        alert("Cant get rooms");
+      }
+        )
     
   }
 
@@ -122,6 +133,20 @@ export class ReservationsComponent implements OnInit {
         }
       )
     }
+}
+
+AddReservation(){
+  alert(this.addRoomRes.get("selectRoom").value.id)
+  alert(this.addRoomRes.get("from").value);
+  alert(this.addRoomRes.get("to").value);
+  var res = new Reservation(this.addRoomRes.get("from").value,this.addRoomRes.get("to").value,ReservationStateEnum.ALLOWED);
+
+  this.reservationService.addReservation(res,this.addRoomRes.get("selectRoom").value).subscribe(
+    data=>{
+      alert("hektoooorr")
+    }
+  )
+
 }
 
 AddRoom() {
