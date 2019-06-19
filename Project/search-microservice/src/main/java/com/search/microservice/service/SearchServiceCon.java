@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.search.microservice.domain.GetRooms;
 import com.search.microservice.domain.Location;
+import com.search.microservice.domain.Reservation;
 import com.search.microservice.domain.Room;
 import com.search.microservice.domain.dto.SearchParamsDTO;
 import com.search.microservice.repository.LocationRepository;
@@ -32,19 +33,24 @@ public class SearchServiceCon implements SearchService {
 
 		SimpleDateFormat x = new SimpleDateFormat("yyyy.MM.dd.");
 
-		Date date1 = new Date();
-		System.out.println("Date1: " + x.format(date1));
+		Date date1 = spDTO.getCheckIn();
+		System.out.println("CheckIn: " + x.format(date1));
 		Calendar cal1 = Calendar.getInstance();
 		cal1.setTime(date1);
 
-		Date date2 = new Date();
-		System.out.println("Date2: " + x.format(date2));
+		Date date2 = spDTO.getCheckOut();
+		System.out.println("CheckOut: " + x.format(date2));
 		Calendar cal2 = Calendar.getInstance();
 		cal2.setTime(date2);
 
 		if (spDTO.getDestination().isEmpty() || spDTO.getNumOfPeople() == 0) {
 			System.out.println("nije unesena destinacija ili broj ljudi u pretrazi");
 			System.out.println("ne znam sta treba da vratim");
+			return null;
+		}
+		
+		if (cal2.before(cal1) || areDatesEqual(date1, date2)) {
+			System.out.println("CheckOut je pre CheckIn-a ili su isti datumi");
 			return null;
 		}
 
@@ -55,7 +61,9 @@ public class SearchServiceCon implements SearchService {
 			} else {
 				if (!isInDestinationRange(spDTO.getDestination(), r.getLocation(), spDTO.getDistanceFromDestionation()))
 					continue;
-
+				
+				if (!isFreeInSelectedTime(spDTO.getCheckIn(), spDTO.getCheckOut(), r.getReservation()))
+					continue;
 			}
 			
 			searchResults.add(r);
@@ -66,10 +74,110 @@ public class SearchServiceCon implements SearchService {
 
 		return foundRooms;
 	}
+	
+	public boolean isFreeInSelectedTime(Date checkIn, Date checkOut, List<Reservation> roomReservations) {
+		boolean ret = true;
+		System.out.println("isFreeInSelectedTime");
+		
+		for (Reservation r : roomReservations) {
+			if (!isDate1AfterDate2(checkIn, r.getCheckOut()))
+				return false;
+			
+			if (!isDate1BeforeDate2(checkOut, r.getCheckIn()))
+				return false;
+		}
+	
+		return ret;
+	}
+	
+	public boolean isDate1AfterDate2(Date date1, Date date2) {
+		boolean ret = true;
+		System.out.println("isDate1AfterDate2");
+		
+		SimpleDateFormat x = new SimpleDateFormat("yyyy.MM.dd.");
+		String date1String[] = x.format(date1).split(".");
+		String date2String[] = x.format(date2).split(".");
+		
+		int date1year = Integer.parseInt(date1String[0]);
+		int date2year = Integer.parseInt(date2String[0]);
+		
+		if (date1year <= date2year)
+			return false;
+		
+		int date1month = Integer.parseInt(date1String[1]);
+		int date2month = Integer.parseInt(date2String[1]);
+		
+		if (date1month <= date2month)
+			return false;
+		
+		int date1day = Integer.parseInt(date1String[2]);
+		int date2day = Integer.parseInt(date2String[2]);
+		
+		if (date1day <= date2day)
+			return false;
+		
+		return ret;
+	}
+	
+	public boolean isDate1BeforeDate2(Date date1, Date date2) {
+		boolean ret = true;
+		System.out.println("isDate1BeforeDate2");
+		SimpleDateFormat x = new SimpleDateFormat("yyyy.MM.dd.");
+		String date1String[] = x.format(date1).split(".");
+		String date2String[] = x.format(date2).split(".");
+		
+		int date1year = Integer.parseInt(date1String[0]);
+		int date2year = Integer.parseInt(date2String[0]);
+		
+		if (date1year >= date2year)
+			return false;
+		
+		int date1month = Integer.parseInt(date1String[1]);
+		int date2month = Integer.parseInt(date2String[1]);
+		
+		if (date1month >= date2month)
+			return false;
+		
+		int date1day = Integer.parseInt(date1String[2]);
+		int date2day = Integer.parseInt(date2String[2]);
+		
+		if (date1day >= date2day)
+			return false;
+		
+		return ret;
+	}
+	
+	public boolean areDatesEqual(Date date1, Date date2) {
+		boolean ret = true;
+		System.out.println("areDatesEqual");
+		SimpleDateFormat x = new SimpleDateFormat("yyyy.MM.dd.");
+		String date1String[] = x.format(date1).split(".");
+		String date2String[] = x.format(date2).split(".");
+		
+		int date1year = Integer.parseInt(date1String[0]);
+		int date2year = Integer.parseInt(date2String[0]);
+		
+		if (date1year != date2year)
+			return false;
+		
+		int date1month = Integer.parseInt(date1String[1]);
+		int date2month = Integer.parseInt(date2String[1]);
+		
+		if (date1month != date2month)
+			return false;
+		
+		int date1day = Integer.parseInt(date1String[2]);
+		int date2day = Integer.parseInt(date2String[2]);
+		
+		if (date1day != date2day)
+			return false;
+		
+		return ret;
+	}
 
 	public boolean isInDestinationRange(String destinationName, Location roomLocation, double range) {
 		boolean ret = false;
-
+		System.out.println("isInDestinationRange");
 		/*
 		 * List<Location> foundLocations =
 		 * locationRepository.findByName(destinationName);
@@ -84,12 +192,13 @@ public class SearchServiceCon implements SearchService {
 				break;
 			}
 		}
-
+		
+		System.out.println("ret: " + ret);
 		return ret;
 	}
 
 	public static double distance(double lat1, double lon1, double lat2, double lon2) {
-
+		System.out.println("distance");
 		final int R = 6371; // Radius of the earth
 
 		double latDistance = Math.toRadians(lat2 - lat1);
@@ -98,7 +207,8 @@ public class SearchServiceCon implements SearchService {
 				* Math.cos(Math.toRadians(lat2)) * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 		double distance = R * c;
-
+		
+		System.out.println("distance: " + distance);
 		return distance;
 	}
 
