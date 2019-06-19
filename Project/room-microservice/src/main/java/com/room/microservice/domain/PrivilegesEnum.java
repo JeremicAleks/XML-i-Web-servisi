@@ -13,34 +13,34 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ReservationStateEnum.
+ * <p>Java class for PrivilegesEnum.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <pre>
- * &lt;simpleType name="ReservationStateEnum">
+ * &lt;simpleType name="PrivilegesEnum">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="ALLOWED"/>
- *     &lt;enumeration value="NOTALLOWED"/>
- *     &lt;enumeration value="PENDING"/>
+ *     &lt;enumeration value="WRITE_PRODUCT"/>
+ *     &lt;enumeration value="READ_PRODUCT"/>
+ *     &lt;enumeration value="DELETE_PRODUCT"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
  * 
  */
-@XmlType(name = "ReservationStateEnum")
+@XmlType(name = "PrivilegesEnum")
 @XmlEnum
-public enum ReservationStateEnum {
+public enum PrivilegesEnum {
 
-    ALLOWED,
-    NOTALLOWED,
-    PENDING;
+    WRITE_PRODUCT,
+    READ_PRODUCT,
+    DELETE_PRODUCT;
 
     public String value() {
         return name();
     }
 
-    public static ReservationStateEnum fromValue(String v) {
+    public static PrivilegesEnum fromValue(String v) {
         return valueOf(v);
     }
 
