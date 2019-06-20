@@ -2,10 +2,9 @@ package com.search.microservice.repository;
 
 import java.util.List;
 
+import com.search.microservice.domain.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import com.search.microservice.domain.Room;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
 

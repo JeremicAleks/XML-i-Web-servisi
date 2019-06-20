@@ -1,4 +1,5 @@
-
+<div>
+  <form name = "searchForm" [formGroup]="searchForm">
 <div class="img-container">
     <div class="headerSearch row">
       <div class="col-10 offset-1">
@@ -9,40 +10,42 @@
             <div class="row">
               <div class="col-md-3 paddingRightClear">
                 <span class="fa fa-book userIcon"></span>
-                <input type="text" class="form-control searchInput bookInput" aria-label="Large" placeholder="Where are you going?">
+                <input type="text" class="form-control searchInput bookInput" aria-label="Large" placeholder="Where are you going?" formControlName="destination">
               </div>
               <div class="col-md-2 paddingRightClear">
-              <form class="form-inline">
+
                 <div class="form-group">
                   <div class="input-group">
                     <input class="form-control dateInput" placeholder="Check in"
-                          ngbDatepicker #d="ngbDatepicker" aria-label="Large">
+                          ngbDatepicker #d="ngbDatepicker" aria-label="Large" formControlName="checkIn">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
                     </div>
                   </div>
                 </div>
-              </form>
+
               </div>
               <div class="col-md-2 paddingRightClear">
-                <form class="form-inline">
+
                   <div class="form-group">
                     <div class="input-group">
                       <input class="form-control dateInput" placeholder="Check out"
-                             ngbDatepicker #d2="ngbDatepicker" aria-label="Large">
+                             ngbDatepicker #d2="ngbDatepicker" aria-label="Large" formControlName="checkOut">
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
                       </div>
                     </div>
                   </div>
-                </form>
+
               </div>
               <div class="col-md-3 paddingRightClear">
+
                 <span class="fa fa-key userIcon"></span>
-                <input type="number" class="form-control searchInput"  readonly = true aria-label="Large" (click)="openSignInModal(exampleModal)" placeholder="{{brojsoba}} people">
+                  <input type="number" class="form-control searchInput"  readonly = true aria-label="Large" (click)="openSignInModal(exampleModal)" placeholder="{{brojsoba}} people">
+
               </div>
               <div class="col-md-2">
-                <button type="button" class="btn btn-search btn-lg btn-block"> Search </button>
+                <button type="button" class="btn btn-search btn-lg btn-block" (click)="search()"> Search </button>
               </div>
             </div>
           </div>
@@ -69,4 +72,5 @@
          </div>
        </div>
  </ng-template>
-
+  </form>
+</div>

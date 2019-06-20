@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   authentificationApiUrl: 'http://localhost:8089',
-  centralApiUrl: 'https://localhost:8043'
+  centralApiUrl: 'https://localhost:8043',
+  searchUrl: 'http://localhost:8084'
 };
 
 /*

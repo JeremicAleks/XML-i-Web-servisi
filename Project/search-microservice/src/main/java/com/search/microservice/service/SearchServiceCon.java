@@ -6,14 +6,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.search.microservice.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.search.microservice.domain.GetRooms;
-import com.search.microservice.domain.Location;
-import com.search.microservice.domain.Reservation;
-import com.search.microservice.domain.Room;
-import com.search.microservice.domain.RoomAdditionalService;
 import com.search.microservice.domain.dto.SearchParamsDTO;
 import com.search.microservice.repository.LocationRepository;
 import com.search.microservice.repository.RoomRepository;
@@ -66,18 +62,18 @@ public class SearchServiceCon implements SearchService {
 				if (!isFreeInSelectedTime(spDTO.getCheckIn(), spDTO.getCheckOut(), r.getReservation()))
 					continue;
 				
-				if (spDTO.getAccCategory() != null && !r.getAccCategory().equals(spDTO.getAccCategory())) {
+				if (spDTO.getAccCategory() != null && !r.getAccommodationCategory().equals(spDTO.getAccCategory())) {
 					continue;
 				}
 				
-				if (spDTO.getAccType() != null && !r.getAccType().equals(spDTO.getAccType())) {
+				if (spDTO.getAccType() != null && !r.getAccommodationType().equals(spDTO.getAccType())) {
 					continue;
 				}
 				
 				if (!spDTO.getRoomServices().isEmpty()) {
 					boolean shouldContinue = false;
 					for (RoomAdditionalService ras : spDTO.getRoomServices()) {
-						if (!r.getRoomServices().contains(ras))
+						if (!r.getRoomAdditionalService().contains(ras))
 							shouldContinue = true;
 							break;
 					}
