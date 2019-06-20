@@ -13,6 +13,12 @@ import { RoomServiceService } from '../services/room-service.service';
 import { Room } from '../models/room';
 import { ReservationService } from '../services/reservation.service';
 import { Reservation, ReservationStateEnum } from '../models/reservation';
+import { MessageTable } from '../models/message-table';
+import { SendMessageDto } from '../models/send-message-dto';
+import { AllowReservation } from '../models/allow-reservation';
+import { RoomAdditionalServices } from '../models/room-additional-services';
+import { RoomType } from '../models/room-type';
+import { RoomCategory } from '../models/room-category';
 const moment = _rollupMoment||_moment;
 
 export const MY_FORMATS = {
@@ -34,9 +40,7 @@ export const MY_FORMATS = {
   templateUrl: './reservations.component.html',
   styleUrls: ['./reservations.component.css'],
   providers: [
-    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
-    // application's root module. We provide it at the component level here, due to limitations of
-    // our example generation script.
+
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
 
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
@@ -49,12 +53,14 @@ export class ReservationsComponent implements OnInit {
   
 
   addReservation = new FormGroup({
-    locationname: new FormControl('', Validators.required),
-    locationCords: new FormControl('', Validators.required),
-    selectType: new FormControl('', Validators.required),
+    locationname: new FormControl('',Validators.required),
+    locationLat: new FormControl(new Number, Validators.required),
+    locationLng: new FormControl(new Number, Validators.required),
+    selectType: new FormControl(new RoomType, Validators.required),
+    selectCategory: new FormControl(new RoomCategory, Validators.required),
     roomDescription: new FormControl('', Validators.required),
-    numberOfPersons: new FormControl('', Validators.required),
-    roomAdditionalServices: new FormControl(new Array<String>(), Validators.required),
+    numberOfPersons: new FormControl(new Number, Validators.required),
+    roomAdditionalServices: new FormControl(new Array<RoomAdditionalServices>(), Validators.required),
     roomCancel: new FormControl(new Number, Validators.required),
     imageUpload:new FormControl(null, Validators.required),
   });
@@ -83,8 +89,11 @@ export class ReservationsComponent implements OnInit {
   user:any;
   roomString:any;
   rooms:Array<Room>;
-
-
+  messages:Array<any>;
+  reservations:Array<any>;
+  types:Array<RoomType>
+  categories:Array<RoomCategory>
+  addServices:Array<RoomAdditionalServices>
 
   constructor(private modalService: NgbModal,private roomService:RoomServiceService,private reservationService:ReservationService) { 
     this.prices = new Array<PriceList>();
@@ -104,9 +113,20 @@ export class ReservationsComponent implements OnInit {
   }
 
   SendMessage(){
+     var m = new MessageTable();
+     m.messageString = this.sendMessage.get("message").value;
+     m.toUser = this.user.messageTable.fromUser;
+    var smd = new SendMessageDto(this.user.roomId,this.user.resId,m);
+
+    this.reservationService.sendMessage(smd).subscribe(
+      data=>{
+        alert("Uspesno!")
+      }
+    )
 
 
   }
+  
 
   ngOnInit() {
     this.roomService.getRooms().subscribe(
@@ -117,6 +137,37 @@ export class ReservationsComponent implements OnInit {
         alert("Cant get rooms");
       }
         )
+        this.reservationService.getMessages().subscribe(
+          data => {
+              this.messages = data; 
+             },
+           error=>{
+             alert("Cant get messages");
+           }
+             )
+             this.reservationService.getReservations().subscribe(
+              data => {
+                  this.reservations = data; 
+                 },
+               error=>{
+                 alert("Cant get reservations");
+               }
+                 )
+              this.roomService.getCategories().subscribe(
+                data=>{
+                    this.categories = data
+                }
+              )
+              this.roomService.getTypes().subscribe(
+                data=>{
+                    this.types = data
+                }
+              )
+              this.roomService.getAdditionalServices().subscribe(
+                data=>{
+                    this.addServices = data
+                }
+              )
     
   }
 
@@ -141,7 +192,10 @@ AddReservation(){
   alert(this.addRoomRes.get("to").value);
   var res = new Reservation(this.addRoomRes.get("from").value,this.addRoomRes.get("to").value,ReservationStateEnum.ALLOWED);
 
-  this.reservationService.addReservation(res,this.addRoomRes.get("selectRoom").value).subscribe(
+  alert(res.checkIn);
+
+
+  this.reservationService.addReservation(res,this.addRoomRes.get("selectRoom").value.id).subscribe(
     data=>{
       alert("hektoooorr")
     }
@@ -154,11 +208,12 @@ AddRoom() {
   
 
   var room = new Room();
-  room.additionalServices = this.addReservation.get("roomAdditionalServices").value;
-  room.location = new Location(this.addReservation.get("locationCords").value,this.addReservation.get("locationCords").value,this.addReservation.get("locationname").value)
+  room.roomAdditionalService = this.addReservation.get("roomAdditionalServices").value;
+  room.accommodationCategory = room.accommodationType = this.addReservation.get("selectCategory").value
+  room.location = new Location(this.addReservation.get("locationLat").value,this.addReservation.get("locationLng").value,this.addReservation.get("locationname").value)
   room.numberOfBeds=this.addReservation.get("numberOfPersons").value;
   room.priceList = this.prices;
-  room.type = this.addReservation.get("selectType").value
+  room.accommodationType = this.addReservation.get("selectType").value
   room.description = this.addReservation.get("roomDescription").value;
   room.daysForCancel = this.addReservation.get("roomCancel").value;
   room.image = new Array<string>();
@@ -189,12 +244,30 @@ AddPrice(){
 
 }
 
+Allow(p){
+  var allow = new AllowReservation(p.reservation.id,ReservationStateEnum.ALLOWED);
+  this.reservationService.allowReservation(allow).subscribe(
+    data=>{
+      this.reservations =data;
+    }
+  )
+}
+Deny(p){
+  var allow = new AllowReservation(p.reservation.id,ReservationStateEnum.NOTALLOWED);
+  this.reservationService.allowReservation(allow).subscribe(
+    data=>{
+      this.reservations =data;
+    }
+  )
+
+}
+
 RemovePrice(i:any){
   
   var priceTemp = new Array<PriceList>();
 
   for (let index = 0; index < this.prices.length; index++) {
-    alert(this.prices[index].date)
+    alert(this.prices[index].month)
    if(index != i){
       priceTemp.push(this.prices[index]);
     }

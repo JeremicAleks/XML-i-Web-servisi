@@ -6,32 +6,45 @@
         <form [formGroup]="addReservation" id="addReservation" enctype="multipart/form-data">
           <h4>Location:</h4>
           <div class="form-group row">
-            <label for="locationname" class="col-sm-4 col-form-label">Name:</label>
+            <label for="locationname" class="col-sm-4 col-form-label">Place:</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" id="locationname" placeholder="Location name"
+              <input type="text" class="form-control" id="locationname" placeholder="Location place"
                 formControlName="locationname"
                 [ngClass]="{'is-invalid':addReservation.get('locationname').touched && addReservation.get('locationname').invalid}"
                 required>
               <div *ngIf="addReservation.get('locationname').touched && addReservation.get('locationname').invalid"
                 class="invalid-feedback">
-                <div>Location name is required</div>
+                <div>Location place is required</div>
               </div>
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="locationCords" class="col-sm-4 col-form-label">Cordinates:</label>
+            <label for="locationLat" class="col-sm-4 col-form-label">Latidue:</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" id="locationCords" placeholder="Location coordinates"
-                formControlName="locationCords"
-                [ngClass]="{'is-invalid':addReservation.get('locationCords').touched && addReservation.get('locationCords').invalid}"
+              <input type="text" class="form-control" id="locationLat" placeholder="Location coordinates"
+                formControlName="locationLat"
+                [ngClass]="{'is-invalid':addReservation.get('locationLat').touched && addReservation.get('locationLat').invalid}"
                 required>
-              <div *ngIf="addReservation.get('locationCords').touched && addReservation.get('locationCords').invalid"
+              <div *ngIf="addReservation.get('locationLat').touched && addReservation.get('locationLat').invalid"
                 class="invalid-feedback">
-                <div>Location name is required</div>
+                <div>Location lat is required</div>
               </div>
             </div>
           </div>
+          <div class="form-group row">
+              <label for="locationLng" class="col-sm-4 col-form-label">Longitude:</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="locationLng" placeholder="Location longitude"
+                  formControlName="locationLng"
+                  [ngClass]="{'is-invalid':addReservation.get('locationLng').touched && addReservation.get('locationLng').invalid}"
+                  required>
+                <div *ngIf="addReservation.get('locationLng').touched && addReservation.get('locationLng').invalid"
+                  class="invalid-feedback">
+                  <div>Location lng is required</div>
+                </div>
+              </div>
+            </div>
           <hr>
           <h4>Room configuration:</h4>
           <div class="form-group row">
@@ -40,16 +53,28 @@
               <select class="form-control" id="selectType" placeholder="Room type" formControlName="selectType"
                 [ngClass]="{'is-invalid':addReservation.get('selectType').touched && addReservation.get('selectType').invalid}"
                 required>
-                <option>HOTEL</option>
-                <option>BED&BREKFAST</option>
-                <option>APARTMAN</option>
+                <option *ngFor="let type of types;index as i" [ngValue] = "type">{{type.description}}</option>
               </select>
               <div *ngIf="addReservation.get('selectType').touched && addReservation.get('selectType').invalid"
                 class="invalid-feedback">
-                <div>Location name is required</div>
+                <div>Room type is required</div>
               </div>
             </div>
           </div>
+          <div class="form-group row">
+              <label for="selectCategory" class="col-sm-4 col-form-label">Select room category:</label>
+              <div class="col-sm-8">
+                <select class="form-control" id="selectCategory" placeholder="Room category" formControlName="selectCategory"
+                  [ngClass]="{'is-invalid':addReservation.get('selectCategory').touched && addReservation.get('selectCategory').invalid}"
+                  required>
+                  <option *ngFor="let cat of categories;index as i" [ngValue] = "cat">{{cat.description}}</option>
+                </select>
+                <div *ngIf="addReservation.get('selectCategory').touched && addReservation.get('selectCategory').invalid"
+                  class="invalid-feedback">
+                  <div>Category is required</div>
+                </div>
+              </div>
+            </div>
           <div class="form-group row">
             <label for="roomDescription" class="col-sm-4 col-form-label">Description:</label>
             <div class="col-sm-8">
@@ -60,7 +85,7 @@
               <div
                 *ngIf="addReservation.get('roomDescription').touched && addReservation.get('roomDescription').invalid"
                 class="invalid-feedback">
-                <div>Location name is required</div>
+                <div>Description is required</div>
               </div>
             </div>
           </div>
@@ -75,7 +100,7 @@
               <div
                 *ngIf="addReservation.get('numberOfPersons').touched && addReservation.get('numberOfPersons').invalid"
                 class="invalid-feedback">
-                <div>Location name is required</div>
+                <div>Number of persons is required</div>
               </div>
             </div>
           </div>
@@ -86,22 +111,12 @@
                 formControlName="roomAdditionalServices"
                 [ngClass]="{'is-invalid':addReservation.get('roomAdditionalServices').touched && addReservation.get('roomAdditionalServices').invalid}"
                 required>
-               <option>WIFI</option> 
-               <option>PARKING</option>
-               <option>BREAKFAST</option> 
-               <option>BEDANDBREKFAST</option> 
-               <option>BEDANDBOARD</option> 
-               <option>ALLINCLUSIVE</option> 
-               <option>PETFRIENDLY</option> 
-               <option>TV</option> 
-               <option>KITCHEN</option>
-               <option>BATHROOM</option> 
-               <option>ROOMCANCEL</option>
+                <option *ngFor="let add of addServices;index as i" [ngValue] = "cat">{{add.description}}</option>
               </select>
               <div
                 *ngIf="addReservation.get('roomAdditionalServices').touched && addReservation.get('roomAdditionalServices').invalid"
                 class="invalid-feedback">
-                <div>Location name is required</div>
+                <div>Additional services is required</div>
               </div>
             </div>
           </div>
@@ -115,7 +130,7 @@
                 required>
               <div *ngIf="addReservation.get('roomCancel').touched && addReservation.get('roomCancel').invalid"
                 class="invalid-feedback">
-                <div>Location name is required</div>
+                <div>Room cancel is required</div>
               </div>
             </div>
           </div>
@@ -135,18 +150,18 @@
                   </mat-datepicker>
                 </mat-form-field>
                 <div *ngIf="addPrice.get('date').touched && addPrice.get('date').invalid" class="invalid-feedback">
-                  <div>Location name is required</div>
+                  <div>Date is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
               <label for="price" class="col-sm-4 col-form-label">Price for this month:</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="price" placeholder="Location coordinates"
+                <input type="text" class="form-control" id="price" placeholder="Price for this month"
                   formControlName="price"
                   [ngClass]="{'is-invalid':addPrice.get('price').touched && addPrice.get('price').invalid}" required>
                 <div *ngIf="addPrice.get('price').touched && addPrice.get('price').invalid" class="invalid-feedback">
-                  <div>Location name is required</div>
+                  <div>Price is required</div>
                 </div>
               </div>
             </div>
@@ -169,7 +184,7 @@
             <tbody>
               <tr *ngFor="let p of prices;index as i">
                 <td width="80%">
-                  {{p.date}}
+                  {{p.month}}
                 </td>
                 <th>{{p.price}}</th>
                 <td class="text-center" width="10%">
@@ -192,7 +207,7 @@
                 required>
               <div *ngIf="addReservation.get('imageUpload').touched && addReservation.get('imageUpload').invalid"
                 class="invalid-feedback">
-                <div>Location name is required</div>
+                <div>Image is required</div>
               </div>
             </div>
           </div>
@@ -244,11 +259,11 @@
                       <select class="form-control" id="selectRoom" placeholder="Room type" formControlName="selectRoom"
                         [ngClass]="{'is-invalid':addRoomRes.get('selectRoom').touched && addRoomRes.get('selectRoom').invalid}"
                         required>
-                        <option *ngFor="let room of rooms;index as i" [ngValue] = "room">location: {{room.location.name}},beds: {{room.numberOfBeds}}, type: {{room.type}}</option>
+                        <option *ngFor="let room of rooms;index as i" [ngValue] = "room">location: {{room.location.name}},beds: {{room.numberOfBeds}}, type: {{room.accommodationType.description}}</option>
                       </select>
                       <div *ngIf="addRoomRes.get('selectRoom').touched && addRoomRes.get('selectRoom').invalid"
                         class="invalid-feedback">
-                        <div>Location name is required</div>
+                        <div>Room is required</div>
                       </div>
                     </div>
                   </div>
@@ -292,16 +307,20 @@
     <ng-template ngbTabContent>
      <br>
 
+     <div class="col-10">
      <table>
         <thead>
           <tr>
-            <th width="80%">
+            <th width="10%">
               User
             </th>
-            <th width="10%">
+            <th width="30%">
               Room
             </th>
-            <th>
+            <th width="20%">
+              Reservation
+            </th>
+            <th width="35%">
               Message
             </th>
             <th>
@@ -311,14 +330,17 @@
         </thead>
         <tbody>
           <tr *ngFor="let p of messages;index as i">
-            <td width="20%">
-              {{p.user}}
+              <td >
+                  {{p.messageTable.fromUser}}
+             </td>
+            <td>
+              {{p.roomType.description}},location: {{p.location.name}}
             </td>
             <td width="10%">
-              {{p.room}}
+            {{p.checkIn}} - {{p.checkOut}}
             </td>  
             <td width="60%">
-                {{p.message}}
+                {{p.messageTable.messageString}}
             </td>
             <td width="10%">
               
@@ -328,7 +350,7 @@
           </tr>
         </tbody>
       </table>
-
+</div>
                  
         
 
@@ -339,45 +361,47 @@
       <ng-template ngbTabTitle><b>Allow reservations</b></ng-template>
       <ng-template ngbTabContent>
        <br>
-  
+       <div class="col-10">
        <table>
           <thead>
             <tr>
-              <th width="80%">
-                User
-              </th>
-              <th width="10%">
+              <th width="40%">
                 Room
               </th>
-              <th>
-                Message
+              <th width="40%">
+                Reservation
               </th>
               <th>
-                 Answer
+                 Allow
               </th>
+              <th>
+                  Deny
+               </th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let p of messages;index as i">
-              <td width="20%">
-                {{p.user}}
+            <tr *ngFor="let p of reservations;index as i">
+              <td>
+                  {{p.roomType.description}},location: {{p.location.name}}
               </td>
-              <td width="10%">
-                {{p.room}}
+              <td >
+                {{p.reservation.checkIn}} - {{p.reservation.checkOut}}
               </td>  
-              <td width="60%">
-                  {{p.message}}
-              </td>
-              <td width="10%">
+              <td>
                 
-             <button type="button" class="btn btn-primary"  (click)="OpenSendMessage(sendMessageModal,p)" >Answer</button>
+             <button type="button" class="btn btn-primary"  (click)="Allow(p)" >Allow</button>
   
+              </td>
+              <td>
+                
+                  <button type="button" class="btn btn-primary"  (click)="Deny(p)" >Deny</button>
+       
               </td>
             </tr>
           </tbody>
         </table>
   
-                   
+       </div>    
           
   
       </ng-template>
@@ -397,7 +421,7 @@
         <div class="col-md-10"> 
       <form name="sendMessageModal" [formGroup]="sendMessage">
 
-       <p>Send Message to : <b>{{user}}</b></p>
+       <p>Send Message to : <b>{{user.messageTable.fromUser}}</b></p>
 
        <div class="form-group row">
           <label for="roomDescription" class="col-sm-4 col-form-label">Message:</label>

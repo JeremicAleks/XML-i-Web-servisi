@@ -48,7 +48,6 @@ export class MainNavbarComponent implements OnInit {
 
   // SIGN IN PART
   onSignIn() {
-    alert("sign in - to be tested")
 
     if (this.loginForm.invalid) {
       return;
@@ -63,6 +62,7 @@ export class MainNavbarComponent implements OnInit {
           this.isLogin = true
           this.modalService.dismissAll()
           alert("Successfull sign in!")
+          this.router.navigate(['/panel']);
         }
       },
 
@@ -170,11 +170,12 @@ export class MainNavbarComponent implements OnInit {
 
   // LOG OUT
   logOut() {
-    alert("log out clicked")
+
     this.authService.logOut().subscribe(
       data => {
         localStorage.removeItem('sessionUser')
         this.isLogin = false;
+        alert(data.message);
       },
       error => {
         console.log("log out error")

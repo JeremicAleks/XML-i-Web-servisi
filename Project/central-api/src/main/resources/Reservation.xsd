@@ -57,4 +57,12 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="AllowReservationDTO">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="reservationId" type="xsd:long"/>
+                <xsd:element maxOccurs="1" name="state" type="reservations:ReservationStateEnum"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 </xsd:schema>
