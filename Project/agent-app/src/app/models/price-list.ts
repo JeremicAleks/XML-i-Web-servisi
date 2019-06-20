@@ -1,11 +1,11 @@
 export class PriceList {
 
 public price:Number
-public date:Date
+public month:Date
 
 constructor(number,date){
 this.price=number;
-this.date=date;
+this.month=date;
 
 }
 

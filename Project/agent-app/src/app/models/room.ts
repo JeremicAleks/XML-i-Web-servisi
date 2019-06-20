@@ -1,13 +1,16 @@
 import{Location} from "./location"
 import { PriceList } from "./price-list";
+import { RoomAdditionalServices } from './room-additional-services';
+import { RoomCategory } from './room-category';
+import { RoomType } from './room-type';
 export class Room {
 
     id:number;
     numberOfBeds:number;
     location:Location;
-    type:TypeEnum;
-    category:CategoryEnum ;
-    additionalServices:Array<RoomAdditionalServiceEnum>;
+    accommodationType:RoomType;
+    accommodationCategory:RoomCategory ;
+    roomAdditionalService:Array<RoomAdditionalServices>;
     description : string;
     image:Array<string>;
     priceList:Array<PriceList>;
@@ -19,39 +22,4 @@ export class Room {
     }
 }
 
-export enum TypeEnum{
 
-    HOTEL,
-    BEDANDBREKFAST,
-    APARTMAN
-
-}
-
-export enum RoomAdditionalServiceEnum {
-
-    WIFI,
-    PARKING,
-    BREAKFAST,
-    BEDANDBREKFAST,
-    BEDANDBOARD,
-    ALLINCLUSIVE,
-    PETFRIENDLY,
-    TV,
-    KITCHEN,
-    BATHROOM,
-    ROOMCANCEL
-
-}
-
-
-export enum CategoryEnum {
-
-
-    UNCATEGORIZAED,
-    ONESTAR,
-    TWOSTAR,
-    THREESTAR,
-    FOURSTAR,
-    FIVESTAR
-
-}

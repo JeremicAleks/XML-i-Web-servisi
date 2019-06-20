@@ -33,7 +33,7 @@ export class AuthentificationService {
   }
 
   logOut() {
-    return this.http.get<any>(environment.authentificationApiUrl + '/api/revoke')
+    return this.http.get<any>(environment.agentApiUrl + '/api/logout')
     .pipe(map(message => {
       return message;
     }

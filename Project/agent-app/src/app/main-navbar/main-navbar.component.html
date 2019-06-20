@@ -10,18 +10,6 @@
     <ul class="navbar-nav mr-auto">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="navbar-nav" style="vertical-align: bottom">
-          <a class="nav-item nav-link active" id="nav-link" style="color: white" routerLink="admin/config/user">
-            <i class="material-icons">code</i>
-            user config
-          </a>
-          <a class="nav-item nav-link" id="nav-link" style="color: white" routerLink="admin/config/role">
-            <i class="material-icons">settings</i>
-            role config
-          </a>
-          <a class="nav-item nav-link" id="nav-link" style="color: white" routerLink="" (click)="logOut()">
-            <i class="material-icons">power_settings_new</i>
-            log out
-          </a>
         </div>
       </div>
     </ul>
@@ -36,16 +24,10 @@
       </li>
       <!-- if user is logged in -->
      <li *ngIf="isLogin" class="nav-item dropdown">
-        <a class="nav-link" style="color: white" dropdown-toggle data-toggle="dropdown" role="button"
-          aria-haspopup="true" aria-expanded="false" href="#">
-          <i class="material-icons">person</i>
-          {{userLoginDTO.username}}
-        </a>
-        <div class="dropdown-menu bg-dark dropdown-menu-right">
-          <a class="dropdown-item" style="color: white;" routerLink="/">Adminpanel</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" style="color: white;" routerLink="/">Logout</a>
-        </div>
+      <a class="nav-item nav-link" id="nav-link" style="color: white" routerLink="" (click)="logOut()">
+        <i class="material-icons">power_settings_new</i>
+        log out
+      </a>
       </li>
     </ul>
   </div>

@@ -145,4 +145,13 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="SendMessageDTO">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="roomId" type="xsd:long"/>
+                <xsd:element name="reservationId" type="xsd:long"/>
+                <xsd:element ref="reservation:MessageTable"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 </xsd:schema>
