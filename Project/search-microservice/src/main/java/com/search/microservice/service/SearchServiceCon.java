@@ -13,6 +13,7 @@ import com.search.microservice.domain.GetRooms;
 import com.search.microservice.domain.Location;
 import com.search.microservice.domain.Reservation;
 import com.search.microservice.domain.Room;
+import com.search.microservice.domain.RoomAdditionalService;
 import com.search.microservice.domain.dto.SearchParamsDTO;
 import com.search.microservice.repository.LocationRepository;
 import com.search.microservice.repository.RoomRepository;
@@ -64,6 +65,26 @@ public class SearchServiceCon implements SearchService {
 				
 				if (!isFreeInSelectedTime(spDTO.getCheckIn(), spDTO.getCheckOut(), r.getReservation()))
 					continue;
+				
+				if (spDTO.getAccCategory() != null && !r.getAccCategory().equals(spDTO.getAccCategory())) {
+					continue;
+				}
+				
+				if (spDTO.getAccType() != null && !r.getAccType().equals(spDTO.getAccType())) {
+					continue;
+				}
+				
+				if (!spDTO.getRoomServices().isEmpty()) {
+					boolean shouldContinue = false;
+					for (RoomAdditionalService ras : spDTO.getRoomServices()) {
+						if (!r.getRoomServices().contains(ras))
+							shouldContinue = true;
+							break;
+					}
+					
+					if (shouldContinue)
+						continue;
+				}
 			}
 			
 			searchResults.add(r);
