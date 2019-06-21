@@ -124,3 +124,13 @@
 {date:2019-06-20 04:33:56.822, level:INFO , process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
 {date:2019-06-20 04:34:36.817, level:DEBUG, process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
 {date:2019-06-20 04:34:37.273, level:INFO , process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-20 15:39:06.106, level:DEBUG, process:http-nio-8089-exec-7, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-20 15:39:06.974, level:INFO , process:http-nio-8089-exec-7, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-20 21:03:32.309, level:DEBUG, process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-20 21:03:32.824, level:INFO , process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-20 21:03:32.997, level:DEBUG, process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-20 21:03:33.514, level:INFO , process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-20 21:07:52.607, level:DEBUG, process:http-nio-8089-exec-2, class:freemarker.cache, msg:Couldn't find template in cache for "error.ftl"("en_US", UTF-8, parsed); will try to load it.}
+{date:2019-06-20 21:07:52.637, level:DEBUG, process:http-nio-8089-exec-2, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error_en_US.ftl"): Not found}
+{date:2019-06-20 21:07:52.639, level:DEBUG, process:http-nio-8089-exec-2, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error_en.ftl"): Not found}
+{date:2019-06-20 21:07:52.640, level:DEBUG, process:http-nio-8089-exec-2, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error.ftl"): Not found}
