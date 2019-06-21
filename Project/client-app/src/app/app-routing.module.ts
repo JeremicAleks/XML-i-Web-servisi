@@ -22,15 +22,13 @@ const routes: Routes = [
     component: AdminRoleConfigurationComponent, canActivate: [SecAdminGuard]
   },
   {
-    path: 'searchResult',
+    path: 'searchResult/:destination/:checkIn/:checkOut/:numOfPeople',
     component: DestinationsComponent
   },
   {
     path: '',
     component: MainHomepageComponent
   }
-
-
 ];
 
 @NgModule({

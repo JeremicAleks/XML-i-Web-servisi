@@ -52,12 +52,7 @@ export class MainHomepageComponent implements OnInit {
     let myDate2 = new Date(ngbDate2.year, ngbDate2.month-1, ngbDate2.day);
 
     this.searchParams = new SearchParams(this.searchForm.get("destination").value,myDate,myDate2,this.brojsoba);
-   //alert(this.searchParams.destination + this.searchParams.checkIn + this.searchParams.checkOut +this.searchParams.numOfPeople)
-    this.searchService.getSearchResults(this.searchParams).subscribe(
-data=>{
-    alert('nesto se desilo kao ')
-}
-    )
-    //this.router.navigate(['/searchResult'])
+
+    this.router.navigate(['/searchResult'+'/'+this.searchParams.destination + '/123/123/2'])
   }
 }
