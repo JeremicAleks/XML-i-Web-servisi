@@ -1,6 +1,5 @@
 package com.room.microservice.controller;
 
-
 import com.room.microservice.domain.*;
 import com.room.microservice.service.AgentUserService;
 import com.room.microservice.service.RoomService;
@@ -10,10 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/room")
+@RequestMapping("/api")
 public class RoomController {
 
     @Autowired
@@ -24,19 +21,18 @@ public class RoomController {
 
     @PostMapping(value = "/add",consumes = MediaType.APPLICATION_JSON_VALUE)
     public Room addRoom(@RequestBody AddRoomDTO addRoomDTO){
-
+        Room room ;
         AgentUser agentUser = agentUserService.findByUsername(addRoomDTO.getUsername());
-        Room room = roomService.AddRoom(addRoomDTO.getRoom(),agentUser);
+         room = roomService.AddRoom(addRoomDTO.getRoom(),agentUser);
 
         return room;
     }
 
-    @GetMapping(value = "/all")
-    public GetRooms getRooms(){
+    @PostMapping(value = "/all",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public GetRooms getRooms(@RequestBody GetRoomsForUserDTO getRoomsForUserDTO){
         GetRooms getRooms = new GetRooms();
 
-        List<Room> roomList = roomService.findAll();
-        getRooms.setRoom(roomList);
+        getRooms.setRoom(roomService.getRoomsFromAgent(getRoomsForUserDTO));
 
         return getRooms;
     }
@@ -44,11 +40,9 @@ public class RoomController {
     @PostMapping(value = "/delete",consumes =MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteRoom(@RequestBody DeleteRoom deleteRoom){
 
-        if(roomService.DeleteRoom(deleteRoom))
-        return new ResponseEntity<>(HttpStatus.OK);
-        
 
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

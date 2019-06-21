@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import { AdminUserConfigurationComponent } from './views/admin-user-configuration/admin-user-configuration.component';
 import { MainHomepageComponent } from './views/main-homepage/main-homepage.component';
 import {NgbDatepickerModule} from "@ng-bootstrap/ng-bootstrap";
+import { DestinationsComponent } from './views/destinations/destinations.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {NgbDatepickerModule} from "@ng-bootstrap/ng-bootstrap";
     MainNavibarComponent,
     AdminRoleConfigurationComponent,
     AdminUserConfigurationComponent,
-    MainHomepageComponent
+    MainHomepageComponent,
+    DestinationsComponent
   ],
   imports: [
     BrowserModule,

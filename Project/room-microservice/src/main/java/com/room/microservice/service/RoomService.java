@@ -1,12 +1,13 @@
 package com.room.microservice.service;
 
 import com.room.microservice.domain.AgentUser;
-import com.room.microservice.domain.DeleteRoom;
+import com.room.microservice.domain.GetRoomsForUserDTO;
 import com.room.microservice.domain.Room;
 import com.room.microservice.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,23 +24,24 @@ public class RoomService {
 
     public Room AddRoom(Room r, AgentUser agentUser){
 
-        r.setAgentUser(agentUser);
+        List<Room> agentRooms = agentUser.getRoom();
+        Room room = roomRepository.save(r);
+        agentRooms.add(room);
+        agentUserService.save(agentUser);
 
-        return roomRepository.save(r);
+        return room;
     }
 
-    public boolean DeleteRoom(DeleteRoom deleteRoom){
-        AgentUser agentUser = agentUserService.findByUsername(deleteRoom.getUsername());
-        Room room = findById(deleteRoom.getRoomId());
+    public List<Room> getRoomsFromAgent(GetRoomsForUserDTO getRoomsForUserDTO){
+        List<Room> rooms = new ArrayList<>();
 
-        if(room.getAgentUser() == agentUser){
-            roomRepository.delete(room);
-            return true;
-        }
+        AgentUser agentUser = agentUserService.findByUsername(getRoomsForUserDTO.getUsername());
+        rooms = agentUser.getRoom();
 
-
-        return false;
+        return rooms;
     }
+
+
 
 
 
