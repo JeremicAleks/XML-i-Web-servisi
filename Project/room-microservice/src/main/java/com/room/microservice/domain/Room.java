@@ -104,19 +104,8 @@ public class Room {
     protected List<Reservation> reservation;
     protected int daysForCancel;
 
-    @ManyToOne
-    protected  AgentUser agentUser;
-
-
     public Room() {
-    }
 
-    public AgentUser getAgentUser() {
-        return agentUser;
-    }
-
-    public void setAgentUser(AgentUser agentUser) {
-        this.agentUser = agentUser;
     }
 
     /**

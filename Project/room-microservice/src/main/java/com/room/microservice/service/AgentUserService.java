@@ -15,5 +15,7 @@ public class AgentUserService {
 
     public AgentUser findByUsername(String username){return agentUserRepository.findByUsername(username);}
 
+    public AgentUser save(AgentUser agentUser){return agentUserRepository.save(agentUser);}
+
 
 }
