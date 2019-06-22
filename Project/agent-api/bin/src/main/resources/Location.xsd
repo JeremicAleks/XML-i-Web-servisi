@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified"
+    targetNamespace="http://www.xml-ftn.xml.domain.centralapi.com/Location"
+    xmlns:location="http://www.xml-ftn.xml.domain.centralapi.com/Location"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:element name="Location">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="name" type="xsd:string"/>
+                <xsd:element maxOccurs="1" name="lng" type="xsd:double"/>
+                <xsd:element form="qualified" name="lat" type="xsd:double"/>
+                <xsd:element name="id" type="xsd:long"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

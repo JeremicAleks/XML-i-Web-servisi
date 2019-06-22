@@ -29,6 +29,8 @@ public class SearchServiceCon implements SearchService {
 		List<Room> searchResults = new ArrayList<Room>();
 
 		SimpleDateFormat x = new SimpleDateFormat("yyyy.MM.dd.");
+		
+		System.out.println(spDTO.getCheckIn());
 
 		Date date1 = spDTO.getCheckIn();
 		System.out.println("CheckIn: " + x.format(date1));
@@ -40,8 +42,14 @@ public class SearchServiceCon implements SearchService {
 		Calendar cal2 = Calendar.getInstance();
 		cal2.setTime(date2);
 
-		if (spDTO.getDestination().isEmpty() || spDTO.getNumOfPeople() == 0) {
-			System.out.println("nije unesena destinacija ili broj ljudi u pretrazi");
+		if (spDTO.getDestination().isEmpty() || ) {
+			System.out.println("nije unesena destinacija");
+			System.out.println("ne znam sta treba da vratim");
+			return null;
+		}
+		
+		if (spDTO.getNumOfPeople() == 0) {
+			System.out.println("nije unesen broj ljudi u pretrazi");
 			System.out.println("ne znam sta treba da vratim");
 			return null;
 		}

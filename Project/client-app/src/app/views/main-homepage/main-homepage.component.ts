@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Router} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {SearchParams} from "../../models/search-params";
-import {SearchService} from "../../services/search.service";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SearchParams } from '../../models/search-params';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-main-homepage',
@@ -18,11 +18,11 @@ export class MainHomepageComponent implements OnInit {
 
   searchForm = new FormGroup({
     destination: new FormControl('', [Validators.required]),
-    checkIn: new FormControl(new Date(''), [Validators.required]),
-    checkOut: new FormControl(new Date(''), [Validators.required])
-  })
+    checkIn: new FormControl(new Date(), [Validators.required]),
+    checkOut: new FormControl(new Date(), [Validators.required])
+  });
 
-  constructor(private modalService: NgbModal, private router :Router, private searchService: SearchService) { }
+  constructor(private modalService: NgbModal, private router: Router, private searchService: SearchService) { }
 
   ngOnInit() {
     this.brojsoba = 1;
@@ -36,7 +36,7 @@ export class MainHomepageComponent implements OnInit {
   }
 
   addSoba() {
-   this.brojsoba++;
+    this.brojsoba++;
   }
 
   removeSoba() {
@@ -46,13 +46,12 @@ export class MainHomepageComponent implements OnInit {
   }
 
   search() {
-    let ngbDate = this.searchForm.get("checkIn").value;
-    let myDate = new Date(ngbDate.year, ngbDate.month-1, ngbDate.day);
-    let ngbDate2 = this.searchForm.get("checkOut").value;
-    let myDate2 = new Date(ngbDate2.year, ngbDate2.month-1, ngbDate2.day);
+    const destination = this.searchForm.get('destination').value;
+    const ngbDate = this.searchForm.get('checkIn').value;
+    const myDate = new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);
+    const ngbDate2 = this.searchForm.get('checkOut').value;
+    const myDate2 = new Date(ngbDate2.year, ngbDate2.month - 1, ngbDate2.day);
 
-    this.searchParams = new SearchParams(this.searchForm.get("destination").value,myDate,myDate2,this.brojsoba);
-
-    this.router.navigate(['/searchResult'+'/'+this.searchParams.destination + '/123/123/2'])
+    this.router.navigate(['/searchResult' + '/' + destination + '/' + myDate + '/' + myDate2  + '/' + this.brojsoba]);
   }
 }

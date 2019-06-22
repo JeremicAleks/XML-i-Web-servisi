@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {SearchService} from "../../services/search.service";
-import {SearchParams} from "../../models/search-params";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ActivatedRoute} from '@angular/router';
+import {SearchService} from '../../services/search.service';
+import {SearchParams} from '../../models/search-params';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-destinations',
@@ -11,32 +11,36 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class DestinationsComponent implements OnInit {
 
-  brojsoba: number;
-  dest: string;
+  numOfPeople: number;
+  destination: string;
   searchParams: SearchParams;
 
 
   searchForm = new FormGroup({
     destination: new FormControl('', [Validators.required]),
-    checkIn: new FormControl(new Date(''), [Validators.required]),
-    checkOut: new FormControl(new Date(''), [Validators.required])
-  })
+    checkIn: new FormControl(new Date(), [Validators.required]),
+    checkOut: new FormControl(new Date(), [Validators.required])
+  });
 
   constructor(private route: ActivatedRoute, private searchService: SearchService) { }
 
   ngOnInit() {
 
-    this.dest = this.route.snapshot.paramMap.get('destination');
-    let ngbDate = this.searchForm.get("checkIn").value;
-    let myDate = new Date(ngbDate.year, ngbDate.month-1, ngbDate.day);
-    let ngbDate2 = this.searchForm.get("checkOut").value;
-    let myDate2 = new Date(ngbDate2.year, ngbDate2.month-1, ngbDate2.day);
-    this.searchParams = new SearchParams(this.searchForm.get("destination").value,myDate,myDate2,this.brojsoba);
-    /*this.searchService.getSearchResults(this.searchParams).subscribe(
-      data=>{
-        alert('nesto se desilo kao ')
+    this.destination = this.route.snapshot.paramMap.get('destination');
+    const checkIn = this.route.snapshot.paramMap.get('checkIn');
+    const checkInDate = new Date(checkIn);
+    const checkOut = this.route.snapshot.paramMap.get('checkOut');
+    const checkOutDate = new Date(checkOut);
+    this.numOfPeople = +this.route.snapshot.paramMap.get('brojSoba');
+    this.searchParams = new SearchParams(this.destination, checkInDate, checkOutDate, this.numOfPeople);
+    this.searchService.getSearchResults(this.searchParams).subscribe(
+      data => {
+        alert('nesto se desilo kao');
+      },
+      error => {
+        alert('jebem ti se s mamom');
       }
-    )*/
+    );
   }
 
 }

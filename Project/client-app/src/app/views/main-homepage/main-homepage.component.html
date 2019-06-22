@@ -1,76 +1,78 @@
 <div>
-  <form name = "searchForm" [formGroup]="searchForm">
-<div class="img-container">
-    <div class="headerSearch row">
-      <div class="col-10 offset-1">
-        <h2>Find deals for every season</h2>
-        <p>From cozy country homes to funky city apartments</p>
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="row">
-              <div class="col-md-3 paddingRightClear">
-                <span class="fa fa-book userIcon"></span>
-                <input type="text" class="form-control searchInput bookInput" aria-label="Large" placeholder="Where are you going?" formControlName="destination">
-              </div>
-              <div class="col-md-2 paddingRightClear">
-
-                <div class="form-group">
-                  <div class="input-group">
-                    <input class="form-control dateInput" placeholder="Check in"
-                          ngbDatepicker #d="ngbDatepicker" aria-label="Large" formControlName="checkIn">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                    </div>
-                  </div>
+  <form name="searchForm" [formGroup]="searchForm">
+    <div class="img-container">
+      <div class="headerSearch row">
+        <div class="col-10 offset-1">
+          <h2>Find deals for every season</h2>
+          <p>From cozy country homes to funky city apartments</p>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <div class="row">
+                <div class="col-md-3 paddingRightClear">
+                  <span class="fa fa-book userIcon"></span>
+                  <input type="text" class="form-control searchInput bookInput" aria-label="Large"
+                    placeholder="Where are you going?" formControlName="destination">
                 </div>
-
-              </div>
-              <div class="col-md-2 paddingRightClear">
+                <div class="col-md-2 paddingRightClear">
 
                   <div class="form-group">
                     <div class="input-group">
-                      <input class="form-control dateInput" placeholder="Check out"
-                             ngbDatepicker #d2="ngbDatepicker" aria-label="Large" formControlName="checkOut">
+                      <input class="form-control dateInput" placeholder="Check in" ngbDatepicker #d="ngbDatepicker"
+                        aria-label="Large" formControlName="checkIn">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-md-2 paddingRightClear">
+
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input class="form-control dateInput" placeholder="Check out" ngbDatepicker #d2="ngbDatepicker"
+                        aria-label="Large" formControlName="checkOut">
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
                       </div>
                     </div>
                   </div>
 
-              </div>
-              <div class="col-md-3 paddingRightClear">
+                </div>
+                <div class="col-md-3 paddingRightClear">
 
-                <span class="fa fa-key userIcon"></span>
-                  <input type="number" class="form-control searchInput"  readonly = true aria-label="Large" (click)="openSignInModal(exampleModal)" placeholder="{{brojsoba}} people">
+                  <span class="fa fa-key userIcon"></span>
+                  <input type="number" class="form-control searchInput" readonly=true aria-label="Large"
+                    (click)="openSignInModal(exampleModal)" placeholder="{{brojsoba}} people">
 
-              </div>
-              <div class="col-md-2">
-                <button type="button" class="btn btn-search btn-lg btn-block" (click)="search()"> Search </button>
+                </div>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-search btn-lg btn-block" (click)="search()"> Search </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
- <ng-template #exampleModal let-modal aria-labelledby="exampleModalLabel" aria-hidden="true">
-       <div class="modal-body">
-         <div class="row">
-           <div class = col-md-4>
-         Room Number
-           </div>
-           <div class="col-md-2">
-             <button class = "btn btn-default btn-sm" (click)="addSoba()">Dodaj</button>
-           </div>
-           <div class="col-md-2">
-             {{brojsoba}}
-           </div>
-           <div class="col-md-2">
-             <button class = "btn btn-default btn-sm" (click)="removeSoba()">Oduzmi</button>
-           </div>
-         </div>
-       </div>
- </ng-template>
   </form>
+  
+  <ng-template #exampleModal let-modal aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-body">
+      <div class="row">
+        <div class=col-md-4>
+          Room Number
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-default btn-sm" (click)="addSoba()">Dodaj</button>
+        </div>
+        <div class="col-md-2">
+          {{brojsoba}}
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-default btn-sm" (click)="removeSoba()">Oduzmi</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </div>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified"
+    targetNamespace="http://www.xml-ftn.xml.domain.centralapi.com/Rooms"
+    xmlns:rooms="http://www.xml-ftn.xml.domain.centralapi.com/Rooms"
+    xmlns:location="http://www.xml-ftn.xml.domain.centralapi.com/Location"
+    xmlns:reservation="http://www.xml-ftn.xml.domain.centralapi.com/Reservation"
+    xmlns:users="http://www.xml-ftn.xml.domain.centralapi.com/Users"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.xml-ftn.xml.domain.centralapi.com/Location"
+        schemaLocation="Location.xsd"/>
+    <xsd:import namespace="http://www.xml-ftn.xml.domain.centralapi.com/Reservation"
+        schemaLocation="Reservation.xsd"/>
+    <xsd:element name="Room">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element form="qualified" name="numberOfBeds">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:positiveInteger">
+                            <xsd:maxExclusive value="6"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element ref="location:Location"/>
+                <xsd:element minOccurs="1" ref="rooms:AccommodationCategory"/>
+                <xsd:sequence maxOccurs="unbounded" minOccurs="0">
+                    <xsd:element ref="rooms:RoomAdditionalService"/>
+                </xsd:sequence>
+                <xsd:element name="description" type="xsd:string"/>
+                <xsd:sequence maxOccurs="10">
+                    <xsd:element minOccurs="1" name="image" type="xsd:string"> </xsd:element>
+                </xsd:sequence>
+                <xsd:sequence maxOccurs="unbounded" minOccurs="0">
+                    <xsd:element name="priceList" type="rooms:PriceList"/>
+                </xsd:sequence>
+                <xsd:sequence maxOccurs="unbounded" minOccurs="0">
+                    <xsd:element ref="reservation:Reservation"/>
+                </xsd:sequence>
+                <xsd:element maxOccurs="1" name="id" type="xsd:long"/>
+                <xsd:element name="daysForCancel" type="xsd:int"/>
+                <xsd:element maxOccurs="1" ref="rooms:AccommodationType"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="RateAndComment">
+        <xsd:sequence>
+            <xsd:element name="comment" type="xsd:string"/>
+            <xsd:element name="rating">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:positiveInteger">
+                        <xsd:maxInclusive value="10"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element form="qualified" name="isAllowed" type="xsd:boolean"/>
+            <xsd:element ref="rooms:Room"/>
+            <xsd:element name="id" type="xsd:long"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PriceList">
+        <xsd:sequence>
+            <xsd:element name="month" type="xsd:gYearMonth"/>
+            <xsd:element name="price" type="xsd:double"/>
+            <xsd:element name="id" type="xsd:long"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="addRoomDTO">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="rooms:Room"/>
+                <xsd:element name="username" nillable="false" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="image">
+        <xsd:complexType>
+            <xsd:sequence maxOccurs="1">
+                <xsd:element fixed="" name="image" type="xsd:base64Binary"/>
+                <xsd:element name="nameForImage" type="xsd:string"/>
+                <xsd:element name="roomId" type="xsd:long"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="imageReturn">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="additionImageString" type="xsd:string"/>
+                <xsd:element name="image" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="allowReservation">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="reservationId"/>
+                <xsd:element maxOccurs="1" name="revationState"
+                    type="reservation:ReservationStateEnum"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetRooms">
+        <xsd:complexType>
+            <xsd:sequence maxOccurs="unbounded">
+                <xsd:element ref="rooms:Room"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AccommodationCategory">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="description" type="xsd:string"/>
+                <xsd:element name="id" type="xsd:long"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AccommodationType">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="description" type="xsd:string"/>
+                <xsd:element name="id" type="xsd:long"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="RoomAdditionalService">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:long"/>
+                <xsd:element name="description" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetAccommodationCategories">
+        <xsd:complexType>
+            <xsd:sequence maxOccurs="unbounded">
+                <xsd:element ref="rooms:AccommodationCategory"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetAccommodationTypes">
+        <xsd:complexType>
+            <xsd:sequence maxOccurs="unbounded">
+                <xsd:element maxOccurs="1" ref="rooms:AccommodationType"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetRoomAdditionalServices">
+        <xsd:complexType>
+            <xsd:sequence maxOccurs="unbounded">
+                <xsd:element ref="rooms:RoomAdditionalService"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetCategories">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="username" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetTypes">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="username" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetAdditionalServices">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="username" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
