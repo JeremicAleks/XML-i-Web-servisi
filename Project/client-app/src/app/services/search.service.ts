@@ -13,7 +13,7 @@ export class SearchService {
 
   getSearchResults(searchParams: SearchParams) {
     alert(searchParams.checkIn);
-    return this.http.post<any>(environment.searchUrl + '/api/search/kurec', searchParams)
+    return this.http.post<any>(environment.searchMicroserviceUrl + '/api/search', searchParams)
       .pipe(map(searchRes => {
           return searchRes;
         }

@@ -43,7 +43,7 @@
 
                   <span class="fa fa-key userIcon"></span>
                   <input type="number" class="form-control searchInput" readonly=true aria-label="Large"
-                    (click)="openSignInModal(exampleModal)" placeholder="{{brojsoba}} people">
+                    (click)="openSignInModal(exampleModal)" placeholder="{{numOfPeople}} people">
 
                 </div>
                 <div class="col-md-2">
@@ -64,13 +64,13 @@
           Room Number
         </div>
         <div class="col-md-2">
-          <button class="btn btn-default btn-sm" (click)="addSoba()">Dodaj</button>
+          <button class="btn btn-default btn-sm" (click)="addPeople()">Add</button>
         </div>
         <div class="col-md-2">
-          {{brojsoba}}
+          {{numOfPeople}}
         </div>
         <div class="col-md-2">
-          <button class="btn btn-default btn-sm" (click)="removeSoba()">Oduzmi</button>
+          <button class="btn btn-default btn-sm" (click)="removePeople()">Remove</button>
         </div>
       </div>
     </div>

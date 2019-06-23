@@ -28,10 +28,22 @@ export class DestinationsComponent implements OnInit {
 
     this.destination = this.route.snapshot.paramMap.get('destination');
     const checkIn = this.route.snapshot.paramMap.get('checkIn');
+    alert(checkIn);
     const checkInDate = new Date(checkIn);
     const checkOut = this.route.snapshot.paramMap.get('checkOut');
+    alert(checkOut);
     const checkOutDate = new Date(checkOut);
-    this.numOfPeople = +this.route.snapshot.paramMap.get('brojSoba');
+    this.numOfPeople = +this.route.snapshot.paramMap.get('numOfPeople');
+    alert(this.numOfPeople);
+
+    alert(this.destination);
+
+    if (this.destination === 'null') {
+      this.destination = '';
+    }
+
+    alert(this.destination);
+
     this.searchParams = new SearchParams(this.destination, checkInDate, checkOutDate, this.numOfPeople);
     this.searchService.getSearchResults(this.searchParams).subscribe(
       data => {

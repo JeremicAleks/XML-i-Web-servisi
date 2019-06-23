@@ -17,18 +17,25 @@ import com.centralapi.domain.xml.xml_ftn.rooms.Room;
 @Service
 @RequestMapping("/api/search")
 public class SearchController {
-
+	
 	@Autowired
 	RestTemplate restTemp;
 
-	@GetMapping(value = "/kurec", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> search() {
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> search() {
 		
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println("pogodjen central api");
-		GetRooms rooms = restTemp.getForObject("http://search-microservice/api/search/kurec", GetRooms.class);
-		List<Room> searchResults = rooms.getRoom();
-
+		
+		//ResponseEntity<?> reply = restTemp.getForObject("http://search-microservice/api/search", ResponseEntity.class);
+		//System.out.println("progutao je ovaj moj pokusaj - reply");
+		//GetRooms getRooms = (GetRooms) reply.getBody();
+		GetRooms getRooms = restTemp.getForObject("http://search-microservice/api/search", GetRooms.class);
+		List<Room> searchResults = getRooms.getRoom();
+		System.out.println("nesto se desava");
+		
 		return new ResponseEntity<>(searchResults, HttpStatus.OK);
+		//return new ResponseEntity<>(searchResults, reply.getStatusCode());
 	}
 
 }

@@ -11,10 +11,9 @@ import { SearchService } from '../../services/search.service';
   styleUrls: ['./main-homepage.component.css']
 })
 export class MainHomepageComponent implements OnInit {
-  brojsoba: number;
 
   searchParams: SearchParams;
-
+  numOfPeople: number;
 
   searchForm = new FormGroup({
     destination: new FormControl('', [Validators.required]),
@@ -25,7 +24,7 @@ export class MainHomepageComponent implements OnInit {
   constructor(private modalService: NgbModal, private router: Router, private searchService: SearchService) { }
 
   ngOnInit() {
-    this.brojsoba = 1;
+    this.numOfPeople = 1;
   }
 
   openSignInModal(content) {
@@ -35,23 +34,27 @@ export class MainHomepageComponent implements OnInit {
     });
   }
 
-  addSoba() {
-    this.brojsoba++;
+  addPeople() {
+    this.numOfPeople++;
   }
 
-  removeSoba() {
-    if (this.brojsoba > 0) {
-      this.brojsoba--;
+  removePeople() {
+    if (this.numOfPeople > 0) {
+      this.numOfPeople--;
     }
   }
 
   search() {
-    const destination = this.searchForm.get('destination').value;
+    let destination = this.searchForm.get('destination').value;
     const ngbDate = this.searchForm.get('checkIn').value;
-    const myDate = new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);
+    const myDate = new Date(ngbDate.year, ngbDate.month, ngbDate.day);
     const ngbDate2 = this.searchForm.get('checkOut').value;
-    const myDate2 = new Date(ngbDate2.year, ngbDate2.month - 1, ngbDate2.day);
+    const myDate2 = new Date(ngbDate2.year, ngbDate2.month, ngbDate2.day);
 
-    this.router.navigate(['/searchResult' + '/' + destination + '/' + myDate + '/' + myDate2  + '/' + this.brojsoba]);
+    if (destination === '') {
+      destination = 'null';
+    }
+
+    this.router.navigate(['/searchResult' + '/' + destination + '/' + myDate + '/' + myDate2  + '/' + this.numOfPeople]);
   }
 }

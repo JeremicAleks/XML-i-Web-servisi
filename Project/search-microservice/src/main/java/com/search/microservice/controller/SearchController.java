@@ -17,7 +17,7 @@ public class SearchController {
 	@Autowired
 	SearchService searchService;
 
-	@PostMapping(value = "/kurec", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> searchRoom(@RequestBody SearchParamsDTO spDTO){
 		// @RequestBody SearchParamsDTO spDTO
 
@@ -25,7 +25,8 @@ public class SearchController {
 		System.out.println("search for");
 		GetRooms searchResults = searchService.search(spDTO);
 		
-		System.out.println("Nasao je sobe!");
+		
+		System.out.println("[microservice-search] -");
 		
         return new ResponseEntity<>(searchResults, HttpStatus.OK);
     }
