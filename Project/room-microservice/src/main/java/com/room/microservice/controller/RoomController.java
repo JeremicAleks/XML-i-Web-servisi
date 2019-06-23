@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class RoomController {
@@ -19,30 +21,40 @@ public class RoomController {
     @Autowired
     RoomService roomService;
 
-    @PostMapping(value = "/add",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/add")
     public Room addRoom(@RequestBody AddRoomDTO addRoomDTO){
         Room room ;
-        AgentUser agentUser = agentUserService.findByUsername(addRoomDTO.getUsername());
-         room = roomService.AddRoom(addRoomDTO.getRoom(),agentUser);
+
+         room = roomService.AddRoom(addRoomDTO);
 
         return room;
     }
 
-    @PostMapping(value = "/all",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GetRooms getRooms(@RequestBody GetRoomsForUserDTO getRoomsForUserDTO){
+    @GetMapping(value = "/all/{username}")
+    public GetRooms getRooms(@PathVariable String username){
         GetRooms getRooms = new GetRooms();
 
-        getRooms.setRoom(roomService.getRoomsFromAgent(getRoomsForUserDTO));
+        List<Room> rooms = roomService.getRoomsFromAgent(username);
+
+
+        for(Room room : rooms)
+            getRooms.getRoom().add(room);
 
         return getRooms;
     }
 
-    @PostMapping(value = "/delete",consumes =MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteRoom(@RequestBody DeleteRoom deleteRoom){
+    @GetMapping(value = "/all")
+    public GetRooms getAllRooms(){
+        GetRooms getRooms = new GetRooms();
+
+        List<Room> rooms = roomService.getAllRooms();
+
+        for(Room room : rooms)
+            getRooms.getRoom().add(room);
 
 
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return getRooms;
     }
+
 
 }

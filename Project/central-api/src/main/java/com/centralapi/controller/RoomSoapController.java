@@ -6,14 +6,19 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.ws.rs.Produces;
 
+import com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
 import com.centralapi.service.RoomService;
 import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.client.RestTemplate;
@@ -61,15 +66,16 @@ public class RoomSoapController {
 	@Autowired
 	private RoomService roomService;
 
+	@Produces(MediaType.APPLICATION_XML_VALUE)
 	@PreAuthorize("hasRole('ROLE_AGENT_APP')")
 	@PayloadRoot(namespace = ROOM_NAMESPACE_URI, localPart = "addRoomDTO")
 	@ResponsePayload
-	public ResponseEntity<?> addRoom(@RequestPayload AddRoomDTO request) {
+	public Room addRoom(@RequestPayload AddRoomDTO request) {
 
 		// sacuvati u bazu i vratiti room sa id-om
 		Room room = restTemplate.postForObject("http://room-microservice/api/add", request, Room.class);
 
-		return new ResponseEntity<>(room, HttpStatus.OK);
+		return room;
 
 	}
 
@@ -89,7 +95,16 @@ public class RoomSoapController {
 	@ResponsePayload
 	public GetRooms getRooms(@RequestPayload GetRoomsForUserDTO request) throws IOException {
 
-		GetRooms getRooms = restTemplate.postForObject("http://room-microservice/api/all", request,GetRooms.class);
+		GetRooms getRooms = new GetRooms();
+		//Nema username - a
+		System.out.println("EEEEEE");
+		ResponseEntity<List<Room>> response = restTemplate.exchange("http://room-microservice/api/all", HttpMethod.GET, null, new ParameterizedTypeReference<List<Room>>() {});
+
+		for(Room room: response.getBody())
+			getRooms.getRoom().add(room);
+
+
+
 
 		return  getRooms;
 

@@ -25,9 +25,7 @@ public class ReservationController {
     public List<Reservation> getReservatons(){
 
         ResponseEntity<List<Reservation>> response = restTemplate.exchange("http://reservation-microservice/api/reservation/all",
-                HttpMethod.GET, null, new ParameterizedTypeReference<List<Reservation>>() {
-                });
-
+                HttpMethod.GET, null, new ParameterizedTypeReference<List<Reservation>>() {});
         return response.getBody();
     }
 

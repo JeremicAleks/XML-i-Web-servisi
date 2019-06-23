@@ -285,7 +285,7 @@ public class AgentController {
 		
 		GetCategories catServices = new GetCategories();
 		
-		GetReservations reservations = (GetReservations) soap.marshalSendAndReceive(SERVICE_URI, getForUser);
+		//GetReservations reservations = (GetReservations) soap.marshalSendAndReceive(SERVICE_URI, getForUser);
 
 		GetRooms rooms = (GetRooms) soap.marshalSendAndReceive(SERVICE_URI, getForUserRoom);
 
@@ -298,7 +298,7 @@ public class AgentController {
 		GetAccommodationCategories catS = (GetAccommodationCategories) soap.marshalSendAndReceive(SERVICE_URI, catServices);
 
 		
-		resRepo.saveAll(reservations.getReservation());
+		//resRepo.saveAll(reservations.getReservation());
 		roomRepo.saveAll(rooms.getRoom());
 		msgRepo.saveAll(msgs.getMessageTable());
 		addRepo.saveAll(addS.getRoomAdditionalService());

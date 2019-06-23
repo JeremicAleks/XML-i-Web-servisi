@@ -134,3 +134,111 @@
 {date:2019-06-20 21:07:52.637, level:DEBUG, process:http-nio-8089-exec-2, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error_en_US.ftl"): Not found}
 {date:2019-06-20 21:07:52.639, level:DEBUG, process:http-nio-8089-exec-2, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error_en.ftl"): Not found}
 {date:2019-06-20 21:07:52.640, level:DEBUG, process:http-nio-8089-exec-2, class:freemarker.cache, msg:TemplateLoader.findTemplateSource("error.ftl"): Not found}
+{date:2019-06-22 19:56:50.011, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 19:56:50.742, level:INFO , process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 19:56:51.787, level:DEBUG, process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 19:56:52.093, level:DEBUG, process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 19:56:52.204, level:INFO , process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 19:56:52.541, level:INFO , process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 19:56:53.993, level:DEBUG, process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 19:56:54.438, level:INFO , process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 19:58:18.135, level:DEBUG, process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 19:58:18.569, level:INFO , process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 19:58:18.861, level:DEBUG, process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 19:58:19.293, level:INFO , process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 20:05:12.226, level:DEBUG, process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 20:05:12.688, level:INFO , process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 20:05:12.923, level:DEBUG, process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 20:05:13.372, level:INFO , process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 20:13:09.896, level:DEBUG, process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 20:13:10.339, level:INFO , process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 20:13:10.795, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 20:13:11.212, level:INFO , process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 20:23:02.369, level:DEBUG, process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 20:23:02.818, level:INFO , process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 20:23:03.309, level:DEBUG, process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 20:23:03.748, level:INFO , process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 20:32:11.638, level:DEBUG, process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 20:32:12.060, level:INFO , process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 21:02:08.973, level:DEBUG, process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 21:02:09.410, level:INFO , process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 21:10:00.605, level:DEBUG, process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 21:10:01.058, level:INFO , process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 22:44:10.739, level:DEBUG, process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 22:44:11.192, level:INFO , process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-22 23:29:50.827, level:DEBUG, process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-22 23:29:51.281, level:INFO , process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 01:18:05.265, level:DEBUG, process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 01:18:05.787, level:INFO , process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 01:30:41.145, level:DEBUG, process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 01:30:42.075, level:INFO , process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 01:30:42.854, level:DEBUG, process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 01:30:43.292, level:INFO , process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 01:32:38.363, level:DEBUG, process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 01:32:38.888, level:INFO , process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 01:32:39.882, level:DEBUG, process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 01:32:40.588, level:INFO , process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 01:36:41.958, level:DEBUG, process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 01:36:42.430, level:INFO , process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 01:36:43.106, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 01:36:43.576, level:INFO , process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 01:57:54.930, level:DEBUG, process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 01:57:55.396, level:INFO , process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 01:57:55.843, level:DEBUG, process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 01:57:56.286, level:INFO , process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:01:26.051, level:DEBUG, process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:01:26.590, level:INFO , process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:01:27.045, level:DEBUG, process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:01:27.612, level:INFO , process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:13:38.456, level:DEBUG, process:http-nio-8089-exec-7, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:13:38.952, level:INFO , process:http-nio-8089-exec-7, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:13:42.240, level:DEBUG, process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:13:42.693, level:INFO , process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:13:44.743, level:DEBUG, process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:13:45.293, level:INFO , process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:13:47.501, level:DEBUG, process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:13:48.033, level:INFO , process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:19:52.837, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:19:53.454, level:INFO , process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:19:56.796, level:DEBUG, process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:19:57.385, level:INFO , process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:29:06.170, level:DEBUG, process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:29:06.593, level:INFO , process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:29:09.355, level:DEBUG, process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:29:09.816, level:INFO , process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:32:58.387, level:DEBUG, process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:32:58.819, level:INFO , process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:33:01.451, level:DEBUG, process:http-nio-8089-exec-7, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:33:01.880, level:INFO , process:http-nio-8089-exec-7, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:33:31.495, level:DEBUG, process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:33:31.937, level:INFO , process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:33:34.086, level:DEBUG, process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:33:34.513, level:INFO , process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:37:42.709, level:DEBUG, process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:37:43.169, level:INFO , process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:37:45.330, level:DEBUG, process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:37:45.767, level:INFO , process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 02:55:13.484, level:DEBUG, process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 02:55:13.948, level:INFO , process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 03:03:23.491, level:DEBUG, process:http-nio-8089-exec-7, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 03:03:23.950, level:INFO , process:http-nio-8089-exec-7, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 03:03:26.360, level:DEBUG, process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 03:03:26.782, level:INFO , process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 03:07:43.249, level:DEBUG, process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 03:07:43.733, level:INFO , process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 03:07:46.479, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 03:07:46.916, level:INFO , process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 03:11:38.820, level:DEBUG, process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 03:11:39.260, level:INFO , process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 03:11:41.775, level:DEBUG, process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 03:11:42.227, level:INFO , process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 03:14:23.455, level:DEBUG, process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 03:14:23.907, level:INFO , process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 03:14:27.482, level:DEBUG, process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 03:14:27.925, level:INFO , process:http-nio-8089-exec-6, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 03:22:50.225, level:DEBUG, process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 03:22:50.652, level:INFO , process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 03:22:54.383, level:DEBUG, process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 03:22:54.854, level:INFO , process:http-nio-8089-exec-9, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-23 03:31:50.218, level:DEBUG, process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: kiriyaga}
+{date:2019-06-23 03:31:50.654, level:INFO , process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}

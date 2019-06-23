@@ -61,10 +61,6 @@ public class AgentUser
 	@XmlElement(required = true)
 	protected String pib;
 
-
-    public AgentUser() {
-    }
-
     /**
      * Gets the value of the room property.
      * 
