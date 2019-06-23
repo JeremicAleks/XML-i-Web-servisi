@@ -42,7 +42,7 @@ public class SearchServiceCon implements SearchService {
 		Calendar cal2 = Calendar.getInstance();
 		cal2.setTime(date2);
 
-		if (spDTO.getDestination().isEmpty() || ) {
+		if (spDTO.getDestination().isEmpty()) {
 			System.out.println("nije unesena destinacija");
 			System.out.println("ne znam sta treba da vratim");
 			return null;
