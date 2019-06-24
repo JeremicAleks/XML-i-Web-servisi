@@ -36,7 +36,6 @@ public class RoomController {
 
         List<Room> rooms = roomService.getRoomsFromAgent(username);
 
-
         for(Room room : rooms)
             getRooms.getRoom().add(room);
 
@@ -48,6 +47,7 @@ public class RoomController {
         GetRooms getRooms = new GetRooms();
 
         List<Room> rooms = roomService.getAllRooms();
+        System.out.println(rooms.size());
 
         for(Room room : rooms)
             getRooms.getRoom().add(room);

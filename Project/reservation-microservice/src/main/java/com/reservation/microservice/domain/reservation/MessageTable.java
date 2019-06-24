@@ -6,7 +6,7 @@
 //
 
 
-package com.reservation.microservice.domain;
+package com.reservation.microservice.domain.reservation;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
