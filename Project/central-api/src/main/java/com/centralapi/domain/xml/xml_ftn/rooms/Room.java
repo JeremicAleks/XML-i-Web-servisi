@@ -11,15 +11,7 @@ package com.centralapi.domain.xml.xml_ftn.rooms;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -100,7 +92,7 @@ public class Room {
     @ManyToOne(fetch = FetchType.LAZY)
     protected AccommodationCategory accommodationCategory;
     @XmlElement(name = "RoomAdditionalService")
-    @OneToMany(fetch = FetchType.LAZY,orphanRemoval = false)
+    @ManyToMany(fetch = FetchType.LAZY)
     protected List<RoomAdditionalService> roomAdditionalService;
     @XmlElement(required = true)
     protected String description;
