@@ -21,6 +21,7 @@ import org.springframework.ws.client.core.WebServiceTemplate;
 
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.AllowReservationDTO;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
+import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.ReservationDTO;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.AddRoomDTO;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.GetAccommodationCategories;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.GetAccommodationTypes;
@@ -131,11 +132,14 @@ public class AgentController {
 			return new ResponseEntity<>(new ResponseMessage("Please Login!"), HttpStatus.UNAUTHORIZED);
 
 		Room room = roomRepo.getOne(idRoom);
-		room.getReservation().add(reservation);
-
-		roomRepo.saveAndFlush(room);
-		// treba i korisniku upisati na glavnom frontu
-
+		//room.getReservation().add(reservation);
+		//roomRepo.saveAndFlush(room);
+		ReservationDTO addReservation = new ReservationDTO();
+		addReservation.setReservation(reservation);
+		addReservation.setRoomId(idRoom);
+		Reservation response = (Reservation) soap.marshalSendAndReceive(SERVICE_URI, addReservation);
+		resRepo.save(response);
+		
 		return new ResponseEntity<>("Suceessfully reserved room!", HttpStatus.OK);
 	}
 

@@ -104,7 +104,8 @@ public class Room {
     @ManyToOne(fetch = FetchType.LAZY)
     protected AccommodationCategory accommodationCategory;
     @XmlElement(name = "RoomAdditionalService")
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     protected List<RoomAdditionalService> roomAdditionalService;
     @XmlElement(required = true)
     protected String description;
