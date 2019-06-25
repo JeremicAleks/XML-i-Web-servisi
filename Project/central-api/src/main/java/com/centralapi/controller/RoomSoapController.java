@@ -73,6 +73,7 @@ public class RoomSoapController {
 	@ResponsePayload
 	public Room addRoom(@RequestPayload AddRoomDTO request) {
 
+		System.out.println("RAS" + request.getRoom().getRoomAdditionalService().size());
 		// sacuvati u bazu i vratiti room sa id-om
 		Room room = restTemplate.postForObject("http://room-microservice/api/add", request, Room.class);
 

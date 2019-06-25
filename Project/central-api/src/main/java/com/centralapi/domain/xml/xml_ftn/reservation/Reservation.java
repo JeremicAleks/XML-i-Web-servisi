@@ -19,6 +19,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -27,6 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+
+import com.centralapi.domain.xml.xml_ftn.rooms.Room;
 
 
 /**
@@ -81,8 +84,7 @@ public class Reservation {
     @XmlElement(name = "MessageTable", required = true)
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     protected List<MessageTable> messageTable;
-
-    /**
+	/**
      * Gets the value of the checkIn property.
      * 
      * @return

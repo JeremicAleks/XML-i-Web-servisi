@@ -67,11 +67,11 @@ public class PriceList {
      *     {@link XMLGregorianCalendar }
      *     
      */
+    
     public Date getMonth() {
         return month;
     }
-
-    /**
+	/**
      * Sets the value of the month property.
      * 
      * @param value
