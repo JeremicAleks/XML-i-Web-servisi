@@ -31,60 +31,16 @@ public class RoomService {
     public List<Room> findAll(){return roomRepository.findAll();}
 
     public Room AddRoom(AddRoomDTO addRoomDTO){
+    	System.out.println("dsada");
         Room r = addRoomDTO.getRoom();
-        Room room = new Room();
-        room.setDescription(r.getDescription());
+        System.out.println("rOOM " + r.getRoomAdditionalService().size());
+        r = roomRepository.save(r);
+        //AgentUser agentUser = agentUserService.findByUsername(addRoomDTO.getUsername());
+        //List<Room> agentRooms = agentUser.getRoom();
+       // agentRooms.add(room);
+       // agentUserService.save(agentUser);
 
-        //Prebaciti da ide po id-u
-        AccommodationCategory accommodationCategory = new AccommodationCategory();
-        accommodationCategory.setDescription(r.getAccommodationCategory().getDescription());
-        accommodationCategory = accommodationCategoriesService.save(accommodationCategory);
-        room.setAccommodationCategory(accommodationCategory);
-
-        //Prebaciti da ide po id-u
-
-        AccommodationType accommodationType = new AccommodationType();
-        accommodationType.setDescription(r.getAccommodationType().getDescription());
-        accommodationType = accommodationTypeService.save(accommodationType);
-        room.setAccommodationType(accommodationType);
-        room.setDaysForCancel(r.getDaysForCancel());
-        Location loc = new Location();
-        loc.setLat(r.getLocation().getLat());
-        loc.setLng(r.getLocation().getLng());
-        loc.setName(r.getLocation().getName());
-        loc = locationService.save(loc);
-        room.setLocation(loc);
-        room.setNumberOfBeds(r.getNumberOfBeds());
-
-
-        List<PriceList> priceLists = r.getPriceList();
-        for (PriceList priceList: priceLists){
-            PriceList pL = new PriceList();
-            pL.setMonth(priceList.getMonth());
-            pL.setPrice(priceList.getPrice());
-            pL = priceListService.save(pL);
-            room.getPriceList().add(pL);
-        }
-
-        // getAdditionalService je prazno...
-        List<RoomAdditionalService> roomAdditionalServices = r.getRoomAdditionalService();
-
-        //Prebaciti da ide po id-u
-
-        for(RoomAdditionalService rAD : roomAdditionalServices){
-            RoomAdditionalService roomAdditionalService = new RoomAdditionalService();
-            roomAdditionalService.setDescription(rAD.getDescription());
-            roomAdditionalService = roomAdditionalServiceService.save(roomAdditionalService);
-            room.getRoomAdditionalService().add(roomAdditionalService);
-        }
-
-        room = roomRepository.save(room);
-        AgentUser agentUser = agentUserService.findByUsername(addRoomDTO.getUsername());
-        List<Room> agentRooms = agentUser.getRoom();
-        agentRooms.add(room);
-        agentUserService.save(agentUser);
-
-        return room;
+        return r;
     }
 
     public List<Room> getRoomsFromAgent(String username){

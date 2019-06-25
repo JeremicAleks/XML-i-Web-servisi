@@ -11,6 +11,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.ws.rs.Produces;
 
+import com.centralapi.domain.xml.xml_ftn.reservation.GetReservations;
 import com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
 import com.centralapi.service.RoomService;
 import com.netflix.discovery.converters.Auto;
@@ -72,6 +73,7 @@ public class RoomSoapController {
 	@ResponsePayload
 	public Room addRoom(@RequestPayload AddRoomDTO request) {
 
+		System.out.println("RAS" + request.getRoom().getRoomAdditionalService().size());
 		// sacuvati u bazu i vratiti room sa id-om
 		Room room = restTemplate.postForObject("http://room-microservice/api/add", request, Room.class);
 
@@ -95,13 +97,10 @@ public class RoomSoapController {
 	@ResponsePayload
 	public GetRooms getRooms(@RequestPayload GetRoomsForUserDTO request) throws IOException {
 
-		GetRooms getRooms = new GetRooms();
+		GetRooms getRooms;
 		//Nema username - a
-		System.out.println("EEEEEE");
-		ResponseEntity<List<Room>> response = restTemplate.exchange("http://room-microservice/api/all", HttpMethod.GET, null, new ParameterizedTypeReference<List<Room>>() {});
-
-		for(Room room: response.getBody())
-			getRooms.getRoom().add(room);
+		getRooms = restTemplate.getForObject("http://room-microservice/api/all", GetRooms.class);
+//		getRooms = restTemplate.getForObject("http://room-microservice/api/all/"+request.getUsername(), GetRooms.class);
 
 
 

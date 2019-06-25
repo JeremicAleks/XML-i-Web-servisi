@@ -10,10 +10,17 @@ package com.centralapi.domain.xml.xml_ftn.users;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
 import com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
 
 
@@ -40,11 +47,14 @@ import com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
 @XmlType(name = "RegistredUser", propOrder = {
     "reservation"
 })
+@Entity
+@DiscriminatorValue("REGISTERED")
 public class RegistredUser
     extends User
 {
 
     @XmlElement(name = "Reservation", namespace = "http://www.xml-ftn.xml.domain.centralapi.com/Reservation")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     protected List<Reservation> reservation;
 
     /**

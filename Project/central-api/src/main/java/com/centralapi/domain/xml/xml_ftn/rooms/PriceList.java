@@ -57,7 +57,7 @@ public class PriceList {
     protected Date month;
     protected double price;
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
     /**
      * Gets the value of the month property.
@@ -67,11 +67,11 @@ public class PriceList {
      *     {@link XMLGregorianCalendar }
      *     
      */
+    
     public Date getMonth() {
         return month;
     }
-
-    /**
+	/**
      * Sets the value of the month property.
      * 
      * @param value

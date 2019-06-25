@@ -1,6 +1,6 @@
 package com.reservation.microservice.repository;
 
-import com.reservation.microservice.domain.Reservation;
+import com.reservation.microservice.domain.reservation.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
