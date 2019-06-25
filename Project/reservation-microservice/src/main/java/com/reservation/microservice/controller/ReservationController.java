@@ -1,6 +1,7 @@
 package com.reservation.microservice.controller;
 
 import com.reservation.microservice.domain.reservation.*;
+import com.reservation.microservice.domain.user.SendMessageDTO;
 import com.reservation.microservice.service.MessageTableService;
 import com.reservation.microservice.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,24 @@ public class ReservationController {
 
 
         return getMessages;
+    }
+
+    @PostMapping(value = "/changeState")
+    public Reservation changeState(@RequestBody AllowReservationDTO allowReservationDTO){
+        Reservation reservation;
+
+        reservation = reservationService.changeState(allowReservationDTO);
+
+        return reservation;
+    }
+
+    @PostMapping(value = "/sendMessage")
+    public MessageTable sendMessage(@RequestBody SendMessageDTO sendMessageDTO){
+        MessageTable messageTable;
+
+        messageTable = messageTableService.sendMessage(sendMessageDTO);
+
+        return messageTable;
     }
 
 }

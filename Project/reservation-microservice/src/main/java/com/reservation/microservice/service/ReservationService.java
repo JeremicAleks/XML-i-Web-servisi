@@ -3,6 +3,7 @@ package com.reservation.microservice.service;
 import java.util.Date;
 import java.util.List;
 
+import com.reservation.microservice.domain.reservation.AllowReservationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,30 +52,30 @@ public class ReservationService {
         reservation.setCheckIn(reservationDTO.getReservation().getCheckIn());
         reservation.setCheckOut(reservationDTO.getReservation().getCheckOut());
         reservation.setState(reservationDTO.getReservation().getState());
-        List<MessageTable> messageTables = reservationDTO.getReservation().getMessageTable();
 
-        for(MessageTable mt:messageTables) {
-            MessageTable messageTable = new MessageTable();
-            messageTable.setFromUser(mt.getFromUser());
-            messageTable.setToUser(mt.getToUser());
-            messageTable.setMessageString(mt.getMessageString());
-
-            messageTable = messageTableService.save(messageTable);
-            reservation.getMessageTable().add(messageTable);
-        }
 
         reservation = save(reservation);
 
-        if (reservationDTO.getUserId() != 0L){
-            RegistredUser registredUser = registeredUserService.findById(reservationDTO.getUserId());
+        if (reservationDTO.getUserId() != null){
+            RegistredUser registredUser = registeredUserService.findByUsername(reservationDTO.getUserId());
             registredUser.getReservation().add(reservation);
             registeredUserService.save(registredUser);
         }
 
         Room room = roomService.fingById(reservationDTO.getRoomId());
         room.getReservation().add(reservation);
-        room = roomService.save(room);
+        roomService.save(room);
 
+
+        return reservation;
+    }
+
+    public Reservation changeState(AllowReservationDTO allowReservationDTO) {
+
+        Reservation reservation = findById(allowReservationDTO.getReservationId());
+        reservation.setState(allowReservationDTO.getState());
+
+        reservation = save(reservation);
 
         return reservation;
     }

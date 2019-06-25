@@ -2,7 +2,9 @@ package com.reservation.microservice.service;
 
 import com.reservation.microservice.domain.reservation.MessageTable;
 import com.reservation.microservice.domain.reservation.Reservation;
+import com.reservation.microservice.domain.room.Room;
 import com.reservation.microservice.domain.user.RegistredUser;
+import com.reservation.microservice.domain.user.SendMessageDTO;
 import com.reservation.microservice.repository.MessageTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,10 @@ public class MessageTableService {
     private MessageTableRepository messageTableRepository;
     @Autowired
     private RegisteredUserService registeredUserService;
+    @Autowired
+    private ReservationService reservationService;
+    @Autowired
+    private RoomService roomService;
 
     public MessageTable findById(Long id){return messageTableRepository.getOne(id);}
 
@@ -33,5 +39,18 @@ public class MessageTableService {
             messageTables.addAll(reservation.getMessageTable());
 
         return messageTables;
+    }
+
+    public MessageTable sendMessage(SendMessageDTO sendMessageDTO) {
+        MessageTable messageTable = sendMessageDTO.getMessageTable();
+        Room room = roomService.fingById(sendMessageDTO.getRoomId());
+        Reservation reservation =reservationService.findById(sendMessageDTO.getRoomId());
+
+        messageTable = save(messageTable);
+
+        reservation.getMessageTable().add(messageTable);
+        reservationService.save(reservation);
+
+        return messageTable;
     }
 }
