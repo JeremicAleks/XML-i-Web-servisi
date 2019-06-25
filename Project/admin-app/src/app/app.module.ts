@@ -11,13 +11,15 @@ import { JwtInterceptor } from './utils/authInterceptors/jwt-interceptor';
 import { ErrorInterceptor } from './utils/authInterceptors/error-interceptor';
 import { DatePipe } from '@angular/common';
 import { AdminUserConfigurationComponent } from './views/admin-user-configuration/admin-user-configuration.component';
+import { AdminCodeBookComponent } from './views/admin-code-book/admin-code-book.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavibarComponent,
     AdminRoleConfigurationComponent,
-    AdminUserConfigurationComponent
+    AdminUserConfigurationComponent,
+    AdminCodeBookComponent
   ],
   imports: [
     BrowserModule,
