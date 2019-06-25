@@ -44,10 +44,6 @@ public class CodeBookController {
 	@PostMapping(value = "/accommodation/newType", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseMessage> addAccommodationType(@Valid @RequestBody AccommodationDTO accommodationType) {
 		
-		System.out.println(accommodationType.getClass());
-		System.out.println(accommodationType.getId());
-		System.out.println(accommodationType.getDescription());
-		
 		ResponseMessage rm = codeBookService.addAccommodationType(accommodationType.getDescription());
 
 		return new ResponseEntity<>(rm, HttpStatus.OK);
@@ -55,7 +51,8 @@ public class CodeBookController {
 	
 	@DeleteMapping(value = "/accommodation/deleteType/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseMessage> deleteRole(@PathVariable Long id) {
-
+		
+		System.out.println("deleteid: " + id);
 		ResponseMessage rm = codeBookService.deleteAccommodationType(id);
 
 		return new ResponseEntity<>(rm, HttpStatus.OK);

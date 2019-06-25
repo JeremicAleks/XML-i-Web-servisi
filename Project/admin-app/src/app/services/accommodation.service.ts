@@ -22,7 +22,7 @@ export class AccommodationService {
   }
 
   deleteAccommodationType(id: number) {
-    return this.http.delete<any>(environment.centralApiUrl + '/api/accommodation/deleteType' + id )
+    return this.http.delete<any>(environment.centralApiUrl + '/api/accommodation/deleteType/' + id)
     .pipe(map(retVal => {
       return retVal;
     }

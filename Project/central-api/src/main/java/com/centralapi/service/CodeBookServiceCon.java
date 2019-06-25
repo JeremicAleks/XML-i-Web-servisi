@@ -32,7 +32,7 @@ public class CodeBookServiceCon implements CodeBookService {
 		
 		System.out.println(accommodationType);
 
-		accommTypeRepo.save(new AccommodationType(accommodationType));
+		accommTypeRepo.save(new AccommodationType(accommodationType, true));
 
 		return new ResponseMessage("Successfully add accommodation type!");
 	}
