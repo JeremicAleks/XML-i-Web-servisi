@@ -24,7 +24,6 @@
       <!-- Accommodation type -->
       <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         accommodation type
-
         <br>
         <!-- TABELA ZA ACCOMM TYPE -->
         <table class="table">
@@ -36,17 +35,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let at of this.accomodationTypes; let i = index">
+            <tr *ngFor="let at of this.accommodationTypes; let i = index">
               <td>{{at.id}}</td>
               <td>{{at.description}}</td>
-
               <td>
                 <button type="button" class="btn btn-outline-danger" style="margin-right: 10px"
-                  (click)="deleteAccomodationType(at, at.id)">Delete</button>
+                  (click)="deleteAccomodationType(at.id)">Delete</button>
               </td>
             </tr>
           </tbody>
         </table>
+
+        <br>
+
+        <button type="button" class="btn btn-outline-success" style="margin-left: 20px"
+          (click)="newAccommodationType(newAccommodationTypeModal)">New</button>
       </div>
 
       <!-- Accommodation category -->
@@ -62,3 +65,96 @@
     </div>
   </div>
 </section>
+
+<!-- NEW ACCOMMODATION TYPE MODAL-->
+<ng-template #newAccommodationTypeModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Create new accommodation type</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="newAccommodationTypeForm" [formGroup]="newAccommodationTypeForm">
+      <div class="container" id="newAccommodationTypeForm">
+        <div class="form-group">
+          <div class="form-group row">
+            <label for="role" class="col-sm-4 col-form-label">Description</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="typeDescription" placeholder="DESCRIPTION"
+                formControlName="typeDescription"
+                [ngClass]="{'is-invalid':newAccommodationTypeForm.get('typeDescription').touched 
+                && newAccommodationTypeForm.get('typeDescription').invalid}" required>
+              <div
+                *ngIf="newAccommodationTypeForm.get('typeDescription').touched 
+                && newAccommodationTypeForm.get('typeDescription').invalid" class="invalid-feedback">
+                <div>Type description is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" [disabled]="!newAccommodationTypeForm.valid"
+      (click)="createNewAccommodationType()">Confirm</button>
+  </div>
+</ng-template>
+
+<!-- UPDATE USER MODAL-->
+<ng-template #updateRoleModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Update role privilages</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="form" [formGroup]="updateRoleForm" id="updateRoleForm">
+      <div class="form-group">
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <table>
+              <tr>
+                <td style="padding: 8px;">
+                  <input type="checkbox" id="write" (change)="changeCheckBox($event)" formControlName="write">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <label for="write" class="col-sm-5 col-form-label">Write product</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <table>
+              <tr>
+                <td style="padding: 8px;">
+                  <input type="checkbox" id="read" (change)="changeCheckBox($event)" formControlName="read">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <label for="read" class="col-sm-5 col-form-label">Read product</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <table>
+              <tr>
+                <td style="padding: 8px;">
+                  <input type="checkbox" id="delete" (change)="changeCheckBox($event)" formControlName="delete">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <label for="delete" class="col-sm-5 col-form-label">Delete product</label>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" (click)="saveRoleChanges()">Save changes</button>
+  </div>
+</ng-template>

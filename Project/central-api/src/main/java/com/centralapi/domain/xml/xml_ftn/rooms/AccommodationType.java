@@ -59,6 +59,12 @@ public class AccommodationType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
     protected boolean active;
+    
+    public AccommodationType() {}
+    
+    public AccommodationType(String description) {
+    	this.description = description;
+    }
 
     /**
      * Gets the value of the description property.

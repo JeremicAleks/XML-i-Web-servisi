@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { AdminRoleConfigurationComponent } from './views/admin-role-configuration/admin-role-configuration.component';
 import { AdminUserConfigurationComponent } from './views/admin-user-configuration/admin-user-configuration.component';
 import { SecAdminGuard } from './utils/sec-admin-guard';
+import { AdminCodeBookComponent } from './views/admin-code-book/admin-code-book.component';
 
 const routes: Routes = [
 
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path: 'admin/config/role',
     component: AdminRoleConfigurationComponent // , canActivate: [SecAdminGuard]
+  },
+
+  {
+    path: 'admin/config/codeBook',
+    component: AdminCodeBookComponent // , canActivate: [SecAdminGuard]
   }
 
 ];

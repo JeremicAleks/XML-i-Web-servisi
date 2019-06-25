@@ -1,6 +1,9 @@
 export class AccommodationDTO {
-    id: string;
-    description: string;
+    id: number;
+    description: String;
 
-    constructor() {}
+    constructor() {
+        this.id = -1;
+        this.description = '';
+    }
 }
