@@ -50,7 +50,7 @@ import java.util.List;
 })
 @XmlRootElement(name = "AgentUser")
 @Entity
-@DiscriminatorColumn(name = "AGENT")
+@DiscriminatorValue("AGENT")
 public class AgentUser
     extends User
 {

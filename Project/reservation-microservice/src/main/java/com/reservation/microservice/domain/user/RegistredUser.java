@@ -43,7 +43,7 @@ import java.util.List;
     "reservation"
 })
 @Entity
-@DiscriminatorColumn(name="REGISTERED")
+@DiscriminatorValue("REGISTERED")
 public class RegistredUser
     extends User
 {
