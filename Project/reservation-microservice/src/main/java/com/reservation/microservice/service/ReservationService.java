@@ -1,5 +1,6 @@
 package com.reservation.microservice.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,23 +48,23 @@ public class ReservationService {
     }
 
     public Reservation reserveRoom(ReservationDTO reservationDTO) {
+        Room room = roomService.findById(reservationDTO.getRoomId());
 
-    	Reservation res = reservationRepository.save(reservationDTO.getReservation());
-    	
-        if (reservationDTO.getUserId() != null){
-            RegistredUser registredUser = registeredUserService.findByUsername(reservationDTO.getUserId());
-            registredUser.getReservation().add(res);
-            registeredUserService.save(registredUser);
-            System.out.println("ovde ne ulazi");
+        List<Reservation> reservations = reservationsRoomForDate(room,reservationDTO.getReservation().getCheckIn(),reservationDTO.getReservation().getCheckOut());
+        if(reservations.isEmpty()){
+            Reservation res = reservationRepository.save(reservationDTO.getReservation());
+            if (reservationDTO.getUserId() != null){
+                RegistredUser registredUser = registeredUserService.findByUsername(reservationDTO.getUserId());
+                registredUser.getReservation().add(res);
+                registeredUserService.save(registredUser);
+            }
+            room.getReservation().add(res);
+            roomService.save(room);
+            return res;
+        }else{
+            return  null;
         }
 
-        System.out.println("ovde ulazi");
-        Room room = roomService.fingById(reservationDTO.getRoomId());
-        room.getReservation().add(res);
-        roomService.save(room);
-
-
-        return res;
     }
 
     public Reservation changeState(AllowReservationDTO allowReservationDTO) {
@@ -74,5 +75,18 @@ public class ReservationService {
         reservation = save(reservation);
 
         return reservation;
+    }
+
+    public List<Reservation> reservationsRoomForDate(Room room,Date startDate,Date endDate){
+        List<Reservation> res = new ArrayList<>();
+        List<Reservation> all = room.getReservation();
+
+        for (Reservation r : all){
+            if((startDate.before(r.getCheckIn()) && endDate.after(r.getCheckIn()))|| (startDate.before(r.getCheckOut())&&endDate.after(r.getCheckOut()))
+            || (startDate.after(r.getCheckIn())&& endDate.before(r.getCheckOut()))|| (startDate.before(r.getCheckIn())&&endDate.after(r.getCheckOut())) || startDate.equals(r.getCheckIn()) || endDate.equals(r.getCheckOut())){
+                res.add(r);
+            }
+        }
+        return res;
     }
 }

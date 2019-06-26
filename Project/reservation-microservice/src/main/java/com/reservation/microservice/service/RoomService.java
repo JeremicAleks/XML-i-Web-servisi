@@ -11,7 +11,7 @@ public class RoomService {
     @Autowired
     private RoomRepository roomRepository;
 
-    public Room fingById(Long id){return roomRepository.getOne(id);}
+    public Room findById(Long id){return roomRepository.getOne(id);}
 
 
     public Room save(Room room) {

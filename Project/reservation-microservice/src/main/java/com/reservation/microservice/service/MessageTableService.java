@@ -43,7 +43,7 @@ public class MessageTableService {
 
     public Reservation sendMessage(SendMessageDTO sendMessageDTO) {
         MessageTable messageTable = sendMessageDTO.getMessageTable();
-        Room room = roomService.fingById(sendMessageDTO.getRoomId());
+        Room room = roomService.findById(sendMessageDTO.getRoomId());
         Reservation reservation =reservationService.findById(sendMessageDTO.getRoomId());
 
         messageTable = save(messageTable);
