@@ -6,7 +6,16 @@ public class AddRateAndCommentDTO {
 	private Integer rate;
 	private Long roomId;
 	private Long reservationId;
+	private String username;
 	
+	
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public String getComment() {
 		return comment;
 	}

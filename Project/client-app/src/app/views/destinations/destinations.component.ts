@@ -26,6 +26,7 @@ export class DestinationsComponent implements OnInit {
 
   ngOnInit() {
 
+
     this.destination = this.route.snapshot.paramMap.get('destination');
     const checkIn = this.route.snapshot.paramMap.get('checkIn');
     alert(checkIn);
@@ -51,6 +52,7 @@ export class DestinationsComponent implements OnInit {
       },
       error => {
         alert('jebem ti se s mamom');
+
       }
     );
   }

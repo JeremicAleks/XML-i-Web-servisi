@@ -55,6 +55,10 @@ export class MainHomepageComponent implements OnInit {
       destination = 'null';
     }
 
+
+   // this.router.navigate(['/searchResult'+'/'+this.searchParams.destination + '/' + this.searchParams.checkIn + '/' + this.searchParams.checkOut + '/' + this.searchParams.numOfPeople])
+
     this.router.navigate(['/searchResult' + '/' + destination + '/' + myDate + '/' + myDate2  + '/' + this.numOfPeople]);
+
   }
 }
