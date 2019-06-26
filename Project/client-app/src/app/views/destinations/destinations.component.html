@@ -59,88 +59,113 @@
         </div>
         <div class="row ">
           <div class="col-md-12">
-            <div class="card bg-primary text-white">
+            <div class="card bg-basic text-black">
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-12">
-                    <h3>Search</h3>
+                    <h3>Filter by</h3>
                   </div>
+                  <hr>
                 </div>
                 <div class="row">
                   <div class="col-md-12">
                     <form>
                       <div class="form-group">
-                        <select class="form-control" id="conditionsselect1">
-                          <option>Conditions</option>
-                          <option>New</option>
-                          <option>Used</option>
-                        </select>
+
+                          <div>
+                            <label class="labelkat">Property type</label>
+                            <div class="chiller_cb">
+                              <input id="myCheckbox" type="checkbox" >
+                              <label for="myCheckbox">Hotel</label>
+                              <span></span>
+                            </div>
+                            <div class="chiller_cb">
+                              <input id="myCheckbox2" type="checkbox">
+                              <label for="myCheckbox2">Bed&Breakfast</label>
+                              <span></span>
+                            </div>
+                            <div class="chiller_cb">
+                              <input id="myCheckbox3" type="checkbox">
+                              <label for="myCheckbox3">Apartment</label>
+                              <span></span>
+                            </div>
+                          </div>
+
                       </div>
                       <div class="form-group">
-                        <select class="form-control" id="conditionsselect2">
-                          <option>Body</option>
-                          <option>Compact</option>
-                          <option>Convertible</option>
-                          <option>Coupe</option>
-                          <option>Off-road</option>
-                          <option>Sedan</option>
-                        </select>
+
+                          <div>
+                            <label class="labelkat">Star rating</label>
+                            <div class="chiller_cb">
+                              <input id="myCheckbox11" type="checkbox" >
+                              <label for="myCheckbox11">unrated</label>
+                              <span></span>
+                            </div>
+                            <div class="chiller_cb">
+                              <input id="myCheckbox22" type="checkbox">
+                              <label for="myCheckbox22">2+ stars</label>
+                              <span></span>
+                            </div>
+                            <div class="chiller_cb">
+                              <input id="myCheckbox33" type="checkbox">
+                              <label for="myCheckbox33">3+ stars</label>
+                              <span></span>
+                            </div>
+                            <div class="chiller_cb">
+                              <input id="myCheckbox34" type="checkbox">
+                              <label for="myCheckbox34">4+ stars</label>
+                              <span></span>
+                            </div>
+                            <div class="chiller_cb">
+                              <input id="myCheckbox35" type="checkbox">
+                              <label for="myCheckbox35">5 stars</label>
+                              <span></span>
+                            </div>
+                          </div>
+
                       </div>
                       <div class="form-group">
-                        <select class="form-control" id="make1">
-                          <option>Make</option>
-                          <option>Ford</option>
-                          <option>Hyundai</option>
-                          <option>Kia</option>
-                          <option>Honda</option>
-                          <option>Skoda</option>
-                        </select>
+                        <div>
+                          <label class="labelkat">Distance from city center</label>
+                          <div class="chiller_cb">
+                            <input id="myCheckboxa" type="checkbox" >
+                            <label for="myCheckboxa">less than 1km</label>
+                            <span></span>
+                          </div>
+                          <div class="chiller_cb">
+                            <input id="myCheckbox2b" type="checkbox">
+                            <label for="myCheckbox2b">less than 2km</label>
+                            <span></span>
+                          </div>
+                          <div class="chiller_cb">
+                            <input id="myCheckbox3c" type="checkbox">
+                            <label for="myCheckbox3c">less than 3km</label>
+                            <span></span>
+                          </div>
+                        </div>
                       </div>
                       <div class="form-group">
-                        <select class="form-control" id="make1">
-                          <option>Model</option>
-                          <option>Accord</option>
-                          <option>Camry</option>
-                          <option>Civic</option>
-                          <option>Rapid</option>
-                          <option>Octavia</option>
-                        </select>
+                        <div>
+                          <label class="labelkat">Other</label>
+                          <div class="chiller_cb">
+                            <input id="myCheckboxaq" type="checkbox" >
+                            <label for="myCheckboxaq">Parking</label>
+                            <span></span>
+                          </div>
+                          <div class="chiller_cb">
+                            <input id="myCheckbox2w" type="checkbox">
+                            <label for="myCheckbox2w">Wi-fi</label>
+                            <span></span>
+                          </div>
+                          <div class="chiller_cb">
+                            <input id="myCheckbox3all" type="checkbox">
+                            <label for="myCheckbox3all">All-inclusive</label>
+                            <span></span>
+                          </div>
+                        </div>
                       </div>
-                      <div class="form-group">
-                        <select class="form-control" id="mileage1">
-                          <option>Max Mileage</option>
-                          <option>< 5000</option>
-                          <option>5000-10000</option>
-                          <option>10000-15000</option>
-                          <option>15000-20000</option>
-                          <option>20000-25000</option>
-                          <option>> 25000</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <select class="form-control" id="year1">
-                          <option>Year</option>
-                          <option>2000</option>
-                          <option>2001</option>
-                          <option>2002</option>
-                          <option>2003</option>
-                          <option>2004</option>
-                          <option>2005</option>
-                          <option>2006</option>
-                          <option>2007</option>
-                          <option>2008</option>
-                          <option>2009</option>
-                          <option>2010</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <select class="form-control" id="make1">
-                          <option>Transmission</option>
-                          <option>Automatic</option>
-                          <option>Manaul</option>
-                          <option>Semi-Automatic</option>
-                        </select>
-                      </div>
+
+
                       <hr>
                       <button type="btn" class="btn btn-primary">Find Now</button>
                       <button type="btn" class="btn btn-primary">Reset All</button>
@@ -164,21 +189,17 @@
           <div class="col-md-12">
             <ul class="nav nav-justified nav-pills">
               <li class="nav-item">
-                <a class="nav-link active" href="#">Active</a>
+                <a class="nav-link active" href="#">Price</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link bg-light" href="#">Active</a>
+                <a class="nav-link bg-light" href="#">Distance</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link bg-light" href="#">Active</a>
+                <a class="nav-link bg-light" href="#">Review</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link bg-light" href="#">Active</a>
+                <a class="nav-link bg-light" href="#">Category</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link bg-light" href="#">Active</a>
-              </li>
-
             </ul>
           </div>
         </div>

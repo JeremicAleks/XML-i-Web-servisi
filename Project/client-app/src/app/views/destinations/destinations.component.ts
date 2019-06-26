@@ -27,6 +27,7 @@ export class DestinationsComponent implements OnInit {
   ngOnInit() {
 
     this.dest = this.route.snapshot.paramMap.get('destination');
+    //this.brojsoba = this.route.snapshot.paramMap.get('numOfPeople');
     let ngbDate = this.searchForm.get("checkIn").value;
     let myDate = new Date(ngbDate.year, ngbDate.month-1, ngbDate.day);
     let ngbDate2 = this.searchForm.get("checkOut").value;

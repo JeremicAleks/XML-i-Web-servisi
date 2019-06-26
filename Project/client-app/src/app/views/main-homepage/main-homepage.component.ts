@@ -53,6 +53,6 @@ export class MainHomepageComponent implements OnInit {
 
     this.searchParams = new SearchParams(this.searchForm.get("destination").value,myDate,myDate2,this.brojsoba);
 
-    this.router.navigate(['/searchResult'+'/'+this.searchParams.destination + '/123/123/2'])
+    this.router.navigate(['/searchResult'+'/'+this.searchParams.destination + '/' + this.searchParams.checkIn + '/' + this.searchParams.checkOut + '/' + this.searchParams.numOfPeople])
   }
 }
