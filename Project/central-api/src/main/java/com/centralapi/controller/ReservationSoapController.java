@@ -1,7 +1,5 @@
 package com.centralapi.controller;
 
-import com.centralapi.domain.xml.xml_ftn.reservation.*;
-import com.centralapi.domain.xml.xml_ftn.users.SendMessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.client.RestTemplate;
@@ -10,8 +8,15 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import com.centralapi.domain.xml.xml_ftn.reservation.AllowReservationDTO;
+import com.centralapi.domain.xml.xml_ftn.reservation.GetMessages;
+import com.centralapi.domain.xml.xml_ftn.reservation.GetReservations;
+import com.centralapi.domain.xml.xml_ftn.reservation.MessageTable;
+import com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
+import com.centralapi.domain.xml.xml_ftn.reservation.ReservationDTO;
 import com.centralapi.domain.xml.xml_ftn.users.GetMessagesForUserDTO;
 import com.centralapi.domain.xml.xml_ftn.users.GetReservationForUserDTO;
+import com.centralapi.domain.xml.xml_ftn.users.SendMessageDTO;
 
 @Endpoint
 public class ReservationSoapController {

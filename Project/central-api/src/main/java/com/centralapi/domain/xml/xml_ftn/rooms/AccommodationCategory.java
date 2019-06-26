@@ -60,7 +60,14 @@ public class AccommodationCategory {
     protected long id;
     protected boolean active;
 
-    /**
+    public AccommodationCategory() {}
+    
+    public AccommodationCategory(String description, boolean active) {
+		this.description = description;
+		this.active = active;
+	}
+
+	/**
      * Gets the value of the description property.
      * 
      * @return
