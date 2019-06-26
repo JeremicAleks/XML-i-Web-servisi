@@ -34,7 +34,7 @@ export class AdminCommentConfigComponent implements OnInit {
     console.log('getAllComments');
     this.commentService.getAllComments().subscribe(
       data => {
-        alert(data.message);
+        // alert(data.message);
         this.allComments = data;
       },
       error => {

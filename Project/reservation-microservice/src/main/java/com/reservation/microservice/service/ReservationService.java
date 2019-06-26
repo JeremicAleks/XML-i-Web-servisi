@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.reservation.microservice.domain.reservation.AllowReservationDTO;
+import com.reservation.microservice.domain.dto.ClientReservationDTO;
+import com.reservation.microservice.domain.reservation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.reservation.microservice.domain.reservation.MessageTable;
-import com.reservation.microservice.domain.reservation.Reservation;
-import com.reservation.microservice.domain.reservation.ReservationDTO;
 import com.reservation.microservice.domain.room.Room;
 import com.reservation.microservice.domain.user.RegistredUser;
 import com.reservation.microservice.repository.ReservationRepository;
@@ -88,5 +86,27 @@ public class ReservationService {
             }
         }
         return res;
+    }
+
+    public Reservation reserveRoomClient(ClientReservationDTO clientReservationDTO) {
+        Reservation reservation = new Reservation();
+        reservation.setState(ReservationStateEnum.PENDING);
+        reservation.setCheckIn(clientReservationDTO.getCheckIn());
+        reservation.setCheckOut(clientReservationDTO.getCheckOut());
+
+        Room room = roomService.findById(clientReservationDTO.getRoomId());
+
+        List<Reservation> reservations = reservationsRoomForDate(room,reservation.getCheckIn(),reservation.getCheckOut());
+
+        if (reservations.isEmpty()){
+            reservation = save(reservation);
+            RegistredUser registredUser = registeredUserService.findByUsername(clientReservationDTO.getUsername());
+            registredUser.getReservation().add(reservation);
+            registeredUserService.save(registredUser);
+            return reservation;
+        }else
+            return null;
+
+
     }
 }

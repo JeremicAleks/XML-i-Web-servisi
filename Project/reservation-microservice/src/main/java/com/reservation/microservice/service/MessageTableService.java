@@ -1,5 +1,6 @@
 package com.reservation.microservice.service;
 
+import com.reservation.microservice.domain.dto.ClientSendMessageDTO;
 import com.reservation.microservice.domain.reservation.MessageTable;
 import com.reservation.microservice.domain.reservation.Reservation;
 import com.reservation.microservice.domain.room.Room;
@@ -53,5 +54,18 @@ public class MessageTableService {
 
         return reservation;
 
+    }
+
+    public Reservation sendMessageClient(ClientSendMessageDTO clientSendMessageDTO) {
+        Reservation reservation = reservationService.findById(clientSendMessageDTO.getIdReservation());
+        MessageTable messageTable = new MessageTable();
+        messageTable.setFromUser(clientSendMessageDTO.getUsername());
+        messageTable.setMessageString(clientSendMessageDTO.getMessage());
+        //treba naci agenta :D
+
+        reservation.getMessageTable().add(messageTable);
+        reservation = reservationService.save(reservation);
+
+        return reservation;
     }
 }

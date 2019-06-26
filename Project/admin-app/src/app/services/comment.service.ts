@@ -13,16 +13,16 @@ export class CommentService {
 
   getAllComments() {
     return this.http.get<any>(environment.centralApiUrl + '/api/comment/getComments')
-    .pipe(map(allComments => {
-      return allComments;
+    .pipe(map(data => {
+      return data;
     }
     ));
   }
 
   approveComment(id: number) {
     return this.http.get<any>(environment.centralApiUrl + '/api/comment/approveComment/' + id)
-    .pipe(map(allComments => {
-      return allComments;
+    .pipe(map(data => {
+      return data;
     }
     ));
   }

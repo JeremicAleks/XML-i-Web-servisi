@@ -1,5 +1,7 @@
 package com.reservation.microservice.controller;
 
+import com.reservation.microservice.domain.dto.ClientReservationDTO;
+import com.reservation.microservice.domain.dto.ClientSendMessageDTO;
 import com.reservation.microservice.domain.reservation.*;
 import com.reservation.microservice.domain.user.SendMessageDTO;
 import com.reservation.microservice.service.MessageTableService;
@@ -64,6 +66,15 @@ public class ReservationController {
         return reservation;
     }
 
+    @PostMapping(value ="/addFromClient")
+    public Reservation reserveClient(@RequestBody ClientReservationDTO clientReservationDTO){
+	    Reservation reservation;
+
+	    reservation = reservationService.reserveRoomClient(clientReservationDTO);
+
+	    return reservation;
+    }
+
     @GetMapping(value ="/allMessage/{username}")
     public GetMessages getMessagesForUser(@PathVariable String username){
         GetMessages getMessages = new GetMessages();
@@ -71,7 +82,6 @@ public class ReservationController {
         List<MessageTable> messageTables = messageTableService.getMessageForUser(username);
         for (MessageTable messageTable:messageTables)
             getMessages.getMessageTable().add(messageTable);
-
 
         return getMessages;
     }
@@ -92,6 +102,16 @@ public class ReservationController {
         reservation = messageTableService.sendMessage(sendMessageDTO);
 
         return reservation;
+    }
+
+    @PostMapping(value = "/sendMessageClient")
+    public Reservation sendMessageClient(@RequestBody ClientSendMessageDTO clientSendMessageDTO){
+	    Reservation reservation;
+
+	    reservation = messageTableService.sendMessageClient(clientSendMessageDTO);
+
+
+	    return reservation;
     }
 
 }

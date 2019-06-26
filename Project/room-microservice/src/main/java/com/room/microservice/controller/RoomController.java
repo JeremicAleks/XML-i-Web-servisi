@@ -56,6 +56,12 @@ public class RoomController {
 
         return getRooms;
     }
+
+    @GetMapping(value="/{id}")
+    public Room getRoom(@PathVariable Long id){
+        Room room = roomService.findById(id);
+        return room;
+    }
     
 	@PreAuthorize("hasRole('ROLE_CENTRAL_APP')")
 	@GetMapping(value = "/test",produces = MediaType.APPLICATION_JSON_VALUE)
