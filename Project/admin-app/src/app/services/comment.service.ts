@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { RateAndComment } from '../models/rate-and-comment';
 
 @Injectable({
   providedIn: 'root'

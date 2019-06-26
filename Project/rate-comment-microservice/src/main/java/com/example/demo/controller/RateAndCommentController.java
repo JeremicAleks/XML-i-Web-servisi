@@ -20,59 +20,52 @@ import com.example.demo.service.RateAndCommentService;
 @RestController
 @RequestMapping("/api")
 public class RateAndCommentController {
-	
+
 	@Autowired
 	RateAndCommentService rateAndComment;
-	
+
 	@Autowired
 	RateAndCommentRepository ratesRepo;
-	
+
 	@GetMapping(value = "/rates/all/{idRoom}")
 	public ResponseEntity<?> getAllRatesForRoom(@PathVariable Long idRoom) {
-		
 
 		List<RateAndComment> rates = rateAndComment.getRatesForRoom(idRoom);
-		if(rates == null)
+		if (rates == null)
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-		
+
 		return new ResponseEntity<>(rates, HttpStatus.OK);
-		
+
 	}
-	
+
 	@GetMapping(value = "/rates/all")
 	public ResponseEntity<?> getAllRates() {
-		
-		
-		
+
 		return new ResponseEntity<>(ratesRepo.getRatesForAdmin(), HttpStatus.OK);
-		
+
 	}
-	
+
 	@PostMapping(value = "/rates/add")
 	public ResponseEntity<?> addRatesForRoom(@RequestBody AddRateAndCommentDTO rate) {
-		
-		
+
 		RateAndComment rates = rateAndComment.addRateAndComment(rate);
-		if(rates == null)
+		if (rates == null)
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-		
+
 		return new ResponseEntity<>(rates, HttpStatus.OK);
-		
+
 	}
-	
+
 	@GetMapping(value = "/rates/allow/{id}")
 	public ResponseEntity<?> AllowRatesForRoom(@PathVariable Long id) {
-		
+
 		try {
-		rateAndComment.AllowRateAndComment(id);
-		}
-		catch (Exception e) {
+			rateAndComment.AllowRateAndComment(id);
+		} catch (Exception e) {
 			return new ResponseEntity<>("Error for allowing rate and comment!", HttpStatus.OK);
 		}
 
-		return new ResponseEntity<>("Succussfully allowed rate and comment!", HttpStatus.OK);
-		
+		return new ResponseEntity<>("Successfully allowed rate and comment!", HttpStatus.OK);
 	}
-	
 
 }

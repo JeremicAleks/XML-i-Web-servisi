@@ -1,15 +1,16 @@
-<p>
-  admin-comment-config works!
-</p>
-
 <br>
+
+<h4 style="text-align: center">
+  Comment config
+</h4> 
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">#id</th>
       <th scope="col">User</th>
       <th scope="col">Comment</th>
+      <th scope="col">Rating</th>
       <th scope="col">Approve</th>
     </tr>
   </thead>
@@ -21,7 +22,7 @@
       <td>{{c.rating}}</td>
       <td>
         <!-- APPROVE COMMENT -->
-        <button type="button" class="btn btn-outline-success" style="margin-right: 10px" (click)="approveComment(c.id)">
+        <button type="button" class="btn btn-outline-success" style="border-radius: 100%" (click)="approveComment(c.id)">
           <i class="material-icons">check_circle_outline</i></button>
       </td>
     </tr>
