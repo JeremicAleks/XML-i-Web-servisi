@@ -10,6 +10,7 @@ import { SecAdminGuard } from './utils/sec-admin-guard';
 import { AdminCodeBookAccommodationTypeComponent } from './views/admin-code-book-accommodation-type/admin-code-book-accommodation-type.component';
 import { AdminCodeBookAccommodationCategoryComponent } from './views/admin-code-book-accommodation-category/admin-code-book-accommodation-category.component';
 import { AdminCodeBookAdditionalServiceComponent } from './views/admin-code-book-additional-service/admin-code-book-additional-service.component';
+import { AdminCommentConfigComponent } from './views/admin-comment-config/admin-comment-config.component';
 
 const routes: Routes = [
 
@@ -36,6 +37,11 @@ const routes: Routes = [
   {
     path: 'admin/config/codeBook/additionalService',
     component: AdminCodeBookAdditionalServiceComponent // , canActivate: [SecAdminGuard]
+  },
+
+  {
+    path: 'admin/config/comment',
+    component: AdminCommentConfigComponent // , canActivate: [SecAdminGuard]
   }
 
 ];

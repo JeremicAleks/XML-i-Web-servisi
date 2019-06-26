@@ -40,6 +40,7 @@ public class SearchController {
 		return new ResponseEntity<>(searchResults, HttpStatus.OK);
 		//return new ResponseEntity<>(searchResults, reply.getStatusCode());
 	}
+	
 	@GetMapping(value="/test",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> testsearch() {
 		System.out.println("fsafsafa");

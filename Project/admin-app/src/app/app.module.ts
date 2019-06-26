@@ -14,6 +14,7 @@ import { AdminUserConfigurationComponent } from './views/admin-user-configuratio
 import { AdminCodeBookAccommodationTypeComponent } from './views/admin-code-book-accommodation-type/admin-code-book-accommodation-type.component';
 import { AdminCodeBookAccommodationCategoryComponent } from './views/admin-code-book-accommodation-category/admin-code-book-accommodation-category.component';
 import { AdminCodeBookAdditionalServiceComponent } from './views/admin-code-book-additional-service/admin-code-book-additional-service.component';
+import { AdminCommentConfigComponent } from './views/admin-comment-config/admin-comment-config.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AdminCodeBookAdditionalServiceComponent } from './views/admin-code-book
     AdminUserConfigurationComponent,
     AdminCodeBookAccommodationTypeComponent,
     AdminCodeBookAccommodationCategoryComponent,
-    AdminCodeBookAdditionalServiceComponent
+    AdminCodeBookAdditionalServiceComponent,
+    AdminCommentConfigComponent
   ],
   imports: [
     BrowserModule,

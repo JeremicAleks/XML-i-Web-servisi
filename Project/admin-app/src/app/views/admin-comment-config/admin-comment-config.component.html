@@ -1,0 +1,29 @@
+<p>
+  admin-comment-config works!
+</p>
+
+<br>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">User</th>
+      <th scope="col">Comment</th>
+      <th scope="col">Approve</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of allComments; index as i">
+      <th scope="row">{{c.id}}</th>
+      <td>{{c.regUser.username}}</td>
+      <td>{{c.comment}}</td>
+      <td>{{c.rating}}</td>
+      <td>
+        <!-- APPROVE COMMENT -->
+        <button type="button" class="btn btn-outline-success" style="margin-right: 10px" (click)="approveComment(c.id)">
+          <i class="material-icons">check_circle_outline</i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
