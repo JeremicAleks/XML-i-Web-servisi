@@ -1,6 +1,5 @@
 package com.room.microservice.controller;
 
-
 import com.room.microservice.domain.*;
 import com.room.microservice.service.AgentUserService;
 import com.room.microservice.service.RoomService;
@@ -8,12 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/room")
+@RequestMapping("/api")
 public class RoomController {
 
     @Autowired
@@ -22,33 +22,49 @@ public class RoomController {
     @Autowired
     RoomService roomService;
 
-    @PostMapping(value = "/add",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/add")
     public Room addRoom(@RequestBody AddRoomDTO addRoomDTO){
+        Room room ;
 
-        AgentUser agentUser = agentUserService.findByUsername(addRoomDTO.getUsername());
-        Room room = roomService.AddRoom(addRoomDTO.getRoom(),agentUser);
+         room = roomService.AddRoom(addRoomDTO);
 
         return room;
     }
 
-    @GetMapping(value = "/all")
-    public GetRooms getRooms(){
+    @GetMapping(value = "/all/{username}")
+    public GetRooms getRooms(@PathVariable String username){
         GetRooms getRooms = new GetRooms();
 
-        List<Room> roomList = roomService.findAll();
-        getRooms.setRoom(roomList);
+        List<Room> rooms = roomService.getRoomsFromAgent(username);
+
+        for(Room room : rooms)
+            getRooms.getRoom().add(room);
 
         return getRooms;
     }
 
-    @PostMapping(value = "/delete",consumes =MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteRoom(@RequestBody DeleteRoom deleteRoom){
+    @GetMapping(value = "/all")
+    public GetRooms getAllRooms(){
+        GetRooms getRooms = new GetRooms();
 
-        if(roomService.DeleteRoom(deleteRoom))
-        return new ResponseEntity<>(HttpStatus.OK);
-        
+        List<Room> rooms = roomService.getAllRooms();
+        System.out.println(rooms.size());
 
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        for(Room room : rooms)
+            getRooms.getRoom().add(room);
+
+
+        return getRooms;
     }
+    
+	@PreAuthorize("hasRole('ROLE_CENTRAL_APP')")
+	@GetMapping(value = "/test",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> test(){
+		// @RequestBody SearchParamsDTO spDTO
+
+		System.out.println("kklslsjl");
+        return new ResponseEntity<>("dsafsafsaf", HttpStatus.OK);
+    }
+
 
 }

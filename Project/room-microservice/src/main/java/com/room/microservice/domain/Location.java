@@ -56,9 +56,6 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
 
-    public Location() {
-    }
-
     /**
      * Gets the value of the name property.
      * 

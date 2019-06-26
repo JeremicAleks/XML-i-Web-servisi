@@ -70,7 +70,7 @@ import javax.xml.bind.annotation.*;
     "userStatus"
 })
 @XmlSeeAlso({
-    
+    RegistredUser.class,
     AgentUser.class
 })
 @Entity
@@ -79,29 +79,26 @@ import javax.xml.bind.annotation.*;
 public class User {
 
     @XmlElement(required = true)
-    private String name;
+    protected String name;
     @XmlElement(required = true)
-    private String lastName;
+    protected String lastName;
     @XmlElement(required = true)
     @Column(unique = true, nullable = false)
-    private String username;
+    protected String username;
     @XmlElement(required = true)
-    private String email;
+    protected String email;
     @XmlElement(required = true)
-    private String password;
+    protected String password;
     @XmlElement(name = "Role", required = true)
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
-    private Role role;
+    protected Role role;
     @XmlElement(required = true)
-    private String salt;
+    protected String salt;
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     protected long id;
     @XmlElement(required = true)
-    private UserStatusEnum userStatus;
-
-    public User() {
-    }
+    protected UserStatusEnum userStatus;
 
     /**
      * Gets the value of the name property.

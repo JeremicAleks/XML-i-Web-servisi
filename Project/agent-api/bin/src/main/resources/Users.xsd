@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified"
+    targetNamespace="http://www.xml-ftn.xml.domain.centralapi.com/Users"
+    xmlns:reservation="http://www.xml-ftn.xml.domain.centralapi.com/Reservation"
+    xmlns:rooms="http://www.xml-ftn.xml.domain.centralapi.com/Rooms"
+    xmlns:users="http://www.xml-ftn.xml.domain.centralapi.com/Users"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.xml-ftn.xml.domain.centralapi.com/Reservation"
+        schemaLocation="Reservation.xsd"/>
+    <xsd:import namespace="http://www.xml-ftn.xml.domain.centralapi.com/Rooms"
+        schemaLocation="Rooms.xsd"/>
+    <xsd:complexType name="User">
+        <xsd:sequence maxOccurs="1">
+            <xsd:element name="name">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="32"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="lastName">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="username">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="25"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="email" type="xsd:string"/>
+            <xsd:element name="password" type="xsd:string"/>
+            <xsd:element name="Role" type="users:Role"> </xsd:element>
+            <xsd:element name="salt" type="xsd:string"/>
+            <xsd:element minOccurs="1" name="id" type="xsd:long"/>
+            <xsd:element minOccurs="1" name="userStatus" type="users:UserStatusEnum"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element abstract="true" name="User" type="users:User"/>
+    <xsd:complexType name="RegistredUser" block="">
+        <xsd:complexContent mixed="false">
+            <xsd:extension base="users:User">
+                <xsd:sequence maxOccurs="unbounded" minOccurs="0">
+                    <xsd:element ref="reservation:Reservation"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element abstract="false" name="AgentUser">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="users:User">
+                    <xsd:sequence maxOccurs="1" minOccurs="1">
+                        <xsd:sequence maxOccurs="unbounded" minOccurs="0">
+                            <xsd:element ref="rooms:Room"/>
+                        </xsd:sequence>
+                        <xsd:element minOccurs="1" name="pib">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:maxLength value="9"/>
+                                    <xsd:minLength value="9"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:simpleType name="PrivilegesEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="WRITE_PRODUCT"/>
+            <xsd:enumeration value="READ_PRODUCT"/>
+            <xsd:enumeration value="DELETE_PRODUCT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:element name="RegistredUser" type="users:RegistredUser" block=""/>
+    <xsd:complexType name="Role">
+        <xsd:sequence>
+            <xsd:element form="qualified" name="name" type="xsd:string"/>
+            <xsd:sequence maxOccurs="unbounded" minOccurs="0">
+                <xsd:element name="privileges" type="users:PrivilegesEnum" minOccurs="1"/>
+            </xsd:sequence>
+            <xsd:element form="qualified" name="id" type="xsd:long"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="GetReservationForUserDTO">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element form="qualified" name="username" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="LoginDTO">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element form="qualified" name="username" type="xsd:string"/>
+                <xsd:element name="password" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:simpleType name="UserStatusEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="BLOCK"/>
+            <xsd:enumeration value="ACTIVE"/>
+            <xsd:enumeration value="DELETED"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:element name="userLoginDTO">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="username" type="xsd:string"/>
+                <xsd:element name="name" type="xsd:string"/>
+                <xsd:element name="lastname" type="xsd:string"/>
+                <xsd:element name="role" type="xsd:string"/>
+                <xsd:element name="token" type="xsd:string"/>
+                <xsd:element name="email" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="LoginClientDTO">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="username" type="xsd:string"/>
+                <xsd:element name="password" type="xsd:string"/>
+                <xsd:element name="application" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetRoomsForUserDTO">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="username" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GetMessagesForUserDTO">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="username" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="SendMessageDTO">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="roomId" type="xsd:long"/>
+                <xsd:element name="reservationId" type="xsd:long"/>
+                <xsd:element ref="reservation:MessageTable"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

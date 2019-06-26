@@ -7,5 +7,5 @@ export class AgentDTO {
         this.userToPromote = userToPromote;
         this.address = address;
         this.businessRegNumber = businessRegNumber;
-     }
+    }
 }

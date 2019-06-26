@@ -54,11 +54,6 @@ public class PriceList {
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     protected long id;
-
-
-    public PriceList() {
-    }
-
     /**
      * Gets the value of the month property.
      * 

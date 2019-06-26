@@ -10,6 +10,25 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableEurekaClient
 public class CentralApiApplication {
+	
+	static {
+
+		// Kopirati sertifikate u C
+		// Nalaze se target/class
+		System.setProperty("jdk.tls.client.protocols", "TLSv1.2");
+		System.setProperty("https.protocols", "TLSv1.2");
+		System.setProperty("javax.net.ssl.trustStore", "c://centralTrustStore.p12");
+		System.setProperty("javax.net.ssl.trustStorePassword", "MegaTravel");
+		System.setProperty("javax.net.ssl.keyStore", "c://central.p12");
+		System.setProperty("javax.net.ssl.keyStorePassword", "MegaTravel");
+
+		javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(new javax.net.ssl.HostnameVerifier() {
+
+			public boolean verify(String hostname, javax.net.ssl.SSLSession sslSession) {
+				return true;
+			}
+		});
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(CentralApiApplication.class, args);

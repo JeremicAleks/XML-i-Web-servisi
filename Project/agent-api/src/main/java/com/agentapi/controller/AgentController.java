@@ -1,8 +1,6 @@
 package com.agentapi.controller;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
 
 import javax.ws.rs.QueryParam;
 
@@ -21,15 +19,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
-import com.agentapi.com.centralapi.domain.xml.xml_ftn.location.Location;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.AllowReservationDTO;
-import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.GetMessages;
-import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.GetReservations;
-import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.MessageTable;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
-import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.ReservationStateEnum;
-import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.AccommodationCategory;
-import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.AccommodationType;
+import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.ReservationDTO;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.AddRoomDTO;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.GetAccommodationCategories;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.GetAccommodationTypes;
@@ -40,7 +32,6 @@ import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.GetRooms;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.GetTypes;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.Image;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.Room;
-import com.agentapi.com.centralapi.domain.xml.xml_ftn.rooms.RoomAdditionalService;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.users.GetMessagesForUserDTO;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.users.GetReservationForUserDTO;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.users.GetRoomsForUserDTO;
@@ -103,14 +94,14 @@ public class AgentController {
 	public ResponseEntity<?> addRoom(@RequestBody Room room) {
 
 		if (userInfo.count() == 1) {
-
+			
 			AddRoomDTO addRoom = new AddRoomDTO();
 			addRoom.setRoom(room);
 			addRoom.setUsername(userInfo.findAll().get(0).getUsername());
-			roomRepo.save(room);
+			System.out.println("Room addd service : " + room.getRoomAdditionalService().size());
 
 			Room response = (Room) soap.marshalSendAndReceive(SERVICE_URI, addRoom);
-
+			roomRepo.save(response);
 			return new ResponseEntity<>(new ResponseMessage("Successfully added room!"), HttpStatus.OK);
 		}
 		return new ResponseEntity<>(new ResponseMessage("Please Login!"), HttpStatus.UNAUTHORIZED);
@@ -141,12 +132,15 @@ public class AgentController {
 			return new ResponseEntity<>(new ResponseMessage("Please Login!"), HttpStatus.UNAUTHORIZED);
 
 		Room room = roomRepo.getOne(idRoom);
-		room.getReservation().add(reservation);
-
-		roomRepo.saveAndFlush(room);
-		// treba i korisniku upisati na glavnom frontu
-
-		return new ResponseEntity<>("Suceessfully reserved room!", HttpStatus.OK);
+		//room.getReservation().add(reservation);
+		//roomRepo.saveAndFlush(room);
+		ReservationDTO addReservation = new ReservationDTO();
+		addReservation.setReservation(reservation);
+		addReservation.setRoomId(idRoom);
+		Reservation response = (Reservation) soap.marshalSendAndReceive(SERVICE_URI, addReservation);
+		resRepo.save(response);
+		
+		return new ResponseEntity<>(new ResponseMessage("Suceessfully reserved room!"), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/room/all", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -213,7 +207,8 @@ public class AgentController {
 		try {
 
 			SendMessage.getMessageTable().setFromUser(userInfo.findAll().get(0).getUsername());
-			msgService.addMessageToLocal(SendMessage);
+			Reservation response = (Reservation) soap.marshalSendAndReceive(SERVICE_URI, SendMessage);
+			resRepo.save(response);
 
 			// treba poslatii na serveru!
 			return new ResponseEntity<>(new ResponseMessage("Successfully sended!"), HttpStatus.OK);
@@ -240,7 +235,8 @@ public class AgentController {
 
 		try {
 
-			resService.confirmReservation(allow);
+			Reservation response = (Reservation) soap.marshalSendAndReceive(SERVICE_URI, allow);
+			resRepo.saveAndFlush(response);
 
 			// treba poslatii na serveru!
 			return new ResponseEntity<>(resService.getReservations(), HttpStatus.OK);
@@ -264,20 +260,16 @@ public class AgentController {
 
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<>(new ResponseMessage("Invalid login!"), HttpStatus.NOT_FOUND);
 		}
 	}
 
 	public void syncWithMainServer() {
 
-		GetReservationForUserDTO getForUser = new GetReservationForUserDTO();
-		getForUser.setUsername((String) SecurityContextHolder.getContext().getAuthentication().getCredentials());
-
+	
 		GetRoomsForUserDTO getForUserRoom = new GetRoomsForUserDTO();
-		getForUserRoom.setUsername((String) SecurityContextHolder.getContext().getAuthentication().getCredentials());
-
-		GetMessagesForUserDTO getForUserMsg = new GetMessagesForUserDTO();
-		getForUserMsg.setUsername((String) SecurityContextHolder.getContext().getAuthentication().getCredentials());
+		getForUserRoom.setUsername(userInfo.findAll().get(0).getUsername());
 
 		GetAdditionalServices adServices = new GetAdditionalServices();
 		
@@ -285,11 +277,9 @@ public class AgentController {
 		
 		GetCategories catServices = new GetCategories();
 		
-		GetReservations reservations = (GetReservations) soap.marshalSendAndReceive(SERVICE_URI, getForUser);
+		
 
 		GetRooms rooms = (GetRooms) soap.marshalSendAndReceive(SERVICE_URI, getForUserRoom);
-
-		GetMessages msgs = (GetMessages) soap.marshalSendAndReceive(SERVICE_URI, getForUserMsg);
 
 		GetRoomAdditionalServices addS = (GetRoomAdditionalServices) soap.marshalSendAndReceive(SERVICE_URI, adServices);
 
@@ -297,45 +287,12 @@ public class AgentController {
 
 		GetAccommodationCategories catS = (GetAccommodationCategories) soap.marshalSendAndReceive(SERVICE_URI, catServices);
 
-		
-		resRepo.saveAll(reservations.getReservation());
-		roomRepo.saveAll(rooms.getRoom());
-		msgRepo.saveAll(msgs.getMessageTable());
 		addRepo.saveAll(addS.getRoomAdditionalService());
 		typeRepo.saveAll(typeS.getAccommodationType());
 		catRepo.saveAll(catS.getAccommodationCategory());
+		roomRepo.saveAll(rooms.getRoom());
 
-	
-		AccommodationCategory ac = new AccommodationCategory();
-		ac.setDescription("1star");
-		catRepo.save(ac);
-		RoomAdditionalService roomAdd1 = new RoomAdditionalService();
-		roomAdd1.setDescription("WIFI");
-		RoomAdditionalService roomAdd2 = new RoomAdditionalService();
-		roomAdd2.setDescription("DOGOFREE");
-		addRepo.save(roomAdd1);
-		addRepo.save(roomAdd2);
-		Room room = new Room();
-		room.setNumberOfBeds(2);
-		AccommodationType t = new AccommodationType();
-		t.setDescription("HOTEL");
-		typeRepo.save(t);
-		List<AccommodationType> tt = typeRepo.findAll();
-		room.setAccommodationType(tt.get(0));
-		Location loc = new Location();
-		loc.setName("Neko mesto");
-		room.setLocation(loc);
-		Reservation res = new Reservation();
-		res.setCheckIn(new Date());
-		res.setCheckOut(new Date());
-		res.setState(ReservationStateEnum.PENDING);
-		MessageTable msg = new MessageTable();
-		msg.setMessageString("Porukaaaa");
-		msg.setFromUser("maki");
-		msg.setToUser("kiriyaga");
-		res.getMessageTable().add(msg);
-		room.getReservation().add(res);
-		roomRepo.save(room);
+
 
 	}
 

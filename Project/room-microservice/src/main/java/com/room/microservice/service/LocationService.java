@@ -17,4 +17,6 @@ public class LocationService {
 
     public List<Location> findAll(){return locationRepository.findAll();}
 
+    public Location save(Location location){return  locationRepository.save(location);}
+
 }

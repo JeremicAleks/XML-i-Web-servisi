@@ -16,8 +16,8 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -25,6 +25,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.location.Location;
 import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
@@ -100,26 +103,27 @@ public class Room {
     @ManyToOne(fetch = FetchType.EAGER)
     protected AccommodationCategory accommodationCategory;
     @XmlElement(name = "RoomAdditionalService")
-    @OneToMany(fetch = FetchType.EAGER,orphanRemoval = false)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     protected List<RoomAdditionalService> roomAdditionalService;
     @XmlElement(required = true)
     protected String description;
     @XmlElement(required = true)
     @ElementCollection
     protected List<String> image;
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
     protected List<PriceList> priceList;
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
     @XmlElement(name = "Reservation", namespace = "http://www.xml-ftn.xml.domain.centralapi.com/Reservation")
     protected List<Reservation> reservation;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
     protected int daysForCancel;
     @ManyToOne(fetch = FetchType.EAGER)
     @XmlElement(name = "AccommodationType", required = true)
     protected AccommodationType accommodationType;
-
     /**
      * Gets the value of the numberOfBeds property.
      * 

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Router} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {SearchParams} from "../../models/search-params";
-import {SearchService} from "../../services/search.service";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SearchParams } from '../../models/search-params';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-main-homepage',
@@ -11,21 +11,20 @@ import {SearchService} from "../../services/search.service";
   styleUrls: ['./main-homepage.component.css']
 })
 export class MainHomepageComponent implements OnInit {
-  brojsoba: number;
 
   searchParams: SearchParams;
-
+  numOfPeople: number;
 
   searchForm = new FormGroup({
     destination: new FormControl('', [Validators.required]),
-    checkIn: new FormControl(new Date(''), [Validators.required]),
-    checkOut: new FormControl(new Date(''), [Validators.required])
-  })
+    checkIn: new FormControl(new Date(), [Validators.required]),
+    checkOut: new FormControl(new Date(), [Validators.required])
+  });
 
-  constructor(private modalService: NgbModal, private router :Router, private searchService: SearchService) { }
+  constructor(private modalService: NgbModal, private router: Router, private searchService: SearchService) { }
 
   ngOnInit() {
-    this.brojsoba = 1;
+    this.numOfPeople = 1;
   }
 
   openSignInModal(content) {
@@ -35,24 +34,31 @@ export class MainHomepageComponent implements OnInit {
     });
   }
 
-  addSoba() {
-   this.brojsoba++;
+  addPeople() {
+    this.numOfPeople++;
   }
 
-  removeSoba() {
-    if (this.brojsoba > 0) {
-      this.brojsoba--;
+  removePeople() {
+    if (this.numOfPeople > 0) {
+      this.numOfPeople--;
     }
   }
 
   search() {
-    let ngbDate = this.searchForm.get("checkIn").value;
-    let myDate = new Date(ngbDate.year, ngbDate.month-1, ngbDate.day);
-    let ngbDate2 = this.searchForm.get("checkOut").value;
-    let myDate2 = new Date(ngbDate2.year, ngbDate2.month-1, ngbDate2.day);
+    let destination = this.searchForm.get('destination').value;
+    const ngbDate = this.searchForm.get('checkIn').value;
+    const myDate = new Date(ngbDate.year, ngbDate.month, ngbDate.day);
+    const ngbDate2 = this.searchForm.get('checkOut').value;
+    const myDate2 = new Date(ngbDate2.year, ngbDate2.month, ngbDate2.day);
 
-    this.searchParams = new SearchParams(this.searchForm.get("destination").value,myDate,myDate2,this.brojsoba);
+    if (destination === '') {
+      destination = 'null';
+    }
 
-    this.router.navigate(['/searchResult'+'/'+this.searchParams.destination + '/' + this.searchParams.checkIn + '/' + this.searchParams.checkOut + '/' + this.searchParams.numOfPeople])
+
+   // this.router.navigate(['/searchResult'+'/'+this.searchParams.destination + '/' + this.searchParams.checkIn + '/' + this.searchParams.checkOut + '/' + this.searchParams.numOfPeople])
+
+    this.router.navigate(['/searchResult' + '/' + destination + '/' + myDate + '/' + myDate2  + '/' + this.numOfPeople]);
+
   }
 }

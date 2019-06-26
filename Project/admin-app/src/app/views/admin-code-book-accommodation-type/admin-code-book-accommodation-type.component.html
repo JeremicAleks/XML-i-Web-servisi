@@ -1,0 +1,143 @@
+<!-- Tabs -->
+<section id="tabs">
+  <div class="container">
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <nav>
+          <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
+              routerLink="/admin/config/codeBook/accommodationType" role="tab" aria-controls="nav-home"
+              aria-selected="true">Accommodation type</a>
+
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+              routerLink="/admin/config/codeBook/accommodationCategory" role="tab" aria-controls="nav-profile"
+              aria-selected="false">Accommodation category</a>
+
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+              routerLink="/admin/config/codeBook/additionalService" role="tab" aria-controls="nav-contact"
+              aria-selected="false">Additional services</a>
+
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+      <!-- Accommodation type -->
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <br>
+        <!-- TABELA ZA ACCOMM TYPE -->
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Description</th>
+              <th scope="col" colspan="2" style="text-align: justify">Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let at of this.accommodationTypes; let i = index">
+              <td>{{at.id}}</td>
+              <td>{{at.description}}</td>
+              <td>
+                <button type="button" class="btn btn-outline-warning" data-toggle="modal"
+                  (click)="updateAccommodationType(updateAccommodationTypeModal, at)">Update</button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-outline-danger" style="margin-right: 10px"
+                  (click)="deleteAccommodationType(at)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <br>
+
+        <button type="button" class="btn btn-outline-success" style="margin-left: 20px"
+          (click)="newAccommodationType(newAccommodationTypeModal)">New</button>
+      </div>
+
+      <!-- Accommodation category -->
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        accommodation category
+      </div>
+
+      <!-- Additional services -->
+      <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+        additional services
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEW ACCOMMODATION TYPE MODAL-->
+<ng-template #newAccommodationTypeModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Create new accommodation type</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="newAccommodationTypeForm" [formGroup]="newAccommodationTypeForm">
+      <div class="container" id="newAccommodationTypeForm">
+        <div class="form-group">
+          <div class="form-group row">
+            <label for="role" class="col-sm-4 col-form-label">Description</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="typeDescription" placeholder="DESCRIPTION"
+                formControlName="typeDescription" [ngClass]="{'is-invalid':newAccommodationTypeForm.get('typeDescription').touched 
+                && newAccommodationTypeForm.get('typeDescription').invalid}" required>
+              <div *ngIf="newAccommodationTypeForm.get('typeDescription').touched 
+                && newAccommodationTypeForm.get('typeDescription').invalid" class="invalid-feedback">
+                <div>Type description is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" [disabled]="!newAccommodationTypeForm.valid"
+      (click)="createNewAccommodationType()">Confirm</button>
+  </div>
+</ng-template>
+
+<!-- UPDATE ACCOMMODATION TYPE MODAL-->
+<ng-template #updateAccommodationTypeModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Update accommodation type</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="updateAccommodationTypeForm" [formGroup]="updateAccommodationTypeForm">
+      <div class="container" id="updateAccommodationTypeForm">
+        <div class="form-group">
+          <div class="form-group row">
+            <label for="role" class="col-sm-4 col-form-label">Description</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="typeDescription" placeholder="DESCRIPTION"
+                formControlName="typeDescription" [ngClass]="{'is-invalid':updateAccommodationTypeForm.get('typeDescription').touched 
+                && updateAccommodationTypeForm.get('typeDescription').invalid}" required>
+              <div *ngIf="updateAccommodationTypeForm.get('typeDescription').touched 
+                && updateAccommodationTypeForm.get('typeDescription').invalid" class="invalid-feedback">
+                <div>Type description is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" [disabled]="!updateAccommodationTypeForm.valid"
+      (click)="updateOldAccommodationType()">Confirm</button>
+  </div>
+</ng-template>

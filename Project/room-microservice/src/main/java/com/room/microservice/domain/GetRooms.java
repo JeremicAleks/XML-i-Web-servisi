@@ -71,7 +71,6 @@ public class GetRooms {
         return this.room;
     }
 
-    public void setRoom(List<Room> room) {
-        this.room = room;
-    }
+
+
 }

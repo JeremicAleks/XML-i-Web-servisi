@@ -6,11 +6,23 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.ws.rs.Produces;
 
+import com.centralapi.domain.xml.xml_ftn.reservation.GetReservations;
+import com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
+import com.centralapi.service.RoomService;
+import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -49,14 +61,23 @@ public class RoomSoapController {
 	@Autowired
 	RoomAdditionalServicesRepository addRepo;
 
+	@Autowired
+	private RestTemplate restTemplate;
+
+	@Autowired
+	private RoomService roomService;
+
+	@Produces(MediaType.APPLICATION_XML_VALUE)
 	@PreAuthorize("hasRole('ROLE_AGENT_APP')")
 	@PayloadRoot(namespace = ROOM_NAMESPACE_URI, localPart = "addRoomDTO")
 	@ResponsePayload
 	public Room addRoom(@RequestPayload AddRoomDTO request) {
 
+		System.out.println("RAS" + request.getRoom().getRoomAdditionalService().size());
 		// sacuvati u bazu i vratiti room sa id-om
+		Room room = restTemplate.postForObject("https://room-microservice/api/add", request, Room.class);
 
-		return request.getRoom();
+		return room;
 
 	}
 
@@ -65,12 +86,7 @@ public class RoomSoapController {
 	@ResponsePayload
 	public Image addFile(@RequestPayload Image request) throws IOException {
 
-		// ovo mozes staviti negde u neki service ili kako god :D
-		Path path = Paths.get("src", "main", "resources", "static");
-		ByteArrayInputStream bis = new ByteArrayInputStream(request.getImage());
-		BufferedImage bImage2 = ImageIO.read(bis);
-		ImageIO.write(bImage2, "jpg",
-				new File(path.toString() + "/" + request.getRoomId() + "-" + request.getNameForImage()));
+		roomService.roomAddImage(request);
 
 		return request;
 
@@ -81,10 +97,15 @@ public class RoomSoapController {
 	@ResponsePayload
 	public GetRooms getRooms(@RequestPayload GetRoomsForUserDTO request) throws IOException {
 
-		System.out.println("dsafsa");
+		GetRooms getRooms;
+		//Nema username - a
+		getRooms = restTemplate.getForObject("https://room-microservice/api/all", GetRooms.class);
+//		getRooms = restTemplate.getForObject("http://room-microservice/api/all/"+request.getUsername(), GetRooms.class);
 
-		// ovde treba vratiti sobe :D
-		return new GetRooms();
+
+
+
+		return  getRooms;
 
 	}
 

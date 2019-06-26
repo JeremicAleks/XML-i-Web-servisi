@@ -17,6 +17,7 @@ import com.authorizationapi.domain.dto.RegisterUserDTO;
 import com.authorizationapi.domain.dto.UserLoginDTO;
 import com.authorizationapi.exception.ResponseMessage;
 import com.authorizationapi.exception.UserCreditalsException;
+import com.authorizationapi.repo.RegUserRepository;
 import com.authorizationapi.repo.RoleRepository;
 import com.authorizationapi.repo.UserRepository;
 import com.authorizationapi.utils.PasswordValidation;
@@ -41,6 +42,9 @@ public class UserServiceCon implements UserService {
 
 	@Autowired
 	RoleRepository roleRepo;
+	
+	@Autowired
+	RegUserRepository regRepo;
 
 	@Autowired
 	private UserDetailsServiceCon userDetailService;
@@ -61,6 +65,7 @@ public class UserServiceCon implements UserService {
 	@Override
 	public UserLoginDTO userLogin(String username, String password) {
 
+		System.out.println("Da li udjes ovde");
 		User user = loadUserByUsername(username);
 		String fullPass = password + user.getSalt() + pepper;
 
@@ -110,7 +115,7 @@ public class UserServiceCon implements UserService {
 		Role r = roleRepo.findByName("DefaultRole");
 		regUser.setRole(r);
 		logger.debug("Set role for user..");
-		userRepository.save(regUser);
+		regRepo.saveAndFlush(regUser);
 
 		MDC.put("user",user.getUsername());
 		logger.info("Successfull registration!");

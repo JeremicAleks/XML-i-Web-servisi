@@ -53,7 +53,6 @@ import javax.xml.bind.annotation.XmlType;
 public class MessageTable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
     @XmlElement(required = true)
     protected String messageString;

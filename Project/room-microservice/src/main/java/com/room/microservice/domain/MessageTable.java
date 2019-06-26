@@ -58,10 +58,6 @@ public class MessageTable {
     @XmlElement(required = true, nillable = true)
     protected String toUser;
 
-
-    public MessageTable() {
-    }
-
     /**
      * Gets the value of the id property.
      * 

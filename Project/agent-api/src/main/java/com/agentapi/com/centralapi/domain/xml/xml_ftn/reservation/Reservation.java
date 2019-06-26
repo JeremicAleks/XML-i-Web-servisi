@@ -73,7 +73,6 @@ public class Reservation {
     @XmlSchemaType(name = "date")
     protected Date checkOut;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
     @XmlElement(required = true)
     @Enumerated

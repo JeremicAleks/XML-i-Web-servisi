@@ -50,7 +50,7 @@ import java.util.List;
 })
 @XmlRootElement(name = "AgentUser")
 @Entity
-@DiscriminatorColumn(name = "AGENT")
+@DiscriminatorValue("AGENT")
 public class AgentUser
     extends User
 {
@@ -60,10 +60,6 @@ public class AgentUser
 	protected List<Room> room;
 	@XmlElement(required = true)
 	protected String pib;
-
-
-    public AgentUser() {
-    }
 
     /**
      * Gets the value of the room property.

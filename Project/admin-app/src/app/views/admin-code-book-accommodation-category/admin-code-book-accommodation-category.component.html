@@ -1,0 +1,142 @@
+<!-- Tabs -->
+<section id="tabs">
+  <div class="container">
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <nav>
+          <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+
+            <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab"
+              routerLink="/admin/config/codeBook/accommodationType" role="tab" aria-controls="nav-home"
+              aria-selected="true">Accommodation type</a>
+
+            <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab"
+              routerLink="/admin/config/codeBook/accommodationCategory" role="tab" aria-controls="nav-profile"
+              aria-selected="false">Accommodation category</a>
+
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+              routerLink="/admin/config/codeBook/additionalService" role="tab" aria-controls="nav-contact"
+              aria-selected="false">Additional services</a>
+
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+      <!-- Accommodation Category -->
+      <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        accommodation type
+      </div>
+
+      <!-- Accommodation category -->
+      <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <!-- TABELA ZA ACCOMM Category -->
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Description</th>
+              <th scope="col" colspan="2" style="text-align: justify">Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let at of this.accommodationCategories; let i = index">
+              <td>{{at.id}}</td>
+              <td>{{at.description}}</td>
+              <td>
+                <button Category="button" class="btn btn-outline-warning" data-toggle="modal"
+                  (click)="updateAccommodationCategory(updateAccommodationCategoryModal, at)">Update</button>
+              </td>
+              <td>
+                <button Category="button" class="btn btn-outline-danger" style="margin-right: 10px"
+                  (click)="deleteAccommodationCategory(at)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <br>
+
+        <button Category="button" class="btn btn-outline-success" style="margin-left: 20px"
+          (click)="newAccommodationCategory(newAccommodationCategoryModal)">New</button>
+      </div>
+
+      <!-- Additional services -->
+      <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+        additional services
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEW ACCOMMODATION Category MODAL-->
+<ng-template #newAccommodationCategoryModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Create new accommodation Category</h4>
+    <button Category="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="newAccommodationCategoryForm" [formGroup]="newAccommodationCategoryForm">
+      <div class="container" id="newAccommodationCategoryForm">
+        <div class="form-group">
+          <div class="form-group row">
+            <label for="role" class="col-sm-4 col-form-label">Description</label>
+            <div class="col-sm-8">
+              <input Category="text" class="form-control" id="categoryDescription" placeholder="DESCRIPTION"
+                formControlName="categoryDescription" [ngClass]="{'is-invalid':newAccommodationCategoryForm.get('categoryDescription').touched 
+                && newAccommodationCategoryForm.get('categoryDescription').invalid}" required>
+              <div *ngIf="newAccommodationCategoryForm.get('categoryDescription').touched 
+                && newAccommodationCategoryForm.get('categoryDescription').invalid" class="invalid-feedback">
+                <div>Category description is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button Category="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button Category="button" class="btn btn-primary" [disabled]="!newAccommodationCategoryForm.valid"
+      (click)="createNewAccommodationCategory()">Confirm</button>
+  </div>
+</ng-template>
+
+<!-- UPDATE ACCOMMODATION Category MODAL-->
+<ng-template #updateAccommodationCategoryModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Update accommodation category</h4>
+    <button Category="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="updateAccommodationCategoryForm" [formGroup]="updateAccommodationCategoryForm">
+      <div class="container" id="updateAccommodationCategoryForm">
+        <div class="form-group">
+          <div class="form-group row">
+            <label for="role" class="col-sm-4 col-form-label">Description</label>
+            <div class="col-sm-8">
+              <input Category="text" class="form-control" id="categoryDescription" placeholder="DESCRIPTION"
+                formControlName="categoryDescription" [ngClass]="{'is-invalid':updateAccommodationCategoryForm.get('categoryDescription').touched 
+                && updateAccommodationCategoryForm.get('categoryDescription').invalid}" required>
+              <div *ngIf="updateAccommodationCategoryForm.get('categoryDescription').touched 
+                && updateAccommodationCategoryForm.get('categoryDescription').invalid" class="invalid-feedback">
+                <div>Category description is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button Category="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button Category="button" class="btn btn-primary" [disabled]="!updateAccommodationCategoryForm.valid"
+      (click)="updateOldAccommodationCategory()">Confirm</button>
+  </div>
+</ng-template>

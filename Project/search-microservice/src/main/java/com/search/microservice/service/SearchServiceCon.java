@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.search.microservice.domain.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import com.search.microservice.repository.RoomRepository;
 @Service
 public class SearchServiceCon implements SearchService {
 
+	
 	@Autowired
 	RoomRepository roomRepository;
 
@@ -27,8 +29,22 @@ public class SearchServiceCon implements SearchService {
 	public GetRooms search(SearchParamsDTO spDTO) {
 		System.out.println("search service con");
 		List<Room> searchResults = new ArrayList<Room>();
+		
+		if (spDTO.getDestination().isEmpty()) {
+			System.out.println("nije unesena destinacija");
+			System.out.println("ne znam sta treba da vratim - trenutno null");
+			return null;
+		}
 
 		SimpleDateFormat x = new SimpleDateFormat("yyyy.MM.dd.");
+		
+		System.out.println(spDTO.getCheckIn());
+		
+		if (spDTO.getCheckIn() == null || spDTO.getCheckOut() == null) {
+			System.out.println("check in i/ili check out nisu uneseni");
+			System.out.println("ne znam sta treba da vratim - trenutno null");
+			return null;
+		}
 
 		Date date1 = spDTO.getCheckIn();
 		System.out.println("CheckIn: " + x.format(date1));
@@ -39,17 +55,26 @@ public class SearchServiceCon implements SearchService {
 		System.out.println("CheckOut: " + x.format(date2));
 		Calendar cal2 = Calendar.getInstance();
 		cal2.setTime(date2);
-
-		if (spDTO.getDestination().isEmpty() || spDTO.getNumOfPeople() == 0) {
-			System.out.println("nije unesena destinacija ili broj ljudi u pretrazi");
-			System.out.println("ne znam sta treba da vratim");
+		
+		if (cal2.before(cal1) || areDatesEqual(date1, date2)) {
+			System.out.println("CheckOut je pre CheckIn-a");
+			System.out.println("ne znam sta treba da vratim - trenutno null");
 			return null;
 		}
 		
-		if (cal2.before(cal1) || areDatesEqual(date1, date2)) {
-			System.out.println("CheckOut je pre CheckIn-a ili su isti datumi");
+		if (areDatesEqual(date1, date2)) {
+			System.out.println("CheckOutDate je isti kao i CheckInDate");
+			System.out.println("ne znam sta treba da vratim - trenutno null");
 			return null;
 		}
+		
+		if (spDTO.getNumOfPeople() == 0) {
+			System.out.println("nije unesen broj ljudi u pretrazi");
+			System.out.println("ne znam sta treba da vratim - trenutno null");
+			return null;
+		}
+		
+		System.out.println("prosao sve provere i sad ce da prolazi kroz sobe");
 
 		for (Room r : roomRepository.findByNumberOfBeds(spDTO.getNumOfPeople())) {
 			if (spDTO.getDistanceFromDestionation() == 0) {
@@ -112,8 +137,8 @@ public class SearchServiceCon implements SearchService {
 		System.out.println("isDate1AfterDate2");
 		
 		SimpleDateFormat x = new SimpleDateFormat("yyyy.MM.dd.");
-		String date1String[] = x.format(date1).split(".");
-		String date2String[] = x.format(date2).split(".");
+		String date1String[] = x.format(date1).split("\\.");
+		String date2String[] = x.format(date2).split("\\.");
 		
 		int date1year = Integer.parseInt(date1String[0]);
 		int date2year = Integer.parseInt(date2String[0]);
@@ -140,8 +165,8 @@ public class SearchServiceCon implements SearchService {
 		boolean ret = true;
 		System.out.println("isDate1BeforeDate2");
 		SimpleDateFormat x = new SimpleDateFormat("yyyy.MM.dd.");
-		String date1String[] = x.format(date1).split(".");
-		String date2String[] = x.format(date2).split(".");
+		String date1String[] = x.format(date1).split("\\.");
+		String date2String[] = x.format(date2).split("\\.");
 		
 		int date1year = Integer.parseInt(date1String[0]);
 		int date2year = Integer.parseInt(date2String[0]);
@@ -168,12 +193,13 @@ public class SearchServiceCon implements SearchService {
 		boolean ret = true;
 		System.out.println("areDatesEqual");
 		SimpleDateFormat x = new SimpleDateFormat("yyyy.MM.dd.");
-		String date1String[] = x.format(date1).split(".");
-		String date2String[] = x.format(date2).split(".");
+		
+		String date1String[] = x.format(date1).split("\\.");
+		String date2String[] = x.format(date2).split("\\.");
 		
 		int date1year = Integer.parseInt(date1String[0]);
 		int date2year = Integer.parseInt(date2String[0]);
-		
+
 		if (date1year != date2year)
 			return false;
 		

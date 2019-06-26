@@ -69,10 +69,6 @@ public class Reservation {
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     protected List<MessageTable> messageTable;
 
-
-    public Reservation() {
-    }
-
     /**
      * Gets the value of the checkIn property.
      * 
