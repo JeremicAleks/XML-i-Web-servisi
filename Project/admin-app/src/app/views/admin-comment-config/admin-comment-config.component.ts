@@ -19,7 +19,15 @@ export class AdminCommentConfigComponent implements OnInit {
 
   approveComment(id: number) {
     console.log('approveComment clicked - id: ' + id);
-
+    this.commentService.approveComment(id).subscribe(
+      data => {
+        alert(data.message);
+        this.getAllComments();
+      },
+      error => {
+        alert(error.message);
+      }
+    );
   }
 
   getAllComments() {
