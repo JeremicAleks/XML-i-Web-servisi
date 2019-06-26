@@ -8,18 +8,8 @@
 
 package com.example.demo.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @DiscriminatorColumn(name = "REGUSER")
@@ -28,36 +18,4 @@ public class RegistredUser
 {
 
    
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    protected List<Reservation> reservation;
-
-    /**
-     * Gets the value of the reservation property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the reservation property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getReservation().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Reservation }
-     * 
-     * 
-     */
-    public List<Reservation> getReservation() {
-        if (reservation == null) {
-            reservation = new ArrayList<Reservation>();
-        }
-        return this.reservation;
-    }
-
 }

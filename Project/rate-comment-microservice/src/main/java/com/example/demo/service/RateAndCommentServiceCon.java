@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.RateAndComment;
+import com.example.demo.domain.RegistredUser;
 import com.example.demo.domain.Reservation;
 import com.example.demo.domain.Room;
+import com.example.demo.domain.User;
 import com.example.demo.domain.dto.AddRateAndCommentDTO;
 import com.example.demo.repo.RateAndCommentRepository;
 import com.example.demo.repo.ReservationRepository;
 import com.example.demo.repo.RoomRepository;
+import com.example.demo.repo.UserRepository;
 
 @Service
 public class RateAndCommentServiceCon implements RateAndCommentService {
@@ -22,6 +25,8 @@ public class RateAndCommentServiceCon implements RateAndCommentService {
 	RateAndCommentRepository rateRepo;
 	@Autowired
 	ReservationRepository resRepo;
+	@Autowired
+	UserRepository regUserRepo;
 	
 	@Override
 	public List<RateAndComment> getRatesForRoom(Long idRoom) {
@@ -42,15 +47,17 @@ public class RateAndCommentServiceCon implements RateAndCommentService {
 			Room r  = roomRepo.getOne(rate.getRoomId());
 			Reservation res = resRepo.getOne(rate.getReservationId());
 			
+			RegistredUser reg = regUserRepo.findByUsername(rate.getUsername());
+			
 			
 			System.out.println("USAOO");
 			RateAndComment rateAndComment = new RateAndComment();
 			rateAndComment.setComment(rate.getComment());
 			rateAndComment.setIsAllowed(false);
-			rateAndComment.setRoom(null);
-			rateAndComment.setReservation(null);
+			rateAndComment.setRoom(r);
+			rateAndComment.setReservation(res);
 			rateAndComment.setRating(rate.getRate());
-			rateAndComment.setRegUser(null);
+			rateAndComment.setRegUser(reg);
 			rateRepo.saveAndFlush(rateAndComment);
 			
 			return rateAndComment;
