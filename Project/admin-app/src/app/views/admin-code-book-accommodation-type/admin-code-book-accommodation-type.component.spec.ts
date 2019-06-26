@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminCodeBookComponent } from './admin-code-book.component';
+import { AdminCodeBookAccommodationTypeComponent } from './admin-code-book-accommodation-type.component';
 
 describe('AdminCodeBookComponent', () => {
-  let component: AdminCodeBookComponent;
-  let fixture: ComponentFixture<AdminCodeBookComponent>;
+  let component: AdminCodeBookAccommodationTypeComponent;
+  let fixture: ComponentFixture<AdminCodeBookAccommodationTypeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminCodeBookComponent ]
+      declarations: [ AdminCodeBookAccommodationTypeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminCodeBookComponent);
+    fixture = TestBed.createComponent(AdminCodeBookAccommodationTypeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

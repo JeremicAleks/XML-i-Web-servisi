@@ -7,14 +7,17 @@
         <nav>
           <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
 
-            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-              aria-controls="nav-home" aria-selected="true">Accommodation type</a>
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
+              routerLink="/admin/config/codeBook/accommodationType" role="tab" aria-controls="nav-home"
+              aria-selected="true">Accommodation type</a>
 
-            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-              aria-controls="nav-profile" aria-selected="false">Accommodation category</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+              routerLink="/admin/config/codeBook/accommodationCategory" role="tab" aria-controls="nav-profile"
+              aria-selected="false">Accommodation category</a>
 
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
-              aria-controls="nav-contact" aria-selected="false">Additional services</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+              routerLink="/admin/config/codeBook/additionalService" role="tab" aria-controls="nav-contact"
+              aria-selected="false">Additional services</a>
 
           </div>
         </nav>
@@ -23,7 +26,6 @@
     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
       <!-- Accommodation type -->
       <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-        accommodation type
         <br>
         <!-- TABELA ZA ACCOMM TYPE -->
         <table class="table">
@@ -31,7 +33,7 @@
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Description</th>
-              <th scope="col">Operations</th>
+              <th scope="col" colspan="2" style="text-align: justify">Operations</th>
             </tr>
           </thead>
           <tbody>
@@ -39,8 +41,12 @@
               <td>{{at.id}}</td>
               <td>{{at.description}}</td>
               <td>
+                <button type="button" class="btn btn-outline-warning" data-toggle="modal"
+                  (click)="updateAccommodationType(updateAccommodationTypeModal, at)">Update</button>
+              </td>
+              <td>
                 <button type="button" class="btn btn-outline-danger" style="margin-right: 10px"
-                  (click)="deleteAccomodationType(at.id)">Delete</button>
+                  (click)="deleteAccommodationType(at)">Delete</button>
               </td>
             </tr>
           </tbody>
@@ -82,11 +88,9 @@
             <label for="role" class="col-sm-4 col-form-label">Description</label>
             <div class="col-sm-8">
               <input type="text" class="form-control" id="typeDescription" placeholder="DESCRIPTION"
-                formControlName="typeDescription"
-                [ngClass]="{'is-invalid':newAccommodationTypeForm.get('typeDescription').touched 
+                formControlName="typeDescription" [ngClass]="{'is-invalid':newAccommodationTypeForm.get('typeDescription').touched 
                 && newAccommodationTypeForm.get('typeDescription').invalid}" required>
-              <div
-                *ngIf="newAccommodationTypeForm.get('typeDescription').touched 
+              <div *ngIf="newAccommodationTypeForm.get('typeDescription').touched 
                 && newAccommodationTypeForm.get('typeDescription').invalid" class="invalid-feedback">
                 <div>Type description is required</div>
               </div>
@@ -103,58 +107,37 @@
   </div>
 </ng-template>
 
-<!-- UPDATE USER MODAL-->
-<ng-template #updateRoleModal let-modal>
+<!-- UPDATE ACCOMMODATION TYPE MODAL-->
+<ng-template #updateAccommodationTypeModal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">Update role privilages</h4>
+    <h4 class="modal-title">Update accommodation type</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form class="form" [formGroup]="updateRoleForm" id="updateRoleForm">
-      <div class="form-group">
-        <div class="form-group row">
-          <div class="col-sm-1">
-            <table>
-              <tr>
-                <td style="padding: 8px;">
-                  <input type="checkbox" id="write" (change)="changeCheckBox($event)" formControlName="write">
-                </td>
-              </tr>
-            </table>
+    <form name="updateAccommodationTypeForm" [formGroup]="updateAccommodationTypeForm">
+      <div class="container" id="updateAccommodationTypeForm">
+        <div class="form-group">
+          <div class="form-group row">
+            <label for="role" class="col-sm-4 col-form-label">Description</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="typeDescription" placeholder="DESCRIPTION"
+                formControlName="typeDescription" [ngClass]="{'is-invalid':updateAccommodationTypeForm.get('typeDescription').touched 
+                && updateAccommodationTypeForm.get('typeDescription').invalid}" required>
+              <div *ngIf="updateAccommodationTypeForm.get('typeDescription').touched 
+                && updateAccommodationTypeForm.get('typeDescription').invalid" class="invalid-feedback">
+                <div>Type description is required</div>
+              </div>
+            </div>
           </div>
-          <label for="write" class="col-sm-5 col-form-label">Write product</label>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-1">
-            <table>
-              <tr>
-                <td style="padding: 8px;">
-                  <input type="checkbox" id="read" (change)="changeCheckBox($event)" formControlName="read">
-                </td>
-              </tr>
-            </table>
-          </div>
-          <label for="read" class="col-sm-5 col-form-label">Read product</label>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-1">
-            <table>
-              <tr>
-                <td style="padding: 8px;">
-                  <input type="checkbox" id="delete" (change)="changeCheckBox($event)" formControlName="delete">
-                </td>
-              </tr>
-            </table>
-          </div>
-          <label for="delete" class="col-sm-5 col-form-label">Delete product</label>
         </div>
       </div>
     </form>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    <button type="button" class="btn btn-primary" (click)="saveRoleChanges()">Save changes</button>
+    <button type="button" class="btn btn-primary" [disabled]="!updateAccommodationTypeForm.valid"
+      (click)="updateOldAccommodationType()">Confirm</button>
   </div>
 </ng-template>

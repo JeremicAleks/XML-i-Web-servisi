@@ -14,7 +14,6 @@ import com.centralapi.domain.xml.xml_ftn.reservation.GetReservations;
 import com.centralapi.domain.xml.xml_ftn.reservation.MessageTable;
 import com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
 import com.centralapi.domain.xml.xml_ftn.reservation.ReservationDTO;
-import com.centralapi.domain.xml.xml_ftn.rooms.Room;
 import com.centralapi.domain.xml.xml_ftn.users.GetMessagesForUserDTO;
 import com.centralapi.domain.xml.xml_ftn.users.GetReservationForUserDTO;
 import com.centralapi.domain.xml.xml_ftn.users.SendMessageDTO;

@@ -66,7 +66,12 @@ public class AccommodationType {
     	this.description = description;
     }
 
-    /**
+    public AccommodationType(String description, boolean active) {
+    	this.description = description;
+    	this.active = active;
+	}
+
+	/**
      * Gets the value of the description property.
      * 
      * @return

@@ -7,7 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { AdminRoleConfigurationComponent } from './views/admin-role-configuration/admin-role-configuration.component';
 import { AdminUserConfigurationComponent } from './views/admin-user-configuration/admin-user-configuration.component';
 import { SecAdminGuard } from './utils/sec-admin-guard';
-import { AdminCodeBookComponent } from './views/admin-code-book/admin-code-book.component';
+import { AdminCodeBookAccommodationTypeComponent } from './views/admin-code-book-accommodation-type/admin-code-book-accommodation-type.component';
+import { AdminCodeBookAccommodationCategoryComponent } from './views/admin-code-book-accommodation-category/admin-code-book-accommodation-category.component';
 
 const routes: Routes = [
 
@@ -22,8 +23,18 @@ const routes: Routes = [
   },
 
   {
-    path: 'admin/config/codeBook',
-    component: AdminCodeBookComponent // , canActivate: [SecAdminGuard]
+    path: 'admin/config/codeBook/accommodationType',
+    component: AdminCodeBookAccommodationTypeComponent // , canActivate: [SecAdminGuard]
+  },
+
+  {
+    path: 'admin/config/codeBook/accommodationCategory',
+    component: AdminCodeBookAccommodationCategoryComponent // , canActivate: [SecAdminGuard]
+  },
+
+  {
+    path: 'admin/config/codeBook/additionalService',
+    component: AdminCodeBookAccommodationCategoryComponent // , canActivate: [SecAdminGuard]
   }
 
 ];

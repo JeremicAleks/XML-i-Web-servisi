@@ -9,7 +9,7 @@ import { SendMessageDto } from '../models/send-message-dto';
 import { AllowReservation } from '../models/allow-reservation';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root';
 })
 export class ReservationService {
 
