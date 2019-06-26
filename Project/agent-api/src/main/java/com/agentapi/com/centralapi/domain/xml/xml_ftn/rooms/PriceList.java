@@ -56,7 +56,6 @@ public class PriceList {
     protected Date month;
     protected double price;
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
 
     /**

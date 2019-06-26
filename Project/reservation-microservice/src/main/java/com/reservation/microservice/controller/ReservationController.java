@@ -5,18 +5,30 @@ import com.reservation.microservice.domain.user.SendMessageDTO;
 import com.reservation.microservice.service.MessageTableService;
 import com.reservation.microservice.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/reservation")
 public class ReservationController {
 
     @Autowired
     ReservationService reservationService;
     @Autowired
     MessageTableService messageTableService;
+    
+	@PreAuthorize("hasRole('ROLE_CENTRAL_APP')")
+	@GetMapping(value = "/test",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> test(){
+		// @RequestBody SearchParamsDTO spDTO
+
+		System.out.println("kklslsjl");
+        return new ResponseEntity<>("dsafsafsaf", HttpStatus.OK);
+    }
 
     @GetMapping(value = "/all",produces = MediaType.APPLICATION_JSON_VALUE)
     public GetReservations getReservatons(){

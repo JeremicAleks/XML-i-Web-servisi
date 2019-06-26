@@ -42,6 +42,14 @@ public class ReservationController {
 
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
+    
+	@GetMapping(value="/test",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> testsearch() {
+		System.out.println("fsafsafa");
+		ResponseEntity<String> temp =restTemplate.exchange("https://reservation-microservice/api/reservation/test", HttpMethod.GET, null, String.class);
+		return new ResponseEntity<>(temp.getBody(), HttpStatus.OK);
+
+    }
 
 
 }

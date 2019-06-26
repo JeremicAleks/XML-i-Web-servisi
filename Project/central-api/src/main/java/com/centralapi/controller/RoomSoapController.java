@@ -75,7 +75,7 @@ public class RoomSoapController {
 
 		System.out.println("RAS" + request.getRoom().getRoomAdditionalService().size());
 		// sacuvati u bazu i vratiti room sa id-om
-		Room room = restTemplate.postForObject("http://room-microservice/api/add", request, Room.class);
+		Room room = restTemplate.postForObject("https://room-microservice/api/add", request, Room.class);
 
 		return room;
 
@@ -99,7 +99,7 @@ public class RoomSoapController {
 
 		GetRooms getRooms;
 		//Nema username - a
-		getRooms = restTemplate.getForObject("http://room-microservice/api/all", GetRooms.class);
+		getRooms = restTemplate.getForObject("https://room-microservice/api/all", GetRooms.class);
 //		getRooms = restTemplate.getForObject("http://room-microservice/api/all/"+request.getUsername(), GetRooms.class);
 
 

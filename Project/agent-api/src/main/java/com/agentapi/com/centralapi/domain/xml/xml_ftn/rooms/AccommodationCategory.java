@@ -56,7 +56,6 @@ public class AccommodationCategory {
     @XmlElement(required = true)
     protected String description;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
     protected boolean active;
 

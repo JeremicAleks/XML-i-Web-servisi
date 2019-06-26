@@ -140,7 +140,7 @@ public class AgentController {
 		Reservation response = (Reservation) soap.marshalSendAndReceive(SERVICE_URI, addReservation);
 		resRepo.save(response);
 		
-		return new ResponseEntity<>("Suceessfully reserved room!", HttpStatus.OK);
+		return new ResponseEntity<>(new ResponseMessage("Suceessfully reserved room!"), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/room/all", produces = MediaType.APPLICATION_JSON_VALUE)

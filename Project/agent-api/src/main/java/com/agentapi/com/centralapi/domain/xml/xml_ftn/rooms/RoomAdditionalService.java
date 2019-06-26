@@ -54,7 +54,6 @@ import org.hibernate.annotations.Where;
 public class RoomAdditionalService {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
     @XmlElement(required = true)
     protected String description;

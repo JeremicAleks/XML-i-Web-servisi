@@ -97,7 +97,7 @@ public class Room {
     @XmlElement(name = "Reservation", namespace = "http://www.xml-ftn.xml.domain.centralapi.com/Reservation")
     protected List<Reservation> reservation;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     protected long id;
     protected int daysForCancel;
     @ManyToOne(fetch = FetchType.LAZY)

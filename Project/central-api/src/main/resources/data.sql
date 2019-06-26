@@ -28,19 +28,19 @@ insert into location ( lat, lng, name) values (100,101,'mesto1');
 insert into location ( lat, lng, name) values (101,102,'mesto2');
 insert into location ( lat, lng, name) values (102,103,'mesto3');
 
-insert into accommodation_category (description) values ("1star");
-insert into accommodation_category (description) values ("2star");
-insert into accommodation_category (description) values ("3star");
-insert into accommodation_category (description) values ("4star");
-insert into accommodation_category (description) values ("5star");
+insert into accommodation_category (description,active) values ("1star",1);
+insert into accommodation_category (description,active) values ("2star",1);
+insert into accommodation_category (description,active) values ("3star",1);
+insert into accommodation_category (description,active) values ("4star",1);
+insert into accommodation_category (description,active) values ("5star",1);
 
-insert into accommodation_type (description) values ("Hotel");
-insert into accommodation_type (description) values ("room");
-insert into accommodation_type (description) values ("tip neki");
+insert into accommodation_type (description,active) values ("Hotel",1);
+insert into accommodation_type (description,active) values ("room",1);
+insert into accommodation_type (description,active) values ("tip neki",1);
 
-insert into room_additional_service (description) values ("Wifi");
-insert into room_additional_service (description) values ("DogFriendly");
-insert into room_additional_service (description) values ("AirCondition");
+insert into room_additional_service (description,active) values ("Wifi",1);
+insert into room_additional_service (description,active) values ("DogFriendly",1);
+insert into room_additional_service (description,active) values ("AirCondition",1);
 
 insert into price_list (month, price) value ('2019-6-14',120);
 insert into price_list (month, price) value ('2019-7-04',130);

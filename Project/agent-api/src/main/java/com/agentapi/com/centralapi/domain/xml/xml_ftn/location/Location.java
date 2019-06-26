@@ -57,7 +57,6 @@ public class Location {
     protected double lng;
     protected double lat;
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
     protected long id;
 
     /**

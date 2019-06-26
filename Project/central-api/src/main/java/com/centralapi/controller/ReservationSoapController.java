@@ -1,7 +1,5 @@
 package com.centralapi.controller;
 
-import com.centralapi.domain.xml.xml_ftn.reservation.*;
-import com.centralapi.domain.xml.xml_ftn.users.SendMessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.client.RestTemplate;
@@ -10,8 +8,16 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import com.centralapi.domain.xml.xml_ftn.reservation.AllowReservationDTO;
+import com.centralapi.domain.xml.xml_ftn.reservation.GetMessages;
+import com.centralapi.domain.xml.xml_ftn.reservation.GetReservations;
+import com.centralapi.domain.xml.xml_ftn.reservation.MessageTable;
+import com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
+import com.centralapi.domain.xml.xml_ftn.reservation.ReservationDTO;
+import com.centralapi.domain.xml.xml_ftn.rooms.Room;
 import com.centralapi.domain.xml.xml_ftn.users.GetMessagesForUserDTO;
 import com.centralapi.domain.xml.xml_ftn.users.GetReservationForUserDTO;
+import com.centralapi.domain.xml.xml_ftn.users.SendMessageDTO;
 
 @Endpoint
 public class ReservationSoapController {
@@ -31,7 +37,7 @@ public class ReservationSoapController {
 
         GetReservations getReservations;
 
-        getReservations = restTemplate.getForObject("http://reservation-microservice/api/all",GetReservations.class);
+        getReservations = restTemplate.getForObject("https://reservation-microservice/api/reservation/all",GetReservations.class);
         //getReservations = restTemplate.getForObject("http://reservation-microservice/api/all/"+request.getUsername(),GetReservations.class);
 
 
@@ -44,7 +50,7 @@ public class ReservationSoapController {
     public GetMessages getMsgs(@RequestPayload GetMessagesForUserDTO  request) {
 	    GetMessages getMessages;
 
-	    getMessages = restTemplate.getForObject("http://reservation-microservice/api/allMessage/"+request.getUsername(),GetMessages.class);
+	    getMessages = restTemplate.getForObject("https://reservation-microservice/api/reservation/allMessage/"+request.getUsername(),GetMessages.class);
 
 
     	return getMessages;
@@ -57,7 +63,7 @@ public class ReservationSoapController {
 
         System.out.println("Dodavanje rezervacije");
 
-	    reservation = restTemplate.postForObject("http://reservation-microservice/api/add",request,Reservation.class);
+	    reservation = restTemplate.postForObject("https://reservation-microservice/api/reservation/add",request,Reservation.class);
 
 	    return reservation;
     }
@@ -67,7 +73,7 @@ public class ReservationSoapController {
     public Reservation changeStateReservation(@RequestPayload AllowReservationDTO request){
 	    Reservation reservation;
 
-	    reservation = restTemplate.postForObject("http://reservation-microservice/api/changeState",request,Reservation.class);
+	    reservation = restTemplate.postForObject("https://reservation-microservice/api/reservation/changeState",request,Reservation.class);
 
 	    return reservation;
     }
@@ -77,7 +83,7 @@ public class ReservationSoapController {
     public MessageTable sendMessage(@RequestPayload SendMessageDTO request){
         MessageTable messageTable;
 
-        messageTable = restTemplate.postForObject("http://reservation-microservice/api/sendMessage",request,MessageTable.class);
+        messageTable = restTemplate.postForObject("https://reservation-microservice/api/reservation/sendMessage",request,MessageTable.class);
 
         return messageTable;
     }

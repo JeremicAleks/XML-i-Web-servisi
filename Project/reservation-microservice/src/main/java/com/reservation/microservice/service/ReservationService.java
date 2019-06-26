@@ -48,26 +48,22 @@ public class ReservationService {
 
     public Reservation reserveRoom(ReservationDTO reservationDTO) {
 
-        Reservation reservation = new Reservation();
-        reservation.setCheckIn(reservationDTO.getReservation().getCheckIn());
-        reservation.setCheckOut(reservationDTO.getReservation().getCheckOut());
-        reservation.setState(reservationDTO.getReservation().getState());
-
-
-        reservation = save(reservation);
-
+    	Reservation res = reservationRepository.save(reservationDTO.getReservation());
+    	
         if (reservationDTO.getUserId() != null){
             RegistredUser registredUser = registeredUserService.findByUsername(reservationDTO.getUserId());
-            registredUser.getReservation().add(reservation);
+            registredUser.getReservation().add(res);
             registeredUserService.save(registredUser);
+            System.out.println("ovde ne ulazi");
         }
 
+        System.out.println("ovde ulazi");
         Room room = roomService.fingById(reservationDTO.getRoomId());
-        room.getReservation().add(reservation);
+        room.getReservation().add(res);
         roomService.save(room);
 
 
-        return reservation;
+        return res;
     }
 
     public Reservation changeState(AllowReservationDTO allowReservationDTO) {
