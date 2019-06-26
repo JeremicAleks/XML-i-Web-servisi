@@ -60,7 +60,14 @@ public class RoomAdditionalService {
     protected String description;
     protected boolean active;
 
-    /**
+    public RoomAdditionalService() {}
+    
+    public RoomAdditionalService(String description, boolean active) {
+		this.description = description;
+		this.active = active;
+	}
+
+	/**
      * Gets the value of the id property.
      * 
      */

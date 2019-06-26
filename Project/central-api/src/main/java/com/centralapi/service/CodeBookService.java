@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import com.centralapi.domain.dto.AccommodationDTO;
 import com.centralapi.domain.xml.xml_ftn.rooms.AccommodationCategory;
 import com.centralapi.domain.xml.xml_ftn.rooms.AccommodationType;
+import com.centralapi.domain.xml.xml_ftn.rooms.RoomAdditionalService;
 import com.centralapi.exception.ResponseMessage;
 
 public interface CodeBookService {
@@ -26,5 +27,13 @@ public interface CodeBookService {
 	ResponseMessage deleteAccommodationCategory(Long id);
 
 	ResponseMessage updateAccommodationCategory(@Valid AccommodationDTO accommodationCategory);
+
+	List<RoomAdditionalService> getAllAdditionalServices();
+
+	ResponseMessage addAdditionalService(String additionalService);
+
+	ResponseMessage deleteAdditionalService(Long id);
+
+	ResponseMessage updateAdditionalService(@Valid AccommodationDTO additionalService);
 
 }

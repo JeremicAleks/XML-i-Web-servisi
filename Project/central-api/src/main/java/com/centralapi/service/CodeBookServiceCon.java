@@ -11,10 +11,12 @@ import org.springframework.stereotype.Service;
 import com.centralapi.domain.dto.AccommodationDTO;
 import com.centralapi.domain.xml.xml_ftn.rooms.AccommodationCategory;
 import com.centralapi.domain.xml.xml_ftn.rooms.AccommodationType;
+import com.centralapi.domain.xml.xml_ftn.rooms.RoomAdditionalService;
 import com.centralapi.exception.GlobalException;
 import com.centralapi.exception.ResponseMessage;
 import com.centralapi.repo.AccommodationCategoriesRepository;
 import com.centralapi.repo.AccommodationTypeRepository;
+import com.centralapi.repo.RoomAdditionalServicesRepository;
 
 @Service
 public class CodeBookServiceCon implements CodeBookService {
@@ -24,6 +26,9 @@ public class CodeBookServiceCon implements CodeBookService {
 	
 	@Autowired
 	AccommodationCategoriesRepository accommCategoryRepo;
+	
+	@Autowired
+	RoomAdditionalServicesRepository roomAdditionalServRepo;
 	
 	@Override
 	public List<AccommodationType> getAllAccomodationTypes() { 
@@ -117,5 +122,52 @@ public class CodeBookServiceCon implements CodeBookService {
 		accommCategoryRepo.saveAndFlush(ac.get());
 
 		return new ResponseMessage("Successfully updated accommodation category!");
+	}
+
+	@Override
+	public List<RoomAdditionalService> getAllAdditionalServices() {
+		return roomAdditionalServRepo.findAll();
+	}
+
+	@Override
+	public ResponseMessage addAdditionalService(String additionalService) {
+
+		if (roomAdditionalServRepo.findByDescription(additionalService) != null) {
+			throw new GlobalException("Additional service alredy exist!");
+		}
+		
+		System.out.println(additionalService);
+
+		roomAdditionalServRepo.save(new RoomAdditionalService(additionalService, true));
+
+		return new ResponseMessage("Successfully added additional service!");
+	}
+
+	@Override
+	public ResponseMessage deleteAdditionalService(Long id) {
+
+		Optional<RoomAdditionalService> ac = roomAdditionalServRepo.findById(id);
+		if ( ac == null) {
+			throw new GlobalException("Additional service doesn't exist!");
+		}
+		
+		ac.get().setActive(false);
+		roomAdditionalServRepo.saveAndFlush(ac.get());
+
+		return new ResponseMessage("Successfully deleted additional service!");
+	}
+
+	@Override
+	public ResponseMessage updateAdditionalService(@Valid AccommodationDTO additionalService) {
+
+		Optional<RoomAdditionalService> ac = roomAdditionalServRepo.findById(additionalService.getId());
+		if ( ac == null) {
+			throw new GlobalException("Additional service doesn't exist!");
+		}
+		
+		ac.get().setDescription(additionalService.getDescription());
+		roomAdditionalServRepo.saveAndFlush(ac.get());
+
+		return new ResponseMessage("Successfully updated additional service!");
 	}
 }

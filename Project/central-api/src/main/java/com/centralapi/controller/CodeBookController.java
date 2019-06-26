@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.centralapi.domain.dto.AccommodationDTO;
 import com.centralapi.domain.xml.xml_ftn.rooms.AccommodationCategory;
 import com.centralapi.domain.xml.xml_ftn.rooms.AccommodationType;
+import com.centralapi.domain.xml.xml_ftn.rooms.RoomAdditionalService;
 import com.centralapi.exception.ResponseMessage;
 import com.centralapi.service.CodeBookService;
 
@@ -104,40 +105,40 @@ public class CodeBookController {
 		return new ResponseEntity<>(rm, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/accommodation/categories", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/additionalService", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllAdditionalServices(){
 		
-		List<AccommodationCategory> results = codeBookService.getAllAccomodationCategories();
+		List<RoomAdditionalService> results = codeBookService.getAllAdditionalServices();
 		
 		if (results == null) {
-			System.out.println("vraca null umesto accommCategories");
+			System.out.println("vraca null umesto additionalServices");
 		}
 
         return new ResponseEntity<>(results, HttpStatus.OK);
     }
 	
-	@PostMapping(value = "/accommodation/newCategory", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseMessage> addAdditionalService(@Valid @RequestBody AccommodationDTO accommodationCategory) {
+	@PostMapping(value = "/additionalService/newService", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseMessage> addAdditionalService(@Valid @RequestBody AccommodationDTO additionalService) {
 		
-		ResponseMessage rm = codeBookService.addAccommodationCategory(accommodationCategory.getDescription());
+		ResponseMessage rm = codeBookService.addAdditionalService(additionalService.getDescription());
 
 		return new ResponseEntity<>(rm, HttpStatus.OK);
 	}
 	
-	@PostMapping(value = "/accommodation/deleteCategory", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseMessage> deleteAdditionalService(@Valid @RequestBody AccommodationDTO accommodationCategory) {
+	@PostMapping(value = "/additionalService/deleteService", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseMessage> deleteAdditionalService(@Valid @RequestBody AccommodationDTO additionalService) {
 		
-		System.out.println("deleteid: " + accommodationCategory.getId());
-		ResponseMessage rm = codeBookService.deleteAccommodationCategory(accommodationCategory.getId());
+		System.out.println("deleteid: " + additionalService.getId());
+		ResponseMessage rm = codeBookService.deleteAdditionalService(additionalService.getId());
 
 		return new ResponseEntity<>(rm, HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/accommodation/updateCategory", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseMessage> updateAdditionalService(@Valid @RequestBody AccommodationDTO accommodationCategory) {
+	@PutMapping(value = "/additionalService/updateService", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseMessage> updateAdditionalService(@Valid @RequestBody AccommodationDTO additionalService) {
 		
-		System.out.println("updateid: " + accommodationCategory.getId());
-		ResponseMessage rm = codeBookService.updateAccommodationCategory(accommodationCategory);
+		System.out.println("updateid: " + additionalService.getId());
+		ResponseMessage rm = codeBookService.updateAdditionalService(additionalService);
 
 		return new ResponseEntity<>(rm, HttpStatus.OK);
 	}

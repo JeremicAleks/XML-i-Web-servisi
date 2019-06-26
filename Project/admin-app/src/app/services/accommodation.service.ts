@@ -41,8 +41,8 @@ export class AccommodationService {
 
   getAdditionalServices() {
     return this.http.get<any>(environment.centralApiUrl + '/api/additionalService')
-    .pipe(map(accommodationCategories => {
-      return accommodationCategories;
+    .pipe(map(additionalServices => {
+      return additionalServices;
     }
     ));
   }

@@ -11,8 +11,8 @@ import { AccommodationService } from 'src/app/services/accommodation.service';
 })
 export class AdminCodeBookAdditionalServiceComponent implements OnInit {
 
-  accommodationServices: Array<AccommodationDTO>;
-  accommodationServiceToUpdate: AccommodationDTO;
+  additionalServices: Array<AccommodationDTO>;
+  additionalServiceToUpdate: AccommodationDTO;
 
   newAdditionalServiceForm = new FormGroup({
     serviceDescription: new FormControl('', Validators.required)
@@ -29,8 +29,8 @@ export class AdminCodeBookAdditionalServiceComponent implements OnInit {
   }
 
   updateOldAdditionalService() {
-    this.accommodationServiceToUpdate.description = this.updateAdditionalServiceForm.get('serviceDescription').value;
-    this.accommodationService.updateAccommondationCategory(this.accommodationServiceToUpdate).subscribe(
+    this.additionalServiceToUpdate.description = this.updateAdditionalServiceForm.get('serviceDescription').value;
+    this.accommodationService.updateAccommondationCategory(this.additionalServiceToUpdate).subscribe(
       data => {
         alert(data.message);
         this.modalService.dismissAll();
@@ -44,7 +44,7 @@ export class AdminCodeBookAdditionalServiceComponent implements OnInit {
 
   updateAdditionalService(content, additionalService: AccommodationDTO) {
     this.updateAdditionalServiceForm.get('serviceDescription').setValue(additionalService.description);
-    this.accommodationServiceToUpdate = additionalService;
+    this.additionalServiceToUpdate = additionalService;
 
     this.modalService.open(content, {
       windowClass: 'dark-modal',
@@ -92,7 +92,7 @@ export class AdminCodeBookAdditionalServiceComponent implements OnInit {
     console.log('get additional services');
     this.accommodationService.getAdditionalServices().subscribe(
       data => {
-        this.accommodationServices = data;
+        this.additionalServices = data;
         alert(data.message);
       },
       error => {

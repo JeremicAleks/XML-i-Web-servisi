@@ -36,7 +36,7 @@
 
       <!-- Additional services -->
       <div class="tab-pane fade show active" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-        <!-- TABELA ZA ACCOMM Category -->
+        <!-- TABELA ZA ADDITIONAL SERVICE -->
         <table class="table">
           <thead class="thead-dark">
             <tr>
@@ -46,16 +46,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let as of this.additionalServices; let i = index">
-              <td>{{as.id}}</td>
-              <td>{{as.description}}</td>
+            <tr *ngFor="let at of this.additionalServices; let i = index">
+              <td>{{at.id}}</td>
+              <td>{{at.description}}</td>
               <td>
                 <button Category="button" class="btn btn-outline-warning" data-toggle="modal"
-                  (click)="updateAdditionalService(updateAdditionalServiceModal, as)">Update</button>
+                  (click)="updateAdditionalService(updateAdditionalServiceModal, at)">Update</button>
               </td>
               <td>
                 <button Category="button" class="btn btn-outline-danger" style="margin-right: 10px"
-                  (click)="deleteAdditionalService(as)">Delete</button>
+                  (click)="deleteAdditionalService(at)">Delete</button>
               </td>
             </tr>
           </tbody>
@@ -126,7 +126,7 @@
                 && updateAdditionalServiceForm.get('serviceDescription').invalid}" required>
               <div *ngIf="updateAdditionalServiceForm.get('serviceDescription').touched 
                 && updateAdditionalServiceForm.get('serviceDescription').invalid" class="invalid-feedback">
-                <div>Category description is required</div>
+                <div>Service description is required</div>
               </div>
             </div>
           </div>
