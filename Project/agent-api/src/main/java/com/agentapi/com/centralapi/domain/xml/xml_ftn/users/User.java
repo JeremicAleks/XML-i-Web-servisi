@@ -11,6 +11,7 @@ package com.agentapi.com.centralapi.domain.xml.xml_ftn.users;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -88,7 +89,7 @@ import javax.xml.bind.annotation.XmlType;
     AgentUser.class
 })
 @Entity
-@DiscriminatorColumn(name = "USER")
+@DiscriminatorColumn(name = "USER",discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 

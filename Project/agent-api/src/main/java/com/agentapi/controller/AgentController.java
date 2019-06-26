@@ -207,7 +207,8 @@ public class AgentController {
 		try {
 
 			SendMessage.getMessageTable().setFromUser(userInfo.findAll().get(0).getUsername());
-			msgService.addMessageToLocal(SendMessage);
+			Reservation response = (Reservation) soap.marshalSendAndReceive(SERVICE_URI, SendMessage);
+			resRepo.save(response);
 
 			// treba poslatii na serveru!
 			return new ResponseEntity<>(new ResponseMessage("Successfully sended!"), HttpStatus.OK);
@@ -234,7 +235,8 @@ public class AgentController {
 
 		try {
 
-			resService.confirmReservation(allow);
+			Reservation response = (Reservation) soap.marshalSendAndReceive(SERVICE_URI, allow);
+			resRepo.saveAndFlush(response);
 
 			// treba poslatii na serveru!
 			return new ResponseEntity<>(resService.getReservations(), HttpStatus.OK);

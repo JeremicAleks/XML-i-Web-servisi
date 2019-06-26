@@ -340,3 +340,15 @@
 {date:2019-06-26 04:43:04.793, level:INFO , process:http-nio-8089-exec-8, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
 {date:2019-06-26 04:46:52.535, level:DEBUG, process:http-nio-8089-exec-7, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: agent}
 {date:2019-06-26 04:46:52.720, level:INFO , process:http-nio-8089-exec-7, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-26 16:18:21.744, level:DEBUG, process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: agent}
+{date:2019-06-26 16:18:22.061, level:INFO , process:http-nio-8089-exec-10, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-26 16:26:40.405, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: agent}
+{date:2019-06-26 16:26:40.657, level:INFO , process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-26 16:35:37.796, level:DEBUG, process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: agent}
+{date:2019-06-26 16:35:38.069, level:INFO , process:http-nio-8089-exec-3, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-26 16:44:08.938, level:DEBUG, process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: agent}
+{date:2019-06-26 16:44:09.157, level:INFO , process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-26 16:52:00.777, level:DEBUG, process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: agent}
+{date:2019-06-26 16:52:01.193, level:INFO , process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-26 17:30:17.358, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: agent}
+{date:2019-06-26 17:30:18.148, level:INFO , process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}

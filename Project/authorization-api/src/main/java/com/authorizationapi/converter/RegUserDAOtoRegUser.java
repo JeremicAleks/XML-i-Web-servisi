@@ -14,8 +14,7 @@ public class RegUserDAOtoRegUser {
 
 	public static RegistredUser create(RegisterUserDTO user) {
 
-		return new RegistredUser(user.getName(), user.getLastname(), user.getUsername(), user.getPassword(),
-				user.getEmail(), null, null,null);
+		return new RegistredUser(user.getName(),null,user.getLastname(),user.getUsername(),user.getPassword(),user.getEmail(),null,null);
 	}
 
 }

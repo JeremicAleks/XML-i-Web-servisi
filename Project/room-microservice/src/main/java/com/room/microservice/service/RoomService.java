@@ -35,10 +35,9 @@ public class RoomService {
         Room r = addRoomDTO.getRoom();
         System.out.println("rOOM " + r.getRoomAdditionalService().size());
         r = roomRepository.save(r);
-        //AgentUser agentUser = agentUserService.findByUsername(addRoomDTO.getUsername());
-        //List<Room> agentRooms = agentUser.getRoom();
-       // agentRooms.add(room);
-       // agentUserService.save(agentUser);
+        AgentUser agentUser = agentUserService.findByUsername(addRoomDTO.getUsername());
+        agentUser.getRoom().add(addRoomDTO.getRoom());
+        agentUserService.save(agentUser);
 
         return r;
     }
