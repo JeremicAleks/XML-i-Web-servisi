@@ -8,7 +8,6 @@
 
 package com.example.demo.domain;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,11 +20,49 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
+/**
+ * <p>Java class for anonymous complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType>
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="checkIn" type="{http://www.w3.org/2001/XMLSchema}date"/>
+ *         &lt;element name="checkOut" type="{http://www.w3.org/2001/XMLSchema}date"/>
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="state" type="{http://www.xml-ftn.xml.domain.centralapi.com/Reservation}ReservationStateEnum"/>
+ *         &lt;sequence maxOccurs="unbounded">
+ *           &lt;element ref="{http://www.xml-ftn.xml.domain.centralapi.com/Reservation}MessageTable"/>
+ *         &lt;/sequence>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {
+    "checkIn",
+    "checkOut",
+    "id",
+    "state",
+    "messageTable"
+})
+@XmlRootElement(name = "Reservation")
 @Entity
 public class Reservation {
 
@@ -44,8 +81,7 @@ public class Reservation {
     @XmlElement(name = "MessageTable", required = true)
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     protected List<MessageTable> messageTable;
-
-    /**
+	/**
      * Gets the value of the checkIn property.
      * 
      * @return

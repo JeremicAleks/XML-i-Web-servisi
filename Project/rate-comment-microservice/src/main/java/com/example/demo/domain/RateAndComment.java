@@ -15,6 +15,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 
 
 
@@ -25,31 +28,32 @@ public class RateAndComment {
     protected String comment;
     protected int rating;
     protected boolean isAllowed;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     protected Room room;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
-    public boolean isAllowed() {
-		return isAllowed;
-	}
-
-	public void setAllowed(boolean isAllowed) {
-		this.isAllowed = isAllowed;
-	}
-
-	public RegistredUser getRegUser() {
-		return regUser;
-	}
-
-	public void setRegUser(RegistredUser regUser) {
-		this.regUser = regUser;
-	}
-
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+  
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     protected Reservation reservation;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     protected RegistredUser regUser;
+
+    public boolean isAllowed() {
+  		return isAllowed;
+  	}
+
+  	public void setAllowed(boolean isAllowed) {
+  		this.isAllowed = isAllowed;
+  	}
+
+  	public RegistredUser getRegUser() {
+  		return regUser;
+  	}
+
+  	public void setRegUser(RegistredUser regUser) {
+  		this.regUser = regUser;
+  	}
 
     /**
      * Gets the value of the comment property.

@@ -5,7 +5,6 @@
 // Generated on: 2019.06.24 at 06:58:16 PM CEST 
 //
 
-
 package com.centralapi.domain.xml.xml_ftn.rooms;
 
 import javax.persistence.CascadeType;
@@ -19,6 +18,9 @@ import javax.persistence.ManyToOne;
 import com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
 import com.centralapi.domain.xml.xml_ftn.users.RegistredUser;
 
+
+
+
 @Entity
 public class RateAndComment {
 
@@ -26,15 +28,33 @@ public class RateAndComment {
     protected String comment;
     protected int rating;
     protected boolean isAllowed;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     protected Room room;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+  
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     protected Reservation reservation;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     protected RegistredUser regUser;
+
+    public boolean isAllowed() {
+  		return isAllowed;
+  	}
+
+  	public void setAllowed(boolean isAllowed) {
+  		this.isAllowed = isAllowed;
+  	}
+
+  	public RegistredUser getRegUser() {
+  		return regUser;
+  	}
+
+  	public void setRegUser(RegistredUser regUser) {
+  		this.regUser = regUser;
+  	}
+
     /**
      * Gets the value of the comment property.
      * 

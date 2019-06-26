@@ -33,7 +33,9 @@ public class RateAndCommentServiceCon implements RateAndCommentService {
 		
 		try {
 		Room r  = roomRepo.getOne(idRoom);
-		return rateRepo.getRatesForRoom(idRoom);
+		List<RateAndComment> rates = rateRepo.getRatesForRoom(idRoom);
+
+		return rates;
 		}
 		catch (Exception e) {
 			return null;
@@ -46,11 +48,8 @@ public class RateAndCommentServiceCon implements RateAndCommentService {
 		try {
 			Room r  = roomRepo.getOne(rate.getRoomId());
 			Reservation res = resRepo.getOne(rate.getReservationId());
-			
 			RegistredUser reg = regUserRepo.findByUsername(rate.getUsername());
-			
-			
-			System.out.println("USAOO");
+
 			RateAndComment rateAndComment = new RateAndComment();
 			rateAndComment.setComment(rate.getComment());
 			rateAndComment.setIsAllowed(false);
@@ -58,7 +57,7 @@ public class RateAndCommentServiceCon implements RateAndCommentService {
 			rateAndComment.setReservation(res);
 			rateAndComment.setRating(rate.getRate());
 			rateAndComment.setRegUser(reg);
-			rateRepo.saveAndFlush(rateAndComment);
+			rateRepo.save(rateAndComment);
 			
 			return rateAndComment;
 			

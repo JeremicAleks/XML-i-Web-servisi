@@ -30,7 +30,7 @@ public class RateAndCommentController {
 	@GetMapping(value = "/rates/all/{idRoom}")
 	public ResponseEntity<?> getAllRatesForRoom(@PathVariable Long idRoom) {
 		
-		System.out.println(idRoom);
+
 		List<RateAndComment> rates = rateAndComment.getRatesForRoom(idRoom);
 		if(rates == null)
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -42,7 +42,7 @@ public class RateAndCommentController {
 	@GetMapping(value = "/rates/all")
 	public ResponseEntity<?> getAllRates() {
 		
-		System.out.println("Nabavka komentara");
+		
 		
 		return new ResponseEntity<>(ratesRepo.getRatesForAdmin(), HttpStatus.OK);
 		
@@ -51,7 +51,7 @@ public class RateAndCommentController {
 	@PostMapping(value = "/rates/add")
 	public ResponseEntity<?> addRatesForRoom(@RequestBody AddRateAndCommentDTO rate) {
 		
-		System.out.println("Dodavanje komentara!");
+		
 		RateAndComment rates = rateAndComment.addRateAndComment(rate);
 		if(rates == null)
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

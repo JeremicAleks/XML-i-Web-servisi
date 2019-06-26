@@ -8,7 +8,6 @@
 
 package com.example.demo.domain;
 
-
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -23,14 +22,42 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
+/**
+ * <p>Java class for PriceList complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType name="PriceList">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="month" type="{http://www.w3.org/2001/XMLSchema}gYearMonth"/>
+ *         &lt;element name="price" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "PriceList", propOrder = {
+    "month",
+    "price",
+    "id"
+})
 @Entity
 public class PriceList {
 
-   
+    @XmlElement(required = true)
+    @XmlSchemaType(name = "gYearMonth")
     protected Date month;
     protected double price;
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
     /**
      * Gets the value of the month property.
@@ -40,11 +67,11 @@ public class PriceList {
      *     {@link XMLGregorianCalendar }
      *     
      */
+    
     public Date getMonth() {
         return month;
     }
-
-    /**
+	/**
      * Sets the value of the month property.
      * 
      * @param value

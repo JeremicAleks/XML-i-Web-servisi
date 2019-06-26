@@ -8,10 +8,28 @@
 
 package com.example.demo.domain;
 
-
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
+
+/**
+ * <p>Java class for ReservationStateEnum.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * <pre>
+ * &lt;simpleType name="ReservationStateEnum">
+ *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *     &lt;enumeration value="ALLOWED"/>
+ *     &lt;enumeration value="NOTALLOWED"/>
+ *     &lt;enumeration value="PENDING"/>
+ *   &lt;/restriction>
+ * &lt;/simpleType>
+ * </pre>
+ * 
+ */
+@XmlType(name = "ReservationStateEnum")
+@XmlEnum
 public enum ReservationStateEnum {
 
     ALLOWED,

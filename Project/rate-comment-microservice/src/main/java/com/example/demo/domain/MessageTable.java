@@ -5,27 +5,61 @@
 // Generated on: 2019.06.19 at 12:01:06 AM CEST 
 //
 
-package com.example.demo.domain;
 
+package com.example.demo.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 
+/**
+ * <p>Java class for anonymous complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType>
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="messageString" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="fromUser" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="toUser" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {
+    "id",
+    "messageString",
+    "fromUser",
+    "toUser"
+})
+@XmlRootElement(name = "MessageTable")
 @Entity
 public class MessageTable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
-
+    @XmlElement(required = true)
     protected String messageString;
-
+    @XmlElement(required = true)
     protected String fromUser;
-
+    @XmlElement(required = true, nillable = true)
     protected String toUser;
 
     /**

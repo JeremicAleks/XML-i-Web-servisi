@@ -8,7 +8,6 @@
 
 package com.example.demo.domain;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +18,77 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 
-
+/**
+ * <p>Java class for anonymous complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType>
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="numberOfBeds" form="qualified">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}positiveInteger">
+ *               &lt;maxExclusive value="6"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element ref="{http://www.xml-ftn.xml.domain.centralapi.com/Location}Location"/>
+ *         &lt;element ref="{http://www.xml-ftn.xml.domain.centralapi.com/Rooms}AccommodationCategory"/>
+ *         &lt;sequence maxOccurs="unbounded" minOccurs="0">
+ *           &lt;element ref="{http://www.xml-ftn.xml.domain.centralapi.com/Rooms}RoomAdditionalService"/>
+ *         &lt;/sequence>
+ *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;sequence maxOccurs="10">
+ *           &lt;element name="image" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;/sequence>
+ *         &lt;sequence maxOccurs="unbounded" minOccurs="0">
+ *           &lt;element name="priceList" type="{http://www.xml-ftn.xml.domain.centralapi.com/Rooms}PriceList"/>
+ *         &lt;/sequence>
+ *         &lt;sequence maxOccurs="unbounded" minOccurs="0">
+ *           &lt;element ref="{http://www.xml-ftn.xml.domain.centralapi.com/Reservation}Reservation"/>
+ *         &lt;/sequence>
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="daysForCancel" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element ref="{http://www.xml-ftn.xml.domain.centralapi.com/Rooms}AccommodationType"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {
+    "numberOfBeds",
+    "location",
+    "accommodationCategory",
+    "roomAdditionalService",
+    "description",
+    "image",
+    "priceList",
+    "reservation",
+    "id",
+    "daysForCancel",
+    "accommodationType"
+})
+@XmlRootElement(name = "Room")
 @Entity
 public class Room {
 
@@ -37,16 +101,19 @@ public class Room {
     @ManyToOne(fetch = FetchType.LAZY)
     protected AccommodationCategory accommodationCategory;
     @XmlElement(name = "RoomAdditionalService")
-    @OneToMany(fetch = FetchType.LAZY,orphanRemoval = false)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     protected List<RoomAdditionalService> roomAdditionalService;
     @XmlElement(required = true)
     protected String description;
     @XmlElement(required = true)
     @ElementCollection
     protected List<String> image;
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
     protected List<PriceList> priceList;
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
     @XmlElement(name = "Reservation", namespace = "http://www.xml-ftn.xml.domain.centralapi.com/Reservation")
     protected List<Reservation> reservation;
     @Id
