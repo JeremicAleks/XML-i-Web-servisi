@@ -41,7 +41,7 @@ public class MessageTableService {
         return messageTables;
     }
 
-    public MessageTable sendMessage(SendMessageDTO sendMessageDTO) {
+    public Reservation sendMessage(SendMessageDTO sendMessageDTO) {
         MessageTable messageTable = sendMessageDTO.getMessageTable();
         Room room = roomService.fingById(sendMessageDTO.getRoomId());
         Reservation reservation =reservationService.findById(sendMessageDTO.getRoomId());
@@ -49,8 +49,9 @@ public class MessageTableService {
         messageTable = save(messageTable);
 
         reservation.getMessageTable().add(messageTable);
-        reservationService.save(reservation);
+        reservation = reservationService.save(reservation);
 
-        return messageTable;
+        return reservation;
+
     }
 }

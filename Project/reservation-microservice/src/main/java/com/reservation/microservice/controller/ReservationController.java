@@ -86,12 +86,12 @@ public class ReservationController {
     }
 
     @PostMapping(value = "/sendMessage")
-    public MessageTable sendMessage(@RequestBody SendMessageDTO sendMessageDTO){
-        MessageTable messageTable;
+    public Reservation sendMessage(@RequestBody SendMessageDTO sendMessageDTO){
+        Reservation reservation;
 
-        messageTable = messageTableService.sendMessage(sendMessageDTO);
+        reservation = messageTableService.sendMessage(sendMessageDTO);
 
-        return messageTable;
+        return reservation;
     }
 
 }

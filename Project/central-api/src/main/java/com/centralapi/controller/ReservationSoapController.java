@@ -79,12 +79,11 @@ public class ReservationSoapController {
     //mozda treba promeniti namespace :D
     @PayloadRoot(namespace = USER_NAMESPACE_URI,localPart = "SendMessageDTO")
     @ResponsePayload
-    public MessageTable sendMessage(@RequestPayload SendMessageDTO request){
-        MessageTable messageTable;
+    public Reservation sendMessage(@RequestPayload SendMessageDTO request){
+        Reservation reservation ;
+        reservation= restTemplate.postForObject("https://reservation-microservice/api/reservation/sendMessage",request,Reservation.class);
 
-        messageTable = restTemplate.postForObject("https://reservation-microservice/api/reservation/sendMessage",request,MessageTable.class);
-
-        return messageTable;
+        return reservation;
     }
 
 
