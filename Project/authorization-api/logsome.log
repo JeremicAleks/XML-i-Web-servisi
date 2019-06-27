@@ -352,3 +352,9 @@
 {date:2019-06-26 16:52:01.193, level:INFO , process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
 {date:2019-06-26 17:30:17.358, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Loaded user from database! Username: agent}
 {date:2019-06-26 17:30:18.148, level:INFO , process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Successfully logged in!}
+{date:2019-06-27 04:37:35.971, level:DEBUG, process:http-nio-8089-exec-1, class:com.authorizationapi.service.UserService, msg:Date from token: Thu Jul 04 04:27:47 CEST 2019}
+{date:2019-06-27 04:41:23.258, level:DEBUG, process:http-nio-8089-exec-5, class:com.authorizationapi.service.UserService, msg:Date from token: null}
+{date:2019-06-27 04:59:13.029, level:DEBUG, process:http-nio-8089-exec-4, class:com.authorizationapi.service.UserService, msg:Date from token: Thu Jul 04 04:27:47 CEST 2019}
+{date:2019-06-27 05:00:03.088, level:DEBUG, process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Date from token: Thu Jul 04 04:27:47 CEST 2019}
+{date:2019-06-27 05:00:03.524, level:DEBUG, process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Encode password for user using salt and pepper..}
+{date:2019-06-27 05:00:03.837, level:INFO , process:http-nio-8089-exec-2, class:com.authorizationapi.service.UserService, msg:Successfully changed password!}
