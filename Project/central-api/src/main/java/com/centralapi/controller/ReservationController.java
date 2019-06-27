@@ -57,7 +57,7 @@ public class ReservationController {
     public ResponseEntity<?> sendMessage(@RequestBody ClientSendMessageDTO clientSendMessageDTO){
         Reservation reservation;
 
-        reservation = restTemplate.postForObject("https://reservation-microservice/api/reservation/sendMessage",clientSendMessageDTO,Reservation.class);
+        reservation = restTemplate.postForObject("https://reservation-microservice/api/reservation/sendMessageClient",clientSendMessageDTO,Reservation.class);
 
         return new ResponseEntity<>(reservation,HttpStatus.OK);
     }
