@@ -97,6 +97,10 @@
           </div>
           <span class="psw"><a (click)="openRegistrationModal(registration)">Don't have account? Register
               now!</a></span>
+          <div>
+          <span class="psw"><a (click)="openChangePasswordModal(senduser)">Forgot password? Click here to reset!
+              </a></span>
+          </div>
         </div>
       </div>
     </form>
@@ -239,5 +243,91 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
     <button type="button" class="btn btn-primary" [disabled]="!registerForm.valid" (click)="onRegistration()">Register</button>
+  </div>
+</ng-template>
+
+<ng-template id="nekimodal" #changepass let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Change password</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="changepassForm" [formGroup]="changepassForm">
+      <div class="container" id="changepass-form">
+        <div class="form-group">
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="material-icons">visibility_off</i></span>
+            </div>
+            <input type="password" class="form-control" placeholder="NEW PASSWORD" id="newpassword-value"
+                   formControlName="newPassword"
+                   [ngClass]="{'is-invalid' : changepassForm.get('newPassword').touched && changepassForm.get('newPassword').invalid}"
+                   required />
+            <div *ngIf="changepassForm.get('newPassword').touched && changepassForm.get('newPassword').invalid"
+                 class="invalid-feedback">
+              <div *ngIf="changepassForm.get('newPassword').errors.required">Password is required</div>
+              <div *ngIf="changepassForm.get('newPassword').errors.minlength">Password must be at least 4 character long</div>
+              <div *ngIf="changepassForm.get('newPassword').errors.passwordError">{{errorMessage}}</div>
+            </div>
+          </div>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="material-icons">visibility_off</i></span>
+            </div>
+            <input type="password" class="form-control" placeholder="CONFIRM PASSWORD" id="confirmpassword-value"
+                   formControlName="confirmPassword"
+                   [ngClass]="{'is-invalid' : changepassForm.get('confirmPassword').touched && changepassForm.get('confirmPassword').invalid}"
+                   required />
+            <div *ngIf="changepassForm.get('confirmPassword').touched && changepassForm.get('confirmPassword').invalid"
+                 class="invalid-feedback">
+              <div *ngIf="changepassForm.get('confirmPassword').errors.required">Password is required</div>
+              <div *ngIf="changepassForm.get('confirmPassword').errors.minlength">Password must be at least 4 character long</div>
+              <div *ngIf="changepassForm.get('confirmPassword').errors.passwordError">{{errorMessage}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" [disabled]="!changepassForm.valid" >Change</button>
+  </div>
+</ng-template>
+
+<ng-template #senduser let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Send username</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="senduserForm" [formGroup]="senduserForm">
+      <div class="container" id="senduser-form">
+        <div class="form-group">
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="material-icons">account_circle</i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="USERNAME" id="sendusername-value"
+                   formControlName="sendUsername"
+                   [ngClass]="{'is-invalid':senduserForm.get('sendUsername').touched && senduserForm.get('sendUsername').invalid}"
+                   required>
+            <div *ngIf="senduserForm.get('sendUsername').touched && senduserForm.get('sendUsername').invalid"
+                 class="invalid-feedback">
+              <div *ngIf="senduserForm.get('sendUsername').errors.required">Username is required</div>
+              <div *ngIf="senduserForm.get('sendUsername').errors.usernameError">{{errorMessage}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" [disabled]="!senduserForm.valid" (click)="sendUsername()" >Send</button>
   </div>
 </ng-template>

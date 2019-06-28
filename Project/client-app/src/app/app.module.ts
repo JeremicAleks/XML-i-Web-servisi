@@ -15,6 +15,7 @@ import { MainHomepageComponent } from './views/main-homepage/main-homepage.compo
 import {NgbDatepickerModule} from "@ng-bootstrap/ng-bootstrap";
 import { DestinationsComponent } from './views/destinations/destinations.component';
 import { ReservationComponent } from './views/reservation/reservation.component';
+import { ChangePasswordComponent } from './views/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ReservationComponent } from './views/reservation/reservation.component'
     AdminUserConfigurationComponent,
     MainHomepageComponent,
     DestinationsComponent,
-    ReservationComponent
+    ReservationComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

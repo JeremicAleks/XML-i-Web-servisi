@@ -10,6 +10,7 @@ import { SecAdminGuard } from './utils/sec-admin-guard';
 import {DestinationsComponent} from "./views/destinations/destinations.component";
 import {MainHomepageComponent} from "./views/main-homepage/main-homepage.component";
 import {ReservationComponent} from "./views/reservation/reservation.component";
+import {ChangePasswordComponent} from "./views/change-password/change-password.component";
 
 const routes: Routes = [
 
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'reservation',
     component: ReservationComponent
+  },
+  {
+    path: 'changePassword',
+    component: ChangePasswordComponent
   }
 ];
 
