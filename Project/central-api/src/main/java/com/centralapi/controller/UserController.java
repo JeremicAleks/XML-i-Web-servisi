@@ -24,20 +24,24 @@ import com.centralapi.domain.ForgottenPasswordDTO;
 import com.centralapi.domain.TokenDTO;
 import com.centralapi.domain.xml.xml_ftn.users.User;
 import com.centralapi.domain.xml.xml_ftn.users.UserLoginDTO;
+import com.centralapi.exception.ResponseMessage;
+import com.centralapi.security.TokenUtils;
 import com.centralapi.service.UserService;
-
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
 
-	  private static final Logger logger = Logger.getLogger(UserController.class);
-	  
+	private static final Logger logger = Logger.getLogger(UserController.class);
+
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	RestTemplate restTemplate;
+	
+	@Autowired
+	TokenUtils tokenUtils;
 
 	@GetMapping(value = "/getUsers", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getUsers() throws UnknownHostException {
@@ -45,53 +49,57 @@ public class UserController {
 		List<UserLoginDTO> userdto = new ArrayList<>();
 		for (User user : users) {
 			userdto.add(new UserLoginDTO(user.getUsername(), user.getName(), user.getLastName(),
-					  user.getRole().getName(),"",user.getEmail()));
+					user.getRole().getName(), "", user.getEmail()));
 		}
 		return new ResponseEntity<>(userdto, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getUser(@PathVariable Long id){
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getUser(@PathVariable Long id) {
 		User user = userService.findById(id);
 
-		if(user==null)
-			return new ResponseEntity<>("User not found!",HttpStatus.OK);
+		if (user == null)
+			return new ResponseEntity<>("User not found!", HttpStatus.OK);
 
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/forgottenPassword")
 	public ResponseEntity<?> forgottenPassword(@Valid @RequestBody ForgottenPasswordDTO user) {
-		
-		Object answer = restTemplate.postForObject("http://autorization-api/api/forgottenPassword",user, Object.class);
 
-		return (ResponseEntity) answer;
-	
+		System.out.println(user.getUsername());
+		Object answer = restTemplate.postForObject("http://autorization-api/api/forgottenPassword", user, Object.class);
+
+		return new ResponseEntity<>(answer, HttpStatus.OK);
+
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/verifyForgottenPasswordToken")
 	public ResponseEntity<?> forgottenPassword(@Valid @RequestBody TokenDTO token) {
 
-		
-		
-		Object answer = restTemplate.postForObject("http://autorization-api/api/verifyForgottenPasswordToken",token, Object.class);
+		try {
+			Object answer = restTemplate.postForObject("http://autorization-api/api/verifyForgottenPasswordToken",
+					token, Object.class);
+			return new ResponseEntity<>(answer, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+		}
 
-		return (ResponseEntity) answer;
-	
-		
-		
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/changePassword")
 	public ResponseEntity<?> changePassword(@Valid @RequestBody ChangePasswordDTO changePassword) {
+			
+		try {
+			String username = tokenUtils.getUsernameFromToken(changePassword.getToken());
+			changePassword.setUsername(username);
+			Object answer = restTemplate.postForObject("http://autorization-api/api/changePassword", changePassword,
+					Object.class);
+			return new ResponseEntity<>(new ResponseMessage("Successfuly changed password!"), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ResponseMessage("Can't change a password"), HttpStatus.NOT_FOUND);
 
-		
-		Object answer = restTemplate.postForObject("http://autorization-api/api/changePassword",changePassword, Object.class);
-
-		return (ResponseEntity) answer;
+		}
 	}
-	
-	
-
 
 }

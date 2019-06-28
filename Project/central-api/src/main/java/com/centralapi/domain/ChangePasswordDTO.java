@@ -11,7 +11,6 @@ public class ChangePasswordDTO {
 	@NotNull(message = "Re-Password is required")
 	@Size(min = 4, message = "Re-Password must be at least 4 character long")
 	String rePassword;
-	@NotNull(message = "Password is required")
 	String username;
 	@NotNull(message = "Token is required")
 	String token;

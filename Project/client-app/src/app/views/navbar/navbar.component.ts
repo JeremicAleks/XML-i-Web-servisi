@@ -197,7 +197,16 @@ export class NavbarComponent implements OnInit {
   }
 
   sendUsername(){
-    this.router.navigate(['/changePassword']);
+    this.authService.forgottenPassword(this.senduserForm.get('sendUsername').value).subscribe(
+      data=>{
+        alert(data.message)
+        this.router.navigate(['']);
+      }
+      ,error=>{
+        alert(error)
+      }
+
+    )
   }
 
 }

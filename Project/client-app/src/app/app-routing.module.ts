@@ -36,7 +36,7 @@ const routes: Routes = [
     component: ReservationComponent
   },
   {
-    path: 'changePassword',
+    path: 'forgottenPassword/:token',
     component: ChangePasswordComponent
   }
 ];

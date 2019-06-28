@@ -142,6 +142,7 @@ public class TokenController {
 		SecurityUser sec =new SecurityUser(reguser.getId(), reguser.getUsername(), reguser.getPassword(), reguser.getEmail(), null,null);
 		String token = tokenUtils.generateTokenForgottenPassword(sec);
 		mailService.sendRegistrationActivation(reguser, token);
+		logger.info("Successfully sended mail");
 		return new ResponseEntity<ResponseMessage>(new ResponseMessage("Check your mail!"), HttpStatus.OK);
 
 	}
@@ -152,9 +153,11 @@ public class TokenController {
 		Date date = tokenUtils.getExpirationDateFromToken(token.getToken());
 		logger.debug("Date from token: " + date);
 		if (date != null) {
+			logger.warn("Token is valid!");
 			return new ResponseEntity<>(true, HttpStatus.OK);
 	
 		}
+		logger.warn("Token has been expired!");
 		return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
 	
@@ -164,7 +167,7 @@ public class TokenController {
 		Date date = tokenUtils.getExpirationDateFromToken(changePassword.getToken());
 		logger.debug("Date from token: " + date);
 		if (date != null) {
-			
+			logger.warn("Token is valid!");
 			return new ResponseEntity<>(userService.changePassword(changePassword), HttpStatus.OK);
 	
 		}
