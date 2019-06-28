@@ -1,12 +1,17 @@
 package com.authorizationapi.domain;
 
+import javax.validation.constraints.NotNull;
+
 public class LoginClientDTO {
 
  
+	@NotNull(message = "Username is required!")
     protected String username;
 
+	@NotNull(message = "Password is required!")
     protected String password;
 
+	@NotNull(message = "Applcitaion is required!")
     protected String application;
 
     /**

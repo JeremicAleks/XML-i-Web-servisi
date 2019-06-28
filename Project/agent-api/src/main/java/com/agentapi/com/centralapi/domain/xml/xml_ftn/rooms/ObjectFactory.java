@@ -168,8 +168,5 @@ public class ObjectFactory {
      * Create an instance of {@link RateAndComment }
      * 
      */
-    public RateAndComment createRateAndComment() {
-        return new RateAndComment();
-    }
 
 }

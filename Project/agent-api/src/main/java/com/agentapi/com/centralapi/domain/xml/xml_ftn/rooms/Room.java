@@ -15,11 +15,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -94,11 +94,13 @@ import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
 @Entity
 public class Room {
 
-	
+	@NotNull(message = "Number of Beds cant be null!")
     protected int numberOfBeds;
+	@NotNull(message ="Location cant be null!")
     @XmlElement(name = "Location", namespace = "http://www.xml-ftn.xml.domain.centralapi.com/Location", required = true)
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     protected Location location;
+	@NotNull(message = "AccommodationCategory cant be null!")
     @XmlElement(name = "AccommodationCategory", required = true)
     @ManyToOne(fetch = FetchType.EAGER)
     protected AccommodationCategory accommodationCategory;
@@ -107,6 +109,7 @@ public class Room {
     @Fetch(value = FetchMode.SUBSELECT)
     protected List<RoomAdditionalService> roomAdditionalService;
     @XmlElement(required = true)
+    @NotNull(message = "Desciption cant be null!")
     protected String description;
     @XmlElement(required = true)
     @ElementCollection
@@ -120,9 +123,11 @@ public class Room {
     protected List<Reservation> reservation;
     @Id
     protected long id;
+    @NotNull(message = "Days for cancel cant be null!")
     protected int daysForCancel;
     @ManyToOne(fetch = FetchType.EAGER)
     @XmlElement(name = "AccommodationType", required = true)
+    @NotNull(message = "AccommodationType cant be null!")
     protected AccommodationType accommodationType;
     /**
      * Gets the value of the numberOfBeds property.

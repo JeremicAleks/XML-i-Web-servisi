@@ -2,6 +2,7 @@ package com.agentapi.controller;
 
 import java.io.IOException;
 
+import javax.validation.Valid;
 import javax.ws.rs.QueryParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,7 +92,7 @@ public class AgentController {
 	WebServiceTemplate soap;
 
 	@PostMapping(value = "/addRoom")
-	public ResponseEntity<?> addRoom(@RequestBody Room room) {
+	public ResponseEntity<?> addRoom(@Valid @RequestBody Room room) {
 
 		if (userInfo.count() == 1) {
 			
@@ -126,7 +127,7 @@ public class AgentController {
 	}
 
 	@PostMapping(value = "/reserveRoom/")
-	public ResponseEntity<?> reserveRoom(@RequestBody Reservation reservation,
+	public ResponseEntity<?> reserveRoom(@Valid @RequestBody Reservation reservation,
 			@QueryParam(value = "idRoom") Long idRoom) {
 		if (userInfo.count() != 1)
 			return new ResponseEntity<>(new ResponseMessage("Please Login!"), HttpStatus.UNAUTHORIZED);
@@ -229,7 +230,7 @@ public class AgentController {
 	}
 
 	@PostMapping(value = "/reservation")
-	public ResponseEntity<?> confirmReservation(@RequestBody AllowReservationDTO allow) {
+	public ResponseEntity<?> confirmReservation(@Valid @RequestBody AllowReservationDTO allow) {
 		if (userInfo.count() != 1)
 			return new ResponseEntity<>(new ResponseMessage("Please Login!"), HttpStatus.UNAUTHORIZED);
 

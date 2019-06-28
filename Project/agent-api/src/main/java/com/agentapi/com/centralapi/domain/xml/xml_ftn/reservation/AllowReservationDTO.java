@@ -8,6 +8,7 @@
 
 package com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -43,6 +44,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "AllowReservationDTO")
 public class AllowReservationDTO {
 
+	
+	@NotNull(message = "Reservation id cant null!")
     protected long reservationId;
     @XmlElement(required = true)
     protected ReservationStateEnum state;

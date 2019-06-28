@@ -1,10 +1,10 @@
-package com.authorizationapi.domain.dto;
+package com.centralapi.domain;
 
 import javax.validation.constraints.NotNull;
 
 public class ForgottenPasswordDTO {
 	
-	@NotNull(message = "Username is required!")
+	@NotNull(message = "Username is required")
 	private String username;
 
 	public String getUsername() {

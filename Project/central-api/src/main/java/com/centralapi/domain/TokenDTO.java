@@ -1,10 +1,10 @@
-package com.authorizationapi.domain.dto;
+package com.centralapi.domain;
 
 import javax.validation.constraints.NotNull;
 
 public class TokenDTO {
 	
-	@NotNull(message = "Token is required!")
+	@NotNull(message = "Token is required")
 	private String token;
 
 	public String getToken() {
