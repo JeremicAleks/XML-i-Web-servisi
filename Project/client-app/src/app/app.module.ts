@@ -14,6 +14,7 @@ import { AdminUserConfigurationComponent } from './views/admin-user-configuratio
 import { MainHomepageComponent } from './views/main-homepage/main-homepage.component';
 import {NgbDatepickerModule} from "@ng-bootstrap/ng-bootstrap";
 import { DestinationsComponent } from './views/destinations/destinations.component';
+import { ReservationComponent } from './views/reservation/reservation.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DestinationsComponent } from './views/destinations/destinations.compone
     AdminRoleConfigurationComponent,
     AdminUserConfigurationComponent,
     MainHomepageComponent,
-    DestinationsComponent
+    DestinationsComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,

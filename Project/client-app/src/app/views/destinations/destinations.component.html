@@ -13,14 +13,14 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <form>
+                    <form name="searchForm" [formGroup]="searchForm">
                       <div class="form-group">
                         <input type="text" class="form-control searchInput bookInput" aria-label="Large"
-                          placeholder="Where are you going?" id="destination">
+                          placeholder="Where are you going?" id="destination" formControlName="destination">
                       </div>
                       <div class="form-group">
                         <div class="input-group">
-                          <input class="form-control dateInput" placeholder="Check in" ngbDatepicker #d="ngbDatepicker"
+                          <input class="form-control dateInput" formControlName="checkIn" placeholder="Check in" ngbDatepicker #d="ngbDatepicker"
                             aria-label="Large" id="checkIn">
                           <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
@@ -30,7 +30,7 @@
                       </div>
                       <div class="form-group">
                         <div class="input-group">
-                          <input class="form-control dateInput" placeholder="Check out" ngbDatepicker
+                          <input class="form-control dateInput" formControlName="checkOut" placeholder="Check out" ngbDatepicker
                             #d2="ngbDatepicker" aria-label="Large" id="checkOut">
                           <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()"
@@ -40,6 +40,7 @@
                       </div>
                       <div class="form-group">
                         <select class="form-control">
+                          <option>{{numOfPeople}} people</option>
                           <option>1 person</option>
                           <option>2 people</option>
                           <option>3 people</option>
@@ -181,7 +182,7 @@
       <div class="col-md-9">
         <div class="row">
           <div class="col-md-12">
-            <h2> Reno: 42 properties found </h2>
+            <h2> {{destination}}: n properties found </h2>
             <p> 3 Reasons to Visit: gambling, entertainment & relaxation </p>
           </div>
         </div>
@@ -241,7 +242,7 @@
                       </li>
                       <li class="text-secondary"><small>8067 Reviews </small></li>
                     </ul>
-                    <button type="button" class="btn btn-outline-primary">Book Now</button>
+                    <button type="button" class="btn btn-outline-primary" (click)="reservation()">Book Now</button>
                   </div>
                 </div>
               </div>

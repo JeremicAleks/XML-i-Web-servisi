@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {SearchService} from '../../services/search.service';
 import {SearchParams} from '../../models/search-params';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -17,44 +17,49 @@ export class DestinationsComponent implements OnInit {
 
 
   searchForm = new FormGroup({
-    destination: new FormControl('', [Validators.required]),
-    checkIn: new FormControl(new Date(), [Validators.required]),
+    destination: new FormControl(this.route.snapshot.paramMap.get('destination'), [Validators.required]),
+    checkIn: new FormControl(new Date(this.route.snapshot.paramMap.get('checkIn')), [Validators.required]),
     checkOut: new FormControl(new Date(), [Validators.required])
   });
 
-  constructor(private route: ActivatedRoute, private searchService: SearchService) { }
+  constructor(private route: ActivatedRoute, private searchService: SearchService, private router: Router) { }
 
   ngOnInit() {
 
 
     this.destination = this.route.snapshot.paramMap.get('destination');
+
     const checkIn = this.route.snapshot.paramMap.get('checkIn');
-    alert(checkIn);
+    //alert(checkIn);
     const checkInDate = new Date(checkIn);
     const checkOut = this.route.snapshot.paramMap.get('checkOut');
-    alert(checkOut);
+    //alert(checkOut);
     const checkOutDate = new Date(checkOut);
     this.numOfPeople = +this.route.snapshot.paramMap.get('numOfPeople');
-    alert(this.numOfPeople);
+    //alert(this.numOfPeople);
 
-    alert(this.destination);
+    //alert(this.destination);
 
     if (this.destination === 'null') {
       this.destination = '';
     }
 
-    alert(this.destination);
+    //alert(this.destination);
 
     this.searchParams = new SearchParams(this.destination, checkInDate, checkOutDate, this.numOfPeople);
     this.searchService.getSearchResults(this.searchParams).subscribe(
       data => {
-        alert('nesto se desilo kao');
+        //alert('nesto se desilo kao');
       },
       error => {
-        alert('jebem ti se s mamom');
+        //alert('jebem ti se s mamom');
 
       }
     );
+  }
+
+  reservation(){
+    this.router.navigate(['/reservation']);
   }
 
 }
