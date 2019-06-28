@@ -4,3 +4,27 @@
 .font-boja{
   color: white;
 }
+
+#nav-link {
+  margin-left: 30px;
+}
+
+form {
+  /*margin-top: 30px;*/
+  text-align: center;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+.container {
+  padding: 16px;
+}
+
+input:focus {
+  outline: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important;
+  border-color: #d0d7e1;
+}
