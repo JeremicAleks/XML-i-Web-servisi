@@ -19,6 +19,7 @@ import { ChangePasswordComponent } from './views/change-password/change-password
 import {NavbarComponent} from "./views/navbar/navbar.component";
 import { UserProfileComponent } from './views/user-profile/user-profile.component';
 import { RoomListComponent } from './views/room-list/room-list.component';
+import { ReservationConversationComponent } from './views/reservation-conversation/reservation-conversation.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { RoomListComponent } from './views/room-list/room-list.component';
     ChangePasswordComponent,
     NavbarComponent,
     UserProfileComponent,
-    RoomListComponent
+    RoomListComponent,
+    ReservationConversationComponent
   ],
   imports: [
     BrowserModule,
