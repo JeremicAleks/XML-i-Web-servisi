@@ -11,6 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,12 +24,19 @@ public class ReservationController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @GetMapping(value = "/all",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/allReservation",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getReservatons(){
 
-//        ResponseEntity<List<Reservation>> response = restTemplate.exchange("https://reservation-microservice/api/reservation/all",
-//                HttpMethod.GET, null, new ParameterizedTypeReference<List<Reservation>>() {});
         GetReservations getReservations = restTemplate.getForObject("https://reservation-microservice/api/reservation/all",GetReservations.class);
+        return new ResponseEntity<>(getReservations.getReservation(),HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/all")
+    public ResponseEntity<?> getReservationForUser(){
+        GetReservations getReservations;
+        String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        getReservations = restTemplate.getForObject("https://reservation-microservice/api/reservation/all/"+username,GetReservations.class);
+
         return new ResponseEntity<>(getReservations.getReservation(),HttpStatus.OK);
     }
 
@@ -45,6 +53,9 @@ public class ReservationController {
     public ResponseEntity<?> reserve(@RequestBody ClientReservationDTO clientReservationDTO){
         Reservation reservation;
 
+        String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        clientReservationDTO.setUsername(username);
+
         reservation = restTemplate.postForObject("https://reservation-microservice/api/reservation/addFromClient",clientReservationDTO,Reservation.class);
 
         if (reservation == null)
@@ -53,14 +64,27 @@ public class ReservationController {
         return new ResponseEntity<>(reservation, HttpStatus.OK);
     }
 
+
     @PostMapping(value = "/sendMessageClient")
     public ResponseEntity<?> sendMessage(@RequestBody ClientSendMessageDTO clientSendMessageDTO){
         Reservation reservation;
-
+        String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        clientSendMessageDTO.setUsername(username);
         reservation = restTemplate.postForObject("https://reservation-microservice/api/reservation/sendMessageClient",clientSendMessageDTO,Reservation.class);
 
         return new ResponseEntity<>(reservation,HttpStatus.OK);
     }
+
+    @PostMapping(value ="/cancel/{idReservation}")
+    public ResponseEntity<?> reservationCancel(@PathVariable Long idReservation){
+        Reservation reservation;
+//        String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+
+        reservation = restTemplate.postForObject("https://reservation-microservice/api/reservation/cancel/"+idReservation,null,Reservation.class);
+
+        return new ResponseEntity<>(reservation,HttpStatus.OK);
+    }
+
     
 	@GetMapping(value="/test",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> testsearch() {

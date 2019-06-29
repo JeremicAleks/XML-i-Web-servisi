@@ -9,7 +9,7 @@ public class ClientReservationDTO {
 
 	@NotNull(message = "Room id is required")
     private Long roomId;
-	@NotNull(message = "Username is required")
+
     private String username;
 	@NotNull(message = "Check in is required")
     private Date checkIn;

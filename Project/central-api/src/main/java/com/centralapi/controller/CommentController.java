@@ -2,16 +2,13 @@ package com.centralapi.controller;
 
 import java.util.List;
 
+import com.centralapi.domain.dto.AddRateAndCommentDTO;
 import com.centralapi.exception.ResponseMessage;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import com.centralapi.domain.xml.xml_ftn.rooms.RateAndComment;
@@ -52,5 +49,19 @@ public class CommentController {
 		System.out.println(response.getBody());
 
 		return new ResponseEntity<>(new ResponseMessage(response.getBody()), HttpStatus.OK);
+	}
+
+	@PostMapping(value = "/addComment",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> addComment (@RequestBody AddRateAndCommentDTO addRateAndCommentDTO){
+		RestTemplate restTemplate = new RestTemplate();
+		String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+		addRateAndCommentDTO.setUsername(username);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<AddRateAndCommentDTO> request = new HttpEntity<>(addRateAndCommentDTO, headers);
+		ResponseEntity<RateAndComment> response = restTemplate.exchange("http://localhost:8048/api/rates/add",
+				HttpMethod.POST, request, RateAndComment.class);
+
+		return response;
 	}
 }

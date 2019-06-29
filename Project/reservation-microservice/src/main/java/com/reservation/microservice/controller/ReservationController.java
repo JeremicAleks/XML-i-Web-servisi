@@ -117,4 +117,13 @@ public class ReservationController {
 	    return reservation;
     }
 
+    @PostMapping(value = "/cancel/{idReservation}")
+    public Reservation cancelReservation(@PathVariable Long idReservation){
+	    Reservation reservation;
+
+	    reservation = reservationService.cancelReservation(idReservation);
+
+        return reservation;
+    }
+
 }

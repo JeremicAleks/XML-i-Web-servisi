@@ -1,8 +1,7 @@
 package com.reservation.microservice.service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import com.reservation.microservice.domain.dto.ClientReservationDTO;
 import com.reservation.microservice.domain.reservation.*;
@@ -111,5 +110,28 @@ public class ReservationService {
             return null;
 
 
+    }
+
+    public Reservation cancelReservation(Long idReservation) {
+        Reservation reservation = findById(idReservation);
+        Long room_id = roomService.room_id(idReservation);
+        Room room = roomService.findById(room_id);
+
+        if (dateCheck(reservation.getCheckIn(),room.getDaysForCancel())){
+            reservation.setState(ReservationStateEnum.NOTALLOWED);
+            reservation= save(reservation);
+        }
+
+        return reservation;
+    }
+
+    public boolean dateCheck(Date checkIn,int canceldays){
+        Date today = Calendar.getInstance().getTime();
+        int days=0;
+        if (today.before(checkIn)){
+            days= (int) ((checkIn.getTime() - today.getTime())/ (1000*60*60*24));
+        }
+
+        return days>canceldays;
     }
 }

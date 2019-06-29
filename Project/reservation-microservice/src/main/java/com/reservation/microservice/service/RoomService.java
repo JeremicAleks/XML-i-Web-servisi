@@ -17,4 +17,8 @@ public class RoomService {
     public Room save(Room room) {
         return roomRepository.save(room);
     }
+
+    public Long room_id(Long id){
+        return roomRepository.roomid(id);
+    }
 }
