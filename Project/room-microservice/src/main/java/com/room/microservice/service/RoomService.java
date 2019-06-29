@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 @Service
 public class RoomService {
@@ -31,9 +32,14 @@ public class RoomService {
     public List<Room> findAll(){return roomRepository.findAll();}
 
     public Room AddRoom(AddRoomDTO addRoomDTO){
-    	System.out.println("dsada");
         Room r = addRoomDTO.getRoom();
-        System.out.println("rOOM " + r.getRoomAdditionalService().size());
+
+        ListIterator<String> iterator = r.getImage().listIterator();
+        while (iterator.hasNext()) {
+            String next = iterator.next();
+                iterator.set("https://localhost:8043/images/"+next);
+        }
+
         r = roomRepository.save(r);
         AgentUser agentUser = agentUserService.findByUsername(addRoomDTO.getUsername());
         agentUser.getRoom().add(addRoomDTO.getRoom());

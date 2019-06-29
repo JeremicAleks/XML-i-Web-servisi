@@ -53,8 +53,8 @@ public class ReservationController {
     public ResponseEntity<?> reserve(@RequestBody ClientReservationDTO clientReservationDTO){
         Reservation reservation;
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-        clientReservationDTO.setUsername(username);
+       String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+       clientReservationDTO.setUsername(username);
 
         reservation = restTemplate.postForObject("https://reservation-microservice/api/reservation/addFromClient",clientReservationDTO,Reservation.class);
 

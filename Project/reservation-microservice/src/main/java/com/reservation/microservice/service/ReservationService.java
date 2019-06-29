@@ -5,6 +5,7 @@ import java.util.*;
 
 import com.reservation.microservice.domain.dto.ClientReservationDTO;
 import com.reservation.microservice.domain.reservation.*;
+import com.reservation.microservice.domain.room.PriceList;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,9 +99,16 @@ public class ReservationService {
 
         Room room = roomService.findById(clientReservationDTO.getRoomId());
 
+        boolean flag = false;
+
+        for(PriceList pl:room.getPriceList()){
+            if(havePriceListForDate(pl.getMonth(),reservation.getCheckIn()))
+                flag = true;
+        }
+
         List<Reservation> reservations = reservationsRoomForDate(room,reservation.getCheckIn(),reservation.getCheckOut());
 
-        if (reservations.isEmpty()){
+        if (reservations.isEmpty() && flag){
             reservation = save(reservation);
             RegistredUser registredUser = registeredUserService.findByUsername(clientReservationDTO.getUsername());
             registredUser.getReservation().add(reservation);
@@ -113,6 +121,7 @@ public class ReservationService {
     }
 
     public Reservation cancelReservation(Long idReservation) {
+
         Reservation reservation = findById(idReservation);
         Long room_id = roomService.room_id(idReservation);
         Room room = roomService.findById(room_id);
@@ -134,4 +143,28 @@ public class ReservationService {
 
         return days>canceldays;
     }
+
+    public boolean havePriceListForDate(Date date1, Date date2) {
+        boolean ret = true;
+        SimpleDateFormat x = new SimpleDateFormat("yyyy.MM.dd.");
+
+        String date1String[] = x.format(date1).split("\\.");
+        String date2String[] = x.format(date2).split("\\.");
+
+        int date1year = Integer.parseInt(date1String[0]);
+        int date2year = Integer.parseInt(date2String[0]);
+
+        if (date1year != date2year)
+            return false;
+
+        int date1month = Integer.parseInt(date1String[1]);
+        int date2month = Integer.parseInt(date2String[1]);
+
+        if (date1month != date2month)
+            return false;
+
+
+        return ret;
+    }
+
 }
