@@ -19,8 +19,8 @@ export class DestinationsComponent implements OnInit {
 
 
   searchForm = new FormGroup({
-    destination: new FormControl(this.route.snapshot.paramMap.get('destination'), [Validators.required]),
-    checkIn: new FormControl(new Date(this.route.snapshot.paramMap.get('checkIn')), [Validators.required]),
+    destination: new FormControl('', [Validators.required]),
+    checkIn: new FormControl(new Date(), [Validators.required]),
     checkOut: new FormControl(new Date(), [Validators.required])
   });
 
@@ -77,6 +77,7 @@ export class DestinationsComponent implements OnInit {
     const checkOut = this.route.snapshot.paramMap.get('checkOut');
     //alert(checkOut);
     const checkOutDate = new Date(checkOut);
+    this.searchForm.get('check')
     this.numOfPeople = +this.route.snapshot.paramMap.get('numOfPeople');
     //alert(this.numOfPeople);
 
@@ -90,7 +91,9 @@ export class DestinationsComponent implements OnInit {
 
     this.searchParams = new SearchParams(this.destination, checkInDate, checkOutDate, this.numOfPeople);
 
-   
+    this.searchForm.get('destination').setValue(this.destination);
+    this.searchForm.get('checkIn').setValue(checkInDate);
+    this.searchForm.get('checkOut').setValue(checkOutDate);
 
     this.searchService.getSearchResults(this.searchParams).subscribe(
       data => {
@@ -107,8 +110,8 @@ export class DestinationsComponent implements OnInit {
     );
   }
 
-  reservation() {
-    this.router.navigate(['/reservation']);
+  reservation(roomId) {
+    this.router.navigate(['/reservation/'+this.searchForm.get("checkIn").value+"/"+this.searchForm.get("checkOut").value+"/"+roomId]);
   }
 
 }
