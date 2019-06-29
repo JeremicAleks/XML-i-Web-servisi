@@ -57,6 +57,15 @@ public class RoomController {
         return getRooms;
     }
 
+    @PostMapping(value ="/getPriceList")
+    public PriceList getPriceList(@RequestBody ClientReservationDTO clientReservationDTO){
+        PriceList priceList;
+
+        priceList = roomService.getPriceListForRoom(clientReservationDTO);
+
+        return priceList;
+    }
+
     @GetMapping(value="/{id}")
     public Room getRoom(@PathVariable Long id){
         Room room = roomService.findById(id);
@@ -71,6 +80,7 @@ public class RoomController {
 		System.out.println("kklslsjl");
         return new ResponseEntity<>("dsafsafsaf", HttpStatus.OK);
     }
+
 
 
 }
