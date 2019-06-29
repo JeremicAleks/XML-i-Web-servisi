@@ -7,10 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { AdminRoleConfigurationComponent } from './views/admin-role-configuration/admin-role-configuration.component';
 import { AdminUserConfigurationComponent } from './views/admin-user-configuration/admin-user-configuration.component';
 import { SecAdminGuard } from './utils/sec-admin-guard';
-import {DestinationsComponent} from "./views/destinations/destinations.component";
-import {MainHomepageComponent} from "./views/main-homepage/main-homepage.component";
-import {ReservationComponent} from "./views/reservation/reservation.component";
-import {ChangePasswordComponent} from "./views/change-password/change-password.component";
+import {DestinationsComponent} from './views/destinations/destinations.component';
+import {MainHomepageComponent} from './views/main-homepage/main-homepage.component';
+import {ReservationComponent} from './views/reservation/reservation.component';
+import {ChangePasswordComponent} from './views/change-password/change-password.component';
+import {UserProfileComponent} from './views/user-profile/user-profile.component';
+import {RoomListComponent} from './views/room-list/room-list.component';
 
 const routes: Routes = [
 
@@ -38,7 +40,16 @@ const routes: Routes = [
   {
     path: 'forgottenPassword/:token',
     component: ChangePasswordComponent
+  },
+  {
+    path: 'userProfile',
+    component: UserProfileComponent
+  },
+  {
+    path: 'roomList',
+    component: RoomListComponent
   }
+
 ];
 
 @NgModule({
