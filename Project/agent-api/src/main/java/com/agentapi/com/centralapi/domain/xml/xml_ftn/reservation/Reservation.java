@@ -20,6 +20,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -68,9 +69,11 @@ public class Reservation {
 
     @XmlElement(required = true)
     @XmlSchemaType(name = "date")
+    @NotNull(message = "Check in cant be null!")
     protected Date checkIn;
     @XmlElement(required = true)
     @XmlSchemaType(name = "date")
+    @NotNull(message = "Check out cant be null!")
     protected Date checkOut;
     @Id
     protected long id;

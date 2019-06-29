@@ -1,12 +1,14 @@
 package com.centralapi.domain.dto;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class AccommodationDTO {
 	
+	@NotNull(message = "Id is required")
 	private Long id;
 	
-	//@NotNull(message = "Description is required!")
+	@NotNull(message = "Description is required!")
 	String description;
 	
 	public AccommodationDTO() {}

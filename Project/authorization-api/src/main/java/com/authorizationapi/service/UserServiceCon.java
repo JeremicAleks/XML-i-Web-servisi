@@ -13,6 +13,7 @@ import com.authorizationapi.domain.RegistredUser;
 import com.authorizationapi.domain.Role;
 import com.authorizationapi.domain.SecurityUser;
 import com.authorizationapi.domain.User;
+import com.authorizationapi.domain.dto.ChangePasswordDTO;
 import com.authorizationapi.domain.dto.RegisterUserDTO;
 import com.authorizationapi.domain.dto.UserLoginDTO;
 import com.authorizationapi.exception.ResponseMessage;
@@ -45,6 +46,9 @@ public class UserServiceCon implements UserService {
 	
 	@Autowired
 	RegUserRepository regRepo;
+	
+	@Autowired
+	UserRepository userRepo;
 
 	@Autowired
 	private UserDetailsServiceCon userDetailService;
@@ -120,5 +124,40 @@ public class UserServiceCon implements UserService {
 		MDC.put("user",user.getUsername());
 		logger.info("Successfull registration!");
 		return new ResponseMessage("Successfull registration!");
+	}
+	
+	@Override
+	public Boolean changePassword(ChangePasswordDTO change) {
+		
+		User userTemp = userRepository.findByUsername(change.getUsername());
+		if (userTemp == null) {
+
+			MDC.put("user",change.getUsername());
+			logger.info("Username '" + userTemp.getUsername() + "' doesnt exist!");
+			throw new UserCreditalsException("Username '" + userTemp.getUsername() + "' doesnt exist!");
+
+		}
+		if (!PasswordValidation.validPassword(change.getPassword(), change.getRePassword())) {
+			
+			MDC.put("user",change.getUsername());
+			logger.info("Passwords don't match!");
+
+			throw new UserCreditalsException("Passwords don't match!");
+		
+		}
+		
+		String salt = KeyGenerators.secureRandom().generateKey().toString();
+		String fullPass = change.getRePassword() + salt + pepper;
+		userTemp.setPassword(bcript.encode(fullPass));
+		logger.debug("Encode password for user using salt and pepper..");
+		userTemp.setSalt(salt);
+		userRepo.saveAndFlush(userTemp);
+
+		MDC.put("user",userTemp.getUsername());
+		logger.info("Successfully changed password!");
+		return true;
+		
+		
+		
 	}
 }

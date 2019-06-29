@@ -6,6 +6,7 @@ import com.reservation.microservice.domain.reservation.*;
 import com.reservation.microservice.domain.user.SendMessageDTO;
 import com.reservation.microservice.service.MessageTableService;
 import com.reservation.microservice.service.ReservationService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,6 +23,8 @@ public class ReservationController {
     ReservationService reservationService;
     @Autowired
     MessageTableService messageTableService;
+
+    public static Logger logger = Logger.getLogger(ReservationController.class);
     
 	@PreAuthorize("hasRole('ROLE_CENTRAL_APP')")
 	@GetMapping(value = "/test",produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,7 +43,7 @@ public class ReservationController {
     	for(Reservation res : reservations)
     	    getReservations.getReservation().add(res);
 
-
+        logger.info("All reservations successfully taken!");
         return getReservations;
     }
 
@@ -52,7 +55,7 @@ public class ReservationController {
         for(Reservation res : reservations)
             getReservations.getReservation().add(res);
 
-
+        logger.info("All reservations for "  + username + "successfully taken!");
         return getReservations;
     }
 
@@ -62,7 +65,7 @@ public class ReservationController {
 
        reservation = reservationService.reserveRoom(reservationDTO);
 
-
+    logger.info("Reservation successfully created!");
         return reservation;
     }
 
@@ -91,7 +94,7 @@ public class ReservationController {
         Reservation reservation;
 
         reservation = reservationService.changeState(allowReservationDTO);
-
+        logger.info("State successfully changed!");
         return reservation;
     }
 
@@ -100,7 +103,7 @@ public class ReservationController {
         Reservation reservation;
 
         reservation = messageTableService.sendMessage(sendMessageDTO);
-
+        logger.info("Message successfully sent!");
         return reservation;
     }
 

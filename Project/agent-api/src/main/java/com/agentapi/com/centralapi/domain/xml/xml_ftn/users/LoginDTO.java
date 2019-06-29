@@ -8,6 +8,7 @@
 
 package com.agentapi.com.centralapi.domain.xml.xml_ftn.users;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -44,8 +45,10 @@ import javax.xml.bind.annotation.XmlType;
 public class LoginDTO {
 
     @XmlElement(required = true)
+    @NotNull(message = "Username cant be null!")
     protected String username;
     @XmlElement(required = true)
+    @NotNull(message = "Password cant be null!")
     protected String password;
 
     /**

@@ -23,6 +23,15 @@ export class MainNavibarComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(4)])
   });
 
+  senduserForm = new FormGroup({
+    sendUsername: new FormControl('', [Validators.required]),
+  });
+
+  changepassForm = new FormGroup({
+    newPassword: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(4)])
+  });
+
   registerForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -135,6 +144,13 @@ export class MainNavibarComponent implements OnInit {
     });
   }
 
+  openChangePasswordModal(changepass) {
+    this.modalService.open(changepass, {
+      windowClass: 'dark-modal',
+      centered: true
+    });
+  }
+
   // Metoda za proveru poklapanja password-a
   checkPasswords() {
     const registrationPassword = this.RegistrationPassword.value;
@@ -180,6 +196,10 @@ export class MainNavibarComponent implements OnInit {
       }
     );
 
+  }
+
+  sendUsername(){
+    this.router.navigate(['/changePassword']);
   }
 
 }

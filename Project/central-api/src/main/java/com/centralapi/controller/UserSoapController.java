@@ -43,7 +43,7 @@ public class UserSoapController {
 
     	
     	try {
-    	UserLoginDTO user =rest.postForObject("http://autorization-api/api/token",login, UserLoginDTO.class);
+    	UserLoginDTO user = rest.postForObject("http://autorization-api/api/token",login, UserLoginDTO.class);
     	
     	return user;
     	}

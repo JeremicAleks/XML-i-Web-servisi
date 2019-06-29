@@ -8,6 +8,7 @@
 
 package com.agentapi.com.centralapi.domain.xml.xml_ftn.users;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -47,9 +48,12 @@ import com.agentapi.com.centralapi.domain.xml.xml_ftn.reservation.MessageTable;
 @XmlRootElement(name = "SendMessageDTO")
 public class SendMessageDTO {
 
+	@NotNull(message = "Room id cant be null!")
     protected long roomId;
+	@NotNull(message = "Reservation id cant be null!")
     protected long reservationId;
     @XmlElement(name = "MessageTable", namespace = "http://www.xml-ftn.xml.domain.centralapi.com/Reservation", required = true)
+    @NotNull(message = "Message Table cant be null!")
     protected MessageTable messageTable;
 
     /**

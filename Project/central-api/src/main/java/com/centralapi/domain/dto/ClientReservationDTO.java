@@ -2,11 +2,18 @@ package com.centralapi.domain.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class ClientReservationDTO {
 
+	@NotNull(message = "Room id is required")
     private Long roomId;
-    private Long userId;
+	@NotNull(message = "Username is required")
+    private String username;
+	@NotNull(message = "Check in is required")
     private Date checkIn;
+	@NotNull(message = "Check out is required")
     private Date checkOut;
 
     public Long getRoomId() {
@@ -17,12 +24,12 @@ public class ClientReservationDTO {
         this.roomId = roomId;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Date getCheckIn() {

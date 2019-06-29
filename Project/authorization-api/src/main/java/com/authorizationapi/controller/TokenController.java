@@ -24,15 +24,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.authorizationapi.domain.PrivilegesEnum;
+import com.authorizationapi.domain.RegistredUser;
 import com.authorizationapi.domain.Role;
+import com.authorizationapi.domain.SecurityUser;
 import com.authorizationapi.domain.UserStatusEnum;
+import com.authorizationapi.domain.dto.ChangePasswordDTO;
+import com.authorizationapi.domain.dto.ForgottenPasswordDTO;
 import com.authorizationapi.domain.dto.LoginDTO;
 import com.authorizationapi.domain.dto.RegisterUserDTO;
+import com.authorizationapi.domain.dto.TokenDTO;
 import com.authorizationapi.domain.dto.UserLoginDTO;
 import com.authorizationapi.exception.ResponseMessage;
 import com.authorizationapi.repo.BlackListTokenRepository;
+import com.authorizationapi.repo.RegUserRepository;
 import com.authorizationapi.repo.RoleRepository;
 import com.authorizationapi.repo.UserRepository;
+import com.authorizationapi.service.MailService;
 import com.authorizationapi.service.UserService;
 import com.authorizationapi.utils.TokenUtils;
 
@@ -60,6 +67,12 @@ public class TokenController {
 	
 	@Autowired
 	private RoleRepository roleRepo;
+	
+	@Autowired
+	RegUserRepository regRepo;
+	
+	@Autowired
+	MailService mailService;
 
 
 	@Autowired
@@ -121,6 +134,46 @@ public class TokenController {
 		return new ResponseEntity<ResponseMessage>(new ResponseMessage("Successfully logout!"), HttpStatus.OK);
 
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/forgottenPassword")
+	public ResponseEntity<?> forgottenPassword(@RequestBody ForgottenPasswordDTO user) {
+
+		RegistredUser reguser = regRepo.findByUsername(user.getUsername());
+		SecurityUser sec =new SecurityUser(reguser.getId(), reguser.getUsername(), reguser.getPassword(), reguser.getEmail(), null,null);
+		String token = tokenUtils.generateTokenForgottenPassword(sec);
+		mailService.sendRegistrationActivation(reguser, token);
+		logger.info("Successfully sended mail");
+		return new ResponseEntity<ResponseMessage>(new ResponseMessage("Check your mail!"), HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/verifyForgottenPasswordToken")
+	public ResponseEntity<?> forgottenPassword(@RequestBody TokenDTO token) {
+
+		Date date = tokenUtils.getExpirationDateFromToken(token.getToken());
+		logger.debug("Date from token: " + date);
+		if (date != null) {
+			logger.warn("Token is valid!");
+			return new ResponseEntity<>(true, HttpStatus.OK);
+	
+		}
+		logger.warn("Token has been expired!");
+		return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/changePassword")
+	public ResponseEntity<?> changePassword(@RequestBody ChangePasswordDTO changePassword) {
+
+		Date date = tokenUtils.getExpirationDateFromToken(changePassword.getToken());
+		logger.debug("Date from token: " + date);
+		if (date != null) {
+			logger.warn("Token is valid!");
+			return new ResponseEntity<>(userService.changePassword(changePassword), HttpStatus.OK);
+	
+		}
+		return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+	}
+	
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/test/log")
 	public ResponseEntity<?> test() {

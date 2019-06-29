@@ -61,7 +61,6 @@ public class MessageTableService {
         MessageTable messageTable = new MessageTable();
         messageTable.setFromUser(clientSendMessageDTO.getUsername());
         messageTable.setMessageString(clientSendMessageDTO.getMessage());
-        //treba naci agenta :D
 
         reservation.getMessageTable().add(messageTable);
         reservation = reservationService.save(reservation);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.centralapi.domain.dto.ClientReservationDTO;
 import com.centralapi.domain.dto.ClientSendMessageDTO;
+import com.centralapi.domain.xml.xml_ftn.reservation.GetReservations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -25,9 +26,10 @@ public class ReservationController {
     @GetMapping(value = "/all",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getReservatons(){
 
-        ResponseEntity<List<Reservation>> response = restTemplate.exchange("https://reservation-microservice/api/reservation/all",
-                HttpMethod.GET, null, new ParameterizedTypeReference<List<Reservation>>() {});
-        return new ResponseEntity<>(response.getBody(),HttpStatus.OK);
+//        ResponseEntity<List<Reservation>> response = restTemplate.exchange("https://reservation-microservice/api/reservation/all",
+//                HttpMethod.GET, null, new ParameterizedTypeReference<List<Reservation>>() {});
+        GetReservations getReservations = restTemplate.getForObject("https://reservation-microservice/api/reservation/all",GetReservations.class);
+        return new ResponseEntity<>(getReservations.getReservation(),HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
@@ -55,7 +57,7 @@ public class ReservationController {
     public ResponseEntity<?> sendMessage(@RequestBody ClientSendMessageDTO clientSendMessageDTO){
         Reservation reservation;
 
-        reservation = restTemplate.postForObject("https://reservation-microservice/api/reservation/sendMessage",clientSendMessageDTO,Reservation.class);
+        reservation = restTemplate.postForObject("https://reservation-microservice/api/reservation/sendMessageClient",clientSendMessageDTO,Reservation.class);
 
         return new ResponseEntity<>(reservation,HttpStatus.OK);
     }

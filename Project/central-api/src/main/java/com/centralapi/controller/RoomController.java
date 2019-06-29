@@ -1,5 +1,6 @@
 package com.centralapi.controller;
 
+import com.centralapi.domain.xml.xml_ftn.rooms.GetRooms;
 import com.centralapi.domain.xml.xml_ftn.rooms.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -28,10 +29,9 @@ public class RoomController {
     @GetMapping(value = "/all",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getRooms(){
 
-        ResponseEntity<List<Room>> response = restTemplate.exchange("https://room-microservice/api/all",
-                HttpMethod.GET, null, new ParameterizedTypeReference<List<Room>>() {});
+        GetRooms getRooms = restTemplate.getForObject("https://room-microservice/api/all",GetRooms.class);
 
-        return new ResponseEntity<>(response.getBody(), HttpStatus.OK);
+        return new ResponseEntity<>(getRooms.getRoom(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)

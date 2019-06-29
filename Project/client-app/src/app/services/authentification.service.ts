@@ -40,6 +40,31 @@ export class AuthentificationService {
     ));
   }
 
+  forgottenPassword(username:String) {
+    return this.http.post<any>(environment.centralApiUrl + '/api/user/forgottenPassword',{username})
+    .pipe(map(data => {
+      return data;
+    }
+    ));
+  }
+
+  checkTokenForForgottenPassword(token:String) {
+    return this.http.post<any>(environment.centralApiUrl + '/api/user/verifyForgottenPasswordToken',{token})
+    .pipe(map(data => {
+      return data;
+    }
+    ));
+  }
+  changePassword(token:String,password,rePassword) {
+    return this.http.post<any>(environment.centralApiUrl + '/api/user/changePassword',{token,password,rePassword})
+    .pipe(map(data => {
+      return data;
+    }
+    ));
+  }
+
+
+
   checkSessionUser() {
     const sessionUser = JSON.parse(localStorage.getItem('sessionUser'));
     if (sessionUser && sessionUser.token) {

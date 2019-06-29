@@ -11,6 +11,10 @@ public class ResponseMessage {
 		this.message = message;
 
 	}
+	
+	public ResponseMessage() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getMessage() {
 

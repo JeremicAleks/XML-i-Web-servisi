@@ -107,6 +107,17 @@ public class TokenUtils {
 		return this.generateToken(claims);
 
 	}
+	public String generateTokenForgottenPassword(UserDetails userDetails) {
+
+		Map<String, Object> claims = new HashMap<String, Object>();
+
+		claims.put("sub", userDetails.getUsername());
+		claims.put("created", this.generateCurrentDate());
+		claims.put("iat", new UUID(10, 10));
+
+		return this.generateToken(claims);
+
+	}
 
 	private String generateToken(Map<String, Object> claims) {
 

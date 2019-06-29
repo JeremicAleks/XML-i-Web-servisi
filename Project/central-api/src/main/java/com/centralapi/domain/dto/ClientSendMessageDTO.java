@@ -1,8 +1,14 @@
 package com.centralapi.domain.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class ClientSendMessageDTO {
+	
+	@NotNull(message = "Reservation id is required")
     private Long idReservation;
+	@NotNull(message = "Username is required")
     private String username;
+	@NotNull(message = "Message is required")
     private String message;
 
     public Long getIdReservation() {
