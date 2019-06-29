@@ -17,46 +17,37 @@ import com.centralapi.repo.UserRepository;
 
 @Endpoint
 public class UserSoapController {
-	
+
 	private static final String USER_NAMESPACE_URI = "http://www.xml-ftn.xml.domain.centralapi.com/Users";
 	private static final String ROOM_NAMESPACE_URI = "http://www.xml-ftn.xml.domain.centralapi.com/Rooms";
-	
-	
+
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private RestTemplate rest;
-	
-    @PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "getUserDTO")
-    @ResponsePayload
-    public User getUser(@RequestPayload GetUserRequest  request) {
-    	User response = userRepo.findByUsername(request.getUsername());
 
-        return response;
-    }
+	@PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "getUserDTO")
+	@ResponsePayload
+	public User getUser(@RequestPayload GetUserRequest request) {
+		User response = userRepo.findByUsername(request.getUsername());
 
-    
-    @PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "LoginDTO")
-    @ResponsePayload
-    public UserLoginDTO login(@RequestPayload LoginDTO  login) {
+		return response;
+	}
 
-    	
-    	try {
-    	UserLoginDTO user = rest.postForObject("http://autorization-api/api/token",login, UserLoginDTO.class);
-    	
-    	return user;
-    	}
-    	catch (Exception e) {
-    		e.printStackTrace();
-    		 return null;
+	@PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "LoginDTO")
+	@ResponsePayload
+	public UserLoginDTO login(@RequestPayload LoginDTO login) {
+
+		try {
+			UserLoginDTO user = rest.postForObject("http://autorization-api/api/token", login, UserLoginDTO.class);
+			
+			return user;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-    	
-       
-    }
-    
-    
-    
 
-  
+	}
+
 }
