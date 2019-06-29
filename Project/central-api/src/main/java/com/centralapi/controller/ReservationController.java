@@ -1,20 +1,22 @@
 package com.centralapi.controller;
 
-import java.util.List;
-
-import com.centralapi.domain.dto.ClientReservationDTO;
-import com.centralapi.domain.dto.ClientSendMessageDTO;
-import com.centralapi.domain.xml.xml_ftn.reservation.GetReservations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.centralapi.domain.dto.ClientReservationDTO;
+import com.centralapi.domain.dto.ClientSendMessageDTO;
+import com.centralapi.domain.xml.xml_ftn.reservation.GetReservations;
 import com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
 
 @RestController
@@ -37,7 +39,7 @@ public class ReservationController {
         String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         getReservations = restTemplate.getForObject("https://reservation-microservice/api/reservation/all/"+username,GetReservations.class);
 
-        return new ResponseEntity<>(getReservations.getReservation(),HttpStatus.OK);
+        return new ResponseEntity<>(getReservations.getReservation(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
