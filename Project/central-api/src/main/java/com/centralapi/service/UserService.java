@@ -103,4 +103,24 @@ public class UserService {
 		
 		return new ResponseMessage("User has been successfully activated!");
 	}
+
+	public ResponseMessage deleteUser(String username) {
+		
+		System.out.println("username - deleteUser: " + username);
+		
+		User foundUser = userRepository.findByUsername(username);
+		
+		if (foundUser == null)
+			return new ResponseMessage("There is no user with sent username!");
+		
+		System.out.println("nije pukao i nasao je usera: " + foundUser.getUsername());
+		
+		if (foundUser.getUserStatus() == UserStatusEnum.DELETED)
+			return new ResponseMessage("You can't delete user who is already deleted!");
+		
+		foundUser.setUserStatus(UserStatusEnum.DELETED);
+		userRepository.save(foundUser);
+		
+		return new ResponseMessage("User has been successfully deleted!");
+	}
 }

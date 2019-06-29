@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,10 +55,13 @@ public class AdminController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-	@PostMapping(value = "/user/delete/{id}")
-	public ResponseEntity<?> deleteUser() {
+	@PutMapping(value = "/user/delete")
+	public ResponseEntity<?> deleteUser(@RequestBody String username) {
 
-		return new ResponseEntity<>(null, HttpStatus.OK);
+		System.out.println("username: " + username);
+		ResponseMessage response = userService.deleteUser(username);
+
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@PostMapping(value = "agent/add", consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -55,7 +55,7 @@ export class UserService {
   }
 
   deleteUser(username: string) {
-    return this.http.delete<any>(environment.centralApiUrl + '/api/user/deleteUser/' + username )
+    return this.http.put<any>(environment.centralApiUrl + '/api/admin/user/delete', username )
     .pipe(map(data => {
       return data;
     }
