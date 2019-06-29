@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SearchService} from '../../services/search.service';
-import {SearchParams} from '../../models/search-params';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SearchService } from '../../services/search.service';
+import { SearchParams } from '../../models/search-params';
+import { FormControl, FormGroup, Validators, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
+import { RoomService } from 'src/app/services/room.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-destinations',
@@ -22,13 +24,53 @@ export class DestinationsComponent implements OnInit {
     checkOut: new FormControl(new Date(), [Validators.required])
   });
 
-  constructor(private route: ActivatedRoute, private searchService: SearchService, private router: Router) { }
+  typeForm: FormGroup;
+  categoryForm: FormGroup;
+  additionalServiceForm: FormGroup;
+  rooms:Array<any>;
+
+  types: any;
+
+  constructor(private DomSanitizer: DomSanitizer,private route: ActivatedRoute, private searchService: SearchService, private roomService: RoomService, private router: Router, private _formBuilder: FormBuilder) {
+
+    
+
+    this.typeForm = this._formBuilder.group({
+      typeArray: this._formBuilder.array([])
+    });
+
+    this.categoryForm = this._formBuilder.group({
+      categoryArray: this._formBuilder.array([])
+    });
+
+    this.additionalServiceForm = this._formBuilder.group({
+      additionalServiceArray: this._formBuilder.array([])
+    });
+
+    this.roomService.getTypes().subscribe(
+      data => {
+        this.types = data;
+        data.forEach(element => {
+          console.log("Desc " + element.description)
+          this.addItemTypeForm();
+        });
+      }
+    )
+  }
+
+  get typeArray() {
+    console.log("o bogo - get type array")
+    return this.typeForm.get('typeArray') as FormArray;
+  }
+
+  addItemTypeForm() {
+    this.typeArray.push(this._formBuilder.control(new Boolean));
+    console.log('item type form - boolean pushed to type array')
+  }
 
   ngOnInit() {
 
-
     this.destination = this.route.snapshot.paramMap.get('destination');
-
     const checkIn = this.route.snapshot.paramMap.get('checkIn');
     //alert(checkIn);
     const checkInDate = new Date(checkIn);
@@ -47,18 +89,25 @@ export class DestinationsComponent implements OnInit {
     //alert(this.destination);
 
     this.searchParams = new SearchParams(this.destination, checkInDate, checkOutDate, this.numOfPeople);
+
+   
+
     this.searchService.getSearchResults(this.searchParams).subscribe(
       data => {
         //alert('nesto se desilo kao');
+        this.rooms = data;
+        this.DomSanitizer.bypassSecurityTrustUrl(this.rooms[0].image[0]);
+        alert(this.rooms[0].location.name)
       },
       error => {
         //alert('jebem ti se s mamom');
+      
 
       }
     );
   }
 
-  reservation(){
+  reservation() {
     this.router.navigate(['/reservation']);
   }
 

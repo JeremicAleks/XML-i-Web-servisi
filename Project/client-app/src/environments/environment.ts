@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   authentificationApiUrl: 'http://localhost:8089',
   centralApiUrl: 'https://localhost:8043',
-  searchMicroserviceUrl: 'http://localhost:8084'
+  searchMicroserviceUrl: 'https://localhost:8084'
 };
 
 /*

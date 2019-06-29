@@ -44,7 +44,7 @@ public class UserSoapController {
     	
     	try {
     	UserLoginDTO user = rest.postForObject("http://autorization-api/api/token",login, UserLoginDTO.class);
-    	
+    	System.out.println(user.getUsername());
     	return user;
     	}
     	catch (Exception e) {
