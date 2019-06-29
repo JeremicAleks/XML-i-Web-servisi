@@ -1,4 +1,5 @@
 export class RoomAdditionalServices {
 
-    description:String;
+  description: string;
+    active: boolean;
 }

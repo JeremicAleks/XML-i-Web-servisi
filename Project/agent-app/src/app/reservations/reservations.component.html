@@ -111,7 +111,7 @@
                 formControlName="roomAdditionalServices"
                 [ngClass]="{'is-invalid':addReservation.get('roomAdditionalServices').touched && addReservation.get('roomAdditionalServices').invalid}"
                 required>
-                <option *ngFor="let add of addServices;index as i" [ngValue] = "cat">{{add.description}}</option>
+                <option *ngFor="let add of addServices;index as i" [ngValue] = "add">{{add.description}}</option>
               </select>
               <div
                 *ngIf="addReservation.get('roomAdditionalServices').touched && addReservation.get('roomAdditionalServices').invalid"
