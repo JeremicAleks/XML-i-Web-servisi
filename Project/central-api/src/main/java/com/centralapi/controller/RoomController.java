@@ -2,6 +2,11 @@ package com.centralapi.controller;
 
 import com.centralapi.domain.xml.xml_ftn.rooms.GetRooms;
 import com.centralapi.domain.xml.xml_ftn.rooms.Room;
+import com.centralapi.repo.AccommodationCategoriesRepository;
+import com.centralapi.repo.AccommodationTypeRepository;
+import com.centralapi.repo.RoomAdditionalServicesRepository;
+import com.netflix.discovery.converters.Auto;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -22,6 +27,15 @@ public class RoomController {
 	
 	@Autowired
 	RestTemplate rest;
+	
+	@Autowired
+	RoomAdditionalServicesRepository addRepo;
+	
+	@Autowired
+	AccommodationTypeRepository typeRepo;
+	
+	@Autowired
+	AccommodationCategoriesRepository catRepo;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -41,6 +55,23 @@ public class RoomController {
 
 
         return new ResponseEntity<>(room, HttpStatus.OK);
+    }
+    
+    @GetMapping(value = "/types",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getRoomTypes(){
+    	System.out.println("dsada");
+        return new ResponseEntity<>(typeRepo.findAll(), HttpStatus.OK);
+    }
+    
+    @GetMapping(value = "/categories",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getRoomCategories(){
+
+        return new ResponseEntity<>(catRepo.findAll(), HttpStatus.OK);
+    }
+    @GetMapping(value = "/additionalServices",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getRoomAdditionalService(){
+
+        return new ResponseEntity<>(addRepo.findAll(), HttpStatus.OK);
     }
     
 	@GetMapping(value="/test",produces = MediaType.APPLICATION_JSON_VALUE)

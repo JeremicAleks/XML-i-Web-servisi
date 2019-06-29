@@ -119,6 +119,7 @@
                 <xsd:element name="role" type="xsd:string"/>
                 <xsd:element name="token" type="xsd:string"/>
                 <xsd:element name="email" type="xsd:string"/>
+                <xsd:element minOccurs="1" name="userStatus" type="users:UserStatusEnum"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

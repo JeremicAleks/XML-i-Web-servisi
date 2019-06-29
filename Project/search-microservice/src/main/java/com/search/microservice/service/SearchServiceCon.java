@@ -87,11 +87,11 @@ public class SearchServiceCon implements SearchService {
 				if (!isFreeInSelectedTime(spDTO.getCheckIn(), spDTO.getCheckOut(), r.getReservation()))
 					continue;
 				
-				if (spDTO.getAccCategory() != null && !r.getAccommodationCategory().equals(spDTO.getAccCategory())) {
+				if (spDTO.getAccCategory() != null && !r.getAccommodationCategory().getDescription().equals(spDTO.getAccCategory().getDescription())) {
 					continue;
 				}
 				
-				if (spDTO.getAccType() != null && !r.getAccommodationType().equals(spDTO.getAccType())) {
+				if (spDTO.getAccType() != null && !r.getAccommodationType().getDescription().equals(spDTO.getAccType().getDescription())) {
 					continue;
 				}
 				

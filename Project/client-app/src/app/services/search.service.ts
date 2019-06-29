@@ -12,10 +12,9 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
   getSearchResults(searchParams: SearchParams) {
-    alert(searchParams.checkIn);
-    return this.http.post<any>(environment.searchMicroserviceUrl + '/api/search', searchParams)
-      .pipe(map(searchRes => {
-          return searchRes;
+    return this.http.post<any>(environment.centralApiUrl + '/api/search', searchParams)
+      .pipe(map(data => {
+          return data;
         }
       ));
   }
