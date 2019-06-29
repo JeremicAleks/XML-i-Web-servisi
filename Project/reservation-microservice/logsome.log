@@ -1,0 +1,10 @@
+{date:2019-06-29 17:38:13.455, level:INFO , process:https-jsse-nio-8083-exec-7, class:com.reservation.microservice.service.ReservationService, msg:}
+{date:2019-06-29 17:38:13.505, level:INFO , process:https-jsse-nio-8083-exec-7, class:com.reservation.microservice.controller.ReservationController, msg:All reservations for user1successfully taken!}
+{date:2019-06-29 17:38:28.582, level:INFO , process:https-jsse-nio-8083-exec-2, class:com.reservation.microservice.controller.ReservationController, msg:All reservations successfully taken!}
+{date:2019-06-29 17:38:38.132, level:INFO , process:https-jsse-nio-8083-exec-8, class:com.reservation.microservice.service.ReservationService, msg:}
+{date:2019-06-29 17:38:38.164, level:INFO , process:https-jsse-nio-8083-exec-8, class:com.reservation.microservice.controller.ReservationController, msg:All reservations for user1successfully taken!}
+{date:2019-06-30 00:46:32.518, level:INFO , process:https-jsse-nio-8083-exec-5, class:com.reservation.microservice.service.ReservationService, msg:}
+{date:2019-06-30 00:46:32.572, level:INFO , process:https-jsse-nio-8083-exec-5, class:com.reservation.microservice.controller.ReservationController, msg:All reservations for cikacoasuccessfully taken!}
+{date:2019-06-30 00:46:49.398, level:INFO , process:https-jsse-nio-8083-exec-9, class:com.reservation.microservice.controller.ReservationController, msg:All reservations successfully taken!}
+{date:2019-06-30 00:46:57.948, level:INFO , process:https-jsse-nio-8083-exec-5, class:com.reservation.microservice.service.ReservationService, msg:}
+{date:2019-06-30 00:46:57.986, level:INFO , process:https-jsse-nio-8083-exec-5, class:com.reservation.microservice.controller.ReservationController, msg:All reservations for cikacoasuccessfully taken!}
