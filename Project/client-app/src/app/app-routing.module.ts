@@ -34,7 +34,7 @@ const routes: Routes = [
     component: MainHomepageComponent
   },
   {
-    path: 'reservation',
+    path: 'reservation/:checkIn/:checkOut/:roomId',
     component: ReservationComponent
   },
   {

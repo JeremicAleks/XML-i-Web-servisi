@@ -1,25 +1,30 @@
 package com.centralapi.controller;
 
-import com.centralapi.domain.xml.xml_ftn.rooms.GetRooms;
-import com.centralapi.domain.xml.xml_ftn.rooms.Room;
-import com.centralapi.repo.AccommodationCategoriesRepository;
-import com.centralapi.repo.AccommodationTypeRepository;
-import com.centralapi.repo.RoomAdditionalServicesRepository;
-import com.netflix.discovery.converters.Auto;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
+import com.centralapi.domain.dto.ClientReservationDTO;
+import com.centralapi.domain.dto.ShowRoomDTO;
+import com.centralapi.domain.xml.xml_ftn.rooms.GetRooms;
+import com.centralapi.domain.xml.xml_ftn.rooms.PriceList;
+import com.centralapi.domain.xml.xml_ftn.rooms.RateAndComment;
+import com.centralapi.domain.xml.xml_ftn.rooms.Room;
+import com.centralapi.repo.AccommodationCategoriesRepository;
+import com.centralapi.repo.AccommodationTypeRepository;
+import com.centralapi.repo.RoomAdditionalServicesRepository;
 
 @RestController
 @RequestMapping("api/room")
@@ -46,6 +51,22 @@ public class RoomController {
         GetRooms getRooms = restTemplate.getForObject("https://room-microservice/api/all",GetRooms.class);
 
         return new ResponseEntity<>(getRooms.getRoom(), HttpStatus.OK);
+    }
+    
+    @GetMapping(value = "/getRoomForShow",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getRoomForShow(@RequestBody ClientReservationDTO client){
+    	
+    	
+        ShowRoomDTO room = new ShowRoomDTO();
+        Room r = restTemplate.getForObject("https://room-microservice/api/"+client.getRoomId(),Room.class);
+		ResponseEntity<List<RateAndComment>> response = restTemplate.exchange("http://localhost:8048/api/rates/all/"+client.getRoomId(),
+				HttpMethod.GET, null, new ParameterizedTypeReference<List<RateAndComment>>() {
+				});
+		PriceList priceList = restTemplate.postForObject("http://localhost:8048/api/rates/all/", client, PriceList.class);
+		
+
+
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
