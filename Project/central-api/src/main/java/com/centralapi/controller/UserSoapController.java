@@ -27,27 +27,29 @@ public class UserSoapController {
 	@Autowired
 	private RestTemplate rest;
 
-	@PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "getUserDTO")
-	@ResponsePayload
-	public User getUser(@RequestPayload GetUserRequest request) {
-		User response = userRepo.findByUsername(request.getUsername());
+	
+    @PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "getUserDTO")
+    @ResponsePayload
+    public User getUser(@RequestPayload GetUserRequest  request) {
+    	User response = userRepo.findByUsername(request.getUsername());
 
-		return response;
-	}
+        return response;
+    }
 
-	@PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "LoginDTO")
-	@ResponsePayload
-	public UserLoginDTO login(@RequestPayload LoginDTO login) {
+    
+    @PayloadRoot(namespace = USER_NAMESPACE_URI, localPart = "LoginDTO")
+    @ResponsePayload
+    public UserLoginDTO login(@RequestPayload LoginDTO  login) {
 
-		try {
-			UserLoginDTO user = rest.postForObject("http://autorization-api/api/token", login, UserLoginDTO.class);
-			
+    	
+    	try {
+    	UserLoginDTO user = rest.postForObject("http://autorization-api/api/token",login, UserLoginDTO.class);
+			System.out.println(user.getUsername());
 			return user;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-
 	}
 
 }

@@ -82,6 +82,7 @@ public class TokenController {
 	public ResponseEntity<?> loginUser(@Validated @RequestBody LoginDTO user) {
 
 		UserLoginDTO userLoginDTO = userService.userLogin(user.getUsername(), user.getPassword());
+		System.out.println(user.getUsername());
 		
 		if (userLoginDTO != null) {
 
