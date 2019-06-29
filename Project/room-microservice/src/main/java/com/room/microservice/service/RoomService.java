@@ -5,7 +5,9 @@ import com.room.microservice.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -60,11 +62,38 @@ public class RoomService {
     public List<Room> getAllRooms(){return roomRepository.findAll();}
 
 
+    public PriceList getPriceListForRoom(ClientReservationDTO clientReservationDTO) {
+        Room room = findById(clientReservationDTO.getRoomId());
+
+        for(PriceList pl: room.getPriceList()){
+            if(havePriceListForDate(pl.getMonth(),clientReservationDTO.getCheckIn()))
+                return pl;
+        }
+
+        return null;
+    }
+
+    public boolean havePriceListForDate(Date date1, Date date2) {
+        boolean ret = true;
+        SimpleDateFormat x = new SimpleDateFormat("yyyy.MM.dd.");
+
+        String date1String[] = x.format(date1).split("\\.");
+        String date2String[] = x.format(date2).split("\\.");
+
+        int date1year = Integer.parseInt(date1String[0]);
+        int date2year = Integer.parseInt(date2String[0]);
+
+        if (date1year != date2year)
+            return false;
+
+        int date1month = Integer.parseInt(date1String[1]);
+        int date2month = Integer.parseInt(date2String[1]);
+
+        if (date1month != date2month)
+            return false;
 
 
-
-
-
-
+        return ret;
+    }
 
 }
