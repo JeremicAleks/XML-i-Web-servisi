@@ -57,7 +57,7 @@ public class RoomController {
         return getRooms;
     }
 
-    @GetMapping(value ="/getPriceList")
+    @PostMapping(value ="/getPriceList")
     public PriceList getPriceList(@RequestBody ClientReservationDTO clientReservationDTO){
         PriceList priceList;
 
