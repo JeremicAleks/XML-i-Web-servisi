@@ -34,7 +34,7 @@ const routes: Routes = [
     component: MainHomepageComponent
   },
   {
-    path: 'reservation',
+    path: 'reservation/:checkIn/:checkOut/:roomId',
     component: ReservationComponent
   },
   {
@@ -48,6 +48,10 @@ const routes: Routes = [
   {
     path: 'roomList',
     component: RoomListComponent
+  },
+  {
+    path: 'reservation/:id/conversation',
+    component: ReservationComponent
   }
 
 ];
