@@ -13,6 +13,7 @@ import com.authorizationapi.domain.RegistredUser;
 import com.authorizationapi.domain.Role;
 import com.authorizationapi.domain.SecurityUser;
 import com.authorizationapi.domain.User;
+import com.authorizationapi.domain.UserStatusEnum;
 import com.authorizationapi.domain.dto.ChangePasswordDTO;
 import com.authorizationapi.domain.dto.RegisterUserDTO;
 import com.authorizationapi.domain.dto.UserLoginDTO;
@@ -75,16 +76,24 @@ public class UserServiceCon implements UserService {
 
 		if (bcript.matches(fullPass, user.getPassword())) {
 
+			if (user.getUserStatusEnum() == UserStatusEnum.BLOCK) {
+				MDC.put("login", "failure");
+				MDC.put("user", username);
+				logger.warn("Blocked user tried to login!");
+				
+				throw new UserCreditalsException("User with this username is blocked!");
+			}
+			
 			SecurityUser userDetails = (SecurityUser) this.userDetailService.loadUserByUsername(username);
-
+			
 			String token = this.tokenUtils.generateToken(userDetails);
-			MDC.put("login","success");
-			MDC.put("user",username);
+			MDC.put("login", "success");
+			MDC.put("user", username);
 			logger.info("Successfully logged in!");
 			return new UserLoginDTO(user, token);
 		}
-		MDC.put("login","failure");
-		MDC.put("user",username);
+		MDC.put("login", "failure");
+		MDC.put("user", username);
 		logger.warn("Invalid login!");
 		throw new UserCreditalsException("Wrong password!");
 

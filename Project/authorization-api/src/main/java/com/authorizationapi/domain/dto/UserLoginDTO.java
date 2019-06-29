@@ -3,6 +3,7 @@ package com.authorizationapi.domain.dto;
 import javax.validation.constraints.NotNull;
 
 import com.authorizationapi.domain.User;
+import com.authorizationapi.domain.UserStatusEnum;
 
 public class UserLoginDTO {
 
@@ -13,6 +14,7 @@ public class UserLoginDTO {
 	private String email;
 	private String token;
 	private String role;
+	private UserStatusEnum userStatus;
 	
 	public UserLoginDTO() {
 		super();
@@ -85,5 +87,13 @@ public class UserLoginDTO {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public UserStatusEnum getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(UserStatusEnum userStatus) {
+		this.userStatus = userStatus;
 	}
 }

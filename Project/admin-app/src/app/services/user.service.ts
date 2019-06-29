@@ -46,7 +46,7 @@ export class UserService {
     ));
   }
 
-  blockUser(username: String) {
+  blockUser(username: string) {
     return this.http.put<any>(environment.centralApiUrl + '/api/admin/user/block', username )
     .pipe(map(data => {
       return data;

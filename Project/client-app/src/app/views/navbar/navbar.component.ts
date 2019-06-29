@@ -188,25 +188,33 @@ export class NavbarComponent implements OnInit {
       data => {
         localStorage.removeItem('sessionUser');
         this.isLogin = false;
+        this.router.navigate(['']);
       },
       error => {
         console.log('log out error');
       }
     );
-
   }
 
-  sendUsername(){
+  userDetails() {
+    this.router.navigate(['/userProfile']);
+  }
+
+  roomList() {
+    this.router.navigate(['/roomList']);
+  }
+
+  sendUsername() {
     this.authService.forgottenPassword(this.senduserForm.get('sendUsername').value).subscribe(
-      data=>{
+      data => {
         alert(data.message)
         this.router.navigate(['']);
       }
-      ,error=>{
-        alert(error)
+      , error => {
+        alert(error);
       }
 
-    )
+    );
   }
 
 }

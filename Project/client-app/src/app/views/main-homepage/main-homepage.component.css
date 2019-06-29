@@ -1,4 +1,19 @@
+.nesto{
+  margin-top: 2%;
+  margin-bottom: 2%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+}
+.broj{
+  font-weight: bold;
+  font-size: large;
+}
+.modal-header{
+  font-weight: bold;
 
+}
 /*
 -----------------------
 Modified Default Class
