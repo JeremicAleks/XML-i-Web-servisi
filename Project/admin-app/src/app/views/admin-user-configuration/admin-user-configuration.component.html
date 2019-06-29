@@ -1,5 +1,7 @@
-<h4>
-  admin-user-configuration works!
+<br>
+
+<h4 style="text-align: center">
+  User config
 </h4>
 
 <table class="table table-striped">
@@ -8,7 +10,8 @@
       <th scope="col">#</th>
       <th scope="col">Username</th>
       <th scope="col">Role</th>
-      <th scope="col">Operations</th>
+      <th scope="col">Promote</th>
+      <th scope="col" colspan="3">Operations</th>
     </tr>
   </thead>
   <tbody>
@@ -17,16 +20,17 @@
       <td>{{user.username}}</td>
       <td>{{user.role}}</td>
       <td>
+        <button [hidden]="user.role != 'CLIENT_USER'" type="button" class="btn btn-outline-secondary"
+          (click)="newAgent(newAgentModal, user)">Promote</button>
+      </td>
+      <td>
         <button type="button" class="btn btn-outline-primary"
           (click)="openUpdateUserModal(updateUserModal, user)">Update</button>
       </td>
-      <td>
-        <button type="button" class="btn btn-outline-secondary" (click)="newAgent(newAgentModal, user)">Promote</button>
-      </td>
-      <td>
+      <td [hidden]="user.userStatus == block">
         <button type="button" class="btn btn-outline-warning" (click)="blockUser(user)">Block</button>
       </td>
-      <td>
+      <td [hidden]="user.userStatus == active">
         <button type="button" class="btn btn-outline-success" (click)="activateUser(user)">Activate</button>
       </td>
       <td>

@@ -1,3 +1,5 @@
+import { UserStatusEnum } from './user-status-enum';
+
 export class UserLoginDTO {
     username: string;
     name: string;
@@ -7,6 +9,9 @@ export class UserLoginDTO {
     telephone: string;
     token: string;
     role: string;
+    userStatus: UserStatusEnum;
 
     constructor() { }
+
+
 }

@@ -34,7 +34,7 @@ public class UserController {
 		List<UserLoginDTO> userdto = new ArrayList<>();
 		for (User user : users) {
 			userdto.add(new UserLoginDTO(user.getUsername(), user.getName(), user.getLastName(),
-					  user.getRole().getName(),"",user.getEmail()));
+					  user.getRole().getName(),"",user.getEmail(), user.getUserStatus()));
 		}
 		return new ResponseEntity<>(userdto, HttpStatus.OK);
 	}

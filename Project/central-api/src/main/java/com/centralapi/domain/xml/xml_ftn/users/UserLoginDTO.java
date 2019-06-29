@@ -63,10 +63,12 @@ public class UserLoginDTO {
     protected String token;
     @XmlElement(required = true)
     protected String email;
+    @XmlElement(required = true)
+    protected UserStatusEnum userStatus;
 
     
 
-	public UserLoginDTO(String username, String name, String lastname, String role, String token, String email) {
+	public UserLoginDTO(String username, String name, String lastname, String role, String token, String email, UserStatusEnum userStatus) {
 		super();
 		this.username = username;
 		this.name = name;
@@ -74,6 +76,7 @@ public class UserLoginDTO {
 		this.role = role;
 		this.token = token;
 		this.email = email;
+		this.userStatus = userStatus;
 	}
 
 	public UserLoginDTO() {
