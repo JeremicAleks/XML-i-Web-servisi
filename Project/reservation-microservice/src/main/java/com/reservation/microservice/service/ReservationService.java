@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.reservation.microservice.domain.dto.ClientReservationDTO;
 import com.reservation.microservice.domain.reservation.*;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,8 @@ public class ReservationService {
     @Autowired
     private RoomService roomService;
 
+    public static Logger logger = Logger.getLogger(ReservationService.class);
+
     public Reservation findById(Long id){return reservationRepository.findById(id).get();}
 
     public List<Reservation> findAll(){return  reservationRepository.findAll();}
@@ -41,7 +44,7 @@ public class ReservationService {
         List<Reservation> reservations;
         RegistredUser registeredUser = registeredUserService.findByUsername(username);
         reservations = registeredUser.getReservation();
-
+        logger.info("");
         return reservations;
     }
 
