@@ -5,6 +5,7 @@ import { UserLoginDTO } from 'src/app/models/user-login-dto';
 import { AgentDTO } from 'src/app/models/agent-dto';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Role } from 'src/app/models/role';
+import { allowPreviousPlayerStylesMerge } from '@angular/animations/browser/src/util';
 
 @Component({
   selector: 'app-admin-user-configuration',
@@ -20,8 +21,8 @@ export class AdminUserConfigurationComponent implements OnInit {
   userToPromote: string;
 
   newAgentForm = new FormGroup({
-    agentName: new FormControl('', Validators.required),
-    agentLastName: new FormControl('', Validators.required),
+    agentName: new FormControl(''),
+    agentLastName: new FormControl(''),
     agentAddress: new FormControl('', Validators.required),
     agentBusinessRegNumber: new FormControl('', Validators.required)
   });
@@ -35,17 +36,22 @@ export class AdminUserConfigurationComponent implements OnInit {
   ngOnInit() {
     this.getAllUsers();
     this.getAllRoles();
+    alert('user status: ' + this.allUsers[0].userStatus);
   }
 
   createNewAgent() {
     const agentAddress = this.newAgentForm.get('agentAddress').value;
     const agentBusinessRegNumber = this.newAgentForm.get('agentBusinessRegNumber').value;
-    const newAgent = new AgentDTO(this.userToPromote, agentAddress, agentBusinessRegNumber);
+    const newAgent = new AgentDTO();
+    newAgent.userToPromote = this.userToPromote;
+    newAgent.businessRegNumber = agentBusinessRegNumber;
+    newAgent.address = agentAddress;
 
     this.userService.createNewAgent(newAgent).subscribe(
       data => {
         alert(data.message);
         this.modalService.dismissAll();
+        this.getAllUsers();
       },
       error => {
         alert('createNewAgent - error');

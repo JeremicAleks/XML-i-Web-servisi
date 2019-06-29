@@ -66,7 +66,6 @@ public class UserLoginDTO {
     @XmlElement(required = true)
     protected UserStatusEnum userStatus;
 
-    
 
 	public UserLoginDTO(String username, String name, String lastname, String role, String token, String email, UserStatusEnum userStatus) {
 		super();
@@ -80,8 +79,9 @@ public class UserLoginDTO {
 	}
 
 	public UserLoginDTO() {
-		// TODO Auto-generated constructor stub
+
 	}
+	
 	/**
      * Gets the value of the username property.
      * 
@@ -225,5 +225,13 @@ public class UserLoginDTO {
     public void setEmail(String value) {
         this.email = value;
     }
+
+	public UserStatusEnum getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(UserStatusEnum userStatus) {
+		this.userStatus = userStatus;
+	}
 
 }

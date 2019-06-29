@@ -30,7 +30,8 @@ export class UserService {
   }
 
   createNewAgent(newAgent: AgentDTO) {
-    return this.http.post<any>(environment.centralApiUrl + '/api/user/newAgent', { newAgent } )
+    alert(newAgent.userToPromote);
+    return this.http.post<any>(environment.centralApiUrl + '/api/admin/agent/add', newAgent )
     .pipe(map(data => {
       return data;
     }
@@ -38,15 +39,15 @@ export class UserService {
   }
 
   activateUser(username: string) {
-    return this.http.put<any>(environment.centralApiUrl + '/api/user/activateUser', { username } )
+    return this.http.put<any>(environment.centralApiUrl + '/api/admin/user/activate', username )
     .pipe(map(data => {
       return data;
     }
     ));
   }
 
-  blockUser(username: string) {
-    return this.http.put<any>(environment.centralApiUrl + '/api/user/blockUser', { username } )
+  blockUser(username: String) {
+    return this.http.put<any>(environment.centralApiUrl + '/api/admin/user/block', username )
     .pipe(map(data => {
       return data;
     }

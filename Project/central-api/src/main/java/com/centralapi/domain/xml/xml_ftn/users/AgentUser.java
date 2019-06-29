@@ -71,6 +71,20 @@ public class AgentUser
 	protected List<Room> room;
 	@XmlElement(required = true)
 	protected String pib;
+	
+	public AgentUser() {}
+	
+	public AgentUser(User userToPromote, String pib) {
+		this.room = new ArrayList<Room>();
+		this.pib = pib;
+		this.username = userToPromote.getUsername();
+		this.password = userToPromote.getPassword();
+		this.name = userToPromote.getName();
+		this.lastName = userToPromote.getLastName();
+		this.email = userToPromote.getEmail();
+		this.salt = userToPromote.getSalt();
+		this.userStatus = UserStatusEnum.ACTIVE;
+	}
 
     /**
      * Gets the value of the room property.

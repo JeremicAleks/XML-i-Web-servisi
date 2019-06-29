@@ -31,12 +31,12 @@ public class UserController {
 	@GetMapping(value = "/getUsers", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getUsers() throws UnknownHostException {
 		List<User> users = userService.findAll();
-		List<UserLoginDTO> userdto = new ArrayList<>();
+		List<UserLoginDTO> allUsers = new ArrayList<>();
 		for (User user : users) {
-			userdto.add(new UserLoginDTO(user.getUsername(), user.getName(), user.getLastName(),
+			allUsers.add(new UserLoginDTO(user.getUsername(), user.getName(), user.getLastName(),
 					  user.getRole().getName(),"",user.getEmail(), user.getUserStatus()));
 		}
-		return new ResponseEntity<>(userdto, HttpStatus.OK);
+		return new ResponseEntity<>(allUsers, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)

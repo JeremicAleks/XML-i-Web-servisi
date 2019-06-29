@@ -25,6 +25,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
+import org.hibernate.annotations.Where;
+
 
 /**
  * <p>Java class for User complex type.
@@ -90,6 +92,7 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @DiscriminatorColumn(name = "USER")
 @Inheritance(strategy = InheritanceType.JOINED)
+@Where(clause = "user_status != 2")
 public class User {
 
     @XmlElement(required = true)
@@ -104,7 +107,7 @@ public class User {
     @XmlElement(required = true)
     protected String password;
     @XmlElement(name = "Role", required = true)
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, optional = false)
     protected Role role;
     @XmlElement(required = true)
     protected String salt;

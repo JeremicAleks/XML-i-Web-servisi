@@ -1,11 +1,7 @@
 export class AgentDTO {
-    userToPromote: string;
-    address: string;
-    businessRegNumber: string;
+    userToPromote: String;
+    address: String;
+    businessRegNumber: String;
 
-    constructor(userToPromote: string, address: string, businessRegNumber: string) {
-        this.userToPromote = userToPromote;
-        this.address = address;
-        this.businessRegNumber = businessRegNumber;
-    }
+    constructor() {}
 }
