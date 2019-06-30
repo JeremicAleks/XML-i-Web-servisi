@@ -97,7 +97,7 @@ export class MainNavbarComponent implements OnInit {
 
   // REGISTRATION PART
   onRegistration() {
-    alert("registration - to be tested")
+    // alert("registration - to be tested")
 
     if (this.registerForm.invalid) {
       return;
@@ -108,7 +108,7 @@ export class MainNavbarComponent implements OnInit {
       this.RegistrationUsername.value, this.RegistrationPassword.value, this.ConfirmPassword.value).subscribe(
         data => {
           this.modalService.dismissAll()
-          alert(data.message)
+          // alert(data.message)
         },
         error => {
           this.errorMessage = error;
@@ -170,7 +170,6 @@ export class MainNavbarComponent implements OnInit {
 
   // LOG OUT
   logOut() {
-
     this.authService.logOut().subscribe(
       data => {
         localStorage.removeItem('sessionUser')
