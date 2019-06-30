@@ -31,7 +31,7 @@ export class UserProfileComponent implements OnInit {
     if (this.isLogin) {
       this.userLoginDTO = this.authService.getSessionUser();
     }
-    this.getAllReservations()
+    this.getAllReservations();
   }
 
   sendMessage() {

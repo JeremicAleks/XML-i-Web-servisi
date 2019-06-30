@@ -13,6 +13,7 @@ import {ReservationComponent} from './views/reservation/reservation.component';
 import {ChangePasswordComponent} from './views/change-password/change-password.component';
 import {UserProfileComponent} from './views/user-profile/user-profile.component';
 import {RoomListComponent} from './views/room-list/room-list.component';
+import { ReservationConversationComponent } from './views/reservation-conversation/reservation-conversation.component';
 
 const routes: Routes = [
 
@@ -51,7 +52,7 @@ const routes: Routes = [
   },
   {
     path: 'reservation/:id/conversation',
-    component: ReservationComponent
+    component: ReservationConversationComponent
   }
 
 ];

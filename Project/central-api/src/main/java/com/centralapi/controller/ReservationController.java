@@ -1,9 +1,6 @@
 package com.centralapi.controller;
 
-import com.centralapi.domain.dto.ShowMessageForUserDTO;
-import com.centralapi.domain.xml.xml_ftn.rooms.RateAndComment;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,11 +16,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.centralapi.domain.dto.ClientReservationDTO;
 import com.centralapi.domain.dto.ClientSendMessageDTO;
+import com.centralapi.domain.dto.ShowMessageForUserDTO;
 import com.centralapi.domain.xml.xml_ftn.reservation.GetReservations;
 import com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/reservation")
