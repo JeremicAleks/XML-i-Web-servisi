@@ -12,7 +12,7 @@ import { ErrorInterceptor } from './utils/authInterceptors/error-interceptor';
 import { DatePipe } from '@angular/common';
 import { AdminUserConfigurationComponent } from './views/admin-user-configuration/admin-user-configuration.component';
 import { MainHomepageComponent } from './views/main-homepage/main-homepage.component';
-import {NgbDatepickerModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbDatepickerModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { DestinationsComponent } from './views/destinations/destinations.component';
 import { ReservationComponent } from './views/reservation/reservation.component';
 import { ChangePasswordComponent } from './views/change-password/change-password.component';
@@ -42,7 +42,8 @@ import { ReservationConversationComponent } from './views/reservation-conversati
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
+    NgbModule.forRoot()
   ],
   providers: [ DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

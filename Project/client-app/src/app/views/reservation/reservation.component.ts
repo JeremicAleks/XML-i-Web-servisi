@@ -35,6 +35,9 @@ room:any;
     if(!this.authService.getSessionUser()){
       alert("Please login first!")
     }
+    else if(this.room.priceList==null){
+      alert("No available price list for room!")
+    }
     else{
       this.roomService.reserveRoom(this.checkIn,this.checkOut,this.room.room.id).subscribe(data=>
         {
