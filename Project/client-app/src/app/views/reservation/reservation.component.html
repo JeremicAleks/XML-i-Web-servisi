@@ -9,8 +9,8 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-12 naslovi">
-                    <p>Check in: {{checkIn}}</p>
-                    <p>Check out: {{checkOut}}</p>
+                    <p>Check in: {{checkIn | date}}</p>
+                    <p>Check out: {{checkOut  | date}}</p>
                     <p>Total length of stay: {{room.totalDays}} </p>
                   </div>
                 </div>
@@ -48,7 +48,8 @@
               <div class="card-header naslovi">Price</div>
               <div class="card-body">
                 <div class="row">
-                  <div class="col-md-12 naslovi">
+                  <div class="col-md-12 naslovi" *ngIf="room.priceList!=null">
+
                     {{room.totalDays}} x {{room.priceList.price}}
                   </div>
                 </div>
@@ -126,6 +127,22 @@
               </tr>
             </tbody>
           </table>
+          <br>
+          <hr>
+          <h3>Gallery</h3>
+          <br>
+          <div class="container">
+              <div class="row">
+                <div class="col-md-12 py-3">
+                  <ngb-carousel *ngIf="room.room.image">
+                    <ng-template ngbSlide *ngFor="let img of room.room.image">
+                      <img style="height: 400px;" [src]="img" alt="Random slide">
+                    </ng-template>
+                  </ngb-carousel>
+                </div>
+              </div>
+            </div>
+            <br>
       </div>
      
     </div>

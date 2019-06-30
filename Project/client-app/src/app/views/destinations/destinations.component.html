@@ -76,94 +76,51 @@
 
                       <div>
                         <label class="labelkat">Property type</label>
-                        <form [formGroup]="typeForm">
-                          <div *ngFor="let ai of this.types; let i=index">
+                        
+                          <div *ngFor="let ai of types; let i=index">
                             <div class="chiller_cb">
-                              <input [id]="ai.id" type="checkbox" [formControlName]="this.typeArray[i]">
-                              <label [for]="ai.id" class="array-item-title">
+                              <input [id]="ai.description" type="checkbox" [checked]= "ai.active == false" (click)="ChangeMeType(i)">
+                              <label [for]="ai.description" class="array-item-title">
                                 {{ai.description}}</label>
                               <span></span>
                             </div>
                           </div>
-                        </form>
+                        
                       </div>
 
                     </div>
                     <div class="form-group">
                       <div>
-                        <label class="labelkat">Star rating</label>
-                        <div class="chiller_cb">
-                          <input id="myCheckbox11" type="checkbox">
-                          <label for="myCheckbox11">unrated</label>
-                          <span></span>
-                        </div>
-                        <div class="chiller_cb">
-                          <input id="myCheckbox22" type="checkbox">
-                          <label for="myCheckbox22">2+ stars</label>
-                          <span></span>
-                        </div>
-                        <div class="chiller_cb">
-                          <input id="myCheckbox33" type="checkbox">
-                          <label for="myCheckbox33">3+ stars</label>
-                          <span></span>
-                        </div>
-                        <div class="chiller_cb">
-                          <input id="myCheckbox34" type="checkbox">
-                          <label for="myCheckbox34">4+ stars</label>
-                          <span></span>
-                        </div>
-                        <div class="chiller_cb">
-                          <input id="myCheckbox35" type="checkbox">
-                          <label for="myCheckbox35">5 stars</label>
-                          <span></span>
-                        </div>
+                          <label class="labelkat">Category</label>
+                          <div *ngFor="let ac of categories; let i=index">
+                              <div class="chiller_cb">
+                                <input [id]="ac.description" [checked]= "ac.active == false" type="checkbox" (click)="ChangeMeCategories(i)">
+                                <label [for]="ac.description" class="array-item-title">
+                                  {{ac.description}}</label>
+                                <span></span>
+                              </div>
+                            </div>
+                      
                       </div>
                     </div>
                     <div class="form-group">
                       <div>
-                        <label class="labelkat">Distance from city center</label>
-                        <div class="chiller_cb">
-                          <input id="myCheckboxa" type="checkbox">
-                          <label for="myCheckboxa">less than 1km</label>
-                          <span></span>
-                        </div>
-                        <div class="chiller_cb">
-                          <input id="myCheckbox2b" type="checkbox">
-                          <label for="myCheckbox2b">less than 2km</label>
-                          <span></span>
-                        </div>
-                        <div class="chiller_cb">
-                          <input id="myCheckbox3c" type="checkbox">
-                          <label for="myCheckbox3c">less than 3km</label>
-                          <span></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div>
-                        <label class="labelkat">Other</label>
-                        <div class="chiller_cb">
-                          <input id="myCheckboxaq" type="checkbox">
-                          <label for="myCheckboxaq">Parking</label>
-                          <span></span>
-                        </div>
-                        <div class="chiller_cb">
-                          <input id="myCheckbox2w" type="checkbox">
-                          <label for="myCheckbox2w">Wi-fi</label>
-                          <span></span>
-                        </div>
-                        <div class="chiller_cb">
-                          <input id="myCheckbox3all" type="checkbox">
-                          <label for="myCheckbox3all">All-inclusive</label>
-                          <span></span>
-                        </div>
-                      </div>
-                    </div>
+                        <label class="labelkat">Additional services</label>
 
+                        <div *ngFor="let ass of additionalServices; let i=index">
+                            <div class="chiller_cb">
+                              <input [id]="ass.description" type="checkbox" [checked]= "ass.active == false" (click)="ChangeMeAdditionalServices(i)">
+                              <label [for]="ass.description" class="array-item-title">
+                                {{ass.description}}</label>
+                              <span></span>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
 
                     <hr>
-                    <button type="btn" class="btn btn-primary">Find Now</button>
-                    <button type="btn" class="btn btn-primary">Reset All</button>
+                    <button type="btn" class="btn btn-primary" (click)="filterClicked()">Find Now</button>
+                    <button type="btn" class="btn btn-primary" (click)="resetFilter()">Reset All</button>
                     <div class="pb-3"></div>
                   </div>
                 </div>
@@ -175,15 +132,15 @@
       <div class="col-md-9">
         <div class="row">
           <div class="col-md-12">
-            <h2> {{destination}}: n properties found </h2>
-            <p> {{rooms.length}} Reasons to Visit: gambling, entertainment & relaxation </p>
+            <h2> {{destination}}: {{roomsCopy.length}} properties found </h2>
+            <p> {{roomsCopy.length}} Reasons to Visit: gambling, entertainment & relaxation </p>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
             <ul class="nav nav-justified nav-pills">
               <li class="nav-item">
-                <a class="nav-link active" href="#">Price</a>
+                <a class="nav-link active" (click)="priceSort()">Price</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link bg-light" href="#">Distance</a>
@@ -197,7 +154,7 @@
             </ul>
           </div>
         </div>
-        <div *ngFor="let r of rooms; let i=index" class="row mb-3">
+        <div *ngFor="let r of roomsCopy; let i=index" class="row mb-3">
           <div class="col-md-12">
             <div class="card">
               <div class="card-body">
