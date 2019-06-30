@@ -138,7 +138,7 @@ public class ReservationController {
 	    return mess;
     }
 
-    @GetMapping(value = "/getIdForRoom/{idRservation}")
+    @GetMapping(value = "/getIdForRoom/{idReservation}")
     public GetRoomIdDTO getRoomId(@PathVariable Long idReservation){
 	    GetRoomIdDTO getRoomIdDTO = new GetRoomIdDTO();
 	    Long id = reservationService.getRoomId(idReservation);
