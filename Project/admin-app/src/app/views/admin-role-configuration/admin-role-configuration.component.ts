@@ -41,7 +41,7 @@ export class AdminRoleConfigurationComponent implements OnInit {
         this.allRoles = data;
       },
       error => {
-        alert('getAllRoles error');
+        // alert('getAllRoles error');
       }
     );
   }
@@ -49,10 +49,10 @@ export class AdminRoleConfigurationComponent implements OnInit {
   deleteRole(role) {
     this.userService.deleteRole(role.name).subscribe(
       data => {
-        alert(data.message);
+        // alert(data.message);
       },
       error => {
-        alert(error.message);
+        // alert(error.message);
       }
     );
   }
@@ -68,11 +68,11 @@ export class AdminRoleConfigurationComponent implements OnInit {
     const roleName = this.newRoleForm.get('roleName').value;
     this.userService.createRole(roleName).subscribe(
       data => {
-        alert(data.message);
+        // alert(data.message);
         this.modalService.dismissAll();
       },
       error => {
-        alert(error.message);
+        // alert(error.message);
       }
     );
   }
@@ -114,11 +114,11 @@ export class AdminRoleConfigurationComponent implements OnInit {
 
     this.userService.updateRole(currentPrivileges, this.roleToUpdate).subscribe(
       data => {
-        alert(data.message);
+        // alert(data.message);
         this.modalService.dismissAll();
       },
       error => {
-        alert(error.message);
+        //alert(error.message);
       }
     );
   }

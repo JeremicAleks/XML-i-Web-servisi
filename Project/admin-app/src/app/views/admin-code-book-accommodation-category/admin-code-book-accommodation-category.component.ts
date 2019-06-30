@@ -32,12 +32,12 @@ export class AdminCodeBookAccommodationCategoryComponent implements OnInit {
     this.accommodationCategoryToUpdate.description = this.updateAccommodationCategoryForm.get('categoryDescription').value;
     this.accommodationService.updateAccommondationCategory(this.accommodationCategoryToUpdate).subscribe(
       data => {
-        alert(data.message);
+        // alert(data.message);
         this.modalService.dismissAll();
         this.getAccommodationCategories();
       },
       error => {
-        alert(error.message);
+        // alert(error.message);
       }
     );
   }
@@ -65,12 +65,12 @@ export class AdminCodeBookAccommodationCategoryComponent implements OnInit {
     console.log(accommodationCategory.description);
     this.accommodationService.createAccommodationCategory(accommodationCategory).subscribe(
       data => {
-        alert(data.message);
+        // alert(data.message);
         this.getAccommodationCategories();
         this.modalService.dismissAll();
       },
       error => {
-        alert(error.message);
+        // alert(error.message);
       }
     );
   }
@@ -79,11 +79,11 @@ export class AdminCodeBookAccommodationCategoryComponent implements OnInit {
     console.log('deleteAccommType clicked - id: ' + accommodationCategory.id);
     this.accommodationService.deleteAccommodationCategory(accommodationCategory).subscribe(
       data => {
-        alert(data.message);
+        // alert(data.message);
         this.getAccommodationCategories();
       },
       error => {
-        alert(error.message);
+        // alert(error.message);
       }
     );
   }
@@ -93,10 +93,10 @@ export class AdminCodeBookAccommodationCategoryComponent implements OnInit {
     this.accommodationService.getAccommodationCategories().subscribe(
       data => {
         this.accommodationCategories = data;
-        alert(data.message);
+        // alert(data.message);
       },
       error => {
-        alert(error.message);
+        // alert(error.message);
       }
     );
   }

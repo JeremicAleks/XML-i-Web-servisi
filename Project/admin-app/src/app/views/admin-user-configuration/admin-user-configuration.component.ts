@@ -36,7 +36,6 @@ export class AdminUserConfigurationComponent implements OnInit {
   ngOnInit() {
     this.getAllUsers();
     this.getAllRoles();
-    alert('user status: ' + this.allUsers[0].userStatus);
   }
 
   createNewAgent() {
@@ -49,12 +48,12 @@ export class AdminUserConfigurationComponent implements OnInit {
 
     this.userService.createNewAgent(newAgent).subscribe(
       data => {
-        alert(data.message);
+        //alert(data.message);
         this.modalService.dismissAll();
         this.getAllUsers();
       },
       error => {
-        alert('createNewAgent - error');
+        //alert('createNewAgent - error');
       }
     );
   }
@@ -71,42 +70,42 @@ export class AdminUserConfigurationComponent implements OnInit {
 
   activateUser(user) {
     const userToActivate = user.username;
-    alert('Activating: ' + userToActivate + ' ...');
+    //alert('Activating: ' + userToActivate + ' ...');
     this.userService.activateUser(userToActivate).subscribe(
       data => {
         // alert(data.message);
         this.getAllUsers();
       },
       error => {
-        alert('activateUser - error');
+        // alert('activateUser - error');
       }
     );
   }
 
   blockUser(user) {
     const userToBlock = user.username;
-    alert('Blocking: ' + userToBlock + ' ...');
+    //alert('Blocking: ' + userToBlock + ' ...');
     this.userService.blockUser(userToBlock).subscribe(
       data => {
         // alert(data.message);
         this.getAllUsers();
       },
       error => {
-        alert('blockUser - error');
+        // alert('blockUser - error');
       }
     );
   }
 
   deleteUser(user) {
     const userToDelete = user.username;
-    alert('Deleting: ' + userToDelete + ' ...');
+    //alert('Deleting: ' + userToDelete + ' ...');
     this.userService.deleteUser(userToDelete).subscribe(
       data => {
         // alert(data.message);
         this.getAllUsers();
       },
       error => {
-        alert('deleteUser - error');
+        // alert('deleteUser - error');
       }
     );
   }
@@ -119,7 +118,7 @@ export class AdminUserConfigurationComponent implements OnInit {
         this.getAllUsers();
       },
       error => {
-        alert('saveUserChanges - error');
+        // alert('saveUserChanges - error');
       }
     );
   }
@@ -140,7 +139,7 @@ export class AdminUserConfigurationComponent implements OnInit {
         this.allUsers = data;
       },
       error => {
-        alert('getAllUsers error');
+        //alert('getAllUsers error');
       }
     );
   }
@@ -151,7 +150,7 @@ export class AdminUserConfigurationComponent implements OnInit {
         this.allRoles = data;
       },
       error => {
-        alert('getAllRoles error');
+        //alert('getAllRoles error');
       }
     );
   }

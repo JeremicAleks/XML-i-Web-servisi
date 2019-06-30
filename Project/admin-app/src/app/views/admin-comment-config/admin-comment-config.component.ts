@@ -21,11 +21,11 @@ export class AdminCommentConfigComponent implements OnInit {
     console.log('approveComment clicked - id: ' + id);
     this.commentService.approveComment(id).subscribe(
       data => {
-        alert(data.message);
+        // alert(data.message);
         this.getAllComments();
       },
       error => {
-        alert(error.message);
+        // alert(error.message);
       }
     );
   }
@@ -38,7 +38,7 @@ export class AdminCommentConfigComponent implements OnInit {
         this.allComments = data;
       },
       error => {
-        alert(error.message);
+        // alert(error.message);
       }
     );
   }
