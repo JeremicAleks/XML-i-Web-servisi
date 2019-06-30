@@ -125,6 +125,7 @@ public class UserServiceCon implements UserService {
 		RegistredUser regUser = RegUserDAOtoRegUser.create(user);
 		logger.debug("Creating registred user from DTO..");
 		regUser.setSalt(salt);
+		regUser.setUserStatusEnum(UserStatusEnum.ACTIVE);
 		Role r = roleRepo.findByName("DefaultRole");
 		regUser.setRole(r);
 		logger.debug("Set role for user..");

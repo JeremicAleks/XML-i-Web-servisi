@@ -35,7 +35,7 @@ public class MessageServiceCon implements MessageService {
 		for (Room room : rooms) {
 			for (Reservation res : room.getReservation()) {
 				for (MessageTable msg : res.getMessageTable()) {
-					if(msg.getToUser() == userInfoRepo.findAll().get(0).getUsername())
+					if(msg.getToUser().equals(userInfoRepo.findAll().get(0).getUsername()))
 						msgDTO.add(new MessageDTO(room.getId(),res.getId(),room.getAccommodationType(),room.getLocation(),room.getNumberOfBeds(),res.getCheckIn(),res.getCheckOut(),msg));
 				}
 			}
