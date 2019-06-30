@@ -3,7 +3,9 @@ package com.centralapi.controller;
 import java.util.List;
 
 import com.centralapi.domain.dto.AddRateAndCommentDTO;
+import com.centralapi.domain.dto.GetRoomIdDTO;
 import com.centralapi.exception.ResponseMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +18,9 @@ import com.centralapi.domain.xml.xml_ftn.rooms.RateAndComment;
 @Service
 @RequestMapping("/api/comment")
 public class CommentController {
+
+	@Autowired
+	private RestTemplate rest;
 
 	@GetMapping(value = "/getComments", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getComments() {
@@ -55,6 +60,8 @@ public class CommentController {
 	public ResponseEntity<?> addComment (@RequestBody AddRateAndCommentDTO addRateAndCommentDTO){
 		RestTemplate restTemplate = new RestTemplate();
 		String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+		GetRoomIdDTO getRoomIdDTO = rest.getForObject("https://reservation-microservice/api/reservation/getIdForRoom/"+addRateAndCommentDTO.getReservationId(),GetRoomIdDTO.class);
+		addRateAndCommentDTO.setRoomId(getRoomIdDTO.getId());
 		addRateAndCommentDTO.setUsername(username);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);

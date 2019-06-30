@@ -187,4 +187,9 @@ public class ReservationService {
 
         return showMessageForUserDTO;
     }
+
+    public Long getRoomId(Long idReservation) {
+        Long id = roomService.room_id(idReservation);
+        return id;
+    }
 }

@@ -2,6 +2,7 @@ package com.reservation.microservice.controller;
 
 import com.reservation.microservice.domain.dto.ClientReservationDTO;
 import com.reservation.microservice.domain.dto.ClientSendMessageDTO;
+import com.reservation.microservice.domain.dto.GetRoomIdDTO;
 import com.reservation.microservice.domain.dto.ShowMessageForUserDTO;
 import com.reservation.microservice.domain.reservation.*;
 import com.reservation.microservice.domain.user.SendMessageDTO;
@@ -135,6 +136,16 @@ public class ReservationController {
 	    mess = reservationService.getMessagesForUser(idReservation);
 
 	    return mess;
+    }
+
+    @GetMapping(value = "/getIdForRoom/{idRservation}")
+    public GetRoomIdDTO getRoomId(@PathVariable Long idReservation){
+	    GetRoomIdDTO getRoomIdDTO = new GetRoomIdDTO();
+	    Long id = reservationService.getRoomId(idReservation);
+
+	    getRoomIdDTO.setId(id);
+
+	    return getRoomIdDTO;
     }
 
 
