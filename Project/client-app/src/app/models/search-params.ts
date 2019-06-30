@@ -3,6 +3,7 @@ export class SearchParams {
  public checkIn: Date;
  public checkOut: Date;
  public numOfPeople: number;
+ 
 
   constructor(destination, checkIn, checkOut, numOfPeople) {
    this.destination = destination;
