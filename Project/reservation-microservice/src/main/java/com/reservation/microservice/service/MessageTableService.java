@@ -4,6 +4,7 @@ import com.reservation.microservice.domain.dto.ClientSendMessageDTO;
 import com.reservation.microservice.domain.reservation.MessageTable;
 import com.reservation.microservice.domain.reservation.Reservation;
 import com.reservation.microservice.domain.room.Room;
+import com.reservation.microservice.domain.user.AgentUser;
 import com.reservation.microservice.domain.user.RegistredUser;
 import com.reservation.microservice.domain.user.SendMessageDTO;
 import com.reservation.microservice.repository.MessageTableRepository;
@@ -24,6 +25,9 @@ public class MessageTableService {
     private ReservationService reservationService;
     @Autowired
     private RoomService roomService;
+
+    @Autowired
+    private AgentUserService agentUserService;
 
     public MessageTable findById(Long id){return messageTableRepository.getOne(id);}
 
@@ -61,6 +65,12 @@ public class MessageTableService {
         MessageTable messageTable = new MessageTable();
         messageTable.setFromUser(clientSendMessageDTO.getUsername());
         messageTable.setMessageString(clientSendMessageDTO.getMessage());
+
+        Long roomId = roomService.room_id(clientSendMessageDTO.getIdReservation());
+        Long agentId = agentUserService.findId(roomId);
+
+        AgentUser agentUser = agentUserService.findById(agentId);
+        messageTable.setToUser(agentUser.getUsername());
 
         reservation.getMessageTable().add(messageTable);
         reservation = reservationService.save(reservation);
