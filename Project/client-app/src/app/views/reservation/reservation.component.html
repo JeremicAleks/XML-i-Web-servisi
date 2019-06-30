@@ -9,10 +9,9 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-12 naslovi">
-                    <p>Check in: </p>
-                    <p>Check out: </p>
-                    <p>Total length of stay: </p>
-                    <p>You selected: </p>
+                    <p>Check in: {{checkIn}}</p>
+                    <p>Check out: {{checkOut}}</p>
+                    <p>Total length of stay: {{room.totalDays}} </p>
                   </div>
                 </div>
               </div>
@@ -27,9 +26,15 @@
 
                 <div class="row">
                   <div class="col-md-12">
-                    <p>nesto </p>
-                    <p>nesto  </p>
-
+                    <p>Category: {{room.room.accommodationCategory.description}}</p>
+                    <p>Type: {{room.room.accommodationType.description}} </p>
+                    <p>Additional services:</p>
+                    <ul>
+                      <li  *ngFor="let r of room.room.roomAdditionalService; let i=index">
+                        {{r.description}}
+                      </li>
+                    </ul>
+                   
                   </div>
                 </div>
               </div>
@@ -44,6 +49,7 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-12 naslovi">
+                    {{room.totalDays}} x {{room.priceList.price}}
                   </div>
                 </div>
               </div>
@@ -58,28 +64,26 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-5">
-                    <img src="https://dynamic.realestateindia.com/proj_images/project14122/proj_img-14122_1-small.jpg">
+                    <img src="{{room.room.image[0]}}">
                   </div>
                   <div class="col-md-6  card-body">
                     <div class="list-title">
                       <ul class="list-inline list-unstyled">
-                          <h4>Nugget Casino Resort</h4>
+                          <h4>{{room.room.location.name}}</h4>
                         <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
                           class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i></li>
                         <li class="list-inline-item text-success"><i class="fa fa-thumbs-up"></i></li>
                       </ul>
                     </div>
                     <div class="list-location">
-                      <a href="#"><i class="fa fa-map-marker"></i><small> Sparks, Reno – Show on map (4.7 km from
-                        center)</small> </a>
+                      <a href="#"><i class="fa fa-map-marker"></i><small> Lat: {{room.room.location.lat}}, Lng: {{room.room.location.lng}}</small> </a>
                     </div>
                     <div class="list-descrip">
-                      <small>This Sparks casino hotel is located in the Sierra Nevada Mountains. This resort features
-                        free airport shuttle services, a casino, a nightclub and 8 restaurants and bars. </small>
+                      <small>{{room.room.description}}</small>
                     </div>
                     <br>
                     <div class="col-md-5 border-top card-body">
-                      <button type="button" class="btn btn-outline-primary" >Finish</button>
+                      <button type="button" class="btn btn-outline-primary" (click)="Reserve()">Finish</button>
                     </div>
                   </div>
                   <!--<div class="col-md-3 border-left card-body">
@@ -96,8 +100,34 @@
             </div>
           </div>
         </div>
-
+        <table>
+            <thead>
+              <th width=10%>
+                User
+              </th>
+              <th width=10%>
+                  Rate
+                </th>
+                <th width=80%>
+                    Comment
+                </th>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let r of room.ratesAndComments; let i=index">
+                <td>
+                  {{r.regUser.username}}
+                </td>
+                <td>
+                  {{r.rating}}
+                </td>
+                <td>
+                  {{r.comment}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
       </div>
+     
     </div>
   </div>
 </section>

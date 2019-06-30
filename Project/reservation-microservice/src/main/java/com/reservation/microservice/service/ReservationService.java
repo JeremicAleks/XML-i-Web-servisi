@@ -2,6 +2,7 @@ package com.reservation.microservice.service;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.reservation.microservice.domain.dto.ClientReservationDTO;
 import com.reservation.microservice.domain.dto.ShowMessageForUserDTO;
@@ -45,8 +46,11 @@ public class ReservationService {
         List<Reservation> reservations;
         RegistredUser registeredUser = registeredUserService.findByUsername(username);
         reservations = registeredUser.getReservation();
+
+        List<Reservation> res =  reservations.stream().filter(reservation -> reservation.getState()!=ReservationStateEnum.NOTALLOWED).collect(Collectors.toList());
+
         logger.info("");
-        return reservations;
+        return res;
     }
 
     public Reservation reserveRoom(ReservationDTO reservationDTO) {
@@ -84,9 +88,11 @@ public class ReservationService {
         List<Reservation> all = room.getReservation();
 
         for (Reservation r : all){
-            if((startDate.before(r.getCheckIn()) && endDate.after(r.getCheckIn()))|| (startDate.before(r.getCheckOut())&&endDate.after(r.getCheckOut()))
-            || (startDate.after(r.getCheckIn())&& endDate.before(r.getCheckOut()))|| (startDate.before(r.getCheckIn())&&endDate.after(r.getCheckOut())) || startDate.equals(r.getCheckIn()) || endDate.equals(r.getCheckOut())){
-                res.add(r);
+            if (r.getState()!=ReservationStateEnum.NOTALLOWED) {
+                if ((startDate.before(r.getCheckIn()) && endDate.after(r.getCheckIn())) || (startDate.before(r.getCheckOut()) && endDate.after(r.getCheckOut()))
+                        || (startDate.after(r.getCheckIn()) && endDate.before(r.getCheckOut())) || (startDate.before(r.getCheckIn()) && endDate.after(r.getCheckOut())) || startDate.equals(r.getCheckIn()) || endDate.equals(r.getCheckOut())) {
+                    res.add(r);
+                }
             }
         }
         return res;
@@ -114,6 +120,8 @@ public class ReservationService {
             RegistredUser registredUser = registeredUserService.findByUsername(clientReservationDTO.getUsername());
             registredUser.getReservation().add(reservation);
             registeredUserService.save(registredUser);
+            room.getReservation().add(reservation);
+            roomService.save(room);
             return reservation;
         }else
             return null;

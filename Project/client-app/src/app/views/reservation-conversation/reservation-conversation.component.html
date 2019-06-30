@@ -46,8 +46,12 @@
 
 <br>
 
-<button type="button" class="btn btn-primary" style="margin-left: 10px" (click)="OpenSendMessageModal(sendMessageModal)">Send
+<button type="button" class="btn btn-primary" style="margin-left: 10px"
+  (click)="OpenSendMessageModal(sendMessageModal)">Send
   Message</button>
+
+<br>
+<br>
 
 <!-- SEND MESSAGE MODAL-->
 <ng-template #sendMessageModal let-modal>
@@ -80,7 +84,8 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    <button type="button" class="btn btn-primary" [disabled]="!sendMessageForm.valid" (click)="sendMessageClicked()">Send
+    <button type="button" class="btn btn-primary" [disabled]="!sendMessageForm.valid"
+      (click)="sendMessageClicked()">Send
       Message</button>
   </div>
 </ng-template>

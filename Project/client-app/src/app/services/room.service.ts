@@ -36,7 +36,22 @@ export class RoomService {
   }
 
  
+  getRoom(checkIn:Date,checkOut:Date,roomId:number) {
+    return this.http.post<any>(environment.centralApiUrl + '/api/room/getRoomForShow',{checkIn,checkOut,roomId})
+      .pipe(map(data => {
+          return data;
+        }
+      ));
+  }
 
+   
+  reserveRoom(checkIn:Date,checkOut:Date,roomId:number) {
+    return this.http.post<any>(environment.centralApiUrl + '/api/reservation/add',{checkIn,checkOut,roomId})
+      .pipe(map(data => {
+          return data;
+        }
+      ));
+  }
   getAllRooms() {
     return this.http.get<any>(environment.centralApiUrl + '/api/room/all')
       .pipe(map(allRooms => {

@@ -4,11 +4,13 @@ import com.centralapi.domain.xml.xml_ftn.rooms.PriceList;
 import com.centralapi.domain.xml.xml_ftn.rooms.RateAndComment;
 import com.centralapi.domain.xml.xml_ftn.rooms.Room;
 
+import java.util.List;
+
 public class ShowRoomDTO {
 
 	private Room room;
 	private PriceList priceList;
-	private RateAndComment ratesAndComments;
+	private List<RateAndComment> ratesAndComments;
 	private String totalDays;
 	
 	
@@ -31,11 +33,12 @@ public class ShowRoomDTO {
 	public void setPriceList(PriceList priceList) {
 		this.priceList = priceList;
 	}
-	public RateAndComment getRatesAndComments() {
+
+	public List<RateAndComment> getRatesAndComments() {
 		return ratesAndComments;
 	}
-	public void setRatesAndComments(RateAndComment ratesAndComments) {
+
+	public void setRatesAndComments(List<RateAndComment> ratesAndComments) {
 		this.ratesAndComments = ratesAndComments;
 	}
-	
 }
