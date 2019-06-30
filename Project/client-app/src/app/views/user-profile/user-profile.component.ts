@@ -16,9 +16,13 @@ export class UserProfileComponent implements OnInit {
 
   userLoginDTO: UserLoginDTO;
   isLogin: boolean;
-
+  i:number;
+  j:number;
   allUserReservations: Array<Reservation>;
+  expiredReservations: Array<Reservation>;
+  pendingReservations: Array<Reservation>;
   reservationForMessage: Reservation;
+  time: Date;
 
   sendMessageForm = new FormGroup({
     messageText: new FormControl('', [Validators.required])
@@ -31,7 +35,13 @@ export class UserProfileComponent implements OnInit {
     if (this.isLogin) {
       this.userLoginDTO = this.authService.getSessionUser();
     }
-    this.getAllReservations()
+    this.pendingReservations = [];
+    this.expiredReservations = [];
+    this.i=0;
+    this.j=0;
+    this.getAllReservations();
+    console.log(this.expiredReservations);
+    console.log(this.pendingReservations);
   }
 
   sendMessage() {
@@ -41,14 +51,42 @@ export class UserProfileComponent implements OnInit {
 
   openSendMessageModal(id) {
     console.log('SendMessageModal has just opened...');
+    console.log(id);
     this.router.navigate(['reservation/'+id+'/conversation']);
 
   }
+
+  cancelReservation(id) {
+  console.log('Resevation canceled...')
+  console.log(id);
+
+      this.reservationService.cancelReservation(id).subscribe(
+        data => {
+          this.reservationForMessage = data;
+          console.log(this.reservationForMessage)
+        },
+        error => {
+          alert('getAllRooms error');
+        }
+      )
+
+}
 
   getAllReservations() {
     this.reservationService.getAllReservations().subscribe(
       data => {
         this.allUserReservations = data;
+        this.time = new Date();
+        console.log(this.time)
+        for(this.i=0; this.i<this.allUserReservations.length; this.i++){
+          if(this.allUserReservations[this.i].checkOut <= this.time){
+            this.expiredReservations[this.j] = this.allUserReservations[this.i]
+            this.j++;
+          }else{
+            this.pendingReservations[this.j] = this.allUserReservations[this.i]
+            this.j++;
+          }
+        }
 
       },
       error => {

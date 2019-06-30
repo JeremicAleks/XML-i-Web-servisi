@@ -28,23 +28,27 @@
     <table class="table table-borderless">
       <thead>
         <tr>
-          <th>#</th>
           <th>Check in</th>
           <th>Check out</th>
           <th>State</th>
           <th>Message</th>
+          <th>Cancel</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let r of allUserReservations; index as i">
-          <th scope="row">{{i + 1}}</th>
+        <tr *ngFor="let r of pendingReservations; index as i">
           <td>{{r.checkIn | date}}</td>
           <td>{{r.checkOut| date}}</td>
           <td>{{r.state}}</td>
           <td>
             <!-- SEND MESSAGE -->
-            <button type="button" class="btn btn-outline-primary"
+            <button type="button" class="btn btn-outline-dark"
               (click)="openSendMessageModal(r.id)">Send message</button>
+          </td>
+          <td>
+            <!-- SEND MESSAGE -->
+            <button type="button" class="btn btn-outline-dark"
+                    (click)="cancelReservation(r.id)">Cancel Reservation</button>
           </td>
         </tr>
       </tbody>
@@ -58,9 +62,10 @@
     <table class="table table-borderless">
       <thead>
         <tr>
-          <th>Firstname</th>
-          <th>Lastname</th>
-          <th>Review</th>
+          <th>Check in</th>
+          <th>Check out</th>
+          <th>State</th>
+          <th>Message</th>
         </tr>
       </thead>
       <tbody>

@@ -17,4 +17,12 @@ export class ReservationService {
         }
       ));
   }
+
+  cancelReservation(idReservation:number) {
+    return this.http.post<any>(environment.centralApiUrl + '/api/reservation/cancel/' +idReservation,'')
+      .pipe(map(data => {
+          return data;
+        }
+      ));
+  }
 }

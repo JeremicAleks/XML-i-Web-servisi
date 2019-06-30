@@ -79,9 +79,10 @@ public class ReservationController {
 
     @PostMapping(value ="/cancel/{idReservation}")
     public ResponseEntity<?> reservationCancel(@PathVariable Long idReservation){
+        System.out.println("id rezervacije:" + idReservation);
         Reservation reservation;
 //        String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-
+        System.out.println("id rezervacije:" + idReservation);
         reservation = restTemplate.postForObject("https://reservation-microservice/api/reservation/cancel/"+idReservation,null,Reservation.class);
 
         return new ResponseEntity<>(reservation,HttpStatus.OK);
