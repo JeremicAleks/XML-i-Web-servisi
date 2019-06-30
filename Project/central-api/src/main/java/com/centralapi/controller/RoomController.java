@@ -48,7 +48,7 @@ public class RoomController {
         return new ResponseEntity<>(getRooms.getRoom(), HttpStatus.OK);
     }
     
-    @GetMapping(value = "/getRoomForShow",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/getRoomForShow",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getRoomForShow(@RequestBody ClientReservationDTO client){
 
         RestTemplate rt = new RestTemplate();

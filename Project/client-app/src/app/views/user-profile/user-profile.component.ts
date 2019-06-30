@@ -42,7 +42,6 @@ export class UserProfileComponent implements OnInit {
     this.getAllReservations();
     console.log(this.expiredReservations);
     console.log(this.pendingReservations);
-    this.getAllReservations();
   }
 
   sendMessage() {

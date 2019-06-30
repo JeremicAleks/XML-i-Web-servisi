@@ -17,12 +17,11 @@ export class ErrorInterceptor implements HttpInterceptor {
           let errorMessage = '';
           if (error.error instanceof ErrorEvent) {
             // client-side error
-            errorMessage = `${error.error.message}`;
-            alert(errorMessage + 'dsadsa');
+            errorMessage = `${error.error}`;
+         
           } else {
             // server-side error
-            errorMessage = `${error.error.message}`;
-            alert(errorMessage);
+            errorMessage = `${error.error}`;
           }
           return throwError(errorMessage);
         })
