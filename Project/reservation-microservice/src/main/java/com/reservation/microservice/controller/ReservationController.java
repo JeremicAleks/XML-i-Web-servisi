@@ -2,6 +2,7 @@ package com.reservation.microservice.controller;
 
 import com.reservation.microservice.domain.dto.ClientReservationDTO;
 import com.reservation.microservice.domain.dto.ClientSendMessageDTO;
+import com.reservation.microservice.domain.dto.ShowMessageForUserDTO;
 import com.reservation.microservice.domain.reservation.*;
 import com.reservation.microservice.domain.user.SendMessageDTO;
 import com.reservation.microservice.service.MessageTableService;
@@ -13,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -113,7 +116,6 @@ public class ReservationController {
 
 	    reservation = messageTableService.sendMessageClient(clientSendMessageDTO);
 
-
 	    return reservation;
     }
 
@@ -125,5 +127,16 @@ public class ReservationController {
 
         return reservation;
     }
+
+    @GetMapping(value = "/showMessage/{idReservation}")
+    public ShowMessageForUserDTO getMessageForUser(@PathVariable Long idReservation){
+        ShowMessageForUserDTO mess;
+
+	    mess = reservationService.getMessagesForUser(idReservation);
+
+	    return mess;
+    }
+
+
 
 }

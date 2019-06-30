@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.reservation.microservice.domain.dto.ClientReservationDTO;
+import com.reservation.microservice.domain.dto.ShowMessageForUserDTO;
 import com.reservation.microservice.domain.reservation.*;
 import com.reservation.microservice.domain.room.PriceList;
 import org.apache.log4j.Logger;
@@ -167,4 +168,15 @@ public class ReservationService {
         return ret;
     }
 
+    public ShowMessageForUserDTO getMessagesForUser(Long idReservation) {
+        ShowMessageForUserDTO showMessageForUserDTO = new ShowMessageForUserDTO();
+        Reservation reservation = findById(idReservation);
+        Long roomId = roomService.room_id(idReservation);
+        Room room = roomService.findById(roomId);
+        showMessageForUserDTO.setReservation(reservation);
+        showMessageForUserDTO.setRoom(room);
+        showMessageForUserDTO.setMessageTable(reservation.getMessageTable());
+
+        return showMessageForUserDTO;
+    }
 }
