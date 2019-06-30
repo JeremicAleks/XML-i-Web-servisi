@@ -56,7 +56,6 @@ export class MainNavibarComponent implements OnInit {
 
   // SIGN IN PART
   onSignIn() {
-    alert('sign in - to be tested');
 
     if (this.loginForm.invalid) {
       return;
@@ -105,8 +104,6 @@ export class MainNavibarComponent implements OnInit {
 
   // REGISTRATION PART
   onRegistration() {
-    alert('registration - to be tested');
-
     if (this.registerForm.invalid) {
       return;
     }
@@ -185,7 +182,6 @@ export class MainNavibarComponent implements OnInit {
 
   // LOG OUT
   logOut() {
-    alert('log out clicked');
     this.authService.logOut().subscribe(
       data => {
         localStorage.removeItem('sessionUser');
@@ -201,5 +197,4 @@ export class MainNavibarComponent implements OnInit {
   sendUsername(){
     this.router.navigate(['/changePassword']);
   }
-
 }

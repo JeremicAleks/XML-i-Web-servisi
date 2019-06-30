@@ -78,7 +78,7 @@ export class DestinationsComponent implements OnInit {
         alert(this.rooms[0].location.name)
       },
       error => {
-        //alert('greska u pretrazivanju soba');
+        alert('Searching error!');
       }
     );
   }
@@ -147,21 +147,18 @@ export class DestinationsComponent implements OnInit {
       }
     });
 
-    alert(tipovi.length);
 
     this.categories.forEach(element => {
       if (element.active == false) {
         categories.push(element);
       }
     });
-    alert(categories.length);
 
     this.additionalServices.forEach(element => {
       if (element.active == false) {
         additionalServices.push(element);
       }
     })
-    alert(additionalServices.length)
 
     //filtriraj po
     this.FilterByType(tipovi, categories, additionalServices);
@@ -178,32 +175,31 @@ export class DestinationsComponent implements OnInit {
       types.forEach(tipovi => {
         if (element.accommodationType.description == tipovi.description) {
           booleanRoom = true;
-          alert('pronasao u tipovima');
         }
       });
 
       categories.forEach(kategorije => {
         if (element.accommodationCategory.description == kategorije.description) {
           booleanRoom = true;
-          alert('pronasao u kategorijama');
+
         }
       });
 
       if (additionalServices == null) {
         booleanRoom = true;
-        alert('nema servisa');
+
       } else {
         additionalServices.forEach(servisi => {
           if (element.additionalService.description == servisi.description) {
             booleanRoom = true;
-            alert('pronasao u servisima');
+
           }
         });
       }
 
       if (booleanRoom) {
         this.roomsCopy.push(element);
-        alert('dodata bar jedna soba');
+        alert('At least one room added!');
       }
     });
   }
@@ -241,12 +237,9 @@ export class DestinationsComponent implements OnInit {
         this.rooms = data;
         this.roomsCopy = data;
         this.DomSanitizer.bypassSecurityTrustUrl(this.rooms[0].image[0]);
-        alert(this.rooms[0].location.name)
+
       },
       error => {
-
-
-
       }
     );
   }

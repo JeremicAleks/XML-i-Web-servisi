@@ -10,7 +10,6 @@ export class JwtInterceptor implements HttpInterceptor {
         const sessionUser = JSON.parse(localStorage.getItem('sessionUser'));
 
         if (sessionUser && sessionUser.token) {
-            alert(sessionUser)
             const clonedRequest = request.clone({ headers: request.headers.set('Token-Authority', sessionUser.token) })
             console.warn(clonedRequest.headers.get('Token-Authority'));
             return next.handle(clonedRequest);

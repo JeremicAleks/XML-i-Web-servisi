@@ -54,7 +54,6 @@ export class NavbarComponent implements OnInit {
 
   // SIGN IN PART
   onSignIn() {
-    alert('sign in - to be tested');
 
     if (this.loginForm.invalid) {
       return;
@@ -103,7 +102,6 @@ export class NavbarComponent implements OnInit {
 
   // REGISTRATION PART
   onRegistration() {
-    alert('registration - to be tested');
 
     if (this.registerForm.invalid) {
       return;
@@ -183,7 +181,6 @@ export class NavbarComponent implements OnInit {
 
   // LOG OUT
   logOut() {
-    alert('log out clicked');
     this.authService.logOut().subscribe(
       data => {
         localStorage.removeItem('sessionUser');

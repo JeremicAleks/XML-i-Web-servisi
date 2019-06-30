@@ -70,7 +70,7 @@ export class AdminUserConfigurationComponent implements OnInit {
         this.allRoles = data;
       },
       error => {
-        alert('getAllRoles erro');
+        alert('getAllRoles error');
       }
     )
   }
