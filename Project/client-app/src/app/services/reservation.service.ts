@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
+import { ClientSendMessageDTO } from '../models/client-send-message-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,17 @@ export class ReservationService {
 
   cancelReservation(idReservation:number) {
     return this.http.post<any>(environment.centralApiUrl + '/api/reservation/cancel/' +idReservation,'')
+   
+   getMessagesForReservation(idReservation: number) {
+    return this.http.get<any>(environment.centralApiUrl + '/api/reservation/getMessageForUser/' + idReservation)
+      .pipe(map(data => {
+          return data;
+        }
+      ));
+  }
+
+  sendMessage(clientSendMessageDTO: ClientSendMessageDTO) {
+    return this.http.post<any>(environment.centralApiUrl + '/api/reservation/sendMessageClient', clientSendMessageDTO)
       .pipe(map(data => {
           return data;
         }

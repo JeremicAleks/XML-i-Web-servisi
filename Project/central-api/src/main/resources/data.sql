@@ -42,9 +42,9 @@ insert into room_additional_service (description,active) values ("Wifi",1);
 insert into room_additional_service (description,active) values ("DogFriendly",1);
 insert into room_additional_service (description,active) values ("AirCondition",1);
 
-insert into price_list (month, price) value ('2019-6-14',120);
-insert into price_list (month, price) value ('2019-7-04',130);
-insert into price_list (month, price) value ('2019-6-24',140);
+insert into price_list (month, price) value ('2019-6-14', 120);
+insert into price_list (month, price) value ('2019-7-04', 130);
+insert into price_list (month, price) value ('2019-6-24', 140);
 
 insert into room (days_for_cancel, description, number_of_beds, accommodation_category_id, accommodation_type_id, location_id) values (10,'soba 1',2,3,1,1);
 insert into room (days_for_cancel, description, number_of_beds, accommodation_category_id, accommodation_type_id, location_id) values (15,'soba 2',3,1,2,2);

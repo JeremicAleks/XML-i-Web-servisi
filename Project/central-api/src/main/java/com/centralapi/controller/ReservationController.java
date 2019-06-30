@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.centralapi.domain.dto.ClientReservationDTO;
 import com.centralapi.domain.dto.ClientSendMessageDTO;
+import com.centralapi.domain.dto.ShowMessageForUserDTO;
 import com.centralapi.domain.xml.xml_ftn.reservation.GetReservations;
 import com.centralapi.domain.xml.xml_ftn.reservation.Reservation;
 
@@ -86,6 +87,15 @@ public class ReservationController {
         reservation = restTemplate.postForObject("https://reservation-microservice/api/reservation/cancel/"+idReservation,null,Reservation.class);
 
         return new ResponseEntity<>(reservation,HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getMessageForUser/{idReservation}")
+    public ResponseEntity<?> getMessageForUser(@PathVariable Long idReservation){
+        ShowMessageForUserDTO  mess ;
+
+        mess = restTemplate.getForObject("https://reservation-microservice/api/reservation/showMessage/"+idReservation,ShowMessageForUserDTO.class);
+
+        return new ResponseEntity<>(mess,HttpStatus.OK);
     }
 
     
