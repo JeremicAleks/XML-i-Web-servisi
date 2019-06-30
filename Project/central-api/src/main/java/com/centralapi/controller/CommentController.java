@@ -30,7 +30,7 @@ public class CommentController {
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		ResponseEntity<List<RateAndComment>> response = restTemplate.exchange("http://ec2-35-180-34-177.eu-west-3.compute.amazonaws.com:8080/api/rates/all",
+		ResponseEntity<List<RateAndComment>> response = restTemplate.exchange("http://ec2-35-181-44-209.eu-west-3.compute.amazonaws.com:8048/api/rates/all",
 				HttpMethod.GET, null, new ParameterizedTypeReference<List<RateAndComment>>() {
 				});
 
@@ -48,7 +48,7 @@ public class CommentController {
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		ResponseEntity<String> response = restTemplate.exchange("http://ec2-35-180-34-177.eu-west-3.compute.amazonaws.com:8080/api/rates/allow/" + id.toString(),
+		ResponseEntity<String> response = restTemplate.exchange("http://ec2-35-181-44-209.eu-west-3.compute.amazonaws.com:8048/api/rates/allow/" + id.toString(),
 				HttpMethod.GET, null, String.class);
 		System.out.println("nesto se desava");
 		System.out.println(response.getBody());
@@ -66,7 +66,7 @@ public class CommentController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<AddRateAndCommentDTO> request = new HttpEntity<>(addRateAndCommentDTO, headers);
-		ResponseEntity<RateAndComment> response = restTemplate.exchange("http://localhost:8048/api/rates/add",
+		ResponseEntity<RateAndComment> response = restTemplate.exchange("http://ec2-35-181-44-209.eu-west-3.compute.amazonaws.com:8048/api/rates/add",
 				HttpMethod.POST, request, RateAndComment.class);
 
 		return response;
