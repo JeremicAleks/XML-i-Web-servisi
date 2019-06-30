@@ -244,7 +244,7 @@ export class DestinationsComponent implements OnInit {
         alert(this.rooms[0].location.name)
       },
       error => {
-        //alert('jebem ti se s mamom');
+
 
 
       }
@@ -253,6 +253,11 @@ export class DestinationsComponent implements OnInit {
 
   reservation(roomId) {
     this.router.navigate(['/reservation/' + this.searchForm.get("checkIn").value + "/" + this.searchForm.get("checkOut").value + "/" + roomId]);
+  }
+
+  priceSort(){
+    this.roomsCopy.sort(function (a, b) { return a.priceList[0].price - b.priceList[0].price;
+    })
   }
 
 }

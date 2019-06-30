@@ -55,7 +55,7 @@ public class RoomController {
     	
         ShowRoomDTO room = new ShowRoomDTO();
         Room r = restTemplate.getForObject("https://room-microservice/api/"+client.getRoomId(),Room.class);
-		ResponseEntity<List<RateAndComment>> response = rt.exchange("http://localhost:8048/api/rates/all/"+client.getRoomId(),
+		ResponseEntity<List<RateAndComment>> response = rt.exchange("http://ec2-35-181-44-209.eu-west-3.compute.amazonaws.com:8048/api/rates/all/"+client.getRoomId(),
 				HttpMethod.GET, null, new ParameterizedTypeReference<List<RateAndComment>>() {
 				});
 		PriceList priceList = restTemplate.postForObject("https://room-microservice/api/getPriceList", client, PriceList.class);
