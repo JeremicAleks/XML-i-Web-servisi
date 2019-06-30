@@ -8,3 +8,7 @@
 {date:2019-06-30 00:46:49.398, level:INFO , process:https-jsse-nio-8083-exec-9, class:com.reservation.microservice.controller.ReservationController, msg:All reservations successfully taken!}
 {date:2019-06-30 00:46:57.948, level:INFO , process:https-jsse-nio-8083-exec-5, class:com.reservation.microservice.service.ReservationService, msg:}
 {date:2019-06-30 00:46:57.986, level:INFO , process:https-jsse-nio-8083-exec-5, class:com.reservation.microservice.controller.ReservationController, msg:All reservations for cikacoasuccessfully taken!}
+{date:2019-06-30 03:42:38.945, level:INFO , process:https-jsse-nio-8083-exec-10, class:com.reservation.microservice.service.ReservationService, msg:}
+{date:2019-06-30 03:42:38.986, level:INFO , process:https-jsse-nio-8083-exec-10, class:com.reservation.microservice.controller.ReservationController, msg:All reservations for cikacoasuccessfully taken!}
+{date:2019-06-30 03:43:20.494, level:INFO , process:https-jsse-nio-8083-exec-7, class:com.reservation.microservice.service.ReservationService, msg:}
+{date:2019-06-30 03:43:20.537, level:INFO , process:https-jsse-nio-8083-exec-7, class:com.reservation.microservice.controller.ReservationController, msg:All reservations for cikacoasuccessfully taken!}
