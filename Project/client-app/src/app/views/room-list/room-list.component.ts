@@ -9,49 +9,7 @@ import {RoomDto} from '../../models/room-dto';
 })
 export class RoomListComponent implements OnInit {
 
-  room: RoomDto = {
-    description:'',
-    accommodationType:{
-      active:false,
-      description:'',
-      id:0
-    },
-    accomodationCategory:{
-      active:false,
-      description:'',
-      id:0
-    },
-    daysForCancel:0,
-    image:[],
-    location:{
-      lat:0,
-      lng:0,
-      name:'',
-      id:0
-    },
-    numberOfBeds:0,
-    priceList:[{
-      month:new Date(''),
-      price:0,
-      id:0
-    }],
-    reservation:[{
-      checkIn:new Date(),
-      checkOut:new Date(),
-      state:'',
-      messageTable:[{
-        fromUser:'',
-        toUser:'',
-        messageString:'',
-        id:0
-      }]
-    }],
-    roomAdditionalService:[{
-      description:'',
-      active:false,
-      id:0
-    }]
-  };
+
   allRooms: Array<RoomDto> = [];
   i:number;
 

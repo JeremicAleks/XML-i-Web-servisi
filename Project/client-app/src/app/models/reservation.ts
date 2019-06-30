@@ -6,6 +6,7 @@ export class Reservation {
   checkOut: Date;
   state: string;
   messageTable: MessageTable[];
+  id: number;
 
   constructor() {}
 }

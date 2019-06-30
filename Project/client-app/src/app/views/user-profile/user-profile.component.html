@@ -28,6 +28,7 @@
     <table class="table table-borderless">
       <thead>
         <tr>
+          <th>#</th>
           <th>Check in</th>
           <th>Check out</th>
           <th>State</th>
@@ -37,28 +38,14 @@
       <tbody>
         <tr *ngFor="let r of allUserReservations; index as i">
           <th scope="row">{{i + 1}}</th>
-          <td>{{r.checkIn}}</td>
-          <td>{{r.checkOut}}</td>
+          <td>{{r.checkIn | date}}</td>
+          <td>{{r.checkOut| date}}</td>
           <td>{{r.state}}</td>
           <td>
             <!-- SEND MESSAGE -->
             <button type="button" class="btn btn-outline-primary"
-              (click)="openSendMessageModal(sendMessageModal, r)">Send message</button>
+              (click)="openSendMessageModal(r.id)">Send message</button>
           </td>
-        </tr>
-        <tr>
-          <td>Anthony</td>
-          <td>Davis</td>
-          <td>23</td>
-          <td>
-            <button class="btn btn-outline-dark" (click)="openSendMessageModal(sendMessageModal)">Send message</button>
-          </td>
-        </tr>
-        <tr>
-          <td>LeBron</td>
-          <td>James</td>
-          <td>6</td>
-          <td><button class="btn btn-outline-dark">Delete</button></td>
         </tr>
       </tbody>
     </table>
