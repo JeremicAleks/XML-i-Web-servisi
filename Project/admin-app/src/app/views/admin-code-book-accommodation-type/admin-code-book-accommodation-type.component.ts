@@ -34,12 +34,12 @@ export class AdminCodeBookAccommodationTypeComponent implements OnInit {
     this.accommodationTypeToUpdate.description = this.updateAccommodationTypeForm.get('typeDescription').value;
     this.accommodationService.updateAccommondationType(this.accommodationTypeToUpdate).subscribe(
       data => {
-        alert(data.message);
+        // alert(data.message);
         this.modalService.dismissAll();
         this.getAccommodationTypes();
       },
       error => {
-        alert(error.message);
+        // alert(error.message);
       }
     );
   }
@@ -67,12 +67,12 @@ export class AdminCodeBookAccommodationTypeComponent implements OnInit {
     console.log(accommodationType.description);
     this.accommodationService.createAccommodationType(accommodationType).subscribe(
       data => {
-        alert(data.message);
+        // alert(data.message);
         this.getAccommodationTypes();
         this.modalService.dismissAll();
       },
       error => {
-        alert(error.message);
+        // alert(error.message);
       }
     );
   }
@@ -82,11 +82,11 @@ export class AdminCodeBookAccommodationTypeComponent implements OnInit {
 
     this.accommodationService.deleteAccommodationType(accommodationType).subscribe(
       data => {
-        alert(data.message);
+        // alert(data.message);
         this.getAccommodationTypes();
       },
       error => {
-        alert(error.message);
+        // alert(error.message);
       }
     );
   }
@@ -96,10 +96,10 @@ export class AdminCodeBookAccommodationTypeComponent implements OnInit {
     this.accommodationService.getAccommodationTypes().subscribe(
       data => {
         this.accommodationTypes = data;
-        alert(data.message);
+        // alert(data.message);
       },
       error => {
-        alert(error.message);
+        // alert(error.message);
       }
     );
   }

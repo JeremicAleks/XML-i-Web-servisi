@@ -30,7 +30,6 @@ export class UserService {
   }
 
   createNewAgent(newAgent: AgentDTO) {
-    alert(newAgent.userToPromote);
     return this.http.post<any>(environment.centralApiUrl + '/api/admin/agent/add', newAgent )
     .pipe(map(data => {
       return data;

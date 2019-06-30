@@ -32,12 +32,12 @@ export class AdminCodeBookAdditionalServiceComponent implements OnInit {
     this.additionalServiceToUpdate.description = this.updateAdditionalServiceForm.get('serviceDescription').value;
     this.accommodationService.updateAccommondationCategory(this.additionalServiceToUpdate).subscribe(
       data => {
-        alert(data.message);
+        //alert(data.message);
         this.modalService.dismissAll();
         this.getAccommodationServices();
       },
       error => {
-        alert(error.message);
+        //alert(error.message);
       }
     );
   }
@@ -65,12 +65,12 @@ export class AdminCodeBookAdditionalServiceComponent implements OnInit {
     console.log(additionalService.description);
     this.accommodationService.createAdditionalService(additionalService).subscribe(
       data => {
-        alert(data.message);
+        //alert(data.message);
         this.getAccommodationServices();
         this.modalService.dismissAll();
       },
       error => {
-        alert(error.message);
+        //alert(error.message);
       }
     );
   }
@@ -79,11 +79,11 @@ export class AdminCodeBookAdditionalServiceComponent implements OnInit {
     console.log('deleteAdditionalService clicked - id: ' + additionalService.id);
     this.accommodationService.deleteAdditionalService(additionalService).subscribe(
       data => {
-        alert(data.message);
+        //alert(data.message);
         this.getAccommodationServices();
       },
       error => {
-        alert(error.message);
+        //alert(error.message);
       }
     );
   }
@@ -93,10 +93,10 @@ export class AdminCodeBookAdditionalServiceComponent implements OnInit {
     this.accommodationService.getAdditionalServices().subscribe(
       data => {
         this.additionalServices = data;
-        alert(data.message);
+        //alert(data.message);
       },
       error => {
-        alert(error.message);
+        //alert(error.message);
       }
     );
   }
